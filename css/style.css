@@ -1,0 +1,105 @@
+/* Custom Styles for San Diego Goalball */
+
+/* Root and Base Styles */
+:root {
+    --navy-900: #0B3C5D;
+    --navy-800: #114a70;
+    --gold-500: #F2A900;
+    --sky-400: #4AA3DF;
+    --dark-900: #111111;
+}
+
+body {
+    background-color: #f8fafc;
+    background-image: radial-gradient(circle at 2px 2px, rgba(11, 60, 93, 0.05) 1px, transparent 0);
+    background-size: 32px 32px;
+    min-height: 100vh;
+}
+
+/* Typography Enhancements */
+h1, h2, h3 {
+    letter-spacing: -0.025em;
+}
+
+/* Accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--navy-900);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Screen reader only text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Navigation */
+nav a {
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--gold-500);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero-gradient {
+    background: linear-gradient(to right, rgba(11, 60, 93, 0.95), rgba(11, 60, 93, 0.4));
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--navy-900);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--navy-800);
+}
+
+/* Transitions */
+.transition-all {
+    transition: all 0.3s ease;
+}
+
+/* Selection color */
+::selection {
+    background-color: var(--gold-500);
+    color: var(--navy-900);
+}
