@@ -5,22 +5,40 @@ window.tailwind = {
         theme: {
             extend: {
                 colors: {
+                    // New Theme Palette
+                    indigo: {
+                        900: '#1e1b4b',
+                        800: '#312e81',
+                        500: '#6366f1',
+                    },
+                    amber: {
+                        500: '#f59e0b',
+                        600: '#d97706',
+                        700: '#b45309',
+                    },
+                    emerald: {
+                        500: '#10b981',
+                        600: '#059669',
+                        700: '#047857',
+                    },
+                    // Legacy Mapping (for compatibility during transition)
                     navy: {
-                        DEFAULT: '#0B3C5D',
-                        900: '#0B3C5D',
-                        800: '#114a70',
+                        DEFAULT: '#1e1b4b',
+                        900: '#1e1b4b',
+                        800: '#312e81',
                     },
                     gold: {
-                        DEFAULT: '#F2A900',
-                        500: '#F2A900',
-                        600: '#d99800',
+                        DEFAULT: '#f59e0b',
+                        500: '#f59e0b',
+                        600: '#d97706',
+                        700: '#b45309',
                     },
                     sky: {
-                        DEFAULT: '#4AA3DF',
-                        100: '#e1f0fa',
-                        200: '#BAE1FF',
-                        500: '#4AA3DF',
-                        600: '#2c8ccf',
+                        DEFAULT: '#10b981',
+                        100: '#ecfdf5',
+                        200: '#a7f3d0',
+                        500: '#10b981',
+                        600: '#059669',
                     },
                     dark: '#111111',
                     black: '#000000'
@@ -73,6 +91,24 @@ function initMobileMenu() {
             const isHidden = mobileNav.classList.contains('hidden');
             mobileNav.classList.toggle('hidden');
             menuBtn.setAttribute('aria-expanded', isHidden);
+
+            // Add visibility for screen readers and sighted users
+            const label = menuBtn.querySelector('.menu-label');
+            const iconSvg = menuBtn.querySelector('svg');
+
+            if (label) {
+                label.textContent = isHidden ? 'Close' : 'Menu';
+            }
+
+            if (iconSvg) {
+                if (isHidden) {
+                    // X icon
+                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />';
+                } else {
+                    // Menu icon
+                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
+                }
+            }
         });
     }
 }
@@ -140,7 +176,7 @@ function showSearchResults(results) {
             link.href = item.url;
             link.className = 'block p-3 hover:bg-slate-50 rounded-lg transition-colors border-b last:border-0';
             link.innerHTML = `
-                <h4 class="font-bold text-navy text-sm mb-1">${item.title}</h4>
+                <h4 class="font-bold text-indigo-900 text-sm mb-1">${item.title}</h4>
                 <p class="text-xs text-gray-600 line-clamp-2">${item.content}</p>
             `;
             resultsDiv.appendChild(link);
@@ -198,9 +234,9 @@ function highlightCurrentPage() {
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href');
         if (linkPath === currentPath) {
-            link.classList.add('text-gold');
+            link.classList.add('text-amber-700'); // Accessible gold for text
             link.classList.add('font-bold');
-            link.classList.remove('text-navy');
+            link.classList.remove('text-indigo-900');
             link.setAttribute('aria-current', 'page');
         }
     });
