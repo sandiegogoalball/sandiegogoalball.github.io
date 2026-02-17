@@ -1,70 +1,30 @@
 # San Diego Goalball Website
 
-Official website for San Diego Goalball, an organization dedicated to empowering athletes who are blind or visually impaired through the sport of goalball.
+This is the official website for San Diego County Goalball, a community dedicated to providing athletic opportunities for the blind and visually impaired.
 
-## Features
+## Architecture
 
-- **Home Page**: Overview of San Diego Goalball and its mission.
-- **About Us**: Information about the organization, history, and leadership.
-- **Programs**: Details on the various programs and training offered.
-- **Schedule**: Current practice and event schedules.
-- **Get Involved**: Information on how to volunteer, donate, or join as an athlete.
-- **Contact Us**: Contact form and information for inquiries.
-- **Accessibility**: Built with WCAG 2.1 AA standards in mind, featuring high contrast and screen-reader-friendly navigation.
+The website is built as a multi-page static site for maximum performance, accessibility, and reliability. It uses:
+- **HTML5**: For semantic structure.
+- **Tailwind CSS (CDN)**: For styling without a build step.
+- **Inter Font**: For clear, modern typography.
 
-## Tech Stack
+## Pages
 
-- **React 19**: Frontend framework.
-- **Vite**: Build tool and development server.
-- **Tailwind CSS**: Utility-first CSS framework for styling.
-- **React Router**: For client-side routing.
-- **Playwright**: For automated end-to-end testing and verification.
+- `index.html`: Home page
+- `about.html`: About the organization and mission.
+- `programs.html`: Information about the sport of Goalball.
+- `schedule.html`: Practice times and locations.
+- `get-involved.html`: Volunteering and support information.
+- `contact.html`: Contact information and message form.
 
-## Getting Started
+## Maintenance
 
-### Prerequisites
+To make changes to the site:
+1. Edit the relevant `.html` file.
+2. If changing the header or footer, remember to update all files to maintain consistency.
+3. Assets are located in the `/images` directory.
 
-- Node.js (version 18 or higher recommended)
-- npm
+## Deployment
 
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/[username]/san-diego-goalball-website.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd san-diego-goalball-website
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-### Development
-
-Start the development server:
-```bash
-npm run dev
-```
-
-### Build
-
-Build the website for production:
-```bash
-npm run build
-```
-The output will be in the `dist` folder.
-
-### Deployment
-
-The website is configured to automatically deploy to GitHub Pages via GitHub Actions whenever changes are pushed to the `main` branch.
-
-## Accessibility Statement
-
-San Diego Goalball is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards.
-
-## Contact
-
-For questions or feedback, please contact us at info@sdgoalball.org.
+The site is designed to be hosted on GitHub Pages using the "Classic" experience (deploying directly from a branch). No build process is required.

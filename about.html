@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | San Diego Goalball</title>
-    <meta name="description" content="San Diego County Goalball provides opportunities for blind and visually impaired athletes to compete in the Paralympic sport of goalball.">
+    <title>About Us | San Diego Goalball</title>
+    <meta name="description" content="Learn about San Diego County Goalball, our mission to empower blind and visually impaired athletes, and our team.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,9 +44,6 @@
         .skip-link:focus {
             top: 0;
         }
-        .hero-gradient {
-            background: linear-gradient(rgba(11, 60, 93, 0.8), rgba(11, 60, 93, 0.6));
-        }
     </style>
 </head>
 <body class="bg-white text-dark font-sans antialiased">
@@ -60,15 +57,14 @@
             </a>
 
             <nav class="hidden md:flex gap-8 font-semibold uppercase text-sm tracking-widest" aria-label="Main Navigation">
-                <a href="index.html" class="text-gold border-b-2 border-gold pb-1 transition-all">Home</a>
-                <a href="about.html" class="text-navy hover:text-gold transition-colors">About</a>
+                <a href="index.html" class="text-navy hover:text-gold transition-colors">Home</a>
+                <a href="about.html" class="text-gold border-b-2 border-gold pb-1 transition-all">About</a>
                 <a href="programs.html" class="text-navy hover:text-gold transition-colors">Programs</a>
                 <a href="schedule.html" class="text-navy hover:text-gold transition-colors">Schedule</a>
                 <a href="get-involved.html" class="text-navy hover:text-gold transition-colors">Get Involved</a>
                 <a href="contact.html" class="text-navy hover:text-gold transition-colors">Contact</a>
             </nav>
 
-            <!-- Mobile Menu Toggle -->
             <button class="md:hidden text-navy p-2" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -78,8 +74,8 @@
         <!-- Mobile Nav -->
         <div id="mobile-nav" class="hidden md:hidden bg-white border-t border-gray-100">
             <div class="flex flex-col p-4 gap-4 font-semibold uppercase text-sm">
-                <a href="index.html" class="text-gold">Home</a>
-                <a href="about.html" class="text-navy">About</a>
+                <a href="index.html" class="text-navy">Home</a>
+                <a href="about.html" class="text-gold">About</a>
                 <a href="programs.html" class="text-navy">Programs</a>
                 <a href="schedule.html" class="text-navy">Schedule</a>
                 <a href="get-involved.html" class="text-navy">Get Involved</a>
@@ -89,76 +85,60 @@
     </header>
 
     <main id="main-content">
-        <!-- Hero Section -->
-        <section class="relative h-[70vh] flex items-center overflow-hidden">
-            <img src="images/2e92691d-373c-4dd1-b111-23596e420300.jpeg" alt="San Diego Goalball team together on the court" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 hero-gradient"></div>
-            <div class="container mx-auto px-4 relative z-10 text-white">
-                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 max-w-4xl leading-tight">
-                    Athleticism Without <span class="text-gold uppercase">Boundaries</span>
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-2xl text-sky-100 leading-relaxed">
-                    The premier competitive sport for the blind and visually impaired community in San Diego County.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="schedule.html" class="bg-gold text-navy px-8 py-4 rounded-lg font-extrabold text-lg uppercase hover:scale-105 transition-transform shadow-lg">
-                        Find a Practice
-                    </a>
-                    <a href="programs.html" class="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-8 py-4 rounded-lg font-extrabold text-lg uppercase hover:bg-white/20 transition-all">
-                        What is Goalball?
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Welcome Section -->
-        <section class="py-20 bg-white">
+        <!-- Page Banner -->
+        <section class="bg-navy text-white py-20">
             <div class="container mx-auto px-4">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <span class="text-sky font-bold uppercase tracking-widest block mb-4">Welcome to our community</span>
-                        <h2 class="text-4xl font-extrabold text-navy mb-6 leading-tight uppercase">Empowering Athletes Through Sound and Spirit</h2>
-                        <div class="space-y-4 text-gray-700 text-lg">
-                            <p>
-                                San Diego County Goalball provides a supportive yet competitive environment for athletes of all skill levels. We are a community of athletes, coaches, and volunteers dedicated to the Paralympic sport of goalball.
-                            </p>
-                            <p>
-                                Whether you're looking for recreation, fitness, or aiming for the highest levels of competition, we have a place for you on our court.
-                            </p>
-                        </div>
-                        <div class="mt-8">
-                            <a href="about.html" class="text-navy font-bold border-b-2 border-navy hover:text-sky hover:border-sky transition-all uppercase tracking-wider">Our Story &rarr;</a>
-                        </div>
+                <h1 class="text-5xl font-extrabold uppercase tracking-tight">About Us</h1>
+                <p class="text-xl text-sky-200 mt-4 max-w-2xl">Building a community of strength, inclusion, and competitive excellence.</p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="prose prose-lg text-gray-700">
+                    <h2 class="text-3xl font-extrabold text-navy mb-8 uppercase">Our Mission</h2>
+                    <p class="mb-6">
+                        San Diego County Goalball is dedicated to providing athletic and social opportunities for individuals who are blind or visually impaired. Our mission is to promote health, teamwork, and independence through the unique and challenging sport of Goalball.
+                    </p>
+                    <p class="mb-6">
+                        We believe that athleticism should have no boundaries. By providing accessible facilities, expert coaching, and a supportive community, we empower our athletes to reach their full potential, whether they are playing for recreation or training for elite competition.
+                    </p>
+
+                    <h2 class="text-3xl font-extrabold text-navy mt-16 mb-8 uppercase">The Future of Goalball</h2>
+                    <p class="mb-6">
+                        With the 2028 Paralympic Games coming to Los Angeles, we are more motivated than ever to grow the sport in Southern California. We are working hard to build a pipeline of talent and a robust community of supporters to ensure that Goalball continues to thrive in our region.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team/Founders Section -->
+        <section class="py-20 bg-slate-50 border-t border-slate-200">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-extrabold text-navy mb-12 text-center uppercase">Our Leadership</h2>
+                <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="text-2xl font-bold text-navy mb-2">Lori Meyers</h3>
+                        <p class="text-sky font-bold uppercase tracking-widest text-sm mb-4">Founder & Coordinator</p>
+                        <p class="text-gray-600">Lori has been a driving force for Goalball in San Diego for years, ensuring that athletes have the resources and support they need to succeed.</p>
                     </div>
-                    <div class="relative">
-                        <img src="images/27d1258c-3b56-4193-9f7c-887045690341.jpeg" alt="Athlete ready to block the ball on the goalball court" class="rounded-2xl shadow-2xl relative z-10">
-                        <div class="absolute -bottom-6 -right-6 w-full h-full border-4 border-gold rounded-2xl -z-0"></div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="text-2xl font-bold text-navy mb-2">Mike Meyers</h3>
+                        <p class="text-sky font-bold uppercase tracking-widest text-sm mb-4">Lead Coordinator</p>
+                        <p class="text-gray-600">Mike's dedication to the sport and the community has helped San Diego Goalball grow into the vibrant organization it is today.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <section class="py-20 bg-slate-50 border-y border-slate-200">
+        <!-- CTA -->
+        <section class="py-20 bg-white">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-navy mb-8 uppercase">Ready to join the action?</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-4 text-navy uppercase">Athletes</h3>
-                        <p class="text-gray-600 mb-6">Open to all blind and visually impaired individuals. No experience necessary.</p>
-                        <a href="schedule.html" class="text-sky font-bold hover:underline">Get Started &rarr;</a>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-4 text-navy uppercase">Volunteers</h3>
-                        <p class="text-gray-600 mb-6">Help with practices, refereeing, and community outreach. No sports background required.</p>
-                        <a href="get-involved.html" class="text-sky font-bold hover:underline">Volunteer &rarr;</a>
-                    </div>
-                    <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-4 text-navy uppercase">Support</h3>
-                        <p class="text-gray-600 mb-6">Your contributions help us provide equipment and facilities for our athletes.</p>
-                        <a href="contact.html" class="text-sky font-bold hover:underline">Donate &rarr;</a>
-                    </div>
-                </div>
+                <h2 class="text-3xl font-extrabold text-navy mb-8 uppercase">Join the San Diego Goalball Family</h2>
+                <a href="contact.html" class="inline-block bg-gold text-navy px-10 py-4 rounded-lg font-extrabold text-lg uppercase shadow-lg hover:scale-105 transition-transform">
+                    Contact Us Today
+                </a>
             </div>
         </section>
     </main>

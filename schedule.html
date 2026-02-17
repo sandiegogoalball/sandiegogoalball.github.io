@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Schedule | San Diego Goalball</title>
+    <meta name="description" content="View our weekly practice schedule in San Diego and Carlsbad. Open to all blind and visually impaired athletes.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B3C5D',
+                        gold: '#F2A900',
+                        sky: '#4AA3DF',
+                        dark: '#111111',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #F2A900;
+            color: #111111;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.2s;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body class="bg-white text-dark font-sans antialiased">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <span class="font-extrabold text-2xl tracking-tight text-navy uppercase">San Diego Goalball</span>
+            </a>
+
+            <nav class="hidden md:flex gap-8 font-semibold uppercase text-sm tracking-widest" aria-label="Main Navigation">
+                <a href="index.html" class="text-navy hover:text-gold transition-colors">Home</a>
+                <a href="about.html" class="text-navy hover:text-gold transition-colors">About</a>
+                <a href="programs.html" class="text-navy hover:text-gold transition-colors">Programs</a>
+                <a href="schedule.html" class="text-gold border-b-2 border-gold pb-1 transition-all">Schedule</a>
+                <a href="get-involved.html" class="text-navy hover:text-gold transition-colors">Get Involved</a>
+                <a href="contact.html" class="text-navy hover:text-gold transition-colors">Contact</a>
+            </nav>
+
+            <button class="md:hidden text-navy p-2" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Nav -->
+        <div id="mobile-nav" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="flex flex-col p-4 gap-4 font-semibold uppercase text-sm">
+                <a href="index.html" class="text-navy">Home</a>
+                <a href="about.html" class="text-navy">About</a>
+                <a href="programs.html" class="text-navy">Programs</a>
+                <a href="schedule.html" class="text-gold">Schedule</a>
+                <a href="get-involved.html" class="text-navy">Get Involved</a>
+                <a href="contact.html" class="text-navy">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="bg-navy text-white py-20">
+            <div class="container mx-auto px-4">
+                <h1 class="text-5xl font-extrabold uppercase tracking-tight">Practice Schedule</h1>
+                <p class="text-xl text-sky-200 mt-4 max-w-2xl">Join us on the court! We host regular practices throughout San Diego County.</p>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- San Diego Practice -->
+                    <div class="bg-slate-50 p-10 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center gap-6 mb-8">
+                            <div class="bg-navy text-gold p-4 rounded-2xl shadow-inner">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-extrabold text-navy uppercase tracking-tight">San Diego</h2>
+                                <p class="text-sky font-bold uppercase tracking-widest">Every Friday</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Time</h3>
+                                <p class="text-2xl font-extrabold text-navy">5:30 PM &ndash; 7:30 PM</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Location</h3>
+                                <p class="text-xl font-bold text-gray-800">Mission Valley YMCA</p>
+                                <p class="text-gray-600 mt-1">5505 Friars Rd<br>San Diego, CA 92110</p>
+                            </div>
+                            <div class="pt-6">
+                                <a href="https://maps.google.com/?q=Mission+Valley+YMCA+San+Diego" target="_blank" class="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-lg font-bold uppercase tracking-wide hover:bg-sky transition-colors">
+                                    Get Directions
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carlsbad Practice -->
+                    <div class="bg-slate-50 p-10 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center gap-6 mb-8">
+                            <div class="bg-navy text-gold p-4 rounded-2xl shadow-inner">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-3xl font-extrabold text-navy uppercase tracking-tight">Carlsbad</h2>
+                                <p class="text-sky font-bold uppercase tracking-widest">Every Sunday</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Time</h3>
+                                <p class="text-2xl font-extrabold text-navy">1:00 PM &ndash; 4:00 PM</p>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Location</h3>
+                                <p class="text-xl font-bold text-gray-800">Stagecoach Park Community Center</p>
+                                <p class="text-gray-600 mt-1">3420 Camino De Los Coches<br>Carlsbad, CA 92009</p>
+                            </div>
+                            <div class="pt-6">
+                                <a href="https://maps.google.com/?q=Stagecoach+Park+Community+Center+Carlsbad" target="_blank" class="inline-flex items-center gap-2 bg-navy text-white px-6 py-3 rounded-lg font-bold uppercase tracking-wide hover:bg-sky transition-colors">
+                                    Get Directions
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                      <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Box -->
+                <div class="mt-16 bg-gold/10 border-2 border-gold rounded-3xl p-10 text-navy">
+                    <h3 class="text-2xl font-extrabold mb-4 uppercase tracking-tight">New to Goalball?</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        We love seeing new faces! Beginners are always welcome at any of our practices. We provide all the specialized equipment you need. We recommend wearing comfortable athletic clothing and court shoes.
+                    </p>
+                    <p class="font-bold text-xl uppercase tracking-wider">No experience necessary!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-2">
+                    <h2 class="text-2xl font-extrabold mb-6 uppercase tracking-tight">San Diego Goalball</h2>
+                    <p class="text-gray-400 max-w-md leading-relaxed">
+                        Dedicated to providing athletic opportunities for the blind and visually impaired community in San Diego County. Join us for competition, community, and fun.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-gold font-bold uppercase mb-6 tracking-wider">Quick Links</h3>
+                    <ul class="space-y-4 text-sm font-medium">
+                        <li><a href="index.html" class="hover:text-sky transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-sky transition-colors">About Us</a></li>
+                        <li><a href="programs.html" class="hover:text-sky transition-colors">Programs</a></li>
+                        <li><a href="schedule.html" class="hover:text-sky transition-colors">Schedule</a></li>
+                        <li><a href="get-involved.html" class="hover:text-sky transition-colors">Get Involved</a></li>
+                        <li><a href="contact.html" class="hover:text-sky transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-gold font-bold uppercase mb-6 tracking-wider">Contact Info</h3>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li>Email: <a href="mailto:info@sdgoalball.org" class="text-white hover:text-sky transition-colors">info@sdgoalball.org</a></li>
+                        <li>Phone: <a href="tel:7605252800" class="text-white hover:text-sky transition-colors">760-525-2800</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 font-bold uppercase tracking-widest">
+                <p>&copy; <span id="year"></span> San Diego County Goalball. All rights reserved.</p>
+                <p>A registered non-profit organization.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
