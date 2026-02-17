@@ -7,6 +7,7 @@
     --gold-500: #F2A900;
     --sky-400: #4AA3DF;
     --dark-900: #111111;
+    --sky-100: #E3F2FD;
 }
 
 body {
@@ -15,6 +16,10 @@ body {
     background-size: 32px 32px;
     min-height: 100vh;
 }
+
+/* More Color */
+.bg-sky-light { background-color: var(--sky-100); }
+.text-navy-bold { color: var(--navy-900); font-weight: 700; }
 
 /* Typography Enhancements */
 h1, h2, h3 {
@@ -93,9 +98,58 @@ nav a:hover::after {
     background: var(--navy-800);
 }
 
+/* Search Styling */
+#search-input {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#search-input:not(.hidden) {
+    width: 200px;
+}
+
+@media (max-width: 768px) {
+    #search-input:not(.hidden) {
+        width: 150px;
+    }
+}
+
 /* Transitions */
 .transition-all {
     transition: all 0.3s ease;
+}
+
+/* Button Styles */
+.btn-gold {
+    background-color: var(--gold-500);
+    color: var(--navy-900);
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(242, 169, 0, 0.3);
+}
+
+.btn-navy {
+    background-color: var(--navy-900);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-navy:hover {
+    background-color: var(--sky-400);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(11, 60, 93, 0.2);
 }
 
 /* Selection color */
