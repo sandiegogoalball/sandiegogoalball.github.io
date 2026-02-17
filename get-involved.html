@@ -4,32 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Involved | San Diego Goalball</title>
-    <meta name="description" content="Volunteer, donate, or support San Diego County Goalball. Help us empower blind and visually impaired athletes.">
+    <meta name="description" content="Find out how you can support San Diego County Goalball through volunteering, donations, or community outreach to help our visually impaired athletes.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN -->
+    <!-- Scripts -->
+    <script src="js/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: '#0B3C5D',
-                        gold: '#F2A900',
-                        sky: '#4AA3DF',
-                        dark: '#111111',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <script src="js/main.js" defer></script>
     <style type="text/css">
         .skip-link {
             position: absolute;
@@ -64,11 +49,11 @@
                 <a href="about.html" class="text-navy hover:text-gold transition-colors">About</a>
                 <a href="programs.html" class="text-navy hover:text-gold transition-colors">Programs</a>
                 <a href="schedule.html" class="text-navy hover:text-gold transition-colors">Schedule</a>
-                <a href="get-involved.html" class="text-gold border-b-2 border-gold pb-1 transition-all">Get Involved</a>
+                <a href="get-involved.html" class="text-navy hover:text-gold transition-colors">Get Involved</a>
                 <a href="contact.html" class="text-navy hover:text-gold transition-colors">Contact</a>
             </nav>
 
-            <button class="md:hidden text-navy p-2" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+            <button class="md:hidden text-navy p-2" aria-label="Toggle Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
@@ -81,7 +66,7 @@
                 <a href="about.html" class="text-navy">About</a>
                 <a href="programs.html" class="text-navy">Programs</a>
                 <a href="schedule.html" class="text-navy">Schedule</a>
-                <a href="get-involved.html" class="text-gold">Get Involved</a>
+                <a href="get-involved.html" class="text-navy">Get Involved</a>
                 <a href="contact.html" class="text-navy">Contact</a>
             </div>
         </div>
@@ -187,8 +172,5 @@
         </div>
     </footer>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
 </body>
 </html>
