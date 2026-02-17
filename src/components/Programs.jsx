@@ -1,4 +1,4 @@
-const Programs = () => {
+const Programs = ({ hideTitle = false }) => {
   const programs = [
     {
       title: "Recreational League",
@@ -20,7 +20,7 @@ const Programs = () => {
   return (
     <section id="programs" className="bg-gray-50">
       <div className="section-container">
-        <h2 className="text-3xl md:text-4xl mb-12 text-center">Our Programs</h2>
+        {!hideTitle && <h2 className="text-3xl md:text-4xl mb-12 text-center">Our Programs</h2>}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {programs.map((program) => (
             <div key={program.title} className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">

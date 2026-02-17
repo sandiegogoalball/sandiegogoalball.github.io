@@ -1,4 +1,4 @@
-const Schedule = () => {
+const Schedule = ({ hideTitle = false }) => {
   const events = [
     { date: "Mondays", time: "6:00 PM - 8:00 PM", activity: "Open Practice", location: "Mission Valley YMCA" },
     { date: "Wednesdays", time: "6:30 PM - 8:30 PM", activity: "Competitive Training", location: "Mission Valley YMCA" },
@@ -8,7 +8,7 @@ const Schedule = () => {
   return (
     <section id="schedule" className="bg-white">
       <div className="section-container">
-        <h2 className="text-3xl md:text-4xl mb-12 text-center">Practice Schedule</h2>
+        {!hideTitle && <h2 className="text-3xl md:text-4xl mb-12 text-center">Practice Schedule</h2>}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg overflow-hidden">
             <thead className="bg-primary">
