@@ -52,6 +52,25 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
+
+      <section className="bg-primary text-white py-16">
+        <div className="section-container">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl mb-8 text-center text-white">History of Goalball</h2>
+            <div className="space-y-6 text-lg text-white/90 leading-relaxed">
+              <p>
+                Goalball was invented in 1946 by Austrian Hanz Lorenzen and German Sepp Reindl as a way to assist in the rehabilitation of visually impaired World War II veterans.
+              </p>
+              <p>
+                It was introduced to the world at the 1976 Paralympics in Toronto and has been played at every Paralympic Games since. Over the decades, it has evolved from a rehabilitation activity into a high-intensity, competitive sport played in over 100 countries.
+              </p>
+              <p>
+                Today, San Diego Goalball continues this legacy by bringing the sport to our local community, honoring its roots while pushing for modern athletic excellence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

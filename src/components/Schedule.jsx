@@ -1,8 +1,7 @@
 const Schedule = ({ hideTitle = false }) => {
   const events = [
-    { date: "Mondays", time: "6:00 PM - 8:00 PM", activity: "Open Practice", location: "Mission Valley YMCA" },
-    { date: "Wednesdays", time: "6:30 PM - 8:30 PM", activity: "Competitive Training", location: "Mission Valley YMCA" },
-    { date: "Saturdays", time: "10:00 AM - 12:00 PM", activity: "Youth & Beginner Clinic", location: "Balboa Park Activity Center" },
+    { date: "Tuesdays", time: "6:00 PM - 8:00 PM", activity: "Community Practice", location: "San Diego Gym" },
+    { date: "Saturdays", time: "10:00 AM - 12:30 PM", activity: "Main Practice & Clinics", location: "San Diego Gym" },
   ];
 
   return (
@@ -31,8 +30,11 @@ const Schedule = ({ hideTitle = false }) => {
             </tbody>
           </table>
         </div>
-        <p className="mt-8 text-center text-nearBlack italic">
-          * Schedule is subject to change. Please contact us to confirm before attending your first session.
+        <p className="mt-8 text-center text-nearBlack font-medium">
+          <strong>Location:</strong> San Diego area gyms (exact location shared upon registration)
+        </p>
+        <p className="mt-2 text-center text-nearBlack italic">
+          * Times may vary during holidays or special events. Please check our Instagram for the latest updates.
         </p>
       </div>
     </section>

@@ -1,19 +1,24 @@
 const Programs = ({ hideTitle = false }) => {
   const programs = [
     {
-      title: "Recreational League",
-      description: "Perfect for beginners and those looking for a fun way to stay active. No experience necessary.",
+      title: "Youth Development",
+      description: "Introductory training for young athletes focused on fundamentals and teamwork.",
+      icon: "👦"
+    },
+    {
+      title: "Adult Recreational",
+      description: "Weekly community practices for fun, fitness, and building lasting connections.",
       icon: "🏐"
     },
     {
-      title: "Competitive Team",
-      description: "For athletes who want to push their limits and compete in regional and national tournaments.",
+      title: "Competitive Training",
+      description: "Advanced sessions for tournament preparation and elite skill development.",
       icon: "🏆"
     },
     {
-      title: "Youth Goalball",
-      description: "Introducing the sport to the next generation of athletes in a supportive, age-appropriate setting.",
-      icon: "👦"
+      title: "Clinics & Outreach",
+      description: "School and community demonstrations to raise awareness and invite new players.",
+      icon: "📢"
     }
   ];
 
@@ -21,7 +26,7 @@ const Programs = ({ hideTitle = false }) => {
     <section id="programs" className="bg-gray-50">
       <div className="section-container">
         {!hideTitle && <h2 className="text-3xl md:text-4xl mb-12 text-center">Our Programs</h2>}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {programs.map((program) => (
             <div key={program.title} className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="text-4xl mb-4" aria-hidden="true">{program.icon}</div>

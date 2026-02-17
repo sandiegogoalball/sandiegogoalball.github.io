@@ -7,29 +7,27 @@ const SchedulePage = () => {
     <div>
       <PageBanner
         title="Practice Schedule"
-        description="Join us for our weekly practices at several accessible locations throughout San Diego."
+        description="Join us for our weekly practices. We play at various accessible gymnasiums throughout the San Diego area."
       />
       <Schedule hideTitle={true} />
       <section className="bg-primary text-white py-16">
         <div className="section-container text-center">
-          <h2 className="text-3xl md:text-4xl mb-6 text-white">Location Details</h2>
+          <h2 className="text-3xl md:text-4xl mb-6 text-white">How to Attend</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left mt-10">
             <div className="bg-white/10 p-8 rounded-xl border border-white/20">
-              <h3 className="text-2xl text-secondary mb-4 font-bold">Mission Valley YMCA</h3>
-              <p className="mb-2">5505 Friars Rd, San Diego, CA 92110</p>
-              <p className="text-white/80">Practices are held in the main gymnasium. Sighted guides are available at the front desk to escort you to the court if needed.</p>
+              <h3 className="text-2xl text-secondary mb-4 font-bold">1. Register Interest</h3>
+              <p className="text-white/80 leading-relaxed">Due to gym availability and security, we share our exact practice locations with registered athletes and volunteers only. Please reach out via our contact page to get started.</p>
             </div>
             <div className="bg-white/10 p-8 rounded-xl border border-white/20">
-              <h3 className="text-2xl text-secondary mb-4 font-bold">Balboa Park Activity Center</h3>
-              <p className="mb-2">2145 Park Blvd, San Diego, CA 92101</p>
-              <p className="text-white/80">Located near the tennis courts. Accessible transit stops are located within one block of the entrance.</p>
+              <h3 className="text-2xl text-secondary mb-4 font-bold">2. Get Location Details</h3>
+              <p className="text-white/80 leading-relaxed">Once you're on our list, you'll receive a weekly update with the specific gym address and any entry instructions or parking details.</p>
             </div>
           </div>
-          <div className="mt-16 bg-white/5 p-8 rounded-2xl border border-white/10">
+          <div className="mt-16 bg-white/5 p-8 rounded-2xl border border-white/10 max-w-3xl mx-auto">
             <h3 className="text-2xl font-bold mb-4">First time attending?</h3>
-            <p className="text-lg text-white/80 mb-6">We'd love to have you! Stay tuned for our official contact launch to let us know you're coming.</p>
+            <p className="text-lg text-white/80 mb-6">We'd love to have you! New players are always welcome at any practice. We'll make sure you have the equipment and guidance you need.</p>
             <Link to="/contact" className="btn btn-secondary text-lg px-8 py-4">
-              Check Updates
+              Contact Us for Location
             </Link>
           </div>
         </div>
