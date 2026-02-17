@@ -9,16 +9,14 @@ const About = ({ hideTitle = false }) => {
             {!hideTitle && <h2 className="text-3xl md:text-4xl mb-6">About San Diego Goalball</h2>}
             <div className="space-y-4 text-lg text-nearBlack leading-relaxed">
               <p>
-                Goalball is an exciting, fast-paced team sport designed specifically for athletes with visual impairments. Played on a gym floor, two teams of three players try to throw a ball that has bells inside it into the opponents' goal.
+                San Diego Goalball is a community-driven adaptive sports program dedicated to providing opportunities
+                for individuals who are blind or visually impaired to participate in the exciting Paralympic sport of goalball.
+                Our program welcomes athletes of all skill levels, from beginners learning the fundamentals to experienced
+                competitors training for regional and national events.
               </p>
               <p>
-                <strong>Our Mission:</strong> To provide a supportive and competitive environment where athletes of all visual abilities can thrive, build community, and achieve their athletic potential.
-              </p>
-              <p>
-                At San Diego Goalball, we believe in the power of inclusive sports to transform lives. Whether you're a seasoned paralympian or trying the sport for the first time, our community is here to welcome you.
-              </p>
-              <p>
-                We prioritize accessibility in everything we do, ensuring that our training, communications, and events are fully inclusive for the blind and visually impaired community.
+                Through structured practices, competitive play, and a supportive environment, we aim to promote independence,
+                teamwork, physical fitness, and confidence both on and off the court.
               </p>
             </div>
           </div>
@@ -29,6 +27,34 @@ const About = ({ hideTitle = false }) => {
               alt="Athletes on a goalball court wearing eyeshades and preparing for a play."
               className="relative z-10 rounded-lg shadow-xl w-full h-auto"
             />
+          </div>
+        </div>
+
+        <div className="mt-20">
+          <h2 className="text-3xl md:text-4xl mb-6 text-center">What is Goalball?</h2>
+          <p className="text-lg text-nearBlack leading-relaxed text-center max-w-3xl mx-auto mb-12">
+            Goalball is a fast-paced Paralympic team sport designed specifically for athletes who are blind or visually impaired.
+            Players compete in teams of three, using their bodies to block a ball embedded with bells from entering their goal.
+            Because the sport relies heavily on hearing, all athletes wear eyeshades to ensure an equal playing field.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-gray-50 p-8 rounded-xl border border-gray-100 shadow-sm">
+              <h3 className="text-xl font-bold mb-3 text-primary">Inclusive</h3>
+              <p className="text-nearBlack">Open to athletes with visual impairments of all levels.</p>
+            </div>
+            <div className="bg-gray-50 p-8 rounded-xl border border-gray-100 shadow-sm">
+              <h3 className="text-xl font-bold mb-3 text-primary">Team-Based</h3>
+              <p className="text-nearBlack">Build communication, trust, and teamwork skills.</p>
+            </div>
+            <div className="bg-gray-50 p-8 rounded-xl border border-gray-100 shadow-sm">
+              <h3 className="text-xl font-bold mb-3 text-primary">Paralympic Sport</h3>
+              <p className="text-nearBlack">Recognized internationally and played at elite levels.</p>
+            </div>
+            <div className="bg-gray-50 p-8 rounded-xl border border-gray-100 shadow-sm">
+              <h3 className="text-xl font-bold mb-3 text-primary">Beginner Friendly</h3>
+              <p className="text-nearBlack">No experience required — we teach you everything.</p>
+            </div>
           </div>
         </div>
       </div>

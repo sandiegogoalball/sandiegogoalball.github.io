@@ -1,4 +1,4 @@
-import heroImage from '../assets/images/4763ee5c-c3b5-46b4-8cc2-4fe3f034bf3f.jpeg';
+import heroImage from '../assets/images/2e92691d-373c-4dd1-b111-23596e420300.jpeg';
 
 const Hero = () => {
   return (
@@ -20,11 +20,11 @@ const Hero = () => {
             Empowering Athletes Through Goalball
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-10 leading-relaxed">
-            Experience the thrill of San Diego's premier inclusive sport for the blind and visually impaired community. Join us on the court today.
+            Building confidence, community, and competitive excellence for athletes who are blind or visually impaired in San Diego.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a href="#get-involved" className="btn btn-secondary text-lg px-8 py-4">
-              Join the Team
+              Join a Practice
             </a>
             <a href="#about" className="btn border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8 py-4">
               Learn More
