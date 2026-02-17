@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-nearBlack font-sans text-base antialiased;
+    font-size: 16px; /* Minimum 16px body text as required */
+  }
+
+  /* Accessible focus states */
+  :focus-visible {
+    @apply outline-none ring-4 ring-accent ring-offset-2;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-bold text-primary;
+  }
+}
+
+@layer components {
+  .skip-link {
+    @apply absolute -top-16 left-0 bg-primary text-white p-4 transition-all focus:top-0 z-50;
+  }
+
+  .btn {
+    @apply px-6 py-3 rounded-md font-bold transition-all inline-block text-center;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark focus:ring-primary;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-nearBlack hover:bg-secondary-light focus:ring-secondary;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
+  }
+}
