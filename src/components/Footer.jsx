@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer className="bg-nearBlack text-white py-12">
@@ -8,11 +10,11 @@ const Footer = () => {
             <p className="text-white/60">Empowering athletes through inclusive sports.</p>
           </div>
           <nav className="flex flex-wrap justify-center gap-6" aria-label="Footer Navigation">
-            <a href="#home" className="hover:text-secondary transition-colors">Home</a>
-            <a href="#about" className="hover:text-secondary transition-colors">About</a>
-            <a href="#programs" className="hover:text-secondary transition-colors">Programs</a>
-            <a href="#schedule" className="hover:text-secondary transition-colors">Schedule</a>
-            <a href="#contact" className="hover:text-secondary transition-colors">Contact</a>
+            <Link to="/" className="hover:text-secondary transition-colors">Home</Link>
+            <Link to="/about" className="hover:text-secondary transition-colors">About</Link>
+            <Link to="/programs" className="hover:text-secondary transition-colors">Programs</Link>
+            <Link to="/schedule" className="hover:text-secondary transition-colors">Schedule</Link>
+            <Link to="/contact" className="hover:text-secondary transition-colors">Contact</Link>
           </nav>
         </div>
         <div className="text-center text-white/40 text-sm">

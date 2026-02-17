@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Programs', href: '#programs' },
-    { name: 'Schedule', href: '#schedule' },
-    { name: 'Get Involved', href: '#get-involved' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Programs', href: '/programs' },
+    { name: 'Schedule', href: '/schedule' },
+    { name: 'Get Involved', href: '/get-involved' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -22,21 +23,23 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <a href="/" className="text-2xl font-bold text-primary tracking-tight">
+            <Link to="/" className="text-2xl font-bold text-primary tracking-tight">
               San Diego Goalball
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8" aria-label="Main Navigation">
             {navLinks.map((link) => (
-              <a
+              <NavLink
                 key={link.name}
-                href={link.href}
-                className="text-nearBlack hover:text-primary font-medium transition-colors duration-200"
+                to={link.href}
+                className={({ isActive }) =>
+                  `text-nearBlack hover:text-primary font-medium transition-colors duration-200 ${isActive ? 'text-primary' : ''}`
+                }
               >
                 {link.name}
-              </a>
+              </NavLink>
             ))}
           </nav>
 
@@ -73,14 +76,16 @@ const Header = () => {
       >
         <nav className="px-2 pt-2 pb-3 space-y-1 sm:px-3" aria-label="Mobile Navigation">
           {navLinks.map((link) => (
-            <a
+            <NavLink
               key={link.name}
-              href={link.href}
+              to={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className="block px-3 py-4 text-base font-medium text-nearBlack hover:text-primary hover:bg-gray-50 rounded-md transition-colors"
+              className={({ isActive }) =>
+                `block px-3 py-4 text-base font-medium text-nearBlack hover:text-primary hover:bg-gray-50 rounded-md transition-colors ${isActive ? 'text-primary bg-gray-50' : ''}`
+              }
             >
               {link.name}
-            </a>
+            </NavLink>
           ))}
         </nav>
       </div>
