@@ -1,4 +1,5 @@
 import GetInvolved from '../components/GetInvolved';
+import PageBanner from '../components/PageBanner';
 
 const GetInvolvedPage = () => {
   const faqs = [
@@ -12,13 +13,17 @@ const GetInvolvedPage = () => {
     },
     {
       question: "How can I support the team if I don't play?",
-      answer: "We are always looking for sighted volunteers to help with officiating, scoring, and transportation. You can also make a tax-deductible donation."
+      answer: "We are always looking for sighted volunteers to help with officiating, scoring, and transportation. You can also support us through donations once our channels are official."
     }
   ];
 
   return (
-    <div className="py-12">
-      <GetInvolved />
+    <div>
+      <PageBanner
+        title="Get Involved"
+        description="Whether you're an athlete, a volunteer, or a supporter, there's a place for you in our community."
+      />
+      <GetInvolved hideTitle={true} />
       <section className="bg-gray-50 py-16">
         <div className="section-container">
           <h2 className="text-3xl md:text-4xl mb-12 text-center text-nearBlack">Frequently Asked Questions</h2>

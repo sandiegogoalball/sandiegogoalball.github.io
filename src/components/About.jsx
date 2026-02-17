@@ -1,12 +1,12 @@
 import aboutImage from '../assets/images/27d1258c-3b56-4193-9f7c-887045690341.jpeg';
 
-const About = () => {
+const About = ({ hideTitle = false }) => {
   return (
     <section id="about" className="bg-white">
       <div className="section-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl mb-6">About San Diego Goalball</h2>
+            {!hideTitle && <h2 className="text-3xl md:text-4xl mb-6">About San Diego Goalball</h2>}
             <div className="space-y-4 text-lg text-nearBlack leading-relaxed">
               <p>
                 Goalball is an exciting, fast-paced team sport designed specifically for athletes with visual impairments. Played on a gym floor, two teams of three players try to throw a ball that has bells inside it into the opponents' goal.

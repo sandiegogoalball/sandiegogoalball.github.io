@@ -1,8 +1,8 @@
-const GetInvolved = () => {
+const GetInvolved = ({ hideTitle = false }) => {
   return (
     <section id="get-involved" className="bg-primary text-white">
       <div className="section-container text-center">
-        <h2 className="text-3xl md:text-4xl mb-6 text-white">Join the Community</h2>
+        {!hideTitle && <h2 className="text-3xl md:text-4xl mb-6 text-white">Join the Community</h2>}
         <p className="text-xl max-w-3xl mx-auto mb-10 text-white/90">
           Whether you want to play, volunteer, or support us through donations, there are many ways to get involved with San Diego Goalball.
         </p>

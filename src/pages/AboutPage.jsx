@@ -1,9 +1,14 @@
 import About from '../components/About';
+import PageBanner from '../components/PageBanner';
 
 const AboutPage = () => {
   return (
-    <div className="py-12">
-      <About />
+    <div>
+      <PageBanner
+        title="About San Diego Goalball"
+        description="Learn about our mission, our team, and the sport of goalball."
+      />
+      <About hideTitle={true} />
 
       <section className="bg-gray-50 py-16">
         <div className="section-container">
