@@ -22,7 +22,8 @@ window.tailwind = {
                         500: '#4AA3DF',
                         600: '#2c8ccf',
                     },
-                    dark: '#111111'
+                    dark: '#111111',
+                    black: '#000000'
                 },
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
