@@ -1,193 +1,103 @@
-/* Custom Styles for San Diego Goalball */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Root and Base Styles */
-:root {
-    --navy-900: #0B3C5D;
-    --navy-800: #114a70;
-    --gold-500: #F2A900;
-    --sky-400: #4AA3DF;
-    --dark-900: #111111;
-    --sky-100: #E3F2FD;
+@layer base {
+  :root {
+    --primary-color: #1e1b4b; /* Indigo 900 */
+    --accent-color: #f59e0b;  /* Amber 500 */
+    --accent-dark: #b45309;   /* Amber 700 */
+    --secondary-color: #10b981; /* Emerald 500 */
+    --secondary-dark: #047857;  /* Emerald 700 */
+    --text-dark: #111111;
+  }
+
+  body {
+    @apply text-dark antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-extrabold tracking-tight;
+  }
 }
 
-body {
-    background-color: #f8fafc;
-    background-image: radial-gradient(circle at 2px 2px, rgba(11, 60, 93, 0.05) 1px, transparent 0);
-    background-size: 32px 32px;
-    min-height: 100vh;
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Accessible Skip Link */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-amber-500 focus:text-indigo-900 focus:p-4 focus:z-[100] focus:rounded-lg focus:font-bold focus:shadow-2xl focus:ring-4 focus:ring-indigo-900;
+  }
+
+  /* Modern Buttons */
+  .btn-primary {
+    @apply bg-indigo-900 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-indigo-800 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-indigo-300;
+  }
+
+  .btn-accent {
+    @apply bg-amber-500 text-indigo-900 font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-amber-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-amber-300;
+  }
+
+  .btn-secondary {
+    @apply bg-emerald-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-emerald-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-emerald-300;
+  }
+
+  .btn-outline {
+    @apply border-2 border-indigo-900 text-indigo-900 font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-indigo-900 hover:text-white hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-indigo-300;
+  }
+
+  .btn-white-outline {
+    @apply border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-white hover:text-indigo-900 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-white/30;
+  }
+
+  /* Legacy Class Support (Mapped to new theme) */
+  .btn-navy { @apply btn-primary; }
+  .btn-gold { @apply btn-accent; }
+  .btn-sky { @apply btn-secondary; }
+
+  /* Utility Backgrounds */
+  .bg-primary { background-color: var(--primary-color); }
+  .bg-accent { background-color: var(--accent-color); }
+  .bg-secondary { background-color: var(--secondary-color); }
+
+  /* Hero Gradients */
+  .hero-gradient {
+    background: linear-gradient(to right, rgba(30, 27, 75, 0.95), rgba(30, 27, 75, 0.6));
+  }
 }
 
-/* More Color */
-.bg-sky-light { background-color: var(--sky-100); }
-.text-navy-bold { color: var(--navy-900); font-weight: 700; }
-
-/* Typography Enhancements */
-h1, h2, h3 {
-    letter-spacing: -0.025em;
+/* Accessibility Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  @apply outline-none ring-4 ring-indigo-500 ring-offset-2;
 }
 
-/* Global Link Styles */
-main a:not([class*="btn-"]) {
-    color: #2563eb;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: all 0.3s ease;
+/* Custom Utilities */
+.text-balance {
+  text-wrap: balance;
 }
 
-main a:not([class*="btn-"]):hover {
-    color: #1d4ed8;
-    text-decoration-thickness: 2px;
+.sr-only-visible-label {
+    @apply text-xs font-bold uppercase tracking-widest inline-block;
 }
 
-/* Accessibility */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--navy-900);
-    color: white;
-    padding: 8px;
-    z-index: 100;
-    transition: top 0.3s;
+/* General link styling for content */
+main a:not([class]) {
+  @apply text-indigo-700 underline decoration-2 underline-offset-4 hover:text-indigo-900 transition-colors;
 }
 
-.skip-link:focus {
-    top: 0;
-}
-
-/* Screen reader only text */
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-}
-
-/* Navigation */
-nav a {
-    position: relative;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--gold-500);
-    transition: width 0.3s ease;
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
-/* Hero Section */
-.hero-gradient {
-    background: linear-gradient(to right, rgba(11, 60, 93, 0.95), rgba(11, 60, 93, 0.4));
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--navy-900);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--navy-800);
-}
-
-/* Search Styling */
-#search-input {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-#search-input:not(.hidden) {
-    width: 200px;
-}
-
-@media (max-width: 768px) {
-    #search-input:not(.hidden) {
-        width: 150px;
-    }
-}
-
-/* Transitions */
-.transition-all {
-    transition: all 0.3s ease;
-}
-
-/* Button Styles */
-.btn-gold {
-    background-color: var(--gold-500);
-    color: var(--navy-900);
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 800;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-.btn-gold:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(242, 169, 0, 0.3);
-}
-
-.btn-navy {
-    background-color: var(--navy-900);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 800;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-white-outline {
-    background-color: transparent;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 9999px;
-    font-weight: 800;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    display: inline-block;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(4px);
-}
-
-.btn-white-outline:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: white;
-    transform: translateY(-2px);
-}
-
-.btn-navy:hover {
-    background-color: var(--sky-400);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(11, 60, 93, 0.2);
-}
-
-/* Selection color */
-::selection {
-    background-color: var(--gold-500);
-    color: var(--navy-900);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
