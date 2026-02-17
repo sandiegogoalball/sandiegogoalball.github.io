@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | San Diego Goalball</title>
-    <meta name="description" content="San Diego County Goalball provides opportunities for blind and visually impaired athletes to compete in the Paralympic sport of goalball.">
+    <title>Programs | San Diego Goalball</title>
+    <meta name="description" content="What is Goalball? Learn the rules, the equipment, and how the sport is played by blind and visually impaired athletes.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,9 +44,6 @@
         .skip-link:focus {
             top: 0;
         }
-        .hero-gradient {
-            background: linear-gradient(rgba(11, 60, 93, 0.8), rgba(11, 60, 93, 0.6));
-        }
     </style>
 </head>
 <body class="bg-white text-dark font-sans antialiased">
@@ -60,15 +57,14 @@
             </a>
 
             <nav class="hidden md:flex gap-8 font-semibold uppercase text-sm tracking-widest" aria-label="Main Navigation">
-                <a href="index.html" class="text-gold border-b-2 border-gold pb-1 transition-all">Home</a>
+                <a href="index.html" class="text-navy hover:text-gold transition-colors">Home</a>
                 <a href="about.html" class="text-navy hover:text-gold transition-colors">About</a>
-                <a href="programs.html" class="text-navy hover:text-gold transition-colors">Programs</a>
+                <a href="programs.html" class="text-gold border-b-2 border-gold pb-1 transition-all">Programs</a>
                 <a href="schedule.html" class="text-navy hover:text-gold transition-colors">Schedule</a>
                 <a href="get-involved.html" class="text-navy hover:text-gold transition-colors">Get Involved</a>
                 <a href="contact.html" class="text-navy hover:text-gold transition-colors">Contact</a>
             </nav>
 
-            <!-- Mobile Menu Toggle -->
             <button class="md:hidden text-navy p-2" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -78,9 +74,9 @@
         <!-- Mobile Nav -->
         <div id="mobile-nav" class="hidden md:hidden bg-white border-t border-gray-100">
             <div class="flex flex-col p-4 gap-4 font-semibold uppercase text-sm">
-                <a href="index.html" class="text-gold">Home</a>
+                <a href="index.html" class="text-navy">Home</a>
                 <a href="about.html" class="text-navy">About</a>
-                <a href="programs.html" class="text-navy">Programs</a>
+                <a href="programs.html" class="text-gold">Programs</a>
                 <a href="schedule.html" class="text-navy">Schedule</a>
                 <a href="get-involved.html" class="text-navy">Get Involved</a>
                 <a href="contact.html" class="text-navy">Contact</a>
@@ -89,75 +85,60 @@
     </header>
 
     <main id="main-content">
-        <!-- Hero Section -->
-        <section class="relative h-[70vh] flex items-center overflow-hidden">
-            <img src="images/2e92691d-373c-4dd1-b111-23596e420300.jpeg" alt="San Diego Goalball team together on the court" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 hero-gradient"></div>
-            <div class="container mx-auto px-4 relative z-10 text-white">
-                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 max-w-4xl leading-tight">
-                    Athleticism Without <span class="text-gold uppercase">Boundaries</span>
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-2xl text-sky-100 leading-relaxed">
-                    The premier competitive sport for the blind and visually impaired community in San Diego County.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="schedule.html" class="bg-gold text-navy px-8 py-4 rounded-lg font-extrabold text-lg uppercase hover:scale-105 transition-transform shadow-lg">
-                        Find a Practice
-                    </a>
-                    <a href="programs.html" class="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-8 py-4 rounded-lg font-extrabold text-lg uppercase hover:bg-white/20 transition-all">
-                        What is Goalball?
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Welcome Section -->
-        <section class="py-20 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <span class="text-sky font-bold uppercase tracking-widest block mb-4">Welcome to our community</span>
-                        <h2 class="text-4xl font-extrabold text-navy mb-6 leading-tight uppercase">Empowering Athletes Through Sound and Spirit</h2>
-                        <div class="space-y-4 text-gray-700 text-lg">
-                            <p>
-                                San Diego County Goalball provides a supportive yet competitive environment for athletes of all skill levels. We are a community of athletes, coaches, and volunteers dedicated to the Paralympic sport of goalball.
-                            </p>
-                            <p>
-                                Whether you're looking for recreation, fitness, or aiming for the highest levels of competition, we have a place for you on our court.
-                            </p>
-                        </div>
-                        <div class="mt-8">
-                            <a href="about.html" class="text-navy font-bold border-b-2 border-navy hover:text-sky hover:border-sky transition-all uppercase tracking-wider">Our Story &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="relative">
-                        <img src="images/27d1258c-3b56-4193-9f7c-887045690341.jpeg" alt="Athlete ready to block the ball on the goalball court" class="rounded-2xl shadow-2xl relative z-10">
-                        <div class="absolute -bottom-6 -right-6 w-full h-full border-4 border-gold rounded-2xl -z-0"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="py-20 bg-slate-50 border-y border-slate-200">
+        <section class="bg-navy text-white py-20">
             <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-navy mb-8 uppercase">Ready to join the action?</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-4 text-navy uppercase">Athletes</h3>
-                        <p class="text-gray-600 mb-6">Open to all blind and visually impaired individuals. No experience necessary.</p>
-                        <a href="schedule.html" class="text-sky font-bold hover:underline">Get Started &rarr;</a>
+                <h1 class="text-5xl font-extrabold uppercase tracking-tight">The Sport of Goalball</h1>
+                <p class="text-xl text-sky-200 mt-4 max-w-2xl mx-auto">Experience the most popular team sport designed specifically for the blind and visually impaired.</p>
+            </div>
+        </section>
+
+        <!-- Explanation Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-4 max-w-5xl">
+                <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-navy mb-6 uppercase tracking-tight">What is Goalball?</h2>
+                        <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+                            Goalball was created in 1946 to help rehabilitate veterans who had lost their sight during World War II. Since then, it has evolved into a high-speed, competitive Paralympic sport played in over 100 countries.
+                        </p>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            It's played by two teams of three players on a court the size of a volleyball court. The objective is to throw a ball that has bells inside into the opponent's goal, which spans the entire width of the court.
+                        </p>
                     </div>
-                    <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-4 text-navy uppercase">Volunteers</h3>
-                        <p class="text-gray-600 mb-6">Help with practices, refereeing, and community outreach. No sports background required.</p>
-                        <a href="get-involved.html" class="text-sky font-bold hover:underline">Volunteer &rarr;</a>
+                    <div>
+                        <img src="images/ef9fc2a3-f581-484d-974d-61ed5138318f.jpeg" alt="Players defending the goal" class="rounded-2xl shadow-xl">
                     </div>
-                    <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                        <h3 class="text-xl font-bold mb-4 text-navy uppercase">Support</h3>
-                        <p class="text-gray-600 mb-6">Your contributions help us provide equipment and facilities for our athletes.</p>
-                        <a href="contact.html" class="text-sky font-bold hover:underline">Donate &rarr;</a>
+                </div>
+
+                <h2 class="text-3xl font-extrabold text-navy mb-12 text-center uppercase tracking-tight">Key Rules & Mechanics</h2>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-24">
+                    <div class="p-8 bg-slate-50 rounded-xl border-t-4 border-gold">
+                        <h3 class="text-xl font-bold text-navy mb-4 uppercase">Eyeshades</h3>
+                        <p class="text-gray-600">To ensure total equality, all players must wear blackout eyeshades (masks) at all times, regardless of their level of visual impairment.</p>
                     </div>
+                    <div class="p-8 bg-slate-50 rounded-xl border-t-4 border-sky">
+                        <h3 class="text-xl font-bold text-navy mb-4 uppercase">The Ball</h3>
+                        <p class="text-gray-600">The ball contains bells that allow players to track its movement using their hearing. The audience must remain completely silent during play.</p>
+                    </div>
+                    <div class="p-8 bg-slate-50 rounded-xl border-t-4 border-navy">
+                        <h3 class="text-xl font-bold text-navy mb-4 uppercase">The Court</h3>
+                        <p class="text-gray-700 font-medium">The court features tactile lines (raised lines) that players use to orient themselves through touch.</p>
+                    </div>
+                </div>
+
+                <!-- Equipment Section -->
+                <div class="bg-navy text-white rounded-3xl p-12 overflow-hidden relative">
+                    <div class="relative z-10">
+                        <h2 class="text-3xl font-extrabold mb-8 uppercase tracking-tight">Join Our Practices</h2>
+                        <p class="text-xl text-sky-200 mb-8 max-w-2xl">
+                            We provide all the necessary equipment for beginners, including eyeshades, pads, and balls. You just need to bring athletic clothes and a passion for the game.
+                        </p>
+                        <a href="schedule.html" class="inline-block bg-gold text-navy px-8 py-4 rounded-lg font-extrabold text-lg uppercase shadow-lg hover:scale-105 transition-transform">
+                            View Schedule
+                        </a>
+                    </div>
+                    <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
                 </div>
             </div>
         </section>
