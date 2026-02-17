@@ -1,106 +1,106 @@
-/**
- * San Diego Goalball - Main JavaScript
- * Handles common functionality across all pages.
- */
+// Tailwind CSS Configuration
+// This must run before the Tailwind CDN script processes the page
+window.tailwind = {
+    theme: {
+        extend: {
+            colors: {
+                navy: {
+                    DEFAULT: '#0B3C5D',
+                    900: '#0B3C5D',
+                    800: '#114a70',
+                },
+                gold: {
+                    DEFAULT: '#F2A900',
+                    500: '#F2A900',
+                    600: '#d99800',
+                },
+                sky: {
+                    DEFAULT: '#4AA3DF',
+                    200: '#BAE1FF',
+                },
+                dark: '#111111'
+            },
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+            }
+        }
+    }
+};
 
+// Site-wide Logic
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize mobile menu
     initMobileMenu();
-    initCopyrightYear();
-    initActiveNavigation();
-    initContactForm();
+
+    // Initialize external links accessibility
+    initExternalLinks();
+
+    // Set current year in footer
+    initYear();
+
+    // Initialize navigation highlighting
+    highlightCurrentPage();
 });
 
 /**
- * Toggles the mobile navigation menu.
+ * Mobile menu toggle functionality
  */
 function initMobileMenu() {
-    const menuButton = document.querySelector('button[aria-label="Toggle Menu"]');
+    const menuBtn = document.querySelector('button[aria-label="Toggle Menu"]');
     const mobileNav = document.getElementById('mobile-nav');
 
-    if (menuButton && mobileNav) {
-        menuButton.addEventListener('click', () => {
-            const isHidden = mobileNav.classList.toggle('hidden');
-            menuButton.setAttribute('aria-expanded', !isHidden);
+    if (menuBtn && mobileNav) {
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
         });
     }
 }
 
 /**
- * Updates the copyright year in the footer.
+ * Automatically handle external links for accessibility and security
  */
-function initCopyrightYear() {
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
-}
+function initExternalLinks() {
+    const links = document.querySelectorAll('a[target="_blank"]');
+    links.forEach(link => {
+        // Ensure rel="noopener noreferrer" for security
+        link.setAttribute('rel', 'noopener noreferrer');
 
-/**
- * Highlights the current page in the navigation menus.
- */
-function initActiveNavigation() {
-    // Get current filename from URL
-    let currentPath = window.location.pathname.split('/').pop();
+        // Add "(opens in new tab)" for screen readers if not already present
+        const hasSRLabel = link.querySelector('.sr-only');
+        const hasTextLabel = link.textContent.includes('(opens in new tab)');
 
-    // Default to index.html if path is empty or /
-    if (!currentPath || currentPath === '/') {
-        currentPath = 'index.html';
-    }
-
-    const navLinks = document.querySelectorAll('nav a, #mobile-nav a');
-
-    navLinks.forEach(link => {
-        const linkPath = link.getAttribute('href');
-
-        // Check if link matches current path
-        if (linkPath === currentPath) {
-            link.setAttribute('aria-current', 'page');
-
-            // Apply active styles based on whether it's desktop or mobile nav
-            if (link.closest('nav')) {
-                // Desktop navigation active state
-                link.classList.add('text-gold', 'border-b-2', 'border-gold', 'pb-1');
-                link.classList.remove('text-navy', 'hover:text-gold');
-            } else {
-                // Mobile navigation active state
-                link.classList.add('text-gold');
-                link.classList.remove('text-navy');
-            }
-        } else {
-            // Ensure non-active links have correct base classes (in case they were changed)
-            if (link.closest('nav')) {
-                link.classList.add('text-navy', 'hover:text-gold');
-                link.classList.remove('text-gold', 'border-b-2', 'border-gold', 'pb-1');
-            } else {
-                link.classList.add('text-navy');
-                link.classList.remove('text-gold');
-            }
+        if (!hasSRLabel && !hasTextLabel) {
+            const srText = document.createElement('span');
+            srText.className = 'sr-only';
+            srText.textContent = ' (opens in new tab)';
+            link.appendChild(srText);
         }
     });
 }
 
 /**
- * Handles the contact form submission.
+ * Set the current year in any element with id="year"
  */
-function initContactForm() {
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Simple visual feedback
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-
-            setTimeout(() => {
-                alert('Thank you for your message! Since this is a student project, please email us directly at info@sdgoalball.org for any real inquiries.');
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-                contactForm.reset();
-            }, 1000);
-        });
+function initYear() {
+    const yearElement = document.getElementById('year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
     }
+}
+
+/**
+ * Highlights the current page in the navigation
+ */
+function highlightCurrentPage() {
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('nav a');
+
+    navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        if (linkPath === currentPath) {
+            link.classList.add('text-gold');
+            link.classList.remove('text-navy');
+            link.setAttribute('aria-current', 'page');
+        }
+    });
 }
