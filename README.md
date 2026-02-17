@@ -1,16 +1,70 @@
-# React + Vite
+# San Diego Goalball Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Official website for San Diego Goalball, an organization dedicated to empowering athletes who are blind or visually impaired through the sport of goalball.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Home Page**: Overview of San Diego Goalball and its mission.
+- **About Us**: Information about the organization, history, and leadership.
+- **Programs**: Details on the various programs and training offered.
+- **Schedule**: Current practice and event schedules.
+- **Get Involved**: Information on how to volunteer, donate, or join as an athlete.
+- **Contact Us**: Contact form and information for inquiries.
+- **Accessibility**: Built with WCAG 2.1 AA standards in mind, featuring high contrast and screen-reader-friendly navigation.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19**: Frontend framework.
+- **Vite**: Build tool and development server.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **React Router**: For client-side routing.
+- **Playwright**: For automated end-to-end testing and verification.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (version 18 or higher recommended)
+- npm
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/[username]/san-diego-goalball-website.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd san-diego-goalball-website
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development
+
+Start the development server:
+```bash
+npm run dev
+```
+
+### Build
+
+Build the website for production:
+```bash
+npm run build
+```
+The output will be in the `dist` folder.
+
+### Deployment
+
+The website is configured to automatically deploy to GitHub Pages via GitHub Actions whenever changes are pushed to the `main` branch.
+
+## Accessibility Statement
+
+San Diego Goalball is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards.
+
+## Contact
+
+For questions or feedback, please contact us at info@sdgoalball.org.

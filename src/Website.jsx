@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Home from './pages/Home';
@@ -37,9 +37,9 @@ const PageManager = () => {
   return null;
 };
 
-function App() {
+function Website() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <PageManager />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -51,8 +51,8 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
-export default App;
+export default Website;
