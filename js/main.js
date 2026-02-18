@@ -58,6 +58,8 @@ const SITE_INDEX = [
     { title: "Programs", url: "programs.html", content: "Discover the rules, equipment, and unique mechanics of goalball, the premier Paralympic team sport." },
     { title: "Schedule", url: "schedule.html", content: "View our simplified practice schedule at Mission Valley YMCA and Stagecoach Park in Carlsbad." },
     { title: "Get Involved", url: "get-involved.html", content: "Volunteer with us or support our athletes through donations and community outreach." },
+    { title: "Blog", url: "blog.html", content: "Stay updated with the latest news, tournament results, and community stories from San Diego County Goalball." },
+    { title: "SD Goalball Shines at Cascade Classic", url: "blog/2026-cascade-classic.html", content: "Recap of our tournament journey in Portland, Oregon at the 16th Annual Cascade Classic." },
     { title: "Contact", url: "contact.html", content: "Get in touch with Lori or Mike Meyers for inquiries about practices and volunteering." }
 ];
 
