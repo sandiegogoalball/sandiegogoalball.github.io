@@ -5,43 +5,34 @@ window.tailwind = {
         theme: {
             extend: {
                 colors: {
-                    // New Theme Palette
+                    // SDSU Theme Palette
+                    red: {
+                        900: '#A6192E', // SDSU Red
+                        800: '#D41736', // Bright Red
+                        500: '#A6192E',
+                    },
+                    charcoal: {
+                        DEFAULT: '#2D2828',
+                    },
+                    black: '#000000',
+                    white: '#FFFFFF',
+                    // Mapping old colors to new theme for compatibility
                     indigo: {
-                        900: '#1e1b4b',
-                        800: '#312e81',
-                        500: '#6366f1',
+                        900: '#A6192E',
+                        800: '#D41736',
+                        500: '#A6192E',
                     },
                     amber: {
-                        500: '#f59e0b',
-                        600: '#d97706',
-                        700: '#b45309',
+                        500: '#2D2828',
+                        600: '#000000',
+                        700: '#000000',
                     },
                     emerald: {
-                        500: '#10b981',
-                        600: '#059669',
-                        700: '#047857',
+                        500: '#A6192E',
+                        600: '#A6192E',
+                        700: '#A6192E',
                     },
-                    // Legacy Mapping (for compatibility during transition)
-                    navy: {
-                        DEFAULT: '#1e1b4b',
-                        900: '#1e1b4b',
-                        800: '#312e81',
-                    },
-                    gold: {
-                        DEFAULT: '#f59e0b',
-                        500: '#f59e0b',
-                        600: '#d97706',
-                        700: '#b45309',
-                    },
-                    sky: {
-                        DEFAULT: '#10b981',
-                        100: '#ecfdf5',
-                        200: '#a7f3d0',
-                        500: '#10b981',
-                        600: '#059669',
-                    },
-                    dark: '#111111',
-                    black: '#000000'
+                    dark: '#2D2828',
                 },
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
@@ -58,7 +49,8 @@ const SITE_INDEX = [
     { title: "Goalball Program", url: "goalball-program.html", content: "Discover the rules, equipment, and unique mechanics of goalball, the premier Paralympic team sport." },
     { title: "Schedule", url: "schedule.html", content: "View our simplified practice schedule at Mission Valley YMCA and Stagecoach Park in Carlsbad." },
     { title: "Get Involved", url: "get-involved.html", content: "Volunteer with us or support our athletes through donations and community outreach." },
-    { title: "Contact", url: "contact.html", content: "Get in touch with Lori or Mike Meyers for inquiries about practices and volunteering." }
+    { title: "Resources", url: "resources.html", content: "Explore Goalball resources, governing bodies like USABA and IBSA, and local San Diego organizations." },
+    { title: "Contact", url: "contact.html", content: "Get in touch with Lori or Neal Meyers for inquiries about practices and volunteering." }
 ];
 
 // Site-wide Logic
