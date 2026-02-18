@@ -46,7 +46,8 @@ window.tailwind = {
 const SITE_INDEX = [
     { title: "Home", url: "index.html", content: "San Diego County Goalball provides opportunities for blind and visually impaired athletes to compete in the Paralympic sport of goalball." },
     { title: "About Us", url: "about.html", content: "Learn about our mission to empower athletes through sport, inclusion, and competitive excellence. Information on Matt Boyle." },
-    { title: "Goalball Program", url: "goalball-program.html", content: "Discover the rules, equipment, and unique mechanics of goalball, the premier Paralympic team sport." },
+    { title: "About Goalball", url: "about-goalball.html", content: "Discover the rules, history, and unique mechanics of goalball, the premier Paralympic team sport." },
+    { title: "Equipment", url: "equipment.html", content: "Learn about specialized goalball gear including audible balls, blackout eyeshades, and protective padding." },
     { title: "Schedule", url: "schedule.html", content: "View our simplified practice schedule at Mission Valley YMCA and Stagecoach Park in Carlsbad." },
     { title: "Get Involved", url: "get-involved.html", content: "Volunteer with us or support our athletes through donations and community outreach." },
     { title: "Resources", url: "resources.html", content: "Explore Goalball resources, governing bodies like USABA and IBSA, and local San Diego organizations." },
@@ -63,6 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize external links accessibility
     initExternalLinks();
+
+    // Initialize FAQ Accordion
+    initFAQ();
 
     // Set current year in footer
     initYear();
@@ -188,19 +192,124 @@ function showSearchResults(results) {
  */
 function initExternalLinks() {
     const links = document.querySelectorAll('a[target="_blank"]');
+
+    // Create Modal Element if it doesn't exist
+    let modal = document.getElementById('external-link-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'external-link-modal';
+        modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300';
+        modal.innerHTML = `
+            <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-red-900">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-black text-red-900 text-center uppercase mb-4 tracking-tight">Leaving Our Site</h3>
+                <p class="text-gray-600 text-center mb-8 leading-relaxed">
+                    You are about to leave <span class="font-bold">San Diego Goalball</span> to visit an external website. Would you like to proceed?
+                </p>
+                <div class="flex flex-col gap-3">
+                    <a id="modal-proceed" href="#" target="_blank" class="btn-primary text-center">Yes, Proceed</a>
+                    <button id="modal-cancel" class="py-3 px-8 rounded-full font-bold text-gray-500 hover:text-red-900 transition-colors">Go Back</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        const cancelBtn = modal.querySelector('#modal-cancel');
+        cancelBtn.addEventListener('click', () => closeModal(modal));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal(modal);
+        });
+    }
+
     links.forEach(link => {
         // Ensure rel="noopener noreferrer" for security
         link.setAttribute('rel', 'noopener noreferrer');
 
-        // Add "(opens in new tab)" for screen readers if not already present
+        // Add "(opens in new tab)" for screen readers
         const hasSRLabel = link.querySelector('.sr-only');
-        const hasTextLabel = link.textContent.includes('(opens in new tab)');
-
-        if (!hasSRLabel && !hasTextLabel) {
+        if (!hasSRLabel) {
             const srText = document.createElement('span');
             srText.className = 'sr-only';
             srText.textContent = ' (opens in new tab)';
             link.appendChild(srText);
+        }
+
+        // Intercept click
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            openModal(modal, href);
+        });
+    });
+}
+
+function openModal(modal, href) {
+    const proceedBtn = modal.querySelector('#modal-proceed');
+    const content = modal.querySelector('#modal-content');
+    proceedBtn.href = href;
+
+    modal.classList.remove('hidden');
+    // Force reflow
+    modal.offsetHeight;
+    modal.classList.add('opacity-100');
+    content.classList.remove('scale-95');
+    content.classList.add('scale-100');
+
+    // Handle proceed button click to close modal
+    proceedBtn.onclick = () => {
+        setTimeout(() => closeModal(modal), 500);
+    };
+}
+
+function closeModal(modal) {
+    const content = modal.querySelector('#modal-content');
+    modal.classList.remove('opacity-100');
+    content.classList.remove('scale-100');
+    content.classList.add('scale-95');
+
+    setTimeout(() => {
+        modal.classList.add('hidden');
+    }, 300);
+}
+
+/**
+ * FAQ Accordion Logic
+ */
+function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const icon = item.querySelector('.faq-icon');
+
+        if (question && answer) {
+            question.addEventListener('click', () => {
+                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    const otherIcon = otherItem.querySelector('.faq-icon');
+                    if (otherAnswer && otherAnswer !== answer) {
+                        otherAnswer.style.maxHeight = '0px';
+                        otherIcon?.classList.remove('rotate-180');
+                    }
+                });
+
+                // Toggle current item
+                if (isOpen) {
+                    answer.style.maxHeight = '0px';
+                    icon?.classList.remove('rotate-180');
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon?.classList.add('rotate-180');
+                }
+            });
         }
     });
 }
@@ -220,16 +329,18 @@ function initYear() {
  */
 function highlightCurrentPage() {
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    // Select links in desktop nav and mobile nav
     const navLinks = document.querySelectorAll('nav a, #mobile-nav a');
 
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href');
         if (linkPath === currentPath) {
-            link.classList.add('text-amber-700'); // Accessible gold for text
-            link.classList.add('font-bold');
-            link.classList.remove('text-indigo-900');
+            // Updated for SDSU Red theme - using white or light red for active state in the red header
+            link.classList.add('text-white');
+            link.classList.add('opacity-100');
+            link.classList.add('font-black');
             link.setAttribute('aria-current', 'page');
+        } else {
+            link.classList.add('text-white/70');
         }
     });
 }
