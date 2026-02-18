@@ -45,11 +45,17 @@ window.tailwind = {
 // Site Index for Search
 const SITE_INDEX = [
     { title: "Home", url: "index.html", content: "San Diego County Goalball provides opportunities for blind and visually impaired athletes to compete in the Paralympic sport of goalball." },
-    { title: "About Us", url: "about.html", content: "Learn about our mission to empower athletes through sport, inclusion, and competitive excellence. Information on Matt Boyle." },
-    { title: "About Goalball", url: "about-goalball.html", content: "Discover the rules, history, and unique mechanics of goalball, the premier Paralympic team sport." },
+    { title: "Our Story", url: "about.html", content: "Learn about our mission to empower athletes through sport, inclusion, and competitive excellence. Information on Matt Boyle." },
+    { title: "History", url: "history.html", content: "Explore the origins of goalball from WWII rehabilitation to a premier Paralympic sport and our local San Diego roots." },
+    { title: "Gallery", url: "gallery.html", content: "View photos and descriptions of San Diego Goalball practices, tournaments, and community events." },
+    { title: "What is Goalball?", url: "about-goalball.html", content: "Discover the rules, history, and unique mechanics of goalball, the premier Paralympic team sport." },
+    { title: "Rules", url: "rules.html", content: "Detailed rules of goalball including court dimensions, audible ball mechanics, and common penalties." },
     { title: "Equipment", url: "equipment.html", content: "Learn about specialized goalball gear including audible balls, blackout eyeshades, and protective padding." },
-    { title: "Schedule", url: "schedule.html", content: "View our simplified practice schedule at Mission Valley YMCA and Stagecoach Park in Carlsbad." },
-    { title: "Get Involved", url: "get-involved.html", content: "Volunteer with us or support our athletes through donations and community outreach." },
+    { title: "Practice Schedule", url: "schedule.html", content: "View our simplified practice schedule at Mission Valley YMCA and Stagecoach Park in Carlsbad." },
+    { title: "Tournaments", url: "tournaments.html", content: "Information on major goalball tournaments like the Cascade Classic and USABA Nationals." },
+    { title: "Get Involved Overview", url: "get-involved.html", content: "Volunteer with us or support our athletes through donations and community outreach." },
+    { title: "Volunteer", url: "volunteer.html", content: "Join our team as a goal judge, timer, scorer, or sighted guide. Training provided." },
+    { title: "Sponsorship", url: "sponsorship.html", content: "Partner with San Diego Goalball through corporate sponsorship tiers and support our athletes." },
     { title: "Resources", url: "resources.html", content: "Explore Goalball resources, governing bodies like USABA and IBSA, and local San Diego organizations." },
     { title: "Contact", url: "contact.html", content: "Get in touch with Lori or Neal Meyers for inquiries about practices and volunteering." }
 ];
@@ -172,7 +178,7 @@ function showSearchResults(results) {
             link.href = item.url;
             link.className = 'block p-3 hover:bg-slate-50 rounded-lg transition-colors border-b last:border-0';
             link.innerHTML = `
-                <h4 class="font-bold text-indigo-900 text-sm mb-1">${item.title}</h4>
+                <h4 class="font-bold text-red-900 text-sm mb-1">${item.title}</h4>
                 <p class="text-xs text-gray-600 line-clamp-2">${item.content}</p>
             `;
             resultsDiv.appendChild(link);
@@ -196,18 +202,18 @@ function initExternalLinks() {
     // Create Modal Element if it doesn't exist
     let modal = document.getElementById('external-link-modal');
     if (!modal) {
-        modal = document.createElement('div');
+        modal = document.createElement('dialog');
         modal.id = 'external-link-modal';
-        modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300';
+        modal.className = 'fixed inset-0 z-[100] p-0 m-auto bg-transparent border-none backdrop:bg-black/60 backdrop:backdrop-blur-sm';
         modal.innerHTML = `
-            <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+            <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
                 <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-red-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-red-900" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                     </svg>
                 </div>
-                <h3 class="text-2xl font-black text-red-900 text-center uppercase mb-4 tracking-tight">Leaving Our Site</h3>
-                <p class="text-gray-600 text-center mb-8 leading-relaxed">
+                <h3 id="modal-title" class="text-2xl font-black text-red-900 text-center uppercase mb-4 tracking-tight">Leaving Our Site</h3>
+                <p id="modal-desc" class="text-gray-600 text-center mb-8 leading-relaxed">
                     You are about to leave <span class="font-bold">San Diego Goalball</span> to visit an external website. Would you like to proceed?
                 </p>
                 <div class="flex flex-col gap-3">
@@ -216,10 +222,14 @@ function initExternalLinks() {
                 </div>
             </div>
         `;
+        modal.setAttribute('aria-labelledby', 'modal-title');
+        modal.setAttribute('aria-describedby', 'modal-desc');
         document.body.appendChild(modal);
 
         const cancelBtn = modal.querySelector('#modal-cancel');
         cancelBtn.addEventListener('click', () => closeModal(modal));
+
+        // Close on backdrop click
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal(modal);
         });
@@ -252,12 +262,13 @@ function openModal(modal, href) {
     const content = modal.querySelector('#modal-content');
     proceedBtn.href = href;
 
-    modal.classList.remove('hidden');
-    // Force reflow
-    modal.offsetHeight;
-    modal.classList.add('opacity-100');
-    content.classList.remove('scale-95');
-    content.classList.add('scale-100');
+    modal.showModal();
+
+    // Animation
+    requestAnimationFrame(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+    });
 
     // Handle proceed button click to close modal
     proceedBtn.onclick = () => {
@@ -267,12 +278,11 @@ function openModal(modal, href) {
 
 function closeModal(modal) {
     const content = modal.querySelector('#modal-content');
-    modal.classList.remove('opacity-100');
-    content.classList.remove('scale-100');
-    content.classList.add('scale-95');
+    content.classList.remove('scale-100', 'opacity-100');
+    content.classList.add('scale-95', 'opacity-0');
 
     setTimeout(() => {
-        modal.classList.add('hidden');
+        modal.close();
     }, 300);
 }
 
@@ -336,11 +346,26 @@ function highlightCurrentPage() {
         if (linkPath === currentPath) {
             // Updated for SDSU Red theme - using white or light red for active state in the red header
             link.classList.add('text-white');
+            link.classList.remove('text-white/70');
             link.classList.add('opacity-100');
             link.classList.add('font-black');
             link.setAttribute('aria-current', 'page');
+
+            // If it's a sub-menu item, also highlight the parent dropdown button
+            const dropdown = link.closest('.dropdown');
+            if (dropdown) {
+                const button = dropdown.querySelector('button');
+                if (button) {
+                    button.classList.add('text-white');
+                    button.classList.remove('text-white/70');
+                    button.classList.add('font-black');
+                }
+            }
         } else {
-            link.classList.add('text-white/70');
+            // Only add text-white/70 if it doesn't already have text-white
+            if (!link.classList.contains('text-white')) {
+                link.classList.add('text-white/70');
+            }
         }
     });
 }
