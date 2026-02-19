@@ -116,19 +116,21 @@
             </div>
         </div>
         <!-- Mobile Nav -->
-        <div id="mobile-nav" class="hidden lg:hidden bg-red-800 border-t border-red-700 overflow-y-auto max-h-[80vh]">
+        <div id="mobile-nav" class="lg:hidden bg-red-800 border-t border-red-700 overflow-hidden max-h-0 opacity-0 invisible transition-all duration-300 ease-in-out">
             <div class="flex flex-col p-6 gap-2 font-semibold uppercase text-sm tracking-widest">
                 <a href="index.html" class="text-white py-3 border-b border-white/10">Home</a>
 
                 <!-- About Collapsible -->
                 <div class="border-b border-white/10">
-                    <button type="button" class="w-full flex justify-between items-center text-white py-3 mobile-dropdown-toggle" aria-expanded="false" aria-controls="mobile-about-links">
-                        About
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </button>
-                    <div id="mobile-about-links" class="hidden flex flex-col pb-3 pl-4 gap-2">
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-white">About</span>
+                        <button type="button" class="p-2 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="mobile-about-links" aria-label="Toggle About Submenu">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-about-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
                         <a href="about.html" class="text-white/80 py-1 hover:text-white">Our Story</a>
                         <a href="history.html" class="text-white/80 py-1 hover:text-white">History</a>
                         <a href="gallery.html" class="text-white/80 py-1 hover:text-white">Gallery</a>
@@ -137,13 +139,15 @@
 
                 <!-- The Sport Collapsible -->
                 <div class="border-b border-white/10">
-                    <button type="button" class="w-full flex justify-between items-center text-white py-3 mobile-dropdown-toggle" aria-expanded="false" aria-controls="mobile-sport-links">
-                        The Sport
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </button>
-                    <div id="mobile-sport-links" class="hidden flex flex-col pb-3 pl-4 gap-2">
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-white">The Sport</span>
+                        <button type="button" class="p-2 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="mobile-sport-links" aria-label="Toggle The Sport Submenu">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-sport-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
                         <a href="about-goalball.html" class="text-white/80 py-1 hover:text-white">What is Goalball?</a>
                         <a href="rules.html" class="text-white/80 py-1 hover:text-white">Rules</a>
                         <a href="equipment.html" class="text-white/80 py-1 hover:text-white">Equipment</a>
@@ -152,13 +156,15 @@
 
                 <!-- Schedule Collapsible -->
                 <div class="border-b border-white/10">
-                    <button type="button" class="w-full flex justify-between items-center text-white py-3 mobile-dropdown-toggle" aria-expanded="false" aria-controls="mobile-schedule-links">
-                        Schedule
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </button>
-                    <div id="mobile-schedule-links" class="hidden flex flex-col pb-3 pl-4 gap-2">
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-white">Schedule</span>
+                        <button type="button" class="p-2 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="mobile-schedule-links" aria-label="Toggle Schedule Submenu">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-schedule-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
                         <a href="schedule.html" class="text-white/80 py-1 hover:text-white">Practice Schedule</a>
                         <a href="tournaments.html" class="text-white/80 py-1 hover:text-white">Tournaments</a>
                     </div>
@@ -166,13 +172,15 @@
 
                 <!-- Get Involved Collapsible -->
                 <div class="border-b border-white/10">
-                    <button type="button" class="w-full flex justify-between items-center text-white py-3 mobile-dropdown-toggle" aria-expanded="false" aria-controls="mobile-involved-links">
-                        Get Involved
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transition-transform duration-300">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </button>
-                    <div id="mobile-involved-links" class="hidden flex flex-col pb-3 pl-4 gap-2">
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-white">Get Involved</span>
+                        <button type="button" class="p-2 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="mobile-involved-links" aria-label="Toggle Get Involved Submenu">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-involved-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
                         <a href="get-involved.html" class="text-white/80 py-1 hover:text-white">Overview</a>
                         <a href="volunteer.html" class="text-white/80 py-1 hover:text-white">Volunteer</a>
                         <a href="sponsorship.html" class="text-white/80 py-1 hover:text-white">Sponsorship</a>
