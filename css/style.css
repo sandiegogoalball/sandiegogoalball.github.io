@@ -27,7 +27,7 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Accessible Skip Link (Visible on focus) */
+  /* Accessible Skip Link */
   .skip-link {
     @apply sr-only;
   }
@@ -101,6 +101,9 @@
     @apply absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl opacity-0 invisible translate-y-2 transition-all duration-300 z-50 overflow-hidden border border-slate-100;
   }
 
+  .group:hover .dropdown-content,
+  .dropdown:hover .dropdown-content,
+  .dropdown:focus-within .dropdown-content,
   button[aria-expanded="true"] + .dropdown-content {
     @apply opacity-100 visible translate-y-0;
   }
