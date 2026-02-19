@@ -65,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize mobile menu
     initMobileMenu();
 
+    // Initialize desktop navigation accessibility
+    initDesktopNav();
+
     // Initialize search
     initSearch();
 
@@ -82,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Mobile menu toggle functionality
+ * Mobile menu toggle functionality and accordions
  */
 function initMobileMenu() {
     const menuBtn = document.querySelector('button[aria-label="Toggle Menu"]');
@@ -113,6 +116,64 @@ function initMobileMenu() {
             }
         });
     }
+
+    // Mobile Dropdown Accordions
+    const mobileToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+    mobileToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const targetId = toggle.getAttribute('aria-controls');
+            const target = document.getElementById(targetId);
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+            // Toggle current
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            if (target) {
+                target.classList.toggle('hidden');
+            }
+
+            // Rotate icon
+            const icon = toggle.querySelector('svg');
+            if (icon) {
+                icon.style.transform = !isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        });
+    });
+}
+
+/**
+ * Desktop navigation accessibility - handle focus states
+ */
+function initDesktopNav() {
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const button = dropdown.querySelector('button');
+        const content = dropdown.querySelector('.dropdown-content');
+
+        if (button && content) {
+            // When button is focused or hovered, show content
+            // (Hover is handled by CSS, focus needs JS)
+            button.addEventListener('focus', () => {
+                button.setAttribute('aria-expanded', 'true');
+                // We let CSS handle the visibility if we use a class
+            });
+
+            // Handle keyboard navigation within dropdown
+            dropdown.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    button.setAttribute('aria-expanded', 'false');
+                    button.focus();
+                }
+            });
+
+            // Close when focus leaves the dropdown
+            dropdown.addEventListener('focusout', (e) => {
+                if (!dropdown.contains(e.relatedTarget)) {
+                    button.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+    });
 }
 
 /**
@@ -204,21 +265,23 @@ function initExternalLinks() {
     if (!modal) {
         modal = document.createElement('dialog');
         modal.id = 'external-link-modal';
-        modal.className = 'fixed inset-0 z-[100] p-0 m-auto bg-transparent border-none backdrop:bg-black/60 backdrop:backdrop-blur-sm';
+        // High contrast HTML style modal
+        modal.className = 'fixed inset-0 z-[100] p-0 m-auto bg-white border-4 border-red-900 rounded-none shadow-none w-full max-w-lg';
         modal.innerHTML = `
-            <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
-                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-red-900" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                    </svg>
+            <div class="p-0 flex flex-col h-full" id="modal-content">
+                <div class="bg-red-900 text-white p-6">
+                    <h3 id="modal-title" class="text-2xl font-black uppercase tracking-tight">Leaving Website</h3>
                 </div>
-                <h3 id="modal-title" class="text-2xl font-black text-red-900 text-center uppercase mb-4 tracking-tight">Leaving Our Site</h3>
-                <p id="modal-desc" class="text-gray-600 text-center mb-8 leading-relaxed">
-                    You are about to leave <span class="font-bold">San Diego Goalball</span> to visit an external website. Would you like to proceed?
-                </p>
-                <div class="flex flex-col gap-3">
-                    <a id="modal-proceed" href="#" target="_blank" class="btn-primary text-center">Yes, Proceed</a>
-                    <button id="modal-cancel" class="py-3 px-8 rounded-full font-bold text-gray-500 hover:text-red-900 transition-colors">Go Back</button>
+                <div class="p-8 flex-grow">
+                    <p id="modal-desc" class="text-xl text-dark mb-8 leading-relaxed">
+                        You are now leaving the <span class="font-bold">San Diego Goalball</span> website to visit an external link.
+                        <br><br>
+                        Do you want to continue?
+                    </p>
+                    <div class="flex flex-col gap-4">
+                        <a id="modal-proceed" href="#" target="_blank" class="bg-red-900 text-white text-center py-5 px-8 font-black uppercase tracking-widest text-lg hover:bg-black transition-colors">Yes, Continue</a>
+                        <button id="modal-cancel" class="bg-gray-200 text-dark text-center py-5 px-8 font-black uppercase tracking-widest text-lg hover:bg-gray-300 transition-colors">No, Stay Here</button>
+                    </div>
                 </div>
             </div>
         `;
@@ -229,9 +292,28 @@ function initExternalLinks() {
         const cancelBtn = modal.querySelector('#modal-cancel');
         cancelBtn.addEventListener('click', () => closeModal(modal));
 
-        // Close on backdrop click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal(modal);
+        // Focus trapping and keyboard support
+        modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                const focusableElements = modal.querySelectorAll('a, button');
+                const first = focusableElements[0];
+                const last = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey) {
+                    if (document.activeElement === first) {
+                        last.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === last) {
+                        first.focus();
+                        e.preventDefault();
+                    }
+                }
+            }
+            if (e.key === 'Escape') {
+                closeModal(modal);
+            }
         });
     }
 
@@ -259,31 +341,14 @@ function initExternalLinks() {
 
 function openModal(modal, href) {
     const proceedBtn = modal.querySelector('#modal-proceed');
-    const content = modal.querySelector('#modal-content');
     proceedBtn.href = href;
-
     modal.showModal();
-
-    // Animation
-    requestAnimationFrame(() => {
-        content.classList.remove('scale-95', 'opacity-0');
-        content.classList.add('scale-100', 'opacity-100');
-    });
-
-    // Handle proceed button click to close modal
-    proceedBtn.onclick = () => {
-        setTimeout(() => closeModal(modal), 500);
-    };
+    // Auto-focus the proceed button for accessibility
+    proceedBtn.focus();
 }
 
 function closeModal(modal) {
-    const content = modal.querySelector('#modal-content');
-    content.classList.remove('scale-100', 'opacity-100');
-    content.classList.add('scale-95', 'opacity-0');
-
-    setTimeout(() => {
-        modal.close();
-    }, 300);
+    modal.close();
 }
 
 /**
