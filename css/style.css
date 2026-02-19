@@ -27,9 +27,12 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Accessible Skip Link (Invisible per user request) */
+  /* Accessible Skip Link (Visible on focus) */
   .skip-link {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only fixed top-4 left-4 z-[100] bg-red-900 text-white p-4 rounded-lg font-bold shadow-2xl ring-4 ring-white;
   }
 
   /* Modern Buttons */
@@ -98,8 +101,7 @@
     @apply absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl opacity-0 invisible translate-y-2 transition-all duration-300 z-50 overflow-hidden border border-slate-100;
   }
 
-  .group:hover .dropdown-content,
-  .dropdown:focus-within .dropdown-content {
+  button[aria-expanded="true"] + .dropdown-content {
     @apply opacity-100 visible translate-y-0;
   }
 }

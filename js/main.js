@@ -9,10 +9,13 @@ window.tailwind = {
                     red: {
                         900: '#A6192E', // SDSU Red
                         800: '#D41736', // Bright Red
+                        700: '#721220',
+                        600: '#A6192E',
                         500: '#A6192E',
                     },
                     charcoal: {
                         DEFAULT: '#2D2828',
+                        50: '#F7F7F7',
                     },
                     black: '#000000',
                     white: '#FFFFFF',
@@ -167,45 +170,50 @@ function initMobileMenu() {
  * Desktop navigation accessibility - handle focus states and clicks
  */
 function initDesktopNav() {
-    const dropdowns = document.querySelectorAll('.dropdown');
+    const buttons = document.querySelectorAll('button[aria-haspopup="true"]');
 
-    dropdowns.forEach(dropdown => {
-        const button = dropdown.querySelector('button');
-        const content = dropdown.querySelector('.dropdown-content');
+    buttons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-        if (button && content) {
-            // Toggle on click (for touch and screen readers)
-            button.addEventListener('click', (e) => {
-                const isExpanded = button.getAttribute('aria-expanded') === 'true';
-                button.setAttribute('aria-expanded', !isExpanded);
+            // Close all other dropdowns
+            buttons.forEach(otherButton => {
+                if (otherButton !== button) {
+                    otherButton.setAttribute('aria-expanded', 'false');
+                }
             });
 
-            // Removed focus listener that was resetting aria-expanded prematurely
+            // Toggle current dropdown
+            button.setAttribute('aria-expanded', !isExpanded);
+            e.stopPropagation();
+        });
 
-            // Handle keyboard navigation within dropdown
-            dropdown.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
+        // Handle keyboard navigation
+        const container = button.parentElement;
+        container.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                button.setAttribute('aria-expanded', 'false');
+                button.focus();
+            }
+        });
+
+        // Close when focus leaves the dropdown
+        container.addEventListener('focusout', (e) => {
+            setTimeout(() => {
+                if (!container.contains(document.activeElement)) {
                     button.setAttribute('aria-expanded', 'false');
-                    button.focus();
                 }
+            }, 10);
+        });
+    });
 
-                // Allow Space and Enter to toggle as well (default click handles Enter, but Space often needs help)
-                if (e.key === ' ' || e.key === 'Spacebar') {
-                    e.preventDefault();
-                    button.click();
-                }
-            });
-
-            // Close when focus leaves the dropdown
-            dropdown.addEventListener('focusout', (e) => {
-                // Use a small timeout to allow focus to move to the next item
-                setTimeout(() => {
-                    if (!dropdown.contains(document.activeElement)) {
-                        button.setAttribute('aria-expanded', 'false');
-                    }
-                }, 10);
-            });
-        }
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        buttons.forEach(button => {
+            if (!button.parentElement.contains(e.target)) {
+                button.setAttribute('aria-expanded', 'false');
+            }
+        });
     });
 }
 
@@ -441,27 +449,42 @@ function highlightCurrentPage() {
 
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href');
+        const isDropdownLink = link.closest('.dropdown-content') !== null;
+        const isMobileLink = link.closest('#mobile-nav') !== null;
+
         if (linkPath === currentPath) {
-            // Updated for SDSU Red theme - using white or light red for active state in the red header
-            link.classList.add('text-white');
-            link.classList.remove('text-white/70');
-            link.classList.add('opacity-100');
-            link.classList.add('font-black');
+            if (isDropdownLink) {
+                link.classList.add('bg-slate-50');
+                link.classList.add('font-black');
+            } else {
+                link.classList.add('text-white');
+                link.classList.remove('text-white/70');
+                link.classList.add('opacity-100');
+                link.classList.add('font-black');
+            }
             link.setAttribute('aria-current', 'page');
 
             // If it's a sub-menu item, also highlight the parent dropdown button
-            const dropdown = link.closest('.dropdown');
-            if (dropdown) {
-                const button = dropdown.querySelector('button');
-                if (button) {
-                    button.classList.add('text-white');
-                    button.classList.remove('text-white/70');
-                    button.classList.add('font-black');
+            const container = link.closest('.relative, .border-b');
+            const button = container?.querySelector('button[aria-haspopup="true"], .mobile-dropdown-toggle');
+            if (button) {
+                button.classList.add('text-white');
+                button.classList.remove('text-white/70');
+                button.classList.add('font-black');
+
+                // For mobile, also expand the parent
+                if (isMobileLink) {
+                    button.setAttribute('aria-expanded', 'true');
+                    const targetId = button.getAttribute('aria-controls');
+                    const target = document.getElementById(targetId);
+                    if (target) target.classList.remove('hidden');
+                    const icon = button.querySelector('svg');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
                 }
             }
         } else {
-            // Only add text-white/70 if it doesn't already have text-white
-            if (!link.classList.contains('text-white')) {
+            // Only add text-white/70 to top-level desktop nav links or mobile main links
+            if (!isDropdownLink && !link.classList.contains('text-white')) {
                 link.classList.add('text-white/70');
             }
         }
