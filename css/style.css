@@ -62,6 +62,20 @@
   /* Navigation Hover Effect */
   nav a { @apply relative py-1 transition-all duration-300 hover:text-red-800; }
 
+  /* Requested Navigation Hover Effect - Yellow Background, Blue Text */
+  nav a:hover,
+  nav a:focus,
+  nav .dropdown button:hover,
+  nav .dropdown button:focus,
+  #mobile-nav a:hover,
+  #mobile-nav a:focus {
+    background-color: #FACC15 !important; /* bg-yellow-400 */
+    color: #1E3A8A !important; /* text-blue-900 */
+    border-radius: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
   /* Legacy Class Support (Mapped to new theme) */
   .btn-navy { @apply btn-primary; }
   .btn-gold { @apply btn-accent; }

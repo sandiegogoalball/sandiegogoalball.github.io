@@ -34,65 +34,67 @@
 
             <div class="flex items-center gap-6">
                 <nav class="hidden lg:flex gap-6 font-semibold uppercase text-sm tracking-widest" aria-label="Main Navigation">
-                    <a href="index.html" class="hover:text-white/70 transition-colors">Home</a>
-                    <!-- About Dropdown -->
-                    <div class="relative group dropdown">
-                        <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
-                            About
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="about.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Our Story</a>
-                            <a href="history.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">History</a>
-                            <a href="gallery.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Gallery</a>
-                        </div>
-                    </div>
-                    <!-- The Sport Dropdown -->
-                    <div class="relative group dropdown">
-                        <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
-                            The Sport
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="about-goalball.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">What is Goalball?</a>
-                            <a href="rules.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Rules</a>
-                            <a href="equipment.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Equipment</a>
-                        </div>
-                    </div>
-                    <!-- Schedule Dropdown -->
-                    <div class="relative group dropdown">
-                        <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
-                            Schedule
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="schedule.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Practice Schedule</a>
-                            <a href="tournaments.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Tournaments</a>
-                        </div>
-                    </div>
-                    <!-- Get Involved Dropdown -->
-                    <div class="relative group dropdown">
-                        <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
-                            Get Involved
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="get-involved.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Overview</a>
-                            <a href="volunteer.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Volunteer</a>
-                            <a href="sponsorship.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Sponsorship</a>
-                            <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Donate</a>
-                        </div>
-                    </div>
-                    <a href="resources.html" class="hover:text-white/70 transition-colors">Resources</a>
-                    <a href="contact.html" class="hover:text-white/70 transition-colors">Contact</a>
+                    <ul class="flex gap-6 items-center">
+                        <li><a href="index.html" class="hover:text-white/70 transition-colors">Home</a></li>
+                        <!-- About Dropdown -->
+                        <li class="relative group dropdown">
+                            <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
+                                About
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-content">
+                                <li><a href="about.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Our Story</a></li>
+                                <li><a href="history.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">History</a></li>
+                                <li><a href="gallery.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Gallery</a></li>
+                            </ul>
+                        </li>
+                        <!-- The Sport Dropdown -->
+                        <li class="relative group dropdown">
+                            <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
+                                The Sport
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-content">
+                                <li><a href="about-goalball.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">What is Goalball?</a></li>
+                                <li><a href="rules.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Rules</a></li>
+                                <li><a href="equipment.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Equipment</a></li>
+                            </ul>
+                        </li>
+                        <!-- Schedule Dropdown -->
+                        <li class="relative group dropdown">
+                            <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
+                                Schedule
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-content">
+                                <li><a href="schedule.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Practice Schedule</a></li>
+                                <li><a href="tournaments.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Tournaments</a></li>
+                            </ul>
+                        </li>
+                        <!-- Get Involved Dropdown -->
+                        <li class="relative group dropdown">
+                            <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
+                                Get Involved
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-content">
+                                <li><a href="get-involved.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Overview</a></li>
+                                <li><a href="volunteer.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Volunteer</a></li>
+                                <li><a href="sponsorship.html" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Sponsorship</a></li>
+                                <li><a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="block px-6 py-3 text-red-900 hover:bg-slate-50 transition-colors">Donate</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="resources.html" class="hover:text-white/70 transition-colors">Resources</a></li>
+                        <li><a href="contact.html" class="hover:text-white/70 transition-colors">Contact</a></li>
+                    </ul>
                 </nav>
 
                 <!-- Search -->
@@ -350,6 +352,23 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
             </a>
+        </div>
+    </dialog>
+
+    <!-- Confirmation Modal -->
+    <dialog id="confirmation-modal" class="p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full overflow-hidden">
+        <div class="bg-red-900 p-8 text-white relative">
+            <button id="close-confirmation-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 id="confirmation-modal-title" class="text-3xl font-black uppercase mb-2">Notification</h2>
+            <p id="confirmation-modal-message" class="text-white/80">Message goes here.</p>
+        </div>
+        <div class="p-8 bg-white flex justify-end gap-4">
+            <button id="cancel-confirmation-modal" class="btn-outline px-6 py-2 text-sm uppercase">Cancel</button>
+            <button id="confirm-confirmation-modal" class="btn-primary px-6 py-2 text-sm uppercase">Continue</button>
         </div>
     </dialog>
 </body>
