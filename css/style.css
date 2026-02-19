@@ -27,9 +27,13 @@
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Accessible Skip Link (Invisible per user request) */
+  /* Accessible Skip Link (Visible on focus) */
   .skip-link {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    @apply not-sr-only fixed top-4 left-4 z-[100] bg-white text-red-900 px-6 py-3 rounded-lg font-bold shadow-2xl outline-none ring-4 ring-red-500;
   }
 
   /* Modern Buttons */
@@ -74,7 +78,7 @@
   }
 
   /* Section Spacing */
-  .section-padding { @apply py-32; }
+  .section-padding { @apply py-16; }
 
   /* FAQ Accordion Styles */
   .faq-item {
@@ -98,9 +102,7 @@
     @apply absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl opacity-0 invisible translate-y-2 transition-all duration-300 z-50 overflow-hidden border border-slate-100;
   }
 
-  /* Support both hover and keyboard-driven expanded states */
-  .group:hover .dropdown-content,
-  .dropdown:focus-within .dropdown-content,
+  /* Support only aria-expanded for desktop dropdowns (Expandable/Collapsible) */
   button[aria-expanded="true"] + .dropdown-content {
     @apply opacity-100 visible translate-y-0;
   }
@@ -132,6 +134,15 @@ textarea:focus-visible {
 /* General link styling for content */
 main a:not([class]) {
   @apply text-red-900 underline decoration-2 underline-offset-4 hover:text-black transition-colors;
+}
+
+/* Countdown Banner */
+.countdown-banner {
+  @apply bg-black text-white py-3 px-4 text-center font-bold flex flex-wrap justify-center items-center gap-4 border-b border-white/10;
+}
+
+.countdown-display {
+  @apply bg-red-900 px-3 py-1 rounded-md font-mono text-xl tracking-wider;
 }
 
 .sr-only {

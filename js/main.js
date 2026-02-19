@@ -82,6 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize navigation highlighting
     highlightCurrentPage();
+
+    // Initialize Tournament Countdown
+    initCountdownTimer();
+
+    // Initialize Download Modal
+    initDownloadModal();
 });
 
 /**
@@ -199,9 +205,9 @@ function initDesktopNav() {
         const content = dropdown.querySelector('.dropdown-content');
 
         if (button && content) {
-            // Toggle on click (for touch and screen readers)
+            // Toggle on click
             button.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent document click from closing it immediately
+                e.stopPropagation();
                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
                 // Close all other dropdowns
@@ -229,23 +235,26 @@ function initDesktopNav() {
                 }
             });
 
-            // Close when focus leaves the dropdown
+            // Close when focus leaves the dropdown (Tab out)
             dropdown.addEventListener('focusout', (e) => {
-                setTimeout(() => {
+                // Use requestAnimationFrame to check focus after it shifts
+                requestAnimationFrame(() => {
                     if (!dropdown.contains(document.activeElement)) {
                         button.setAttribute('aria-expanded', 'false');
                     }
-                }, 50);
+                });
             });
         }
     });
 
     // Close all dropdowns when clicking outside
-    document.addEventListener('click', () => {
-        dropdowns.forEach(dropdown => {
-            const button = dropdown.querySelector('button');
-            if (button) button.setAttribute('aria-expanded', 'false');
-        });
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            dropdowns.forEach(dropdown => {
+                const button = dropdown.querySelector('button');
+                if (button) button.setAttribute('aria-expanded', 'false');
+            });
+        }
     });
 }
 
@@ -325,6 +334,93 @@ function showSearchResults(results) {
             resultsDiv.remove();
         }
     }, { once: true });
+}
+
+/**
+ * Tournament Countdown Timer
+ * Target: Feb 20, 2026, 2:40 PM PT
+ */
+function initCountdownTimer() {
+    const timerElement = document.getElementById('tournament-countdown');
+    if (!timerElement) return;
+
+    // Set the target date: Feb 20, 2026, 2:40 PM PT
+    // PT is UTC-8 (Standard) or UTC-7 (Daylight). In Feb it is PST (UTC-8).
+    const targetDate = new Date('2026-02-20T14:40:00-08:00').getTime();
+
+    const updateTimer = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            timerElement.innerHTML = "The Tournament has started! Watch the live stream below.";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const daysStr = days > 0 ? `${days}d ` : "";
+        const hoursStr = `${hours}h `;
+        const minutesStr = `${minutes}m `;
+        const secondsStr = `${seconds}s`;
+
+        const timeString = `${daysStr}${hoursStr}${minutesStr}${secondsStr}`;
+
+        // Update the visual display
+        const displayElement = timerElement.querySelector('.countdown-display');
+        if (displayElement) {
+            displayElement.textContent = timeString;
+        } else {
+            timerElement.textContent = `Tournament starts in: ${timeString}`;
+        }
+
+        // Accessibility: Update an aria-live region every minute
+        const liveRegion = document.getElementById('countdown-live-region');
+        if (liveRegion && minutes % 5 === 0 && seconds === 0) {
+            liveRegion.textContent = `Tournament starts in ${days > 0 ? days + ' days, ' : ''}${hours} hours and ${minutes} minutes.`;
+        }
+    };
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+}
+
+/**
+ * Download Modal Logic
+ */
+function initDownloadModal() {
+    const modal = document.getElementById('download-modal');
+    const openBtns = document.querySelectorAll('.open-download-modal');
+    const closeBtn = document.getElementById('close-download-modal');
+
+    if (!modal || !closeBtn) return;
+
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.showModal();
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.close();
+    });
+
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            modal.close();
+        }
+    });
 }
 
 /**
