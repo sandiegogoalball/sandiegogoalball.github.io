@@ -99,10 +99,10 @@ function initMobileMenu() {
 
             if (nowExpanded) {
                 mobileNav.classList.remove('max-h-0', 'opacity-0', 'invisible');
-                mobileNav.classList.add('max-h-[80vh]', 'opacity-100', 'visible');
+                mobileNav.classList.add('max-h-[90vh]', 'opacity-100', 'visible');
             } else {
                 mobileNav.classList.add('max-h-0', 'opacity-0', 'invisible');
-                mobileNav.classList.remove('max-h-[80vh]', 'opacity-100', 'visible');
+                mobileNav.classList.remove('max-h-[90vh]', 'opacity-100', 'visible');
             }
 
             // Add visibility for screen readers and sighted users
@@ -135,7 +135,7 @@ function initMobileMenu() {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
                 mobileNav.classList.add('max-h-0', 'opacity-0', 'invisible');
-                mobileNav.classList.remove('max-h-[80vh]', 'opacity-100', 'visible');
+                mobileNav.classList.remove('max-h-[90vh]', 'opacity-100', 'visible');
                 menuBtn.setAttribute('aria-expanded', 'false');
                 const label = menuBtn.querySelector('.menu-label');
                 if (label) label.textContent = 'Menu';
@@ -155,17 +155,34 @@ function initMobileMenu() {
             const targetId = toggle.getAttribute('aria-controls');
             const target = document.getElementById(targetId);
             const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            const nowExpanded = !isExpanded;
 
             // Toggle current
-            toggle.setAttribute('aria-expanded', !isExpanded);
+            toggle.setAttribute('aria-expanded', nowExpanded);
+
             if (target) {
-                target.classList.toggle('hidden');
+                if (nowExpanded) {
+                    target.classList.remove('hidden');
+                    // Trigger reflow for transition
+                    void target.offsetHeight;
+                    target.classList.remove('max-h-0', 'opacity-0', 'invisible');
+                    target.classList.add('max-h-[500px]', 'opacity-100', 'visible');
+                } else {
+                    target.classList.add('max-h-0', 'opacity-0', 'invisible');
+                    target.classList.remove('max-h-[500px]', 'opacity-100', 'visible');
+                    // Add hidden after transition completes
+                    setTimeout(() => {
+                        if (toggle.getAttribute('aria-expanded') === 'false') {
+                            target.classList.add('hidden');
+                        }
+                    }, 300);
+                }
             }
 
-            // Rotate icon
+            // Rotate icon for animation effect
             const icon = toggle.querySelector('svg');
             if (icon) {
-                icon.style.transform = !isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+                icon.style.transform = nowExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
             }
         });
     });
@@ -184,11 +201,19 @@ function initDesktopNav() {
         if (button && content) {
             // Toggle on click (for touch and screen readers)
             button.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent document click from closing it immediately
                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                // Close all other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        const otherBtn = other.querySelector('button');
+                        if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
                 button.setAttribute('aria-expanded', !isExpanded);
             });
-
-            // Removed focus listener that was resetting aria-expanded prematurely
 
             // Handle keyboard navigation within dropdown
             dropdown.addEventListener('keydown', (e) => {
@@ -197,7 +222,7 @@ function initDesktopNav() {
                     button.focus();
                 }
 
-                // Allow Space and Enter to toggle as well (default click handles Enter, but Space often needs help)
+                // Allow Space to toggle as well
                 if (e.key === ' ' || e.key === 'Spacebar') {
                     e.preventDefault();
                     button.click();
@@ -206,14 +231,21 @@ function initDesktopNav() {
 
             // Close when focus leaves the dropdown
             dropdown.addEventListener('focusout', (e) => {
-                // Use a small timeout to allow focus to move to the next item
                 setTimeout(() => {
                     if (!dropdown.contains(document.activeElement)) {
                         button.setAttribute('aria-expanded', 'false');
                     }
-                }, 10);
+                }, 50);
             });
         }
+    });
+
+    // Close all dropdowns when clicking outside
+    document.addEventListener('click', () => {
+        dropdowns.forEach(dropdown => {
+            const button = dropdown.querySelector('button');
+            if (button) button.setAttribute('aria-expanded', 'false');
+        });
     });
 }
 

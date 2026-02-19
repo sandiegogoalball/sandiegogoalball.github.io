@@ -98,8 +98,10 @@
     @apply absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl opacity-0 invisible translate-y-2 transition-all duration-300 z-50 overflow-hidden border border-slate-100;
   }
 
+  /* Support both hover and keyboard-driven expanded states */
   .group:hover .dropdown-content,
-  .dropdown:focus-within .dropdown-content {
+  .dropdown:focus-within .dropdown-content,
+  button[aria-expanded="true"] + .dropdown-content {
     @apply opacity-100 visible translate-y-0;
   }
 }
