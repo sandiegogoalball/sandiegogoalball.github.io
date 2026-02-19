@@ -95,24 +95,47 @@ function initMobileMenu() {
         menuBtn.addEventListener('click', () => {
             const isHidden = mobileNav.classList.contains('hidden');
             mobileNav.classList.toggle('hidden');
-            menuBtn.setAttribute('aria-expanded', isHidden);
+            const nowExpanded = isHidden;
+            menuBtn.setAttribute('aria-expanded', nowExpanded);
 
             // Add visibility for screen readers and sighted users
             const label = menuBtn.querySelector('.menu-label');
             const iconSvg = menuBtn.querySelector('svg');
 
             if (label) {
-                label.textContent = isHidden ? 'Close' : 'Menu';
+                label.textContent = nowExpanded ? 'Close' : 'Menu';
             }
 
             if (iconSvg) {
-                if (isHidden) {
+                if (nowExpanded) {
                     // X icon
                     iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />';
+                    // Move focus to first link in mobile nav
+                    setTimeout(() => {
+                        const firstLink = mobileNav.querySelector('a');
+                        if (firstLink) firstLink.focus();
+                    }, 100);
                 } else {
                     // Menu icon
                     iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
+                    // Focus back to menu button
+                    menuBtn.focus();
                 }
+            }
+        });
+
+        // Close mobile menu on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileNav.classList.contains('hidden')) {
+                mobileNav.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                const label = menuBtn.querySelector('.menu-label');
+                if (label) label.textContent = 'Menu';
+                const iconSvg = menuBtn.querySelector('svg');
+                if (iconSvg) {
+                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
+                }
+                menuBtn.focus();
             }
         });
     }
@@ -141,7 +164,7 @@ function initMobileMenu() {
 }
 
 /**
- * Desktop navigation accessibility - handle focus states
+ * Desktop navigation accessibility - handle focus states and clicks
  */
 function initDesktopNav() {
     const dropdowns = document.querySelectorAll('.dropdown');
@@ -151,12 +174,13 @@ function initDesktopNav() {
         const content = dropdown.querySelector('.dropdown-content');
 
         if (button && content) {
-            // When button is focused or hovered, show content
-            // (Hover is handled by CSS, focus needs JS)
-            button.addEventListener('focus', () => {
-                button.setAttribute('aria-expanded', 'true');
-                // We let CSS handle the visibility if we use a class
+            // Toggle on click (for touch and screen readers)
+            button.addEventListener('click', (e) => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', !isExpanded);
             });
+
+            // Removed focus listener that was resetting aria-expanded prematurely
 
             // Handle keyboard navigation within dropdown
             dropdown.addEventListener('keydown', (e) => {
@@ -164,13 +188,22 @@ function initDesktopNav() {
                     button.setAttribute('aria-expanded', 'false');
                     button.focus();
                 }
+
+                // Allow Space and Enter to toggle as well (default click handles Enter, but Space often needs help)
+                if (e.key === ' ' || e.key === 'Spacebar') {
+                    e.preventDefault();
+                    button.click();
+                }
             });
 
             // Close when focus leaves the dropdown
             dropdown.addEventListener('focusout', (e) => {
-                if (!dropdown.contains(e.relatedTarget)) {
-                    button.setAttribute('aria-expanded', 'false');
-                }
+                // Use a small timeout to allow focus to move to the next item
+                setTimeout(() => {
+                    if (!dropdown.contains(document.activeElement)) {
+                        button.setAttribute('aria-expanded', 'false');
+                    }
+                }, 10);
             });
         }
     });
