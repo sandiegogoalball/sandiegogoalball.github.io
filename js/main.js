@@ -198,7 +198,6 @@ function initDesktopNav() {
         });
 
         // Handle keyboard navigation
-        const container = button.parentElement;
         container.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 button.setAttribute('aria-expanded', 'false');
@@ -306,10 +305,52 @@ function showSearchResults(results) {
 
 /**
  * Automatically handle external links for accessibility and security.
- * Uses native window.confirm for maximum accessibility as per project standards.
+ * Uses a custom accessible modal as requested.
  */
 function initExternalLinks() {
     const links = document.querySelectorAll('a[target="_blank"]');
+
+    // Create Modal Element if it doesn't exist
+    let modal = document.getElementById('external-link-modal');
+    if (!modal) {
+        modal = document.createElement('dialog');
+        modal.id = 'external-link-modal';
+        // Styled modal matching SDSU theme
+        modal.className = 'fixed inset-0 z-[100] p-0 m-auto bg-white border-4 border-red-900 rounded-none shadow-2xl w-full max-w-lg';
+        modal.innerHTML = `
+            <div class="flex flex-col h-full overflow-hidden">
+                <div class="bg-red-900 text-white p-6">
+                    <h3 id="modal-title" class="text-2xl font-black uppercase tracking-tight">External Link</h3>
+                </div>
+                <div class="p-8 flex-grow bg-white">
+                    <p id="modal-desc" class="text-lg text-dark mb-8 leading-relaxed">
+                        You are navigating to an external website.
+                        <br><br>
+                        <span class="text-sm text-gray-500 break-all" id="modal-link-display"></span>
+                    </p>
+                    <div class="flex flex-col gap-4">
+                        <button id="modal-proceed" class="bg-red-900 text-white text-center py-4 px-8 font-black uppercase tracking-widest text-sm hover:bg-black transition-colors">Continue to Site</button>
+                        <button id="modal-cancel" class="bg-gray-100 text-dark text-center py-4 px-8 font-black uppercase tracking-widest text-sm hover:bg-gray-200 transition-colors">Stay Here (Close)</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        modal.setAttribute('aria-labelledby', 'modal-title');
+        modal.setAttribute('aria-describedby', 'modal-desc');
+        document.body.appendChild(modal);
+
+        const cancelBtn = modal.querySelector('#modal-cancel');
+        const proceedBtn = modal.querySelector('#modal-proceed');
+
+        cancelBtn.addEventListener('click', () => {
+            modal.close();
+        });
+
+        // Close on backdrop click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.close();
+        });
+    }
 
     links.forEach(link => {
         // Ensure rel="noopener noreferrer" for security
@@ -324,14 +365,24 @@ function initExternalLinks() {
             link.appendChild(srText);
         }
 
-        // Intercept click for confirmation
+        // Intercept click for custom modal
         link.addEventListener('click', (e) => {
+            e.preventDefault();
             const href = link.getAttribute('href');
-            const message = `You are now leaving the San Diego Goalball website to visit an external link:\n\n${href}\n\nDo you want to continue?`;
+            const display = document.getElementById('modal-link-display');
+            if (display) display.textContent = href;
 
-            if (!window.confirm(message)) {
-                e.preventDefault();
-            }
+            const proceedBtn = modal.querySelector('#modal-proceed');
+            // Remove old listeners to avoid multiple navigations
+            const newProceedBtn = proceedBtn.cloneNode(true);
+            proceedBtn.parentNode.replaceChild(newProceedBtn, proceedBtn);
+
+            newProceedBtn.addEventListener('click', () => {
+                window.open(href, '_blank', 'noopener,noreferrer');
+                modal.close();
+            });
+
+            modal.showModal();
         });
     });
 }
