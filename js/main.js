@@ -93,10 +93,17 @@ function initMobileMenu() {
 
     if (menuBtn && mobileNav) {
         menuBtn.addEventListener('click', () => {
-            const isHidden = mobileNav.classList.contains('hidden');
-            mobileNav.classList.toggle('hidden');
-            const nowExpanded = isHidden;
+            const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+            const nowExpanded = !isExpanded;
             menuBtn.setAttribute('aria-expanded', nowExpanded);
+
+            if (nowExpanded) {
+                mobileNav.classList.remove('max-h-0', 'opacity-0', 'invisible');
+                mobileNav.classList.add('max-h-[80vh]', 'opacity-100', 'visible');
+            } else {
+                mobileNav.classList.add('max-h-0', 'opacity-0', 'invisible');
+                mobileNav.classList.remove('max-h-[80vh]', 'opacity-100', 'visible');
+            }
 
             // Add visibility for screen readers and sighted users
             const label = menuBtn.querySelector('.menu-label');
@@ -126,8 +133,9 @@ function initMobileMenu() {
 
         // Close mobile menu on Escape
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !mobileNav.classList.contains('hidden')) {
-                mobileNav.classList.add('hidden');
+            if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+                mobileNav.classList.add('max-h-0', 'opacity-0', 'invisible');
+                mobileNav.classList.remove('max-h-[80vh]', 'opacity-100', 'visible');
                 menuBtn.setAttribute('aria-expanded', 'false');
                 const label = menuBtn.querySelector('.menu-label');
                 if (label) label.textContent = 'Menu';
@@ -288,67 +296,18 @@ function showSearchResults(results) {
 }
 
 /**
+ * Simple Popup function as requested by user
+ */
+function showPopup() {
+    alert("Hello! This is a popup.");
+}
+
+/**
  * Automatically handle external links for accessibility and security
+ * Uses simple alert as requested by user
  */
 function initExternalLinks() {
     const links = document.querySelectorAll('a[target="_blank"]');
-
-    // Create Modal Element if it doesn't exist
-    let modal = document.getElementById('external-link-modal');
-    if (!modal) {
-        modal = document.createElement('dialog');
-        modal.id = 'external-link-modal';
-        // High contrast HTML style modal
-        modal.className = 'fixed inset-0 z-[100] p-0 m-auto bg-white border-4 border-red-900 rounded-none shadow-none w-full max-w-lg';
-        modal.innerHTML = `
-            <div class="p-0 flex flex-col h-full" id="modal-content">
-                <div class="bg-red-900 text-white p-6">
-                    <h3 id="modal-title" class="text-2xl font-black uppercase tracking-tight">Leaving Website</h3>
-                </div>
-                <div class="p-8 flex-grow">
-                    <p id="modal-desc" class="text-xl text-dark mb-8 leading-relaxed">
-                        You are now leaving the <span class="font-bold">San Diego Goalball</span> website to visit an external link.
-                        <br><br>
-                        Do you want to continue?
-                    </p>
-                    <div class="flex flex-col gap-4">
-                        <a id="modal-proceed" href="#" target="_blank" class="bg-red-900 text-white text-center py-5 px-8 font-black uppercase tracking-widest text-lg hover:bg-black transition-colors">Yes, Continue</a>
-                        <button id="modal-cancel" class="bg-gray-200 text-dark text-center py-5 px-8 font-black uppercase tracking-widest text-lg hover:bg-gray-300 transition-colors">No, Stay Here</button>
-                    </div>
-                </div>
-            </div>
-        `;
-        modal.setAttribute('aria-labelledby', 'modal-title');
-        modal.setAttribute('aria-describedby', 'modal-desc');
-        document.body.appendChild(modal);
-
-        const cancelBtn = modal.querySelector('#modal-cancel');
-        cancelBtn.addEventListener('click', () => closeModal(modal));
-
-        // Focus trapping and keyboard support
-        modal.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab') {
-                const focusableElements = modal.querySelectorAll('a, button');
-                const first = focusableElements[0];
-                const last = focusableElements[focusableElements.length - 1];
-
-                if (e.shiftKey) {
-                    if (document.activeElement === first) {
-                        last.focus();
-                        e.preventDefault();
-                    }
-                } else {
-                    if (document.activeElement === last) {
-                        first.focus();
-                        e.preventDefault();
-                    }
-                }
-            }
-            if (e.key === 'Escape') {
-                closeModal(modal);
-            }
-        });
-    }
 
     links.forEach(link => {
         // Ensure rel="noopener noreferrer" for security
@@ -363,25 +322,12 @@ function initExternalLinks() {
             link.appendChild(srText);
         }
 
-        // Intercept click
+        // Simple alert pop-up logic
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const href = link.getAttribute('href');
-            openModal(modal, href);
+            alert("You are now leaving the San Diego Goalball website to visit an external link.");
+            // Navigation continues after alert is dismissed
         });
     });
-}
-
-function openModal(modal, href) {
-    const proceedBtn = modal.querySelector('#modal-proceed');
-    proceedBtn.href = href;
-    modal.showModal();
-    // Auto-focus the proceed button for accessibility
-    proceedBtn.focus();
-}
-
-function closeModal(modal) {
-    modal.close();
 }
 
 /**
