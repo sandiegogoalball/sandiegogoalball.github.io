@@ -98,9 +98,16 @@
     @apply absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl opacity-0 invisible translate-y-2 transition-all duration-300 z-50 overflow-hidden border border-slate-100;
   }
 
-  .group:hover .dropdown-content {
+  .group:hover .dropdown-content,
+  .dropdown:focus-within .dropdown-content {
     @apply opacity-100 visible translate-y-0;
   }
+}
+
+/* Modal Backdrop */
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
 }
 
 /* Accessibility Focus States */
