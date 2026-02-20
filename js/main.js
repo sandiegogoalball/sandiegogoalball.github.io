@@ -5,34 +5,35 @@ window.tailwind = {
         theme: {
             extend: {
                 colors: {
-                    // SDSU Theme Palette
+                    // New Goalball Theme Palette (Green/Blue)
+                    emerald: {
+                        950: '#022c22',
+                        900: '#064e3b', // Deep Green
+                        800: '#065f46',
+                        700: '#047857',
+                        600: '#059669',
+                        500: '#10b981',
+                    },
+                    blue: {
+                        950: '#082f49',
+                        900: '#1e3a8a', // Deep Blue
+                        800: '#1e40af',
+                        700: '#1d4ed8',
+                        600: '#2563eb',
+                        500: '#3b82f6',
+                    },
+                    // Compatibility mapping
                     red: {
-                        900: '#A6192E', // SDSU Red
-                        800: '#D41736', // Bright Red
-                        500: '#A6192E',
+                        900: '#064e3b', // Mapped to Deep Green
+                        800: '#065f46',
+                        500: '#10b981',
                     },
                     charcoal: {
-                        DEFAULT: '#2D2828',
+                        DEFAULT: '#1e3a8a', // Mapped to Blue
                     },
-                    black: '#000000',
+                    black: '#022c22',
                     white: '#FFFFFF',
-                    // Mapping old colors to new theme for compatibility
-                    indigo: {
-                        900: '#A6192E',
-                        800: '#D41736',
-                        500: '#A6192E',
-                    },
-                    amber: {
-                        500: '#2D2828',
-                        600: '#000000',
-                        700: '#000000',
-                    },
-                    emerald: {
-                        500: '#A6192E',
-                        600: '#A6192E',
-                        700: '#A6192E',
-                    },
-                    dark: '#2D2828',
+                    dark: '#022c22',
                 },
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
@@ -91,6 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Global Confirmation Modal
     initConfirmationModal();
+
+    // Initialize Contrast Toggle
+    initContrastToggle();
 });
 
 /**
@@ -579,6 +583,33 @@ function initYear() {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
+}
+
+/**
+ * Contrast Toggle Functionality
+ */
+function initContrastToggle() {
+    const toggleBtn = document.getElementById('contrast-toggle');
+    if (!toggleBtn) return;
+
+    // Check for saved preference
+    if (localStorage.getItem('high-contrast') === 'true') {
+        document.documentElement.classList.add('high-contrast');
+        toggleBtn.setAttribute('aria-pressed', 'true');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        const isHighContrast = document.documentElement.classList.toggle('high-contrast');
+        localStorage.setItem('high-contrast', isHighContrast);
+        toggleBtn.setAttribute('aria-pressed', isHighContrast);
+
+        // Announcement for screen readers
+        const status = isHighContrast ? "High contrast mode enabled" : "High contrast mode disabled";
+        const liveRegion = document.getElementById('countdown-live-region');
+        if (liveRegion) {
+            liveRegion.textContent = status;
+        }
+    });
 }
 
 /**
