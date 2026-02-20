@@ -600,30 +600,83 @@ function initYear() {
 }
 
 /**
- * Contrast Toggle Functionality
+ * Contrast Toggle Functionality - Enhanced for Multiple Modes
  */
 function initContrastToggle() {
     const toggleBtn = document.getElementById('contrast-toggle');
-    if (!toggleBtn) return;
+    const modal = document.getElementById('contrast-modal');
+    const closeBtn = document.getElementById('close-contrast-modal');
+    const options = document.querySelectorAll('.contrast-option');
 
-    // Check for saved preference
-    if (localStorage.getItem('high-contrast') === 'true') {
-        document.documentElement.classList.add('high-contrast');
-        toggleBtn.setAttribute('aria-pressed', 'true');
+    if (!toggleBtn || !modal) return;
+
+    // Load saved preference
+    const savedMode = localStorage.getItem('accessibility-mode');
+    if (savedMode) {
+        setContrastMode(savedMode);
     }
 
     toggleBtn.addEventListener('click', () => {
-        const isHighContrast = document.documentElement.classList.toggle('high-contrast');
-        localStorage.setItem('high-contrast', isHighContrast);
-        toggleBtn.setAttribute('aria-pressed', isHighContrast);
+        modal.showModal();
+    });
 
-        // Announcement for screen readers
-        const status = isHighContrast ? "High contrast mode enabled" : "High contrast mode disabled";
-        const liveRegion = document.getElementById('countdown-live-region');
-        if (liveRegion) {
-            liveRegion.textContent = status;
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.close();
+        });
+    }
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const mode = option.getAttribute('data-mode');
+            setContrastMode(mode);
+            modal.close();
+        });
+    });
+
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            modal.close();
         }
     });
+}
+
+/**
+ * Sets the contrast/accessibility mode
+ * @param {string} mode - 'standard', 'high-contrast', 'high-contrast-yellow', 'grayscale'
+ */
+function setContrastMode(mode) {
+    const html = document.documentElement;
+    const toggleBtn = document.getElementById('contrast-toggle');
+
+    // Remove all accessibility classes
+    html.classList.remove('high-contrast', 'high-contrast-yellow', 'grayscale-mode');
+
+    if (mode !== 'standard') {
+        if (mode === 'high-contrast') html.classList.add('high-contrast');
+        if (mode === 'high-contrast-yellow') html.classList.add('high-contrast-yellow');
+        if (mode === 'grayscale') html.classList.add('grayscale-mode');
+
+        localStorage.setItem('accessibility-mode', mode);
+        if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'true');
+    } else {
+        localStorage.removeItem('accessibility-mode');
+        if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'false');
+    }
+
+    // Announcement for screen readers
+    const status = `Accessibility mode set to ${mode.replace('-', ' ')}`;
+    const liveRegion = document.getElementById('countdown-live-region');
+    if (liveRegion) {
+        liveRegion.textContent = status;
+    }
 }
 
 /**

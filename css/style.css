@@ -171,19 +171,19 @@ main a:not([class]) {
   border-width: 0;
 }
 
-/* High Contrast Mode */
+/* High Contrast Mode (Default/Classic) */
 .high-contrast {
   --primary-color: #000000;
   --primary-bright: #000000;
   --accent-color: #000000;
   --text-dark: #FFFFFF;
   background-color: #000000 !important;
-  color: #FFFF00 !important;
+  color: #FFFFFF !important;
 }
 
 .high-contrast body {
   background-color: #000000 !important;
-  color: #FFFF00 !important;
+  color: #FFFFFF !important;
 }
 
 .high-contrast header,
@@ -192,21 +192,21 @@ main a:not([class]) {
 .high-contrast div:not([class*="bg-white"]),
 .high-contrast main {
   background-color: #000000 !important;
-  color: #FFFF00 !important;
-  border-color: #FFFF00 !important;
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
 }
 
 .high-contrast a,
 .high-contrast button {
-  color: #FFFF00 !important;
+  color: #FFFFFF !important;
   text-decoration: underline !important;
-  border: 2px solid #FFFF00 !important;
+  border: 2px solid #FFFFFF !important;
   background-color: #000000 !important;
 }
 
 .high-contrast a:hover,
 .high-contrast button:hover {
-  background-color: #FFFF00 !important;
+  background-color: #FFFFFF !important;
   color: #000000 !important;
 }
 
@@ -220,20 +220,42 @@ main a:not([class]) {
   background-color: #000000 !important;
 }
 
-.high-contrast .text-emerald-900,
-.high-contrast .text-orange-900,
-.high-contrast .text-orange-800,
-.high-contrast .text-red-900,
-.high-contrast .text-gray-600,
-.high-contrast .text-gray-700 {
+/* Yellow on Black Contrast */
+.high-contrast-yellow {
+  background-color: #000000 !important;
   color: #FFFF00 !important;
 }
 
-.high-contrast .btn-primary,
-.high-contrast .btn-accent,
-.high-contrast .btn-secondary,
-.high-contrast .btn-outline {
+.high-contrast-yellow body,
+.high-contrast-yellow header,
+.high-contrast-yellow footer,
+.high-contrast-yellow section,
+.high-contrast-yellow main,
+.high-contrast-yellow div {
   background-color: #000000 !important;
   color: #FFFF00 !important;
-  border: 3px solid #FFFF00 !important;
+  border-color: #FFFF00 !important;
+}
+
+.high-contrast-yellow a,
+.high-contrast-yellow button {
+  color: #FFFF00 !important;
+  text-decoration: underline !important;
+  border: 2px solid #FFFF00 !important;
+  background-color: #000000 !important;
+}
+
+.high-contrast-yellow a:hover,
+.high-contrast-yellow button:hover {
+  background-color: #FFFF00 !important;
+  color: #000000 !important;
+}
+
+/* Grayscale Mode */
+.grayscale-mode {
+  filter: grayscale(100%);
+}
+
+.grayscale-mode img {
+  filter: grayscale(100%) contrast(120%);
 }
