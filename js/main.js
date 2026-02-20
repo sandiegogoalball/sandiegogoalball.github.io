@@ -408,48 +408,55 @@ function showSearchResults(results) {
 
 /**
  * Tournament Countdown Timer
- * Target: Feb 20, 2026, 2:40 PM PT
+ * Target: Feb 20, 2026, 2:00 PM PT
  */
 function initCountdownTimer() {
-    const timerElement = document.getElementById('tournament-countdown');
-    if (!timerElement) return;
+    const timerElements = document.querySelectorAll('.tournament-countdown');
+    if (timerElements.length === 0) return;
 
-    // Set the target date: Feb 20, 2026, 2:40 PM PT
+    // Set the target date: Feb 20, 2026, 2:00 PM PT
     // PT is UTC-8 (Standard) or UTC-7 (Daylight). In Feb it is PST (UTC-8).
-    const targetDate = new Date('2026-02-20T14:40:00-08:00').getTime();
+    const targetDate = new Date('2026-02-20T14:00:00-08:00').getTime();
 
     const updateTimer = () => {
         const now = new Date().getTime();
         const distance = targetDate - now;
 
-        if (distance < 0) {
-            timerElement.innerHTML = "The Tournament has started! Watch the live stream below.";
-            return;
-        }
+        timerElements.forEach(timerElement => {
+            if (distance < 0) {
+                timerElement.innerHTML = "The Tournament has started! Watch the live stream below.";
+                return;
+            }
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        const daysStr = days > 0 ? `${days}d ` : "";
-        const hoursStr = `${hours}h `;
-        const minutesStr = `${minutes}m `;
-        const secondsStr = `${seconds}s`;
+            const daysStr = days > 0 ? `${days}d ` : "";
+            const hoursStr = `${hours}h `;
+            const minutesStr = `${minutes}m `;
+            const secondsStr = `${seconds}s`;
 
-        const timeString = `${daysStr}${hoursStr}${minutesStr}${secondsStr}`;
+            const timeString = `${daysStr}${hoursStr}${minutesStr}${secondsStr}`;
 
-        // Update the visual display
-        const displayElement = timerElement.querySelector('.countdown-display');
-        if (displayElement) {
-            displayElement.textContent = timeString;
-        } else {
-            timerElement.textContent = `Tournament starts in: ${timeString}`;
-        }
+            // Update the visual display
+            const displayElement = timerElement.querySelector('.countdown-display');
+            if (displayElement) {
+                displayElement.textContent = timeString;
+            } else {
+                timerElement.textContent = `Tournament starts in: ${timeString}`;
+            }
+        });
 
         // Accessibility: Update an aria-live region every minute
+        // Since there might be multiple timers, we still use one global live region if it exists
         const liveRegion = document.getElementById('countdown-live-region');
-        if (liveRegion && minutes % 5 === 0 && seconds === 0) {
+        if (liveRegion && (Math.floor(distance / (1000 * 60)) % 5 === 0) && (Math.floor(distance / 1000) % 60 === 0)) {
+            const distanceForLive = targetDate - now;
+            const days = Math.floor(distanceForLive / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distanceForLive % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distanceForLive % (1000 * 60 * 60)) / (1000 * 60));
             liveRegion.textContent = `Tournament starts in ${days > 0 ? days + ' days, ' : ''}${hours} hours and ${minutes} minutes.`;
         }
     };
