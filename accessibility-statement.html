@@ -217,22 +217,19 @@
                 <div class="prose prose-lg text-gray-700">
                     <h2 class="text-3xl font-extrabold text-orange-600 mb-8 uppercase">Commitment to Accessibility</h2>
                     <p class="mb-6">
-                        San Diego County Goalball is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone and applying the relevant accessibility standards.
+                        San Diego County Goalball is dedicated to ensuring digital accessibility for all users, including those with disabilities. We strive to provide a website that is inclusive and easy to navigate, and we are committed to continuous improvement to meet and exceed accessibility standards.
+                    </p>
+                    <p class="mb-6">
+                        We believe that everyone should be able to access our information and services, and we are working hard to remove any barriers that may exist for our users with visual, auditory, physical, speech, cognitive, and neurological disabilities.
                     </p>
 
                     <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Conformance Status</h2>
                     <p class="mb-6">
-                        The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. San Diego County Goalball is partially conformant with WCAG 2.1 level AA. Partially conformant means that some parts of the content do not fully conform to the accessibility standard.
+                        The Web Content Accessibility Guidelines (WCAG) define requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA.
                     </p>
-
-                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Feedback</h2>
                     <p class="mb-6">
-                        We welcome your feedback on the accessibility of San Diego County Goalball. Please let us know if you encounter accessibility barriers:
+                        San Diego County Goalball is currently <strong>partially conformant</strong> with WCAG 2.1 level AA. This means that while we have made significant efforts to ensure our site meets these standards, some parts of the content may not yet fully conform to the accessibility standard. We are actively working on resolving these issues to achieve full conformance.
                     </p>
-                    <ul class="list-disc pl-6 mb-6 space-y-2">
-                        <li>Phone: 760-525-2800</li>
-                        <li>Email: info@sdgoalball.org</li>
-                    </ul>
 
                     <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Technical Specifications</h2>
                     <p class="mb-6">
@@ -240,10 +237,62 @@
                     </p>
                     <ul class="list-disc pl-6 mb-6 space-y-2">
                         <li>HTML</li>
+                        <li>WAI-ARIA</li>
                         <li>CSS</li>
                         <li>JavaScript</li>
+                        <li>Tailwind CSS</li>
                     </ul>
-                    <p>These technologies are relied upon for conformance with the accessibility standards used.</p>
+                    <p class="mb-6">These technologies are relied upon for conformance with the accessibility standards used. We test our website in modern web browsers and with common assistive technologies such as screen readers (NVDA, VoiceOver) to ensure compatibility.</p>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Accessibility Features</h2>
+                    <p class="mb-6">
+                        Our website includes several features designed to enhance accessibility:
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Contrast Toggle:</strong> A custom display options menu allowing users to switch between standard, high-contrast (white on black, yellow on black), and grayscale modes.</li>
+                        <li><strong>Skip to Main Content:</strong> A keyboard-accessible link at the top of every page that allows users to bypass navigation and jump directly to the primary content.</li>
+                        <li><strong>Semantic HTML:</strong> Use of appropriate HTML tags (headings, landmarks, buttons) to provide structure and context for screen readers.</li>
+                        <li><strong>ARIA Support:</strong> Implementation of ARIA attributes (aria-expanded, aria-haspopup, aria-live) to provide real-time updates and interactive state information.</li>
+                        <li><strong>Keyboard Navigation:</strong> All interactive elements are designed to be fully navigable via keyboard, with clear focus indicators.</li>
+                    </ul>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Assessment Methodology</h2>
+                    <p class="mb-6">
+                        San Diego County Goalball assessed the accessibility of this website through the following methods:
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Self-evaluation:</strong> The website was evaluated by the development team using automated testing tools (such as Lighthouse and AXE) and manual testing with keyboard navigation and screen readers.</li>
+                        <li><strong>User Feedback:</strong> We actively seek and incorporate feedback from our community members, including those with visual impairments, to identify and address accessibility issues.</li>
+                    </ul>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Limitations and Alternatives</h2>
+                    <p class="mb-6">
+                        Despite our best efforts to ensure accessibility of San Diego County Goalball, there may be some limitations. Below is a description of known limitations, and potential solutions:
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>External Content:</strong> Some third-party components or links to external websites may not fully meet accessibility standards. We are working with our partners to encourage them to provide accessible content.</li>
+                        <li><strong>Archived Documents:</strong> Older PDF or Excel documents may not be fully accessible to screen readers. If you require an alternative format, please contact us.</li>
+                    </ul>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Feedback</h2>
+                    <p class="mb-6">
+                        We welcome your feedback on the accessibility of San Diego County Goalball. Please let us know if you encounter accessibility barriers on our website:
+                    </p>
+                    <ul class="list-disc pl-6 mb-12 space-y-4">
+                        <li class="flex flex-col">
+                            <span class="font-bold text-orange-600">Phone:</span>
+                            <span>760-525-2800</span>
+                        </li>
+                        <li class="flex flex-col">
+                            <span class="font-bold text-orange-600">Email:</span>
+                            <a href="mailto:info@sdgoalball.org" class="underline hover:text-orange-800 transition-colors">info@sdgoalball.org</a>
+                        </li>
+                        <li class="flex flex-col">
+                            <span class="font-bold text-orange-600">Postal Address:</span>
+                            <span>San Diego County Goalball, San Diego, CA</span>
+                        </li>
+                    </ul>
+                    <p class="text-sm text-gray-500 italic">This statement was last updated on March 2024.</p>
                 </div>
             </div>
         </section>
