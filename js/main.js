@@ -70,9 +70,12 @@ const SITE_INDEX = [
     { title: "Tournaments", url: "tournaments.html", content: "Information on major goalball tournaments like the Cascade Classic and USABA Nationals." },
     { title: "Get Involved Overview", url: "get-involved.html", content: "Volunteer with us or support our athletes through donations and community outreach." },
     { title: "Volunteer", url: "volunteer.html", content: "Join our team as a goal judge, timer, scorer, or sighted guide. Training provided." },
-    { title: "Sponsorship", url: "sponsorship.html", content: "Partner with San Diego Goalball through corporate sponsorship tiers and support our athletes." },
+    { title: "Our Sponsors", url: "sponsors.html", content: "Meet the organizations that support San Diego County Goalball and help empower our athletes." },
     { title: "Resources", url: "resources.html", content: "Explore Goalball resources, governing bodies like USABA and IBSA, and local San Diego organizations." },
-    { title: "Contact", url: "contact.html", content: "Get in touch with Lori or Neal Meyers for inquiries about practices and volunteering." }
+    { title: "Contact", url: "contact.html", content: "Get in touch with Lori or Neal Meyers for inquiries about practices and volunteering." },
+    { title: "Accessibility Statement", url: "accessibility-statement.html", content: "San Diego County Goalball's commitment to ensuring digital accessibility for people with disabilities." },
+    { title: "Terms of Use", url: "terms-of-use.html", content: "Terms and conditions for using the San Diego County Goalball website." },
+    { title: "Privacy Policy", url: "privacy-policy.html", content: "Privacy policy for San Diego County Goalball website." }
 ];
 
 // Site-wide Logic
@@ -85,6 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize search
     initSearch();
+
+    // Initialize footer search submit
+    initFooterSearchSubmit();
 
     // Initialize external links accessibility
     initExternalLinks();
@@ -109,6 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Contrast Toggle
     initContrastToggle();
+
+    // Initialize Cookie Consent
+    initCookieConsent();
 });
 
 /**
@@ -290,8 +299,13 @@ function initSearch() {
     if (!searchBtn || !searchInput) return;
 
     searchBtn.addEventListener('click', (e) => {
-        if (searchInput.classList.contains('hidden')) {
-            searchInput.classList.remove('hidden');
+        const isMobileHidden = window.getComputedStyle(searchInput).display === 'none';
+
+        if (isMobileHidden || searchInput.classList.contains('hidden')) {
+            searchInput.classList.remove('hidden', 'md:block');
+            searchInput.classList.add('block');
+            searchInput.focus();
+        } else if (searchInput.value.trim() === '') {
             searchInput.focus();
         } else {
             performSearch(searchInput.value);
@@ -321,6 +335,41 @@ function performSearch(query) {
     );
 
     showSearchResults(results);
+}
+
+/**
+ * Footer search input submission
+ */
+function initFooterSearchSubmit() {
+    const footerSearchInput = document.getElementById('footer-search-input');
+    const footerSearchSubmit = document.getElementById('footer-search-submit');
+
+    if (footerSearchInput && footerSearchSubmit) {
+        const handleFooterSearch = () => {
+            const query = footerSearchInput.value.trim();
+            if (query.length >= 2) {
+                // We use the existing performSearch logic
+                // But we need to make sure the results appear in a good place.
+                // For simplicity, we'll scroll to top and use the main search container for results.
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const mainSearchInput = document.getElementById('search-input');
+                if (mainSearchInput) {
+                    mainSearchInput.classList.remove('hidden', 'md:block');
+                    mainSearchInput.classList.add('block');
+                    mainSearchInput.value = query;
+                    performSearch(query);
+                    mainSearchInput.focus();
+                }
+            }
+        };
+
+        footerSearchSubmit.addEventListener('click', handleFooterSearch);
+        footerSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleFooterSearch();
+            }
+        });
+    }
 }
 
 function showSearchResults(results) {
@@ -677,6 +726,68 @@ function setContrastMode(mode) {
     if (liveRegion) {
         liveRegion.textContent = status;
     }
+}
+
+/**
+ * Cookie Consent Banner logic
+ */
+function initCookieConsent() {
+    // Check if consent has already been given
+    const consent = localStorage.getItem('cookie-consent');
+    if (consent) return;
+
+    // Create the banner
+    const banner = document.createElement('div');
+    banner.id = 'cookie-consent-banner';
+    banner.className = 'fixed bottom-0 left-0 w-full bg-blue-900 text-white p-6 z-[200] shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.3)] border-t-4 border-orange-500 transform transition-transform duration-500 translate-y-full';
+    banner.setAttribute('role', 'region');
+    banner.setAttribute('aria-label', 'Cookie Consent');
+
+    banner.innerHTML = `
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex-grow">
+                <h2 class="text-xl font-black mb-2 uppercase tracking-tight">We value your privacy</h2>
+                <p class="text-white/80 text-sm leading-relaxed max-w-4xl">
+                    We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. For more information, please read our <a href="privacy-policy.html" class="underline hover:text-white">Privacy Policy</a>.
+                </p>
+            </div>
+            <div class="flex flex-shrink-0 gap-4">
+                <button id="cookie-accept-btn" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap shadow-lg hover:-translate-y-0.5">
+                    Accept All
+                </button>
+                <button id="cookie-decline-btn" class="bg-transparent border-2 border-white/30 hover:border-white text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap hover:bg-white/10">
+                    Decline
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(banner);
+
+    // Trigger animation
+    setTimeout(() => {
+        banner.classList.remove('translate-y-full');
+    }, 500);
+
+    const acceptBtn = document.getElementById('cookie-accept-btn');
+    const declineBtn = document.getElementById('cookie-decline-btn');
+
+    const closeBanner = () => {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => banner.remove(), 500);
+    };
+
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookie-consent', 'accepted');
+        // Actually set a cookie as requested
+        document.cookie = "cookie-consent=accepted; max-age=" + (365 * 24 * 60 * 60) + "; path=/; SameSite=Lax";
+        closeBanner();
+    });
+
+    declineBtn.addEventListener('click', () => {
+        localStorage.setItem('cookie-consent', 'declined');
+        closeBanner();
+    });
 }
 
 /**
