@@ -88,6 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Download Modal
     initDownloadModal();
+
+    // Initialize Global Confirmation Modal
+    initConfirmationModal();
 });
 
 /**
@@ -424,15 +427,80 @@ function initDownloadModal() {
 }
 
 /**
- * Simple Popup function as requested by user
+ * Global Confirmation Modal Logic
+ */
+let confirmCallback = null;
+
+function initConfirmationModal() {
+    const modal = document.getElementById('confirmation-modal');
+    const closeBtn = document.getElementById('close-confirmation-modal');
+    const cancelBtn = document.getElementById('cancel-confirmation-modal');
+    const confirmBtn = document.getElementById('confirm-confirmation-modal');
+
+    if (!modal) return;
+
+    const closeModal = () => {
+        modal.close();
+        confirmCallback = null;
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+            if (confirmCallback) {
+                confirmCallback();
+            }
+            closeModal();
+        });
+    }
+
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            closeModal();
+        }
+    });
+}
+
+function showConfirmation(title, message, onConfirm) {
+    const modal = document.getElementById('confirmation-modal');
+    const titleElem = document.getElementById('confirmation-modal-title');
+    const messageElem = document.getElementById('confirmation-modal-message');
+
+    if (!modal || !titleElem || !messageElem) {
+        // Fallback if modal not present in HTML
+        if (confirm(message)) {
+            onConfirm();
+        }
+        return;
+    }
+
+    titleElem.textContent = title;
+    messageElem.textContent = message;
+    confirmCallback = onConfirm;
+    modal.showModal();
+}
+
+/**
+ * Simple Popup function as requested by user - Updated to use Modal
  */
 function showPopup() {
-    alert("Hello! This is a popup.");
+    showConfirmation("Notification", "Hello! This is a popup.", () => {
+        console.log("Popup dismissed");
+    });
 }
 
 /**
  * Automatically handle external links for accessibility and security
- * Uses simple alert as requested by user
+ * Updated to use accessible modal
  */
 function initExternalLinks() {
     const links = document.querySelectorAll('a[target="_blank"]');
@@ -450,10 +518,17 @@ function initExternalLinks() {
             link.appendChild(srText);
         }
 
-        // Simple alert pop-up logic
+        // Accessible modal pop-up logic
         link.addEventListener('click', (e) => {
-            alert("You are now leaving the San Diego Goalball website to visit an external link.");
-            // Navigation continues after alert is dismissed
+            e.preventDefault();
+            const href = link.href;
+            showConfirmation(
+                "Leaving Website",
+                "You are now leaving the San Diego Goalball website to visit an external link. Do you wish to continue?",
+                () => {
+                    window.open(href, '_blank', 'noopener,noreferrer');
+                }
+            );
         });
     });
 }
@@ -524,7 +599,7 @@ function highlightCurrentPage() {
             link.setAttribute('aria-current', 'page');
 
             // If it's a sub-menu item, also highlight the parent dropdown button
-            const dropdown = link.closest('.dropdown');
+            const dropdown = link.closest('.dropdown') || link.closest('li.dropdown');
             if (dropdown) {
                 const button = dropdown.querySelector('button');
                 if (button) {
