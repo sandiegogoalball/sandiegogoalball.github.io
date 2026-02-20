@@ -88,7 +88,6 @@
                             <ul class="dropdown-content">
                                 <li><a href="get-involved.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Overview</a></li>
                                 <li><a href="volunteer.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Volunteer</a></li>
-                                <li><a href="sponsorship.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Sponsorship</a></li>
                                 <li><a href="sponsors.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Our Sponsors</a></li>
                                 <li><a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Donate</a></li>
                             </ul>
@@ -107,7 +106,7 @@
                     <span class="text-xs font-bold uppercase ml-1">Contrast</span>
                 </button>
                 <div id="search-container" class="relative flex items-center">
-                    <input type="text" id="search-input" placeholder="Search site..." class="hidden px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm focus:outline-none focus:ring-2 focus:ring-white/50 mr-2 placeholder-white/50">
+                    <input type="text" id="search-input" placeholder="Search San Diego Goalball Website" class="hidden md:block px-4 py-2 rounded-full bg-white border border-white text-dark text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 mr-2 placeholder-gray-500 font-medium w-32 lg:w-48 xl:w-64">
                     <button type="button" id="search-btn" class="inline-flex items-center text-white p-2 hover:text-white/70 transition-colors" aria-label="Search">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -193,7 +192,6 @@
                     <div id="mobile-involved-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
                         <a href="get-involved.html" class="text-white/80 py-1 hover:text-white">Overview</a>
                         <a href="volunteer.html" class="text-white/80 py-1 hover:text-white">Volunteer</a>
-                        <a href="sponsorship.html" class="text-white/80 py-1 hover:text-white">Sponsorship</a>
                         <a href="sponsors.html" class="text-white/80 py-1 hover:text-white">Our Sponsors</a>
                         <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="text-white/80 py-1 hover:text-white">Donate</a>
                     </div>
@@ -469,7 +467,15 @@
                         <li><a href="equipment.html" class="text-white/70 hover:text-white transition-all">Equipment</a></li>
                         <li><a href="schedule.html" class="text-white/70 hover:text-white transition-all">Schedule</a></li>
                         <li><a href="get-involved.html" class="text-white/70 hover:text-white transition-all">Get Involved</a></li>
+
                     </ul>
+                    <div class="mt-8">
+                        <label for="footer-search-input" class="text-white font-black uppercase mb-4 tracking-wider border-b-2 border-white/20 pb-2 inline-block">Search our site</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="footer-search-input" placeholder="Search San Diego Goalball Website" aria-label="Search San Diego Goalball Website" class="bg-white border border-white text-dark text-sm rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder-gray-500 font-medium">
+                            <button type="button" id="footer-search-submit" class="bg-blue-900 text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-blue-950 transition-colors">Go</button>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <h3 class="text-white font-black uppercase mb-8 tracking-wider border-b-2 border-white/20 pb-2 inline-block">Contact Info</h3>
@@ -487,6 +493,13 @@
             </div>
             <div class="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/40 font-bold uppercase tracking-[0.2em]">
                 <p>&copy; <span id="year"></span> San Diego County Goalball. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-x-4 gap-y-2">
+                    <a href="accessibility-statement.html" class="hover:text-white transition-colors">Accessibility Statement</a>
+                    <span class="hidden md:inline">|</span>
+                    <a href="terms-of-use.html" class="hover:text-white transition-colors">Terms of Use</a>
+                    <span class="hidden md:inline">|</span>
+                    <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                </div>
                 <p>Website by <a href="https://linktr.ee/DarrenDizon" target="_blank" class="hover:text-white transition-colors">Darren Dizon</a></p>
             </div>
         </div>
