@@ -5,35 +5,49 @@ window.tailwind = {
         theme: {
             extend: {
                 colors: {
-                    // New Goalball Theme Palette (Green/Blue)
+                    // New Goalball Theme Palette (Orange)
                     emerald: {
-                        950: '#022c22',
-                        900: '#064e3b', // Deep Green
-                        800: '#065f46',
-                        700: '#047857',
-                        600: '#059669',
-                        500: '#10b981',
+                        950: '#431407',
+                        900: '#ea580c', // Remapped to Bright Orange
+                        800: '#f97316',
+                        700: '#fb923c',
+                        600: '#fdba74',
+                        500: '#fed7aa',
                     },
                     blue: {
-                        950: '#082f49',
-                        900: '#1e3a8a', // Deep Blue
-                        800: '#1e40af',
-                        700: '#1d4ed8',
-                        600: '#2563eb',
-                        500: '#3b82f6',
+                        950: '#7c2d12',
+                        900: '#9a3412', // Remapped to Deep Orange
+                        800: '#c2410c',
+                        700: '#ea580c',
+                        600: '#f97316',
+                        500: '#fb923c',
+                    },
+                    // Orange palette for direct use
+                    orange: {
+                        950: '#431407',
+                        900: '#7c2d12',
+                        800: '#9a3412',
+                        700: '#c2410c',
+                        600: '#ea580c',
+                        500: '#f97316',
+                        400: '#fb923c',
+                        300: '#fdba74',
+                        200: '#fed7aa',
+                        100: '#ffedd5',
+                        50: '#fff7ed',
                     },
                     // Compatibility mapping
                     red: {
-                        900: '#064e3b', // Mapped to Deep Green
-                        800: '#065f46',
-                        500: '#10b981',
+                        900: '#ea580c', // Mapped to Bright Orange
+                        800: '#f97316',
+                        500: '#fb923c',
                     },
                     charcoal: {
-                        DEFAULT: '#1e3a8a', // Mapped to Blue
+                        DEFAULT: '#9a3412', // Mapped to Deep Orange
                     },
-                    black: '#022c22',
+                    black: '#431407',
                     white: '#FFFFFF',
-                    dark: '#022c22',
+                    dark: '#431407',
                 },
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
