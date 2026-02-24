@@ -1,0 +1,834 @@
+// Tailwind CSS Configuration
+// This must run before the Tailwind CDN script processes the page
+window.tailwind = {
+    config: {
+        theme: {
+            extend: {
+                colors: {
+                    // New Goalball Theme Palette (Orange)
+                    emerald: {
+                        950: '#431407',
+                        900: '#ea580c', // Remapped to Bright Orange
+                        800: '#f97316',
+                        700: '#fb923c',
+                        600: '#fdba74',
+                        500: '#fed7aa',
+                    },
+                    blue: {
+                        950: '#7c2d12',
+                        900: '#9a3412', // Remapped to Deep Orange
+                        800: '#c2410c',
+                        700: '#ea580c',
+                        600: '#f97316',
+                        500: '#fb923c',
+                    },
+                    // Orange palette for direct use
+                    orange: {
+                        950: '#431407',
+                        900: '#7c2d12',
+                        800: '#9a3412',
+                        700: '#c2410c',
+                        600: '#ea580c',
+                        500: '#f97316',
+                        400: '#fb923c',
+                        300: '#fdba74',
+                        200: '#fed7aa',
+                        100: '#ffedd5',
+                        50: '#fff7ed',
+                    },
+                    // Compatibility mapping
+                    red: {
+                        900: '#ea580c', // Mapped to Bright Orange
+                        800: '#f97316',
+                        500: '#fb923c',
+                    },
+                    charcoal: {
+                        DEFAULT: '#9a3412', // Mapped to Deep Orange
+                    },
+                    black: '#431407',
+                    white: '#FFFFFF',
+                    dark: '#431407',
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                }
+            }
+        }
+    }
+};
+
+// Site Index for Search
+const SITE_INDEX = [
+    { title: "Home", url: "index.html", content: "San Diego County Goalball provides opportunities for blind and visually impaired athletes to compete in the Paralympic sport of goalball." },
+    { title: "Our Story", url: "about.html", content: "Learn about our mission to empower athletes through sport, inclusion, and competitive excellence. Information on Matt Boyle." },
+    { title: "History", url: "history.html", content: "Explore the origins of goalball from WWII rehabilitation to a premier Paralympic sport and our local San Diego roots." },
+    { title: "Gallery", url: "gallery.html", content: "View photos and descriptions of San Diego Goalball practices, tournaments, and community events." },
+    { title: "What is Goalball?", url: "about-goalball.html", content: "Discover the rules, history, and unique mechanics of goalball, the premier Paralympic team sport." },
+    { title: "Rules", url: "rules.html", content: "Detailed rules of goalball including court dimensions, audible ball mechanics, and common penalties." },
+    { title: "Equipment", url: "equipment.html", content: "Learn about specialized goalball gear including audible balls, blackout eyeshades, and protective padding." },
+    { title: "Practice Schedule", url: "schedule.html", content: "View our simplified practice schedule at Mission Valley YMCA and Stagecoach Park in Carlsbad." },
+    { title: "Tournaments", url: "tournaments.html", content: "Information on major goalball tournaments like the Cascade Classic and USABA Nationals." },
+    { title: "Get Involved Overview", url: "get-involved.html", content: "Volunteer with us or support our athletes through donations and community outreach." },
+    { title: "Volunteer", url: "volunteer.html", content: "Join our team as a goal judge, timer, scorer, or sighted guide. Training provided." },
+    { title: "Our Sponsors", url: "sponsors.html", content: "Meet the organizations that support San Diego County Goalball and help empower our athletes." },
+    { title: "Resources", url: "resources.html", content: "Explore Goalball resources, governing bodies like USABA and IBSA, and local San Diego organizations." },
+    { title: "Contact", url: "contact.html", content: "Get in touch with Lori or Neal Meyers for inquiries about practices and volunteering." },
+    { title: "Accessibility Statement", url: "accessibility-statement.html", content: "San Diego County Goalball's commitment to ensuring digital accessibility for people with disabilities." },
+    { title: "Terms of Use", url: "terms-of-use.html", content: "Terms and conditions for using the San Diego County Goalball website." },
+    { title: "Privacy Policy", url: "privacy-policy.html", content: "Privacy policy for San Diego County Goalball website." }
+];
+
+// Site-wide Logic
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize mobile menu
+    initMobileMenu();
+
+    // Initialize desktop navigation accessibility
+    initDesktopNav();
+
+    // Initialize search
+    initSearch();
+
+    // Initialize footer search submit
+    initFooterSearchSubmit();
+
+    // Initialize external links accessibility
+    initExternalLinks();
+
+    // Initialize FAQ Accordion
+    initFAQ();
+
+    // Set current year in footer
+    initYear();
+
+    // Initialize navigation highlighting
+    highlightCurrentPage();
+
+    // Initialize Tournament Countdown
+    initCountdownTimer();
+
+    // Initialize Download Modal
+    initDownloadModal();
+
+    // Initialize Global Confirmation Modal
+    initConfirmationModal();
+
+    // Initialize Contrast Toggle
+    initContrastToggle();
+
+    // Initialize Cookie Consent
+    initCookieConsent();
+});
+
+/**
+ * Mobile menu toggle functionality and accordions
+ */
+function initMobileMenu() {
+    const menuBtn = document.querySelector('button[aria-label="Toggle Menu"]');
+    const mobileNav = document.getElementById('mobile-nav');
+
+    if (menuBtn && mobileNav) {
+        menuBtn.addEventListener('click', () => {
+            const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+            const nowExpanded = !isExpanded;
+            menuBtn.setAttribute('aria-expanded', nowExpanded);
+
+            if (nowExpanded) {
+                mobileNav.classList.remove('max-h-0', 'opacity-0', 'invisible');
+                mobileNav.classList.add('max-h-[90vh]', 'opacity-100', 'visible');
+            } else {
+                mobileNav.classList.add('max-h-0', 'opacity-0', 'invisible');
+                mobileNav.classList.remove('max-h-[90vh]', 'opacity-100', 'visible');
+            }
+
+            // Add visibility for screen readers and sighted users
+            const label = menuBtn.querySelector('.menu-label');
+            const iconSvg = menuBtn.querySelector('svg');
+
+            if (label) {
+                label.textContent = nowExpanded ? 'Close' : 'Menu';
+            }
+
+            if (iconSvg) {
+                if (nowExpanded) {
+                    // X icon
+                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />';
+                    // Move focus to first link in mobile nav
+                    setTimeout(() => {
+                        const firstLink = mobileNav.querySelector('a');
+                        if (firstLink) firstLink.focus();
+                    }, 100);
+                } else {
+                    // Menu icon
+                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
+                    // Focus back to menu button
+                    menuBtn.focus();
+                }
+            }
+        });
+
+        // Close mobile menu on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+                mobileNav.classList.add('max-h-0', 'opacity-0', 'invisible');
+                mobileNav.classList.remove('max-h-[90vh]', 'opacity-100', 'visible');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                const label = menuBtn.querySelector('.menu-label');
+                if (label) label.textContent = 'Menu';
+                const iconSvg = menuBtn.querySelector('svg');
+                if (iconSvg) {
+                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
+                }
+                menuBtn.focus();
+            }
+        });
+    }
+
+    // Mobile Dropdown Accordions
+    const mobileToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+    mobileToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const targetId = toggle.getAttribute('aria-controls');
+            const target = document.getElementById(targetId);
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            const nowExpanded = !isExpanded;
+
+            // Toggle current
+            toggle.setAttribute('aria-expanded', nowExpanded);
+
+            if (target) {
+                if (nowExpanded) {
+                    target.classList.remove('hidden');
+                    // Trigger reflow for transition
+                    void target.offsetHeight;
+                    target.classList.remove('max-h-0', 'opacity-0', 'invisible');
+                    target.classList.add('max-h-[500px]', 'opacity-100', 'visible');
+                } else {
+                    target.classList.add('max-h-0', 'opacity-0', 'invisible');
+                    target.classList.remove('max-h-[500px]', 'opacity-100', 'visible');
+                    // Add hidden after transition completes
+                    setTimeout(() => {
+                        if (toggle.getAttribute('aria-expanded') === 'false') {
+                            target.classList.add('hidden');
+                        }
+                    }, 300);
+                }
+            }
+
+            // Rotate icon for animation effect
+            const icon = toggle.querySelector('svg');
+            if (icon) {
+                icon.style.transform = nowExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        });
+    });
+}
+
+/**
+ * Desktop navigation accessibility - handle focus states and clicks
+ */
+function initDesktopNav() {
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const button = dropdown.querySelector('button');
+        const content = dropdown.querySelector('.dropdown-content');
+
+        if (button && content) {
+            // Toggle on click
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                // Close all other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown) {
+                        const otherBtn = other.querySelector('button');
+                        if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                button.setAttribute('aria-expanded', !isExpanded);
+            });
+
+            // Handle keyboard navigation within dropdown
+            dropdown.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    button.setAttribute('aria-expanded', 'false');
+                    button.focus();
+                }
+
+                // Allow Space to toggle as well
+                if (e.key === ' ' || e.key === 'Spacebar') {
+                    e.preventDefault();
+                    button.click();
+                }
+            });
+
+            // Close when focus leaves the dropdown (Tab out)
+            dropdown.addEventListener('focusout', (e) => {
+                // Use requestAnimationFrame to check focus after it shifts
+                requestAnimationFrame(() => {
+                    if (!dropdown.contains(document.activeElement)) {
+                        button.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+    });
+
+    // Close all dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            dropdowns.forEach(dropdown => {
+                const button = dropdown.querySelector('button');
+                if (button) button.setAttribute('aria-expanded', 'false');
+            });
+        }
+    });
+}
+
+/**
+ * Modern Search Functionality
+ */
+function initSearch() {
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('search-input');
+    const searchContainer = document.getElementById('search-container');
+
+    if (!searchBtn || !searchInput) return;
+
+    searchBtn.addEventListener('click', (e) => {
+        const isMobileHidden = window.getComputedStyle(searchInput).display === 'none';
+
+        if (isMobileHidden || searchInput.classList.contains('hidden')) {
+            searchInput.classList.remove('hidden', 'md:block');
+            searchInput.classList.add('block');
+            searchInput.focus();
+        } else if (searchInput.value.trim() === '') {
+            searchInput.focus();
+        } else {
+            performSearch(searchInput.value);
+        }
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            performSearch(searchInput.value);
+        }
+    });
+
+    // Close search on escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !searchInput.classList.contains('hidden')) {
+            searchInput.classList.add('hidden');
+        }
+    });
+}
+
+function performSearch(query) {
+    if (!query || query.trim().length < 2) return;
+
+    const results = SITE_INDEX.filter(item =>
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        item.content.toLowerCase().includes(query.toLowerCase())
+    );
+
+    showSearchResults(results);
+}
+
+/**
+ * Footer search input submission
+ */
+function initFooterSearchSubmit() {
+    const footerSearchInput = document.getElementById('footer-search-input');
+    const footerSearchSubmit = document.getElementById('footer-search-submit');
+
+    if (footerSearchInput && footerSearchSubmit) {
+        const handleFooterSearch = () => {
+            const query = footerSearchInput.value.trim();
+            if (query.length >= 2) {
+                // We use the existing performSearch logic
+                // But we need to make sure the results appear in a good place.
+                // For simplicity, we'll scroll to top and use the main search container for results.
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const mainSearchInput = document.getElementById('search-input');
+                if (mainSearchInput) {
+                    mainSearchInput.classList.remove('hidden', 'md:block');
+                    mainSearchInput.classList.add('block');
+                    mainSearchInput.value = query;
+                    performSearch(query);
+                    mainSearchInput.focus();
+                }
+            }
+        };
+
+        footerSearchSubmit.addEventListener('click', handleFooterSearch);
+        footerSearchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleFooterSearch();
+            }
+        });
+    }
+}
+
+function showSearchResults(results) {
+    let resultsDiv = document.getElementById('search-results');
+    if (!resultsDiv) {
+        resultsDiv = document.createElement('div');
+        resultsDiv.id = 'search-results';
+        resultsDiv.className = 'absolute top-full right-0 w-80 bg-white shadow-xl rounded-b-xl border border-gray-100 z-[100] max-h-96 overflow-y-auto p-4';
+        document.getElementById('search-container').appendChild(resultsDiv);
+    }
+
+    resultsDiv.innerHTML = '';
+
+    if (results.length === 0) {
+        resultsDiv.innerHTML = '<p class="text-sm text-gray-500">No results found.</p>';
+    } else {
+        results.forEach(item => {
+            const link = document.createElement('a');
+            link.href = item.url;
+            link.className = 'block p-3 hover:bg-slate-50 rounded-lg transition-colors border-b last:border-0';
+            link.innerHTML = `
+                <h4 class="font-bold text-red-900 text-sm mb-1">${item.title}</h4>
+                <p class="text-xs text-gray-600 line-clamp-2">${item.content}</p>
+            `;
+            resultsDiv.appendChild(link);
+        });
+    }
+
+    // Close results when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!document.getElementById('search-container').contains(e.target)) {
+            resultsDiv.remove();
+        }
+    }, { once: true });
+}
+
+/**
+ * Tournament Countdown Timer
+ * Target: Feb 20, 2026, 2:00 PM PT
+ */
+function initCountdownTimer() {
+    const timerElements = document.querySelectorAll('.tournament-countdown');
+    if (timerElements.length === 0) return;
+
+    // Set the target date: Feb 20, 2026, 2:00 PM PT
+    // PT is UTC-8 (Standard) or UTC-7 (Daylight). In Feb it is PST (UTC-8).
+    const targetDate = new Date('2026-02-20T14:00:00-08:00').getTime();
+
+    const updateTimer = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        timerElements.forEach(timerElement => {
+            if (distance < 0) {
+                timerElement.innerHTML = "The Tournament has started! Watch the live stream below.";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const daysStr = days > 0 ? `${days}d ` : "";
+            const hoursStr = `${hours}h `;
+            const minutesStr = `${minutes}m `;
+            const secondsStr = `${seconds}s`;
+
+            const timeString = `${daysStr}${hoursStr}${minutesStr}${secondsStr}`;
+
+            // Update the visual display
+            const displayElement = timerElement.querySelector('.countdown-display');
+            if (displayElement) {
+                displayElement.textContent = timeString;
+            } else {
+                timerElement.textContent = `Tournament starts in: ${timeString}`;
+            }
+        });
+
+        // Accessibility: Update an aria-live region every minute
+        // Since there might be multiple timers, we still use one global live region if it exists
+        const liveRegion = document.getElementById('countdown-live-region');
+        if (liveRegion && (Math.floor(distance / (1000 * 60)) % 5 === 0) && (Math.floor(distance / 1000) % 60 === 0)) {
+            const distanceForLive = targetDate - now;
+            const days = Math.floor(distanceForLive / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distanceForLive % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distanceForLive % (1000 * 60 * 60)) / (1000 * 60));
+            liveRegion.textContent = `Tournament starts in ${days > 0 ? days + ' days, ' : ''}${hours} hours and ${minutes} minutes.`;
+        }
+    };
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+}
+
+/**
+ * Download Modal Logic
+ */
+function initDownloadModal() {
+    const modal = document.getElementById('download-modal');
+    const openBtns = document.querySelectorAll('.open-download-modal');
+    const closeBtn = document.getElementById('close-download-modal');
+
+    if (!modal || !closeBtn) return;
+
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.showModal();
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.close();
+    });
+
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            modal.close();
+        }
+    });
+}
+
+/**
+ * Global Confirmation Modal Logic
+ */
+let confirmCallback = null;
+
+function initConfirmationModal() {
+    const modal = document.getElementById('confirmation-modal');
+    const closeBtn = document.getElementById('close-confirmation-modal');
+    const cancelBtn = document.getElementById('cancel-confirmation-modal');
+    const confirmBtn = document.getElementById('confirm-confirmation-modal');
+
+    if (!modal) return;
+
+    const closeModal = () => {
+        modal.close();
+        confirmCallback = null;
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+            if (confirmCallback) {
+                confirmCallback();
+            }
+            closeModal();
+        });
+    }
+
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            closeModal();
+        }
+    });
+}
+
+function showConfirmation(title, message, onConfirm) {
+    const modal = document.getElementById('confirmation-modal');
+    const titleElem = document.getElementById('confirmation-modal-title');
+    const messageElem = document.getElementById('confirmation-modal-message');
+
+    if (!modal || !titleElem || !messageElem) {
+        // Fallback if modal not present in HTML
+        if (confirm(message)) {
+            onConfirm();
+        }
+        return;
+    }
+
+    titleElem.textContent = title;
+    messageElem.textContent = message;
+    confirmCallback = onConfirm;
+    modal.showModal();
+}
+
+/**
+ * Simple Popup function as requested by user - Updated to use Modal
+ */
+function showPopup() {
+    showConfirmation("Notification", "Hello! This is a popup.", () => {
+        console.log("Popup dismissed");
+    });
+}
+
+/**
+ * Automatically handle external links for accessibility and security
+ * Updated to use accessible modal
+ */
+function initExternalLinks() {
+    const links = document.querySelectorAll('a[target="_blank"]');
+
+    links.forEach(link => {
+        // Ensure rel="noopener noreferrer" for security
+        link.setAttribute('rel', 'noopener noreferrer');
+
+        // Add "(opens in new tab)" for screen readers
+        const hasSRLabel = link.querySelector('.sr-only');
+        if (!hasSRLabel) {
+            const srText = document.createElement('span');
+            srText.className = 'sr-only';
+            srText.textContent = ' (opens in new tab)';
+            link.appendChild(srText);
+        }
+
+        // Accessible modal pop-up logic
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.href;
+            showConfirmation(
+                "Leaving Website",
+                "You are now leaving the San Diego Goalball website to visit an external link. Do you wish to continue?",
+                () => {
+                    window.open(href, '_blank', 'noopener,noreferrer');
+                }
+            );
+        });
+    });
+}
+
+/**
+ * FAQ Accordion Logic
+ */
+function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+        const icon = item.querySelector('.faq-icon');
+
+        if (question && answer) {
+            question.addEventListener('click', () => {
+                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    const otherIcon = otherItem.querySelector('.faq-icon');
+                    if (otherAnswer && otherAnswer !== answer) {
+                        otherAnswer.style.maxHeight = '0px';
+                        otherIcon?.classList.remove('rotate-180');
+                    }
+                });
+
+                // Toggle current item
+                if (isOpen) {
+                    answer.style.maxHeight = '0px';
+                    icon?.classList.remove('rotate-180');
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon?.classList.add('rotate-180');
+                }
+            });
+        }
+    });
+}
+
+/**
+ * Set the current year in any element with id="year"
+ */
+function initYear() {
+    const yearElement = document.getElementById('year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+}
+
+/**
+ * Contrast Toggle Functionality - Enhanced for Multiple Modes
+ */
+function initContrastToggle() {
+    const toggleBtn = document.getElementById('contrast-toggle');
+    const modal = document.getElementById('contrast-modal');
+    const closeBtn = document.getElementById('close-contrast-modal');
+    const options = document.querySelectorAll('.contrast-option');
+
+    if (!toggleBtn || !modal) return;
+
+    // Load saved preference
+    const savedMode = localStorage.getItem('accessibility-mode');
+    if (savedMode) {
+        setContrastMode(savedMode);
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        modal.showModal();
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.close();
+        });
+    }
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const mode = option.getAttribute('data-mode');
+            setContrastMode(mode);
+            modal.close();
+        });
+    });
+
+    // Close on click outside
+    modal.addEventListener('click', (e) => {
+        const dialogDimensions = modal.getBoundingClientRect();
+        if (
+            e.clientX < dialogDimensions.left ||
+            e.clientX > dialogDimensions.right ||
+            e.clientY < dialogDimensions.top ||
+            e.clientY > dialogDimensions.bottom
+        ) {
+            modal.close();
+        }
+    });
+}
+
+/**
+ * Sets the contrast/accessibility mode
+ * @param {string} mode - 'standard', 'high-contrast', 'high-contrast-yellow', 'grayscale'
+ */
+function setContrastMode(mode) {
+    const html = document.documentElement;
+    const toggleBtn = document.getElementById('contrast-toggle');
+
+    // Remove all accessibility classes
+    html.classList.remove('high-contrast', 'high-contrast-yellow', 'grayscale-mode');
+
+    if (mode !== 'standard') {
+        if (mode === 'high-contrast') html.classList.add('high-contrast');
+        if (mode === 'high-contrast-yellow') html.classList.add('high-contrast-yellow');
+        if (mode === 'grayscale') html.classList.add('grayscale-mode');
+
+        localStorage.setItem('accessibility-mode', mode);
+        if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'true');
+    } else {
+        localStorage.removeItem('accessibility-mode');
+        if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'false');
+    }
+
+    // Announcement for screen readers
+    const status = `Accessibility mode set to ${mode.replace('-', ' ')}`;
+    const liveRegion = document.getElementById('countdown-live-region');
+    if (liveRegion) {
+        liveRegion.textContent = status;
+    }
+}
+
+/**
+ * Cookie Consent Banner logic
+ */
+function initCookieConsent() {
+    // Check if consent has already been given
+    const consent = localStorage.getItem('cookie-consent');
+    if (consent) return;
+
+    // Create the banner
+    const banner = document.createElement('div');
+    banner.id = 'cookie-consent-banner';
+    banner.className = 'fixed bottom-0 left-0 w-full bg-blue-900 text-white p-6 z-[200] shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.3)] border-t-4 border-orange-500 transform transition-transform duration-500 translate-y-full';
+    banner.setAttribute('role', 'region');
+    banner.setAttribute('aria-label', 'Cookie Consent');
+
+    banner.innerHTML = `
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex-grow">
+                <h2 class="text-xl font-black mb-2 uppercase tracking-tight">We value your privacy</h2>
+                <p class="text-white/80 text-sm leading-relaxed max-w-4xl">
+                    We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. For more information, please read our <a href="privacy-policy.html" class="underline hover:text-white">Privacy Policy</a>.
+                </p>
+            </div>
+            <div class="flex flex-shrink-0 gap-4">
+                <button id="cookie-accept-btn" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap shadow-lg hover:-translate-y-0.5">
+                    Accept All
+                </button>
+                <button id="cookie-decline-btn" class="bg-transparent border-2 border-white/30 hover:border-white text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap hover:bg-white/10">
+                    Decline
+                </button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(banner);
+
+    // Trigger animation
+    setTimeout(() => {
+        banner.classList.remove('translate-y-full');
+    }, 500);
+
+    const acceptBtn = document.getElementById('cookie-accept-btn');
+    const declineBtn = document.getElementById('cookie-decline-btn');
+
+    const closeBanner = () => {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => banner.remove(), 500);
+    };
+
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookie-consent', 'accepted');
+        // Actually set a cookie as requested
+        document.cookie = "cookie-consent=accepted; max-age=" + (365 * 24 * 60 * 60) + "; path=/; SameSite=Lax";
+        closeBanner();
+    });
+
+    declineBtn.addEventListener('click', () => {
+        localStorage.setItem('cookie-consent', 'declined');
+        closeBanner();
+    });
+}
+
+/**
+ * Highlights the current page in the navigation (both desktop and mobile)
+ */
+function highlightCurrentPage() {
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('nav a, #mobile-nav a');
+
+    navLinks.forEach(link => {
+        const linkPath = link.getAttribute('href');
+        if (linkPath === currentPath) {
+            // Updated for SDSU Red theme - using white or light red for active state in the red header
+            link.classList.add('text-white');
+            link.classList.remove('text-white/70');
+            link.classList.add('opacity-100');
+            link.classList.add('font-black');
+            link.setAttribute('aria-current', 'page');
+
+            // If it's a sub-menu item, also highlight the parent dropdown button
+            const dropdown = link.closest('.dropdown') || link.closest('li.dropdown');
+            if (dropdown) {
+                const button = dropdown.querySelector('button');
+                if (button) {
+                    button.classList.add('text-white');
+                    button.classList.remove('text-white/70');
+                    button.classList.add('font-black');
+                }
+            }
+        } else {
+            // Only add text-white/70 if it doesn't already have text-white
+            if (!link.classList.contains('text-white')) {
+                link.classList.add('text-white/70');
+            }
+        }
+    });
+}

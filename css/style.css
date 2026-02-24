@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-color: #ea580c; /* Bright Orange */
+    --primary-bright: #f97316;
+    --accent-color: #9a3412;  /* Deep Orange */
+    --accent-dark: #7c2d12;
+    --secondary-color: #f97316;
+    --secondary-dark: #7c2d12;
+    --text-dark: #431407;
+  }
+
+  body {
+    @apply text-dark antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-black tracking-tighter uppercase;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Accessible Skip Link (Visible on focus) */
+  .skip-link {
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    @apply not-sr-only fixed top-4 left-4 z-[100] bg-white text-orange-900 px-6 py-3 rounded-lg font-bold shadow-2xl outline-none ring-4 ring-orange-500;
+  }
+
+  /* Modern Buttons */
+  .btn-primary {
+    @apply bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-orange-700 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-100 focus:outline-none focus:ring-4 focus:ring-orange-300;
+    box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.1), 0 4px 6px -2px rgba(234, 88, 12, 0.05);
+  }
+
+  .btn-accent {
+    @apply bg-orange-800 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-orange-900 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-100 focus:outline-none focus:ring-4 focus:ring-orange-300;
+    box-shadow: 0 10px 15px -3px rgba(154, 52, 18, 0.2), 0 4px 6px -2px rgba(154, 52, 18, 0.1);
+  }
+
+  .btn-secondary {
+    @apply bg-orange-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-orange-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-orange-300;
+  }
+
+  .btn-outline {
+    @apply border-2 border-orange-600 text-orange-600 font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-orange-600 hover:text-white hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-orange-300;
+  }
+
+  .btn-white-outline {
+    @apply border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-white hover:text-orange-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-white/30;
+  }
+
+  /* Navigation Hover Effect */
+  nav a { @apply relative py-1 transition-all duration-300 hover:text-orange-800; }
+
+  /* Requested Navigation Hover Effect - Yellow Background, Blue Text */
+  nav a:hover,
+  nav a:focus,
+  nav .dropdown button:hover,
+  nav .dropdown button:focus,
+  #mobile-nav a:hover,
+  #mobile-nav a:focus {
+    background-color: #FACC15 !important; /* bg-yellow-400 */
+    color: #1E3A8A !important; /* text-blue-900 */
+    border-radius: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  /* Legacy Class Support (Mapped to new theme) */
+  .btn-navy { @apply btn-primary; }
+  .btn-gold { @apply btn-accent; }
+  .btn-sky { @apply btn-secondary; }
+
+  /* Utility Backgrounds */
+  .bg-primary { background-color: var(--primary-color); }
+  .bg-accent { background-color: var(--accent-color); }
+  .bg-secondary { background-color: var(--secondary-color); }
+
+  /* Hero Gradients */
+  .hero-gradient {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+  }
+
+  /* Section Spacing */
+  .section-padding { @apply py-16; }
+
+  /* FAQ Accordion Styles */
+  .faq-item {
+    @apply border border-slate-200 rounded-2xl bg-white overflow-hidden transition-all duration-300;
+  }
+
+  .faq-question {
+    @apply w-full flex items-center justify-between p-6 text-left font-bold text-orange-900 uppercase tracking-tight transition-colors hover:bg-slate-50;
+  }
+
+  .faq-answer {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Dropdown Styles */
+  .dropdown {
+    @apply relative;
+  }
+
+  .dropdown-content {
+    @apply absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl opacity-0 invisible translate-y-2 transition-all duration-300 z-50 overflow-hidden border border-slate-100;
+  }
+
+  /* Support only aria-expanded for desktop dropdowns (Expandable/Collapsible) */
+  button[aria-expanded="true"] + .dropdown-content {
+    @apply opacity-100 visible translate-y-0;
+  }
+}
+
+/* Modal Backdrop */
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+/* Accessibility Focus States */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  @apply outline-none ring-4 ring-orange-600 ring-offset-2;
+}
+
+/* Custom Utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.sr-only-visible-label {
+    @apply text-xs font-bold uppercase tracking-widest inline-block;
+}
+
+/* General link styling for content */
+main a:not([class]) {
+  @apply text-orange-800 underline decoration-2 underline-offset-4 hover:text-orange-950 transition-colors;
+}
+
+/* Countdown Banner */
+.countdown-banner {
+  @apply bg-black text-white py-3 px-4 text-center font-bold flex flex-wrap justify-center items-center gap-4 border-b border-white/10;
+}
+
+.countdown-display {
+  background-color: #ea580c;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  line-height: 1.2;
+}
+
+@media (max-width: 640px) {
+  .countdown-display {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* High Contrast Mode (Default/Classic) */
+.high-contrast {
+  --primary-color: #000000;
+  --primary-bright: #000000;
+  --accent-color: #000000;
+  --text-dark: #FFFFFF;
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+.high-contrast body {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+.high-contrast header,
+.high-contrast footer,
+.high-contrast section,
+.high-contrast div:not([class*="bg-white"]),
+.high-contrast main {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+.high-contrast a,
+.high-contrast button {
+  color: #FFFFFF !important;
+  text-decoration: underline !important;
+  border: 2px solid #FFFFFF !important;
+  background-color: #000000 !important;
+}
+
+.high-contrast a:hover,
+.high-contrast button:hover {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+.high-contrast img {
+  filter: grayscale(100%) contrast(150%);
+}
+
+.high-contrast .bg-white,
+.high-contrast .bg-slate-50,
+.high-contrast .bg-slate-100 {
+  background-color: #000000 !important;
+}
+
+/* Yellow on Black Contrast */
+.high-contrast-yellow {
+  background-color: #000000 !important;
+  color: #FFFF00 !important;
+}
+
+.high-contrast-yellow body,
+.high-contrast-yellow header,
+.high-contrast-yellow footer,
+.high-contrast-yellow section,
+.high-contrast-yellow main,
+.high-contrast-yellow div {
+  background-color: #000000 !important;
+  color: #FFFF00 !important;
+  border-color: #FFFF00 !important;
+}
+
+.high-contrast-yellow a,
+.high-contrast-yellow button {
+  color: #FFFF00 !important;
+  text-decoration: underline !important;
+  border: 2px solid #FFFF00 !important;
+  background-color: #000000 !important;
+}
+
+.high-contrast-yellow a:hover,
+.high-contrast-yellow button:hover {
+  background-color: #FFFF00 !important;
+  color: #000000 !important;
+}
+
+/* Grayscale Mode */
+.grayscale-mode {
+  filter: grayscale(100%);
+}
+
+.grayscale-mode img {
+  filter: grayscale(100%) contrast(120%);
+}
