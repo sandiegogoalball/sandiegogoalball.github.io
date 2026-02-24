@@ -5,49 +5,44 @@ window.tailwind = {
         theme: {
             extend: {
                 colors: {
-                    // New Goalball Theme Palette (Orange)
-                    emerald: {
-                        950: '#431407',
-                        900: '#ea580c', // Remapped to Bright Orange
-                        800: '#f97316',
-                        700: '#fb923c',
-                        600: '#fdba74',
-                        500: '#fed7aa',
-                    },
-                    blue: {
-                        950: '#7c2d12',
-                        900: '#9a3412', // Remapped to Deep Orange
-                        800: '#c2410c',
-                        700: '#ea580c',
-                        600: '#f97316',
-                        500: '#fb923c',
-                    },
-                    // Orange palette for direct use
-                    orange: {
-                        950: '#431407',
-                        900: '#7c2d12',
-                        800: '#9a3412',
-                        700: '#c2410c',
-                        600: '#ea580c',
-                        500: '#f97316',
-                        400: '#fb923c',
-                        300: '#fdba74',
-                        200: '#fed7aa',
-                        100: '#ffedd5',
+                    // Professional Brand Palette
+                    primary: {
+                        DEFAULT: '#7c2d12', // Dark Orange for AAA Contrast
                         50: '#fff7ed',
+                        100: '#ffedd5',
+                        200: '#fed7aa',
+                        300: '#fdba74',
+                        400: '#fb923c',
+                        500: '#f97316',
+                        600: '#ea580c',
+                        700: '#c2410c',
+                        800: '#9a3412',
+                        900: '#7c2d12',
+                        950: '#431407',
                     },
-                    // Compatibility mapping
-                    red: {
-                        900: '#ea580c', // Mapped to Bright Orange
-                        800: '#f97316',
-                        500: '#fb923c',
+                    secondary: {
+                        DEFAULT: '#1e3a8a', // Deep Blue for Toolbar
+                        50: '#eff6ff',
+                        100: '#dbeafe',
+                        200: '#bfdbfe',
+                        300: '#93c5fd',
+                        400: '#60a5fa',
+                        500: '#3b82f6',
+                        600: '#2563eb',
+                        700: '#1d4ed8',
+                        800: '#1e40af',
+                        900: '#1e3a8a',
+                        950: '#172554',
                     },
-                    charcoal: {
-                        DEFAULT: '#9a3412', // Mapped to Deep Orange
+                    accent: {
+                        DEFAULT: '#eab308', // Yellow for highlights/banner
+                        500: '#eab308',
+                        600: '#ca8a04',
+                        700: '#a16207',
                     },
-                    black: '#431407',
+                    black: '#000000',
                     white: '#FFFFFF',
-                    dark: '#431407',
+                    dark: '#111827',
                 },
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
@@ -68,6 +63,7 @@ const SITE_INDEX = [
     { title: "Equipment", url: "equipment.html", content: "Learn about specialized goalball gear including audible balls, blackout eyeshades, and protective padding." },
     { title: "Practice Schedule", url: "schedule.html", content: "View our simplified practice schedule at Mission Valley YMCA and Stagecoach Park in Carlsbad." },
     { title: "Tournaments", url: "tournaments.html", content: "Information on major goalball tournaments like the Cascade Classic and USABA Nationals." },
+    { title: "Past Events", url: "past-events.html", content: "View results and information from past tournaments, including the Cascade Classic." },
     { title: "Get Involved Overview", url: "get-involved.html", content: "Volunteer with us or support our athletes through donations and community outreach." },
     { title: "Volunteer", url: "volunteer.html", content: "Join our team as a goal judge, timer, scorer, or sighted guide. Training provided." },
     { title: "Our Sponsors", url: "sponsors.html", content: "Meet the organizations that support San Diego County Goalball and help empower our athletes." },
@@ -706,18 +702,19 @@ function initContrastToggle() {
 
 /**
  * Sets the contrast/accessibility mode
- * @param {string} mode - 'standard', 'high-contrast', 'high-contrast-yellow', 'grayscale'
+ * @param {string} mode - 'standard', 'high-contrast', 'high-contrast-yellow', 'high-contrast-black-white', 'grayscale'
  */
 function setContrastMode(mode) {
     const html = document.documentElement;
     const toggleBtn = document.getElementById('contrast-toggle');
 
     // Remove all accessibility classes
-    html.classList.remove('high-contrast', 'high-contrast-yellow', 'grayscale-mode');
+    html.classList.remove('high-contrast', 'high-contrast-yellow', 'high-contrast-black-white', 'grayscale-mode');
 
     if (mode !== 'standard') {
         if (mode === 'high-contrast') html.classList.add('high-contrast');
         if (mode === 'high-contrast-yellow') html.classList.add('high-contrast-yellow');
+        if (mode === 'high-contrast-black-white') html.classList.add('high-contrast-black-white');
         if (mode === 'grayscale') html.classList.add('grayscale-mode');
 
         localStorage.setItem('accessibility-mode', mode);

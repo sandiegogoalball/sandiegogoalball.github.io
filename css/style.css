@@ -10,7 +10,12 @@
     --accent-dark: #7c2d12;
     --secondary-color: #f97316;
     --secondary-dark: #7c2d12;
-    --text-dark: #431407;
+    --text-dark: #111827;
+    --toolbar-blue: #1e3a8a;
+    --nav-orange: #ea580c;
+    --nav-orange-dark: #7c2d12; /* AAA contrast for white text */
+    --banner-yellow: #facc15;
+    --banner-black: #000000;
   }
 
   body {
@@ -38,21 +43,21 @@
 
   /* Modern Buttons */
   .btn-primary {
-    @apply bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-orange-700 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-100 focus:outline-none focus:ring-4 focus:ring-orange-300;
-    box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.1), 0 4px 6px -2px rgba(234, 88, 12, 0.05);
+    @apply bg-primary text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-primary-800 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-100 focus:outline-none focus:ring-4 focus:ring-primary-300;
+    box-shadow: 0 10px 15px -3px rgba(124, 45, 18, 0.2), 0 4px 6px -2px rgba(124, 45, 18, 0.1);
   }
 
   .btn-accent {
-    @apply bg-orange-800 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-orange-900 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-100 focus:outline-none focus:ring-4 focus:ring-orange-300;
-    box-shadow: 0 10px 15px -3px rgba(154, 52, 18, 0.2), 0 4px 6px -2px rgba(154, 52, 18, 0.1);
+    @apply bg-secondary text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-secondary-800 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-100 focus:outline-none focus:ring-4 focus:ring-secondary-300;
+    box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.2), 0 4px 6px -2px rgba(30, 58, 138, 0.1);
   }
 
   .btn-secondary {
-    @apply bg-orange-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-orange-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-orange-300;
+    @apply bg-primary-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-primary-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-primary-300;
   }
 
   .btn-outline {
-    @apply border-2 border-orange-600 text-orange-600 font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-orange-600 hover:text-white hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-orange-300;
+    @apply border-2 border-primary text-primary font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-primary hover:text-white hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-primary-300;
   }
 
   .btn-white-outline {
@@ -120,6 +125,23 @@
   button[aria-expanded="true"] + .dropdown-content {
     @apply opacity-100 visible translate-y-0;
   }
+
+  /* Toolbar and Navigation components */
+  .header-toolbar {
+    @apply bg-[var(--toolbar-blue)] text-white py-2 shadow-inner;
+  }
+
+  .header-nav-bar {
+    @apply bg-[var(--nav-orange-dark)] text-white shadow-lg sticky top-0 z-40;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-1 py-4 px-2 hover:bg-white/10 transition-colors uppercase font-bold text-xs tracking-widest text-white;
+  }
+
+  .nav-link.active {
+    @apply bg-white/20;
+  }
 }
 
 /* Modal Backdrop */
@@ -147,7 +169,7 @@ textarea:focus-visible {
 
 /* General link styling for content */
 main a:not([class]) {
-  @apply text-orange-800 underline decoration-2 underline-offset-4 hover:text-orange-950 transition-colors;
+  @apply text-primary-900 underline decoration-2 underline-offset-4 hover:text-black transition-colors font-bold;
 }
 
 /* Countdown Banner */
@@ -267,6 +289,57 @@ main a:not([class]) {
 .high-contrast-yellow button:hover {
   background-color: #FFFF00 !important;
   color: #000000 !important;
+}
+
+/* Black on White Contrast */
+.high-contrast-black-white {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+.high-contrast-black-white body,
+.high-contrast-black-white header,
+.high-contrast-black-white footer,
+.high-contrast-black-white section,
+.high-contrast-black-white main,
+.high-contrast-black-white div {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+.high-contrast-black-white a,
+.high-contrast-black-white button {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  border: 2px solid #000000 !important;
+  background-color: #FFFFFF !important;
+}
+
+.high-contrast-black-white a:hover,
+.high-contrast-black-white button:hover {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+/* Ensure modal text visibility in all modes */
+dialog {
+  border: 4px solid var(--text-dark);
+}
+
+.high-contrast dialog,
+.high-contrast-yellow dialog,
+.high-contrast-black-white dialog {
+  background-color: inherit !important;
+  color: inherit !important;
+  border: 4px solid currentColor !important;
+}
+
+.high-contrast dialog *,
+.high-contrast-yellow dialog *,
+.high-contrast-black-white dialog * {
+  background-color: transparent !important;
+  color: inherit !important;
 }
 
 /* Grayscale Mode */
