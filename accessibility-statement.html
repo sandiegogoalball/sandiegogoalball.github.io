@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Statement | San Diego Goalball</title>
+    <meta name="description" content="San Diego County Goalball's commitment to ensuring digital accessibility for people with disabilities.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-dark font-sans antialiased min-h-screen flex flex-col">
+
+    <a href="#main-heading" class="skip-link sr-only">Skip to main content</a>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-blue-900 text-white shadow-lg">
+        <div role="region" aria-label="Student Project Banner" class="bg-blue-950/40 text-white/80 py-1.5 text-[10px] tracking-[0.2em] font-semibold uppercase text-center">
+            STUDENT PROJECT: This website was created as a project for a class at San Diego Mesa College.
+        </div>
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <span class="text-white font-black tracking-tighter text-2xl uppercase">San Diego Goalball</span>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <nav class="hidden lg:flex gap-6 font-semibold uppercase text-sm tracking-widest" aria-label="Main Navigation">
+                    <ul class="flex gap-6 items-center">
+                        <li><a href="index.html" class="hover:text-white/70 transition-colors">Home</a></li>
+                        <!-- About Dropdown -->
+                        <li class="relative group dropdown">
+                            <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
+                                About
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-content">
+                                <li><a href="about.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Our Story</a></li>
+                                <li><a href="history.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">History</a></li>
+                                <li><a href="gallery.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Gallery</a></li>
+                            </ul>
+                        </li>
+                        <!-- The Sport Dropdown -->
+                        <li class="relative group dropdown">
+                            <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
+                                The Sport
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-content">
+                                <li><a href="about-goalball.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">What is Goalball?</a></li>
+                                <li><a href="rules.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Rules</a></li>
+                                <li><a href="equipment.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Equipment</a></li>
+                            </ul>
+                        </li>
+                        <!-- Schedule Dropdown -->
+                        <li class="relative group dropdown">
+                            <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
+                                Schedule
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-content">
+                                <li><a href="schedule.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Practice Schedule</a></li>
+                                <li><a href="tournaments.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Tournaments</a></li>
+                            </ul>
+                        </li>
+                        <!-- Get Involved Dropdown -->
+                        <li class="relative group dropdown">
+                            <button type="button" class="flex items-center gap-1 hover:text-white/70 transition-colors uppercase font-semibold text-sm tracking-widest" aria-haspopup="true" aria-expanded="false">
+                                Get Involved
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-content">
+                                <li><a href="get-involved.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Overview</a></li>
+                                <li><a href="volunteer.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Volunteer</a></li>
+                                <li><a href="sponsors.html" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Our Sponsors</a></li>
+                                <li><a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="block px-6 py-3 text-orange-600 hover:bg-slate-50 transition-colors">Donate</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="resources.html" class="hover:text-white/70 transition-colors">Resources</a></li>
+                        <li><a href="contact.html" class="hover:text-white/70 transition-colors">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Contrast Toggle -->
+                <button type="button" id="contrast-toggle" class="inline-flex items-center text-white p-2 hover:text-white/70 transition-colors" aria-label="Display Options" aria-haspopup="dialog">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                    </svg>
+                    <span class="text-xs font-bold uppercase ml-1">Contrast</span>
+                </button>
+                <div id="search-container" class="relative flex items-center">
+                    <input type="text" id="search-input" placeholder="Search San Diego Goalball Website" class="hidden md:block px-4 py-2 rounded-full bg-white border border-white text-dark text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 mr-2 placeholder-gray-500 font-medium w-32 lg:w-48 xl:w-64">
+                    <button type="button" id="search-btn" class="inline-flex items-center text-white p-2 hover:text-white/70 transition-colors" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                        <span class="text-xs font-bold uppercase ml-1">Search</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button type="button" class="lg:hidden text-white p-2" aria-label="Toggle Menu" aria-expanded="false">
+                    <svg id="menu-icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="32" height="32" class="w-8 h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <span class="text-xs font-bold uppercase ml-1 menu-label">Menu</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Nav -->
+        <div id="mobile-nav" class="lg:hidden bg-orange-950 border-t border-orange-400 overflow-hidden max-h-0 opacity-0 invisible transition-all duration-300 ease-in-out">
+            <div class="flex flex-col p-6 gap-2 font-semibold uppercase text-sm tracking-widest">
+                <a href="index.html" class="text-white py-3 border-b border-white/10">Home</a>
+
+                <!-- About Collapsible -->
+                <div class="border-b border-white/10">
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-white">About</span>
+                        <button type="button" class="p-2 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="mobile-about-links" aria-label="Toggle About Submenu">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-about-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
+                        <a href="about.html" class="text-white/80 py-1 hover:text-white">Our Story</a>
+                        <a href="history.html" class="text-white/80 py-1 hover:text-white">History</a>
+                        <a href="gallery.html" class="text-white/80 py-1 hover:text-white">Gallery</a>
+                    </div>
+                </div>
+
+                <!-- The Sport Collapsible -->
+                <div class="border-b border-white/10">
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-white">The Sport</span>
+                        <button type="button" class="p-2 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="mobile-sport-links" aria-label="Toggle The Sport Submenu">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-sport-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
+                        <a href="about-goalball.html" class="text-white/80 py-1 hover:text-white">What is Goalball?</a>
+                        <a href="rules.html" class="text-white/80 py-1 hover:text-white">Rules</a>
+                        <a href="equipment.html" class="text-white/80 py-1 hover:text-white">Equipment</a>
+                    </div>
+                </div>
+
+                <!-- Schedule Collapsible -->
+                <div class="border-b border-white/10">
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-white">Schedule</span>
+                        <button type="button" class="p-2 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="mobile-schedule-links" aria-label="Toggle Schedule Submenu">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-schedule-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
+                        <a href="schedule.html" class="text-white/80 py-1 hover:text-white">Practice Schedule</a>
+                        <a href="tournaments.html" class="text-white/80 py-1 hover:text-white">Tournaments</a>
+                    </div>
+                </div>
+
+                <!-- Get Involved Collapsible -->
+                <div class="border-b border-white/10">
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-white">Get Involved</span>
+                        <button type="button" class="p-2 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="mobile-involved-links" aria-label="Toggle Get Involved Submenu">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="mobile-involved-links" class="hidden flex flex-col pb-3 pl-4 gap-2 max-h-0 opacity-0 invisible overflow-hidden transition-all duration-300">
+                        <a href="get-involved.html" class="text-white/80 py-1 hover:text-white">Overview</a>
+                        <a href="volunteer.html" class="text-white/80 py-1 hover:text-white">Volunteer</a>
+                        <a href="sponsors.html" class="text-white/80 py-1 hover:text-white">Our Sponsors</a>
+                        <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="text-white/80 py-1 hover:text-white">Donate</a>
+                    </div>
+                </div>
+
+                <a href="resources.html" class="text-white py-3 border-b border-white/10">Resources</a>
+                <a href="contact.html" class="text-white py-3">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="flex-grow">
+        <!-- Page Banner -->
+        <section class="bg-slate-50 text-orange-600 border-b border-slate-100 py-32">
+            <div class="container mx-auto px-4">
+                <h1 id="main-heading" class="text-5xl font-extrabold uppercase tracking-tight">Accessibility Statement</h1>
+                <p class="text-xl text-orange-600 mt-4 max-w-2xl">Our commitment to ensuring digital accessibility for all users.</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <div class="prose prose-lg text-gray-700">
+                    <h2 class="text-3xl font-extrabold text-orange-600 mb-8 uppercase">Commitment to Accessibility</h2>
+                    <p class="mb-6">
+                        San Diego County Goalball is dedicated to ensuring digital accessibility for all users, including those with disabilities. We strive to provide a website that is inclusive and easy to navigate, and we are committed to continuous improvement to meet and exceed accessibility standards.
+                    </p>
+                    <p class="mb-6">
+                        We believe that everyone should be able to access our information and services, and we are working hard to remove any barriers that may exist for our users with visual, auditory, physical, speech, cognitive, and neurological disabilities.
+                    </p>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Conformance Status</h2>
+                    <p class="mb-6">
+                        The Web Content Accessibility Guidelines (WCAG) define requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA.
+                    </p>
+                    <p class="mb-6">
+                        San Diego County Goalball is currently <strong>partially conformant</strong> with WCAG 2.1 level AA. This means that while we have made significant efforts to ensure our site meets these standards, some parts of the content may not yet fully conform to the accessibility standard. We are actively working on resolving these issues to achieve full conformance.
+                    </p>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Technical Specifications</h2>
+                    <p class="mb-6">
+                        Accessibility of San Diego County Goalball relies on the following technologies to work with the particular combination of web browser and any assistive technologies or plugins installed on your computer:
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li>HTML</li>
+                        <li>WAI-ARIA</li>
+                        <li>CSS</li>
+                        <li>JavaScript</li>
+                        <li>Tailwind CSS</li>
+                    </ul>
+                    <p class="mb-6">These technologies are relied upon for conformance with the accessibility standards used. We test our website in modern web browsers and with common assistive technologies such as screen readers (NVDA, VoiceOver) to ensure compatibility.</p>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Accessibility Features</h2>
+                    <p class="mb-6">
+                        Our website includes several features designed to enhance accessibility:
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Contrast Toggle:</strong> A custom display options menu allowing users to switch between standard, high-contrast (white on black, yellow on black), and grayscale modes.</li>
+                        <li><strong>Skip to Main Content:</strong> A keyboard-accessible link at the top of every page that allows users to bypass navigation and jump directly to the primary content.</li>
+                        <li><strong>Semantic HTML:</strong> Use of appropriate HTML tags (headings, landmarks, buttons) to provide structure and context for screen readers.</li>
+                        <li><strong>ARIA Support:</strong> Implementation of ARIA attributes (aria-expanded, aria-haspopup, aria-live) to provide real-time updates and interactive state information.</li>
+                        <li><strong>Keyboard Navigation:</strong> All interactive elements are designed to be fully navigable via keyboard, with clear focus indicators.</li>
+                    </ul>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Assessment Methodology</h2>
+                    <p class="mb-6">
+                        San Diego County Goalball assessed the accessibility of this website through the following methods:
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Self-evaluation:</strong> The website was evaluated by the development team using automated testing tools (such as Lighthouse and AXE) and manual testing with keyboard navigation and screen readers.</li>
+                        <li><strong>User Feedback:</strong> We actively seek and incorporate feedback from our community members, including those with visual impairments, to identify and address accessibility issues.</li>
+                    </ul>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Limitations and Alternatives</h2>
+                    <p class="mb-6">
+                        Despite our best efforts to ensure accessibility of San Diego County Goalball, there may be some limitations. Below is a description of known limitations, and potential solutions:
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>External Content:</strong> Some third-party components or links to external websites may not fully meet accessibility standards. We are working with our partners to encourage them to provide accessible content.</li>
+                        <li><strong>Archived Documents:</strong> Older PDF or Excel documents may not be fully accessible to screen readers. If you require an alternative format, please contact us.</li>
+                    </ul>
+
+                    <h2 class="text-3xl font-extrabold text-orange-600 mt-16 mb-8 uppercase">Feedback</h2>
+                    <p class="mb-6">
+                        We welcome your feedback on the accessibility of San Diego County Goalball. Please let us know if you encounter accessibility barriers on our website:
+                    </p>
+                    <ul class="list-disc pl-6 mb-12 space-y-4">
+                        <li class="flex flex-col">
+                            <span class="font-bold text-orange-600">Phone:</span>
+                            <span>760-525-2800</span>
+                        </li>
+                        <li class="flex flex-col">
+                            <span class="font-bold text-orange-600">Email:</span>
+                            <a href="mailto:info@sdgoalball.org" class="underline hover:text-orange-800 transition-colors">info@sdgoalball.org</a>
+                        </li>
+                        <li class="flex flex-col">
+                            <span class="font-bold text-orange-600">Postal Address:</span>
+                            <span>San Diego County Goalball, San Diego, CA</span>
+                        </li>
+                    </ul>
+                    <p class="text-sm text-gray-500 italic">This statement was last updated on March 2024.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-orange-600 text-white py-20 border-t border-white/10">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-2">
+                    <h2 class="text-3xl font-black mb-8 uppercase tracking-tight">San Diego Goalball</h2>
+                    <p class="text-white/80 max-w-md leading-relaxed mb-8 text-lg">
+                        Empowering the blind and visually impaired community through competitive excellence and inclusive athleticism. San Diego County Goalball is a proud 501(c)3 non-profit.
+                    </p>
+                    <!-- Sponsor Logos -->
+                    <div class="mb-8">
+                        <h3 class="text-white font-black uppercase mb-6 tracking-wider border-b-2 border-white/20 pb-2 inline-block">SD Goalball Sponsors</h3>
+                        <div class="flex flex-wrap gap-8 items-center">
+                            <img src="images/aira-logo-light.svg" alt="Aira Logo" class="h-16 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                            <img src="images/caf-logo.svg" alt="Challenged Athletes Foundation Logo" class="h-16 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-black uppercase mb-8 tracking-wider border-b-2 border-white/20 pb-2 inline-block">Quick Links</h3>
+                    <ul class="space-y-4 text-sm font-bold uppercase tracking-widest">
+                        <li><a href="index.html" class="text-white/70 hover:text-white transition-all">Home</a></li>
+                        <li><a href="about.html" class="text-white/70 hover:text-white transition-all">Our Story</a></li>
+                        <li><a href="about-goalball.html" class="text-white/70 hover:text-white transition-all">About Goalball</a></li>
+                        <li><a href="equipment.html" class="text-white/70 hover:text-white transition-all">Equipment</a></li>
+                        <li><a href="schedule.html" class="text-white/70 hover:text-white transition-all">Schedule</a></li>
+                        <li><a href="get-involved.html" class="text-white/70 hover:text-white transition-all">Get Involved</a></li>
+
+                    </ul>
+                    <div class="mt-8">
+                        <label for="footer-search-input" class="text-white font-black uppercase mb-4 tracking-wider border-b-2 border-white/20 pb-2 inline-block">Search our site</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="footer-search-input" placeholder="Search San Diego Goalball Website" aria-label="Search San Diego Goalball Website" class="bg-white border border-white text-dark text-sm rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder-gray-500 font-medium">
+                            <button type="button" id="footer-search-submit" class="bg-blue-900 text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-blue-950 transition-colors">Go</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-black uppercase mb-8 tracking-wider border-b-2 border-white/20 pb-2 inline-block">Contact Info</h3>
+                    <ul class="space-y-6 text-sm font-bold uppercase tracking-widest">
+                        <li class="flex flex-col gap-2">
+                            <span class="text-white/50 text-[10px]">Email</span>
+                            <a href="mailto:info@sdgoalball.org" class="text-white hover:text-white/70 transition-all underline decoration-white/20">info@sdgoalball.org</a>
+                        </li>
+                        <li class="flex flex-col gap-2">
+                            <span class="text-white/50 text-[10px]">Phone</span>
+                            <a href="tel:7605252800" class="text-white hover:text-white/70 transition-all underline decoration-white/20">760-525-2800</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        <!-- Footer Tournament Countdown -->
+        <div class="mb-12 py-8 border-y border-white/10 text-center">
+            <h3 class="text-white/60 text-xs font-black uppercase tracking-[0.3em] mb-4">Tournament Starts In</h3>
+            <div class="tournament-countdown flex justify-center items-center">
+                <span class="countdown-display">00:00:00</span>
+            </div>
+        </div>
+            <div class="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/40 font-bold uppercase tracking-[0.2em]">
+                <p>&copy; <span id="year"></span> San Diego County Goalball. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-x-4 gap-y-2">
+                    <a href="accessibility-statement.html" class="hover:text-white transition-colors">Accessibility Statement</a>
+                    <span class="hidden md:inline">|</span>
+                    <a href="terms-of-use.html" class="hover:text-white transition-colors">Terms of Use</a>
+                    <span class="hidden md:inline">|</span>
+                    <a href="privacy-policy.html" class="hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+                <p>Website by <a href="https://linktr.ee/DarrenDizon" target="_blank" class="hover:text-white transition-colors">Darren Dizon</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contrast Modal -->
+    <dialog id="contrast-modal" class="p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full overflow-hidden">
+        <div class="bg-blue-900 p-8 text-white relative">
+            <button id="close-contrast-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 class="text-3xl font-black uppercase mb-2">Display Options</h2>
+            <p class="text-white/80">Select a display mode that best suits your visual needs.</p>
+        </div>
+        <div class="p-8 bg-white grid grid-cols-1 gap-4">
+            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-blue-900 hover:bg-slate-50 transition-all group" data-mode="standard">
+                <span class="font-bold text-slate-900 uppercase">Standard View</span>
+                <div class="w-6 h-6 rounded-full bg-orange-600"></div>
+            </button>
+            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-blue-900 hover:bg-slate-50 transition-all group" data-mode="high-contrast">
+                <span class="font-bold text-slate-900 uppercase">High Contrast (White on Black)</span>
+                <div class="w-6 h-6 rounded-full bg-black border border-white"></div>
+            </button>
+            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-blue-900 hover:bg-slate-50 transition-all group" data-mode="high-contrast-yellow">
+                <span class="font-bold text-slate-900 uppercase">High Contrast (Yellow on Black)</span>
+                <div class="w-6 h-6 rounded-full bg-black border border-yellow-400"></div>
+            </button>
+            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-blue-900 hover:bg-slate-50 transition-all group" data-mode="grayscale">
+                <span class="font-bold text-slate-900 uppercase">Grayscale</span>
+                <div class="w-6 h-6 rounded-full bg-gray-400"></div>
+            </button>
+        </div>
+    </dialog>
+</body>
+</html>
