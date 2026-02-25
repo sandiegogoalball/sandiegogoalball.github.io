@@ -166,7 +166,7 @@ button[aria-expanded="true"] + .dropdown-content {
   align-items: center;
   gap: 0.25rem;
   padding: 0.5rem 1rem !important;
-  background-color: #c2410c !important; /* Slightly darker orange for better visibility */
+  background-color: #7c2d12 !important; /* Darker orange for AAA contrast */
   color: white !important;
   border-radius: 0.375rem;
   margin: 0.5rem 0.25rem;
@@ -184,8 +184,10 @@ button[aria-expanded="true"] + .dropdown-content {
   color: white !important;
 }
 
-.nav-link.active {
-  background-color: #7c2d12 !important; /* Darkest orange for active state */
+.nav-link.active,
+.nav-link-active {
+  background-color: #FACC15 !important; /* bg-yellow-400 */
+  color: #1E3A8A !important; /* text-blue-900 */
 }
 
 /* Modal Backdrop */
@@ -248,7 +250,10 @@ main a:not([class]) {
 .high-contrast footer,
 .high-contrast section,
 .high-contrast div:not([class*="bg-white"]),
-.high-contrast main {
+.high-contrast main,
+.high-contrast nav,
+.high-contrast ul,
+.high-contrast li {
   background-color: #000000 !important;
   color: #FFFFFF !important;
   border-color: #FFFFFF !important;
@@ -289,7 +294,10 @@ main a:not([class]) {
 .high-contrast-yellow footer,
 .high-contrast-yellow section,
 .high-contrast-yellow main,
-.high-contrast-yellow div {
+.high-contrast-yellow div,
+.high-contrast-yellow nav,
+.high-contrast-yellow ul,
+.high-contrast-yellow li {
   background-color: #000000 !important;
   color: #FFFF00 !important;
   border-color: #FFFF00 !important;
@@ -320,7 +328,10 @@ main a:not([class]) {
 .high-contrast-black-white footer,
 .high-contrast-black-white section,
 .high-contrast-black-white main,
-.high-contrast-black-white div {
+.high-contrast-black-white div,
+.high-contrast-black-white nav,
+.high-contrast-black-white ul,
+.high-contrast-black-white li {
   background-color: #FFFFFF !important;
   color: #000000 !important;
   border-color: #000000 !important;

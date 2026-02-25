@@ -43,7 +43,8 @@
                 <div class="flex items-center gap-4">
                     <!-- Search -->
                     <div id="search-container" class="relative hidden sm:flex items-center">
-                        <input type="text" id="search-input" placeholder="Search Website" class="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs focus:outline-none focus:ring-2 focus:ring-accent-yellow placeholder-white/50 font-medium w-40 lg:w-64 transition-all focus:bg-white/20">
+                        <button type="button" id="search-cancel" class="absolute right-10 text-white/70 hover:text-white hidden" aria-label="Cancel Search"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg></button>
+                        <input type="text" id="search-input" placeholder="Search Website" class="hidden px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs focus:outline-none focus:ring-2 focus:ring-accent-yellow placeholder-white/50 font-medium w-40 lg:w-64 transition-all focus:bg-white/20">
                         <button type="button" id="search-btn" class="absolute right-2 text-white/70 hover:text-white" aria-label="Search">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
@@ -60,7 +61,7 @@
                     </button>
 
                     <!-- Mobile Menu Toggle -->
-                    <button type="button" class="lg:hidden flex items-center gap-2 bg-primary hover:bg-primary-600 px-4 py-2 rounded-full text-white transition-all shadow-lg" aria-label="Toggle Menu" aria-expanded="false">
+                    <button type="button" class="md:hidden flex items-center gap-2 bg-primary hover:bg-primary-600 px-4 py-2 rounded-full text-white transition-all shadow-lg" aria-label="Toggle Menu" aria-expanded="false">
                         <svg id="menu-icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
@@ -71,7 +72,7 @@
         </div>
 
         <!-- Navigation Bar (Orange) -->
-        <nav class="header-nav-bar hidden lg:block" aria-label="Main Navigation">
+        <nav class="header-nav-bar hidden md:block" aria-label="Main Navigation">
             <div class="container mx-auto px-4">
                 <ul class="flex justify-center">
                     <li><a href="index.html" class="nav-link">Home</a></li>
@@ -139,7 +140,7 @@
         </nav>
 
         <!-- Mobile Nav -->
-        <div id="mobile-nav" class="lg:hidden bg-primary-900 border-t border-white/10 overflow-hidden max-h-0 opacity-0 invisible transition-all duration-300 ease-in-out">
+        <div id="mobile-nav" class="md:hidden bg-primary-900 border-t border-white/10 overflow-hidden max-h-0 opacity-0 invisible transition-all duration-300 ease-in-out">
             <div class="flex flex-col p-6 gap-2 font-semibold uppercase text-sm tracking-widest">
                 <a href="index.html" class="text-white py-3 border-b border-white/10">Home</a>
 
