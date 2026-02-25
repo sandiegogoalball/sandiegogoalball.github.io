@@ -110,10 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Mobile menu toggle functionality and accordions
+ * Unified menu toggle functionality (Mobile & Desktop Drawer)
  */
 function initMobileMenu() {
-    const menuBtn = document.querySelector('button[aria-label="Toggle Menu"]');
+    const menuBtn = document.getElementById('menu-toggle-btn');
     const mobileNav = document.getElementById('mobile-nav');
 
     if (menuBtn && mobileNav) {
@@ -123,11 +123,13 @@ function initMobileMenu() {
             menuBtn.setAttribute('aria-expanded', nowExpanded);
 
             if (nowExpanded) {
-                mobileNav.classList.remove('max-h-0', 'opacity-0', 'invisible');
-                mobileNav.classList.add('max-h-[90vh]', 'opacity-100', 'visible');
+                mobileNav.classList.remove('opacity-0', 'invisible', 'translate-x-full');
+                mobileNav.classList.add('opacity-100', 'visible', 'translate-x-0');
+                document.body.classList.add('overflow-hidden'); // Prevent scroll when menu is open
             } else {
-                mobileNav.classList.add('max-h-0', 'opacity-0', 'invisible');
-                mobileNav.classList.remove('max-h-[90vh]', 'opacity-100', 'visible');
+                mobileNav.classList.add('opacity-0', 'invisible', 'translate-x-full');
+                mobileNav.classList.remove('opacity-100', 'visible', 'translate-x-0');
+                document.body.classList.remove('overflow-hidden');
             }
 
             // Add visibility for screen readers and sighted users
@@ -142,11 +144,11 @@ function initMobileMenu() {
                 if (nowExpanded) {
                     // X icon
                     iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />';
-                    // Move focus to first link in mobile nav
+                    // Move focus to first link in nav
                     setTimeout(() => {
                         const firstLink = mobileNav.querySelector('a');
                         if (firstLink) firstLink.focus();
-                    }, 100);
+                    }, 300);
                 } else {
                     // Menu icon
                     iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
@@ -156,12 +158,13 @@ function initMobileMenu() {
             }
         });
 
-        // Close mobile menu on Escape
+        // Close menu on Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
-                mobileNav.classList.add('max-h-0', 'opacity-0', 'invisible');
-                mobileNav.classList.remove('max-h-[90vh]', 'opacity-100', 'visible');
+                mobileNav.classList.add('opacity-0', 'invisible', 'translate-x-full');
+                mobileNav.classList.remove('opacity-100', 'visible', 'translate-x-0');
                 menuBtn.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('overflow-hidden');
                 const label = menuBtn.querySelector('.menu-label');
                 if (label) label.textContent = 'Menu';
                 const iconSvg = menuBtn.querySelector('svg');
@@ -171,9 +174,16 @@ function initMobileMenu() {
                 menuBtn.focus();
             }
         });
+
+        // Close menu when clicking outside (on the backdrop overlay)
+        mobileNav.addEventListener('click', (e) => {
+            if (e.target === mobileNav) {
+                menuBtn.click();
+            }
+        });
     }
 
-    // Mobile Dropdown Accordions
+    // Dropdown Accordions (Works for both mobile and desktop drawer)
     const mobileToggles = document.querySelectorAll('.mobile-dropdown-toggle');
     mobileToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
@@ -778,7 +788,7 @@ function initCookieConsent() {
  */
 function highlightCurrentPage() {
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('nav a, #mobile-nav a');
+    const navLinks = document.querySelectorAll('.nav-link, .nav-link-inline, #mobile-nav a');
 
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href');

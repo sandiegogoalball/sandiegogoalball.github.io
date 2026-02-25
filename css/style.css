@@ -151,23 +151,128 @@ header {
   box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.5);
 }
 
-/* Mobile Nav */
+/* Unified Navigation Drawer */
 #mobile-nav {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 400px !important;
+  height: 100vh !important;
+  z-index: 1000 !important;
   background-color: var(--primary-color) !important;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.5) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s !important;
+}
+
+#mobile-nav.translate-x-full {
+  transform: translateX(100%) !important;
+}
+
+#mobile-nav.translate-x-0 {
+  transform: translateX(0) !important;
+}
+
+/* Backdrop for Drawer */
+body.overflow-hidden::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Toolbar as a Nav Bar on Desktop */
+.nav-link-inline {
+    color: white !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.1em !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.2s !important;
+}
+
+.nav-link-inline:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Sticky Header Refinement */
+header {
+    transition: all 0.3s ease !important;
+    z-index: 2000 !important; /* Ensure header and its buttons are always above backdrop */
+}
+
+/* Home Header Overrides */
+.header-home {
+    background: transparent !important;
+    position: absolute !important;
+    width: 100% !important;
+    box-shadow: none !important;
+}
+
+.header-home .header-toolbar {
+    background: transparent !important;
+    border-bottom: none !important;
+}
+
+/* Subpage Header Refinement */
+.header-subpage {
+    background: var(--primary-color) !important;
+    position: sticky !important;
+    top: 0 !important;
 }
 
 /* Accessibility Modes */
-[class^="cm-high-contrast"] body { border-color: currentColor !important; }
-.cm-high-contrast { background-color: #000 !important; color: #fff !important; }
-.cm-high-contrast-yellow { background-color: #000 !important; color: #ff0 !important; }
-.cm-high-contrast-black-white { background-color: #fff !important; color: #000 !important; }
-.cm-high-contrast-pink { background-color: #000 !important; color: #f9c !important; }
+.cm-high-contrast body { background-color: #000 !important; color: #fff !important; }
+.cm-high-contrast-yellow body { background-color: #000 !important; color: #ff0 !important; }
+.cm-high-contrast-black-white body { background-color: #fff !important; color: #000 !important; }
+.cm-high-contrast-pink body { background-color: #000 !important; color: #f9c !important; }
+.cm-grayscale body { filter: grayscale(100%) !important; }
 
-[class^="cm-high-contrast"] .header-nav-bar,
-[class^="cm-high-contrast"] .bg-white,
-[class^="cm-high-contrast"] .bg-slate-50,
-[class^="cm-high-contrast"] section {
+/* Global overrides for high contrast modes to ensure all elements respect the theme */
+.cm-high-contrast *,
+.cm-high-contrast-yellow *,
+.cm-high-contrast-black-white *,
+.cm-high-contrast-pink * {
     background-color: transparent !important;
+    border-color: currentColor !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Ensure body and specific containers have the correct background */
+.cm-high-contrast body, .cm-high-contrast main, .cm-high-contrast header, .cm-high-contrast footer, .cm-high-contrast section { background-color: #000 !important; color: #fff !important; }
+.cm-high-contrast-yellow body, .cm-high-contrast-yellow main, .cm-high-contrast-yellow header, .cm-high-contrast-yellow footer, .cm-high-contrast-yellow section { background-color: #000 !important; color: #ff0 !important; }
+.cm-high-contrast-black-white body, .cm-high-contrast-black-white main, .cm-high-contrast-black-white header, .cm-high-contrast-black-white footer, .cm-high-contrast-black-white section { background-color: #fff !important; color: #000 !important; }
+.cm-high-contrast-pink body, .cm-high-contrast-pink main, .cm-high-contrast-pink header, .cm-high-contrast-pink footer, .cm-high-contrast-pink section { background-color: #000 !important; color: #f9c !important; }
+
+/* Ensure buttons and interactive elements are visible in high contrast */
+.cm-high-contrast a, .cm-high-contrast button, .cm-high-contrast input, .cm-high-contrast select, .cm-high-contrast textarea,
+.cm-high-contrast-yellow a, .cm-high-contrast-yellow button, .cm-high-contrast-yellow input, .cm-high-contrast-yellow select, .cm-high-contrast-yellow textarea,
+.cm-high-contrast-black-white a, .cm-high-contrast-black-white button, .cm-high-contrast-black-white input, .cm-high-contrast-black-white select, .cm-high-contrast-black-white textarea,
+.cm-high-contrast-pink a, .cm-high-contrast-pink button, .cm-high-contrast-pink input, .cm-high-contrast-pink select, .cm-high-contrast-pink textarea {
+    border: 2px solid currentColor !important;
+    padding: 0.5rem !important;
+    color: inherit !important;
+    background-color: transparent !important;
+}
+
+/* Hero gradient removal in high contrast */
+.cm-high-contrast .hero-gradient,
+.cm-high-contrast-yellow .hero-gradient,
+.cm-high-contrast-black-white .hero-gradient,
+.cm-high-contrast-pink .hero-gradient {
+    display: none !important;
 }
 
 /* Dialogs */
