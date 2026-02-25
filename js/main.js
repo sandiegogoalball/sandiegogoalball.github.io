@@ -5,7 +5,7 @@ window.tailwind = {
         theme: {
             extend: {
                 colors: {
-                    // Professional Brand Palette
+                    // Professional Brand Palette: Slate and Orange
                     primary: {
                         DEFAULT: '#0f172a', // Slate 900
                         50: '#f8fafc',
@@ -22,17 +22,17 @@ window.tailwind = {
                     },
                     secondary: {
                         DEFAULT: '#ea580c', // Orange 600
-                        50: '#eff6ff',
-                        100: '#dbeafe',
-                        200: '#bfdbfe',
-                        300: '#93c5fd',
-                        400: '#60a5fa',
-                        500: '#3b82f6',
-                        600: '#2563eb',
-                        700: '#1d4ed8',
-                        800: '#1e40af',
-                        900: '#1e3a8a',
-                        950: '#172554',
+                        50: '#fff7ed',
+                        100: '#ffedd5',
+                        200: '#fed7aa',
+                        300: '#fdba74',
+                        400: '#fb923c',
+                        500: '#f97316',
+                        600: '#ea580c',
+                        700: '#c2410c',
+                        800: '#9a3412',
+                        900: '#7c2d12',
+                        950: '#431407',
                     },
                     accent: {
                         DEFAULT: '#ea580c', // Orange 600
@@ -75,6 +75,9 @@ const SITE_INDEX = [
 
 // Site-wide Logic
 document.addEventListener('DOMContentLoaded', () => {
+    // Inject required modals for accessibility and confirmation
+    injectModals();
+
     // Initialize mobile menu
     initMobileMenu();
 
@@ -108,6 +111,99 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Cookie Consent
     initCookieConsent();
 });
+
+/**
+ * Dynamically injects modals into the DOM to ensure they are present on all pages
+ */
+function injectModals() {
+    if (!document.getElementById('contrast-modal')) {
+        const contrastModal = document.createElement('dialog');
+        contrastModal.id = 'contrast-modal';
+        contrastModal.className = 'p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full max-h-[90vh] overflow-hidden';
+        contrastModal.innerHTML = `
+            <div class="flex flex-col h-full max-h-[90vh]">
+                <div class="bg-secondary p-6 text-white relative flex-shrink-0">
+                    <button id="close-contrast-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                    </button>
+                    <h2 class="text-2xl font-black uppercase mb-1">Accessibility Options</h2>
+                    <p class="text-white/80 text-sm font-medium">Customize your viewing experience below.</p>
+                </div>
+                <div class="p-6 bg-white overflow-y-auto flex-grow space-y-8">
+                    <section aria-labelledby="visual-options-heading">
+                        <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+                            <h3 id="visual-options-heading" class="text-sm font-black uppercase tracking-wider text-slate-600">Visual Appearance</h3>
+                        </div>
+                        <div class="grid grid-cols-1 gap-2">
+                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="standard">
+                                <span class="font-bold text-slate-900 uppercase text-xs">Standard Mode</span>
+                                <div class="w-6 h-6 rounded-full bg-primary shadow-inner"></div>
+                            </button>
+                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast">
+                                <span class="font-bold text-slate-900 uppercase text-xs">White on Black</span>
+                                <div class="w-6 h-6 rounded-full bg-black border-2 border-white shadow-inner"></div>
+                            </button>
+                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-yellow">
+                                <span class="font-bold text-slate-900 uppercase text-xs">Yellow on Black</span>
+                                <div class="w-6 h-6 rounded-full bg-black border-2 border-yellow-400 shadow-inner"></div>
+                            </button>
+                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-black-white">
+                                <span class="font-bold text-slate-900 uppercase text-xs">Black on White</span>
+                                <div class="w-6 h-6 rounded-full bg-white border-2 border-black shadow-inner"></div>
+                            </button>
+                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-pink">
+                                <span class="font-bold text-slate-900 uppercase text-xs">Pink on Black</span>
+                                <div class="w-6 h-6 rounded-full bg-black border-2 border-[#FF99CC] shadow-inner"></div>
+                            </button>
+                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="grayscale">
+                                <span class="font-bold text-slate-900 uppercase text-xs">Grayscale</span>
+                                <div class="w-6 h-6 rounded-full bg-gray-400 shadow-inner"></div>
+                            </button>
+                        </div>
+                    </section>
+                    <section aria-labelledby="text-size-heading">
+                        <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" /></svg>
+                            <h3 id="text-size-heading" class="text-sm font-black uppercase tracking-wider text-slate-600">Text Size</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" class="text-size-option p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-xs" data-size="ts-small">Small</button>
+                            <button type="button" class="text-size-option p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-xs" data-size="ts-medium">Medium</button>
+                            <button type="button" class="text-size-option p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-xs" data-size="ts-large">Large</button>
+                            <button type="button" class="text-size-option p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-xs" data-size="ts-xlarge">Extra Large</button>
+                        </div>
+                    </section>
+                </div>
+                <div class="p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row gap-3 flex-shrink-0">
+                    <button type="button" id="cancel-accessibility" class="flex-1 px-6 py-4 rounded-full border-2 border-slate-300 text-slate-700 font-bold uppercase text-xs hover:bg-slate-100 transition-all">Cancel</button>
+                    <button type="button" id="save-accessibility" class="flex-1 px-6 py-4 rounded-full bg-primary text-white font-bold uppercase text-xs hover:bg-primary-700 transition-all shadow-lg border-2 border-primary">Save Settings</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(contrastModal);
+    }
+
+    if (!document.getElementById('confirmation-modal')) {
+        const confirmModal = document.createElement('dialog');
+        confirmModal.id = 'confirmation-modal';
+        confirmModal.className = 'p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full overflow-hidden';
+        confirmModal.innerHTML = `
+            <div class="bg-primary p-8 text-white relative">
+                <button id="close-confirmation-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                </button>
+                <h2 id="confirmation-modal-title" class="text-3xl font-black uppercase mb-2">Notification</h2>
+                <p id="confirmation-modal-message" class="text-white/80">Message goes here.</p>
+            </div>
+            <div class="p-8 bg-white flex justify-end gap-4">
+                <button id="cancel-confirmation-modal" class="btn-outline px-6 py-2 text-sm uppercase">Cancel</button>
+                <button id="confirm-confirmation-modal" class="btn-primary px-6 py-2 text-sm uppercase">Continue</button>
+            </div>
+        `;
+        document.body.appendChild(confirmModal);
+    }
+}
 
 /**
  * Unified menu toggle functionality (Mobile & Desktop Drawer)
@@ -366,8 +462,6 @@ function initFooterSearchSubmit() {
             const query = footerSearchInput.value.trim();
             if (query.length >= 2) {
                 // We use the existing performSearch logic
-                // But we need to make sure the results appear in a good place.
-                // For simplicity, we'll scroll to top and use the main search container for results.
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 const mainSearchInput = document.getElementById('search-input');
                 const mainSearchCancel = document.getElementById('search-cancel');
@@ -758,7 +852,7 @@ function initCookieConsent() {
     // Create the banner
     const banner = document.createElement('div');
     banner.id = 'cookie-consent-banner';
-    banner.className = 'fixed bottom-0 left-0 w-full bg-blue-900 text-white p-6 z-[200] shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.3)] border-t-4 border-orange-500 transform transition-transform duration-500 translate-y-full';
+    banner.className = 'fixed bottom-0 left-0 w-full bg-primary text-white p-6 z-[200] shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.3)] border-t-4 border-accent transform transition-transform duration-500 translate-y-full';
     banner.setAttribute('role', 'region');
     banner.setAttribute('aria-label', 'Cookie Consent');
 
@@ -771,7 +865,7 @@ function initCookieConsent() {
                 </p>
             </div>
             <div class="flex flex-shrink-0 gap-4">
-                <button id="cookie-accept-btn" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap shadow-lg hover:-translate-y-0.5">
+                <button id="cookie-accept-btn" class="bg-accent hover:bg-accent-600 text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap shadow-lg hover:-translate-y-0.5">
                     Accept All
                 </button>
                 <button id="cookie-decline-btn" class="bg-transparent border-2 border-white/30 hover:border-white text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap hover:bg-white/10">
