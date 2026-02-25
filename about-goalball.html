@@ -52,7 +52,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
                         </svg>
-                        <span class="text-xs font-black uppercase tracking-widest hidden lg:inline">Contrast</span>
+                        <span class="text-xs font-black uppercase tracking-widest hidden lg:inline">Options</span>
                     </button>
 
                     <!-- Mobile Menu Toggle -->
@@ -440,7 +440,7 @@
 
     <!-- Confirmation Modal -->
 
-        <!-- Contrast Modal -->
+        <!-- Accessibility Modal -->
     <dialog id="contrast-modal" class="p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full overflow-hidden">
         <div class="bg-secondary p-8 text-white relative">
             <button id="close-contrast-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
@@ -448,30 +448,57 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                 </svg>
             </button>
-            <h2 class="text-3xl font-black uppercase mb-2">Display Options</h2>
-            <p class="text-white/80">Select a display mode that best suits your visual needs.</p>
+            <h2 class="text-3xl font-black uppercase mb-2">Accessibility Options</h2>
+            <p class="text-white/80">Customize your viewing experience.</p>
         </div>
-        <div class="p-8 bg-white grid grid-cols-1 gap-4">
-            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-secondary hover:bg-slate-50 transition-all group" data-mode="standard">
-                <span class="font-bold text-slate-900 uppercase">Standard View</span>
-                <div class="w-6 h-6 rounded-full bg-primary"></div>
-            </button>
-            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-secondary hover:bg-slate-50 transition-all group" data-mode="high-contrast">
-                <span class="font-bold text-slate-900 uppercase">High Contrast (White on Black)</span>
-                <div class="w-6 h-6 rounded-full bg-black border border-white"></div>
-            </button>
-            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-secondary hover:bg-slate-50 transition-all group" data-mode="high-contrast-yellow">
-                <span class="font-bold text-slate-900 uppercase">High Contrast (Yellow on Black)</span>
-                <div class="w-6 h-6 rounded-full bg-black border border-yellow-400"></div>
-            </button>
-            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-secondary hover:bg-slate-50 transition-all group" data-mode="high-contrast-black-white">
-                <span class="font-bold text-slate-900 uppercase">High Contrast (Black on White)</span>
-                <div class="w-6 h-6 rounded-full bg-white border border-black"></div>
-            </button>
-            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-secondary hover:bg-slate-50 transition-all group" data-mode="grayscale">
-                <span class="font-bold text-slate-900 uppercase">Grayscale</span>
-                <div class="w-6 h-6 rounded-full bg-gray-400"></div>
-            </button>
+        <div class="p-8 bg-white space-y-8">
+            <!-- Contrast Section -->
+            <div>
+                <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Contrast & Color</h3>
+                <div class="grid grid-cols-1 gap-2">
+                    <button type="button" class="contrast-option flex items-center justify-between p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="standard">
+                        <span class="font-bold text-slate-900 uppercase text-[10px]">Standard</span>
+                        <div class="w-4 h-4 rounded-full bg-primary"></div>
+                    </button>
+                    <button type="button" class="contrast-option flex items-center justify-between p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast">
+                        <span class="font-bold text-slate-900 uppercase text-[10px]">White on Black</span>
+                        <div class="w-4 h-4 rounded-full bg-black border border-white"></div>
+                    </button>
+                    <button type="button" class="contrast-option flex items-center justify-between p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-yellow">
+                        <span class="font-bold text-slate-900 uppercase text-[10px]">Yellow on Black</span>
+                        <div class="w-4 h-4 rounded-full bg-black border border-yellow-400"></div>
+                    </button>
+                    <button type="button" class="contrast-option flex items-center justify-between p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-black-white">
+                        <span class="font-bold text-slate-900 uppercase text-[10px]">Black on White</span>
+                        <div class="w-4 h-4 rounded-full bg-white border border-black"></div>
+                    </button>
+                    <button type="button" class="contrast-option flex items-center justify-between p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-pink">
+                        <span class="font-bold text-slate-900 uppercase text-[10px]">Pink on Black</span>
+                        <div class="w-4 h-4 rounded-full bg-black border border-[#FF99CC]"></div>
+                    </button>
+                    <button type="button" class="contrast-option flex items-center justify-between p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="grayscale">
+                        <span class="font-bold text-slate-900 uppercase text-[10px]">Grayscale</span>
+                        <div class="w-4 h-4 rounded-full bg-gray-400"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Text Size Section -->
+            <div>
+                <h3 class="text-xs font-black uppercase tracking-widest text-slate-400 mb-4">Text Size</h3>
+                <div class="flex gap-2">
+                    <button type="button" class="text-size-option flex-1 p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-[10px]" data-size="ts-small">Small</button>
+                    <button type="button" class="text-size-option flex-1 p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-[10px]" data-size="ts-medium">Medium</button>
+                    <button type="button" class="text-size-option flex-1 p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-[10px]" data-size="ts-large">Large</button>
+                    <button type="button" class="text-size-option flex-1 p-3 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-[10px]" data-size="ts-xlarge">Extra</button>
+                </div>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex gap-4 pt-4 border-t border-slate-100">
+                <button type="button" id="cancel-accessibility" class="flex-1 px-4 py-3 rounded-full border-2 border-slate-200 text-slate-600 font-bold uppercase text-[10px] hover:bg-slate-50 transition-all">Cancel</button>
+                <button type="button" id="save-accessibility" class="flex-1 px-4 py-3 rounded-full bg-primary text-white font-bold uppercase text-[10px] hover:bg-primary-700 transition-all shadow-lg">Save</button>
+            </div>
         </div>
     </dialog>
 

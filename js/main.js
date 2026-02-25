@@ -574,39 +574,93 @@ function initYear() {
 }
 
 /**
- * Contrast Toggle Functionality - Enhanced for Multiple Modes
+ * Accessibility Options Functionality - Enhanced for Multiple Modes and Text Size
  */
 function initContrastToggle() {
     const toggleBtn = document.getElementById('contrast-toggle');
     const modal = document.getElementById('contrast-modal');
     const closeBtn = document.getElementById('close-contrast-modal');
-    const options = document.querySelectorAll('.contrast-option');
+    const contrastOptions = document.querySelectorAll('.contrast-option');
+    const textSizeOptions = document.querySelectorAll('.text-size-option');
+    const saveBtn = document.getElementById('save-accessibility');
+    const cancelBtn = document.getElementById('cancel-accessibility');
 
     if (!toggleBtn || !modal) return;
 
-    // Load saved preference
-    const savedMode = localStorage.getItem('accessibility-mode');
-    if (savedMode) {
-        setContrastMode(savedMode);
-    }
+    // Current active state (from storage or defaults)
+    let activeMode = localStorage.getItem('accessibility-mode') || 'standard';
+    let activeSize = localStorage.getItem('accessibility-size') || 'ts-medium';
+
+    // Temporary state while modal is open
+    let tempMode = activeMode;
+    let tempSize = activeSize;
+
+    // Initial application
+    setContrastMode(activeMode);
+    setTextSize(activeSize);
 
     toggleBtn.addEventListener('click', () => {
+        // Reset temp state to current active state when opening
+        tempMode = activeMode;
+        tempSize = activeSize;
+        updateModalUI();
         modal.showModal();
     });
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            modal.close();
+    const closeModal = () => {
+        modal.close();
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+    contrastOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            tempMode = option.getAttribute('data-mode');
+            updateModalUI();
+        });
+    });
+
+    textSizeOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            tempSize = option.getAttribute('data-size');
+            updateModalUI();
+        });
+    });
+
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            activeMode = tempMode;
+            activeSize = tempSize;
+            setContrastMode(activeMode);
+            setTextSize(activeSize);
+            closeModal();
         });
     }
 
-    options.forEach(option => {
-        option.addEventListener('click', () => {
-            const mode = option.getAttribute('data-mode');
-            setContrastMode(mode);
-            modal.close();
+    function updateModalUI() {
+        // Update contrast options UI
+        contrastOptions.forEach(opt => {
+            if (opt.getAttribute('data-mode') === tempMode) {
+                opt.classList.add('border-secondary', 'bg-slate-50');
+                opt.classList.remove('border-slate-100');
+            } else {
+                opt.classList.remove('border-secondary', 'bg-slate-50');
+                opt.classList.add('border-slate-100');
+            }
         });
-    });
+
+        // Update text size options UI
+        textSizeOptions.forEach(opt => {
+            if (opt.getAttribute('data-size') === tempSize) {
+                opt.classList.add('border-secondary', 'bg-slate-50');
+                opt.classList.remove('border-slate-100');
+            } else {
+                opt.classList.remove('border-secondary', 'bg-slate-50');
+                opt.classList.add('border-slate-100');
+            }
+        });
+    }
 
     // Close on click outside
     modal.addEventListener('click', (e) => {
@@ -617,26 +671,27 @@ function initContrastToggle() {
             e.clientY < dialogDimensions.top ||
             e.clientY > dialogDimensions.bottom
         ) {
-            modal.close();
+            closeModal();
         }
     });
 }
 
 /**
  * Sets the contrast/accessibility mode
- * @param {string} mode - 'standard', 'high-contrast', 'high-contrast-yellow', 'high-contrast-black-white', 'grayscale'
+ * @param {string} mode - 'standard', 'high-contrast', 'high-contrast-yellow', 'high-contrast-black-white', 'high-contrast-pink', 'grayscale'
  */
 function setContrastMode(mode) {
     const html = document.documentElement;
     const toggleBtn = document.getElementById('contrast-toggle');
 
     // Remove all accessibility classes
-    html.classList.remove('high-contrast', 'high-contrast-yellow', 'high-contrast-black-white', 'grayscale-mode');
+    html.classList.remove('high-contrast', 'high-contrast-yellow', 'high-contrast-black-white', 'high-contrast-pink', 'grayscale-mode');
 
     if (mode !== 'standard') {
         if (mode === 'high-contrast') html.classList.add('high-contrast');
         if (mode === 'high-contrast-yellow') html.classList.add('high-contrast-yellow');
         if (mode === 'high-contrast-black-white') html.classList.add('high-contrast-black-white');
+        if (mode === 'high-contrast-pink') html.classList.add('high-contrast-pink');
         if (mode === 'grayscale') html.classList.add('grayscale-mode');
 
         localStorage.setItem('accessibility-mode', mode);
@@ -644,6 +699,22 @@ function setContrastMode(mode) {
     } else {
         localStorage.removeItem('accessibility-mode');
         if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'false');
+    }
+}
+
+/**
+ * Sets the text size mode
+ * @param {string} size - 'ts-small', 'ts-medium', 'ts-large', 'ts-xlarge'
+ */
+function setTextSize(size) {
+    const html = document.documentElement;
+    html.classList.remove('ts-small', 'ts-medium', 'ts-large', 'ts-xlarge');
+
+    if (size !== 'ts-medium') {
+        html.classList.add(size);
+        localStorage.setItem('accessibility-size', size);
+    } else {
+        localStorage.removeItem('accessibility-size');
     }
 }
 
