@@ -470,10 +470,12 @@ function initConfirmationModal() {
     });
 }
 
-function showConfirmation(title, message, onConfirm) {
+function showConfirmation(title, message, onConfirm, showCancel = true) {
     const modal = document.getElementById('confirmation-modal');
     const titleElem = document.getElementById('confirmation-modal-title');
     const messageElem = document.getElementById('confirmation-modal-message');
+    const cancelBtn = document.getElementById('cancel-confirmation-modal');
+    const confirmBtn = document.getElementById('confirm-confirmation-modal');
 
     if (!modal || !titleElem || !messageElem) {
         // Fallback if modal not present in HTML
@@ -486,16 +488,36 @@ function showConfirmation(title, message, onConfirm) {
     titleElem.textContent = title;
     messageElem.textContent = message;
     confirmCallback = onConfirm;
+
+    if (cancelBtn) {
+        if (showCancel) {
+            cancelBtn.classList.remove('hidden');
+        } else {
+            cancelBtn.classList.add('hidden');
+        }
+    }
+
+    if (confirmBtn) {
+        confirmBtn.textContent = showCancel ? 'Continue' : 'OK';
+    }
+
     modal.showModal();
 }
 
 /**
- * Simple Popup function as requested by user - Updated to use Modal
+ * Shows a simple alert with a single OK button
+ */
+function showAlert(title, message) {
+    showConfirmation(title, message, () => {
+        // Nothing special on alert dismissal
+    }, false);
+}
+
+/**
+ * Simple Popup function as requested by user - Updated to use Alert Modal
  */
 function showPopup() {
-    showConfirmation("Notification", "Hello! This is a popup.", () => {
-        console.log("Popup dismissed");
-    });
+    showAlert("Notification", "Hello! This is a popup.");
 }
 
 /**
@@ -518,17 +540,21 @@ function initExternalLinks() {
             link.appendChild(srText);
         }
 
-        // Accessible modal pop-up logic
+        // Accessible modal pop-up logic - only for actually external links
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const href = link.href;
-            showConfirmation(
-                "Leaving Website",
-                "You are now leaving the San Diego Goalball website to visit an external link. Do you wish to continue?",
-                () => {
-                    window.open(href, '_blank', 'noopener,noreferrer');
-                }
-            );
+            const isExternal = link.hostname && link.hostname !== window.location.hostname;
+
+            if (isExternal) {
+                e.preventDefault();
+                showConfirmation(
+                    "Leaving Website",
+                    "You are now leaving the San Diego Goalball website to visit an external link. Do you wish to continue?",
+                    () => {
+                        window.open(href, '_blank', 'noopener,noreferrer');
+                    }
+                );
+            }
         });
     });
 }
@@ -650,10 +676,10 @@ function initContrastToggle() {
         // Update contrast options UI
         contrastOptions.forEach(opt => {
             if (opt.getAttribute('data-mode') === tempMode) {
-                opt.classList.add('border-secondary', 'bg-slate-50');
+                opt.classList.add('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary');
                 opt.classList.remove('border-slate-100');
             } else {
-                opt.classList.remove('border-secondary', 'bg-slate-50');
+                opt.classList.remove('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary');
                 opt.classList.add('border-slate-100');
             }
         });
@@ -661,10 +687,10 @@ function initContrastToggle() {
         // Update text size options UI
         textSizeOptions.forEach(opt => {
             if (opt.getAttribute('data-size') === tempSize) {
-                opt.classList.add('border-secondary', 'bg-slate-50');
+                opt.classList.add('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary');
                 opt.classList.remove('border-slate-100');
             } else {
-                opt.classList.remove('border-secondary', 'bg-slate-50');
+                opt.classList.remove('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary');
                 opt.classList.add('border-slate-100');
             }
         });
