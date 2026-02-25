@@ -284,23 +284,43 @@ function initDesktopNav() {
 function initSearch() {
     const searchBtn = document.getElementById('search-btn');
     const searchInput = document.getElementById('search-input');
+    const searchCancel = document.getElementById('search-cancel');
     const searchContainer = document.getElementById('search-container');
 
     if (!searchBtn || !searchInput) return;
+
+    const showSearch = () => {
+        searchInput.classList.remove('hidden');
+        if (searchCancel) searchCancel.classList.remove('hidden');
+        searchInput.focus();
+    };
+
+    const hideSearch = () => {
+        searchInput.classList.add('hidden');
+        if (searchCancel) searchCancel.classList.add('hidden');
+        const results = document.getElementById('search-results');
+        if (results) results.remove();
+    };
 
     searchBtn.addEventListener('click', (e) => {
         const isMobileHidden = window.getComputedStyle(searchInput).display === 'none';
 
         if (isMobileHidden || searchInput.classList.contains('hidden')) {
-            searchInput.classList.remove('hidden', 'md:block');
-            searchInput.classList.add('block');
-            searchInput.focus();
+            showSearch();
         } else if (searchInput.value.trim() === '') {
             searchInput.focus();
         } else {
             performSearch(searchInput.value);
         }
     });
+
+    if (searchCancel) {
+        searchCancel.addEventListener('click', () => {
+            searchInput.value = '';
+            hideSearch();
+            searchBtn.focus();
+        });
+    }
 
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -311,7 +331,7 @@ function initSearch() {
     // Close search on escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !searchInput.classList.contains('hidden')) {
-            searchInput.classList.add('hidden');
+            hideSearch();
         }
     });
 }
@@ -343,9 +363,10 @@ function initFooterSearchSubmit() {
                 // For simplicity, we'll scroll to top and use the main search container for results.
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 const mainSearchInput = document.getElementById('search-input');
+                const mainSearchCancel = document.getElementById('search-cancel');
                 if (mainSearchInput) {
-                    mainSearchInput.classList.remove('hidden', 'md:block');
-                    mainSearchInput.classList.add('block');
+                    mainSearchInput.classList.remove('hidden');
+                    if (mainSearchCancel) mainSearchCancel.classList.remove('hidden');
                     mainSearchInput.value = query;
                     performSearch(query);
                     mainSearchInput.focus();
@@ -698,11 +719,7 @@ function highlightCurrentPage() {
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href');
         if (linkPath === currentPath) {
-            // Updated for SDSU Red theme - using white or light red for active state in the red header
-            link.classList.add('text-white');
-            link.classList.remove('text-white/70');
-            link.classList.add('opacity-100');
-            link.classList.add('font-black');
+            link.classList.add('nav-link-active');
             link.setAttribute('aria-current', 'page');
 
             // If it's a sub-menu item, also highlight the parent dropdown button
@@ -710,15 +727,8 @@ function highlightCurrentPage() {
             if (dropdown) {
                 const button = dropdown.querySelector('button');
                 if (button) {
-                    button.classList.add('text-white');
-                    button.classList.remove('text-white/70');
-                    button.classList.add('font-black');
+                    button.classList.add('nav-link-active');
                 }
-            }
-        } else {
-            // Only add text-white/70 if it doesn't already have text-white
-            if (!link.classList.contains('text-white')) {
-                link.classList.add('text-white/70');
             }
         }
     });
