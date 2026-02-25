@@ -112,36 +112,80 @@
     @apply transition-all duration-300 ease-in-out;
   }
 
-  /* Dropdown Styles */
-  .dropdown {
-    @apply relative;
-  }
+}
 
-  .dropdown-content {
-    @apply absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white rounded-2xl shadow-2xl opacity-0 invisible translate-y-2 transition-all duration-300 z-50 overflow-hidden border border-slate-100;
-  }
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+}
 
-  /* Support only aria-expanded for desktop dropdowns (Expandable/Collapsible) */
-  button[aria-expanded="true"] + .dropdown-content {
-    @apply opacity-100 visible translate-y-0;
-  }
+.dropdown-content {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(0.5rem);
+  top: 100%;
+  margin-top: 0.5rem;
+  width: 14rem;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  z-index: 50;
+  overflow: hidden;
+  border: 1px solid #f1f5f9;
+}
 
-  /* Toolbar and Navigation components */
-  .header-toolbar {
-    @apply bg-[var(--toolbar-blue)] text-white py-2 shadow-inner;
-  }
+/* Support only aria-expanded for desktop dropdowns (Expandable/Collapsible) */
+button[aria-expanded="true"] + .dropdown-content {
+  opacity: 100;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
 
-  .header-nav-bar {
-    @apply bg-[var(--nav-orange-dark)] text-white shadow-lg sticky top-0 z-40;
-  }
+/* Toolbar and Navigation components */
+.header-toolbar {
+  background-color: #1e3a8a !important;
+  color: white !important;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 
-  .nav-link {
-    @apply flex items-center gap-1 py-4 px-2 hover:bg-white/10 transition-colors uppercase font-bold text-xs tracking-widest text-white;
-  }
+.header-nav-bar {
+  background-color: #1e3a8a !important;
+  color: white !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
 
-  .nav-link.active {
-    @apply bg-white/20;
-  }
+.nav-link {
+  display: flex !important;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem !important;
+  background-color: #c2410c !important; /* Slightly darker orange for better visibility */
+  color: white !important;
+  border-radius: 0.375rem;
+  margin: 0.5rem 0.25rem;
+  transition: background-color 0.3s, color 0.3s;
+  text-transform: uppercase;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-link:hover, .nav-link:focus {
+  background-color: #ea580c !important; /* Bright orange on hover */
+  color: white !important;
+}
+
+.nav-link.active {
+  background-color: #7c2d12 !important; /* Darkest orange for active state */
 }
 
 /* Modal Backdrop */
@@ -172,32 +216,6 @@ main a:not([class]) {
   @apply text-primary-900 underline decoration-2 underline-offset-4 hover:text-black transition-colors font-bold;
 }
 
-/* Countdown Banner */
-.countdown-banner {
-  @apply bg-black text-white py-3 px-4 text-center font-bold flex flex-wrap justify-center items-center gap-4 border-b border-white/10;
-}
-
-.countdown-display {
-  background-color: #ea580c;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.75rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 2.25rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: #ffffff;
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: inline-block;
-  line-height: 1.2;
-}
-
-@media (max-width: 640px) {
-  .countdown-display {
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-  }
-}
 
 .sr-only {
   position: absolute;

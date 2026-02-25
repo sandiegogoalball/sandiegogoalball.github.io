@@ -100,12 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize navigation highlighting
     highlightCurrentPage();
 
-    // Initialize Tournament Countdown
-    initCountdownTimer();
-
-    // Initialize Download Modal
-    initDownloadModal();
-
     // Initialize Global Confirmation Modal
     initConfirmationModal();
 
@@ -397,103 +391,10 @@ function showSearchResults(results) {
     // Close results when clicking outside
     document.addEventListener('click', (e) => {
         if (!document.getElementById('search-container').contains(e.target)) {
-            resultsDiv.remove();
+            const resultsDiv = document.getElementById('search-results');
+            if (resultsDiv) resultsDiv.remove();
         }
     }, { once: true });
-}
-
-/**
- * Tournament Countdown Timer
- * Target: Feb 20, 2026, 2:00 PM PT
- */
-function initCountdownTimer() {
-    const timerElements = document.querySelectorAll('.tournament-countdown');
-    if (timerElements.length === 0) return;
-
-    // Set the target date: Feb 20, 2026, 2:00 PM PT
-    // PT is UTC-8 (Standard) or UTC-7 (Daylight). In Feb it is PST (UTC-8).
-    const targetDate = new Date('2026-02-20T14:00:00-08:00').getTime();
-
-    const updateTimer = () => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        timerElements.forEach(timerElement => {
-            if (distance < 0) {
-                timerElement.innerHTML = "The Tournament has started! Watch the live stream below.";
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            const daysStr = days > 0 ? `${days}d ` : "";
-            const hoursStr = `${hours}h `;
-            const minutesStr = `${minutes}m `;
-            const secondsStr = `${seconds}s`;
-
-            const timeString = `${daysStr}${hoursStr}${minutesStr}${secondsStr}`;
-
-            // Update the visual display
-            const displayElement = timerElement.querySelector('.countdown-display');
-            if (displayElement) {
-                displayElement.textContent = timeString;
-            } else {
-                timerElement.textContent = `Tournament starts in: ${timeString}`;
-            }
-        });
-
-        // Accessibility: Update an aria-live region every minute
-        // Since there might be multiple timers, we still use one global live region if it exists
-        const liveRegion = document.getElementById('countdown-live-region');
-        if (liveRegion && (Math.floor(distance / (1000 * 60)) % 5 === 0) && (Math.floor(distance / 1000) % 60 === 0)) {
-            const distanceForLive = targetDate - now;
-            const days = Math.floor(distanceForLive / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distanceForLive % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distanceForLive % (1000 * 60 * 60)) / (1000 * 60));
-            liveRegion.textContent = `Tournament starts in ${days > 0 ? days + ' days, ' : ''}${hours} hours and ${minutes} minutes.`;
-        }
-    };
-
-    updateTimer();
-    setInterval(updateTimer, 1000);
-}
-
-/**
- * Download Modal Logic
- */
-function initDownloadModal() {
-    const modal = document.getElementById('download-modal');
-    const openBtns = document.querySelectorAll('.open-download-modal');
-    const closeBtn = document.getElementById('close-download-modal');
-
-    if (!modal || !closeBtn) return;
-
-    openBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            modal.showModal();
-        });
-    });
-
-    closeBtn.addEventListener('click', () => {
-        modal.close();
-    });
-
-    // Close on click outside
-    modal.addEventListener('click', (e) => {
-        const dialogDimensions = modal.getBoundingClientRect();
-        if (
-            e.clientX < dialogDimensions.left ||
-            e.clientX > dialogDimensions.right ||
-            e.clientY < dialogDimensions.top ||
-            e.clientY > dialogDimensions.bottom
-        ) {
-            modal.close();
-        }
-    });
 }
 
 /**
@@ -722,13 +623,6 @@ function setContrastMode(mode) {
     } else {
         localStorage.removeItem('accessibility-mode');
         if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'false');
-    }
-
-    // Announcement for screen readers
-    const status = `Accessibility mode set to ${mode.replace('-', ' ')}`;
-    const liveRegion = document.getElementById('countdown-live-region');
-    if (liveRegion) {
-        liveRegion.textContent = status;
     }
 }
 
