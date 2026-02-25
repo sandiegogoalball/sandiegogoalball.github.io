@@ -161,6 +161,10 @@ button[aria-expanded="true"] + .dropdown-content {
   z-index: 40;
 }
 
+#mobile-nav {
+  background-color: #7c2d12 !important;
+}
+
 .nav-link {
   display: flex !important;
   align-items: center;
@@ -350,6 +354,46 @@ main a:not([class]) {
   background-color: #000000 !important;
   color: #FFFFFF !important;
 }
+
+/* Pink on Black Contrast */
+.high-contrast-pink {
+  background-color: #000000 !important;
+  color: #FF99CC !important;
+}
+
+.high-contrast-pink body,
+.high-contrast-pink header,
+.high-contrast-pink footer,
+.high-contrast-pink section,
+.high-contrast-pink main,
+.high-contrast-pink div,
+.high-contrast-pink nav,
+.high-contrast-pink ul,
+.high-contrast-pink li {
+  background-color: #000000 !important;
+  color: #FF99CC !important;
+  border-color: #FF99CC !important;
+}
+
+.high-contrast-pink a,
+.high-contrast-pink button {
+  color: #FF99CC !important;
+  text-decoration: underline !important;
+  border: 2px solid #FF99CC !important;
+  background-color: #000000 !important;
+}
+
+.high-contrast-pink a:hover,
+.high-contrast-pink button:hover {
+  background-color: #FF99CC !important;
+  color: #000000 !important;
+}
+
+/* Text Size Adjustments */
+html.ts-small { font-size: 14px !important; }
+html.ts-medium { font-size: 16px !important; }
+html.ts-large { font-size: 20px !important; }
+html.ts-xlarge { font-size: 24px !important; }
 
 /* Ensure modal text visibility in all modes */
 dialog {
