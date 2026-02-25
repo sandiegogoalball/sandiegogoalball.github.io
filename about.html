@@ -228,12 +228,17 @@
         <section class="section-padding bg-white">
             <div class="container mx-auto px-4 max-w-4xl">
                 <div class="prose prose-lg text-gray-700">
-                    <h2 class="text-3xl font-extrabold text-primary mb-8 uppercase">Our Mission</h2>
+                    <h2 class="text-3xl font-extrabold text-primary mb-8 uppercase">Our Story</h2>
                     <p class="mb-6">
-                        San Diego County Goalball is dedicated to providing athletic and social opportunities for individuals who are blind or visually impaired. Our mission is to promote health, teamwork, and independence through the unique and challenging sport of Goalball.
+                        San Diego County Goalball was born out of a family's love for the sport and a desire to create an inclusive community. Founded by Neal and Lori Meyers for their son Michael, our organization has grown from a local initiative into a premier competitive program for blind and visually impaired athletes in Southern California.
                     </p>
                     <p class="mb-6">
-                        We believe that athleticism should have no boundaries. By providing accessible facilities, expert coaching, and a supportive community, we empower our athletes to reach their full potential, whether they are playing for recreation or training for elite competition.
+                        We believe that athleticism should have no boundaries. By providing accessible facilities at locations like the Stagecoach Community Center in Carlsbad and the Mission Valley YMCA, and offering expert coaching from world-class mentors like Matt Boyle, we empower our athletes to reach their full potential.
+                    </p>
+
+                    <h2 class="text-3xl font-extrabold text-primary mt-16 mb-8 uppercase">Our Mission</h2>
+                    <p class="mb-6">
+                        Our mission is to promote health, teamwork, and independence through the unique and challenging sport of goalball. We provide a supportive yet competitive environment for athletes of all skill levels, from those just starting out to those aiming for the highest levels of competition.
                     </p>
 
                     <h2 class="text-3xl font-extrabold text-primary mt-16 mb-8 uppercase">The Future of Goalball</h2>
@@ -248,21 +253,26 @@
         <section class="section-padding bg-slate-50 border-t border-slate-200">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl font-extrabold text-primary mb-12 text-center uppercase">Our Leadership & Coaching</h2>
-                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 border-t-4 border-orange-500">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Neal Meyers</h3>
+                        <p class="text-orange-400 font-bold uppercase tracking-widest text-sm mb-4">Founder & Coach</p>
+                        <p class="text-gray-600">Neal co-founded San Diego Goalball to create opportunities for his son Michael and others in the visually impaired community.</p>
+                    </div>
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 border-t-4 border-orange-500">
                         <h3 class="text-2xl font-bold text-primary mb-2">Lori Meyers</h3>
                         <p class="text-orange-400 font-bold uppercase tracking-widest text-sm mb-4">Founder & Coordinator</p>
-                        <p class="text-gray-600">Lori has been a driving force for Goalball in San Diego for years, ensuring that athletes have the resources and support they need to succeed.</p>
-                    </div>
-                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 border-t-4 border-orange-500">
-                        <h3 class="text-2xl font-bold text-primary mb-2">Mike Meyers</h3>
-                        <p class="text-orange-400 font-bold uppercase tracking-widest text-sm mb-4">Lead Coordinator</p>
-                        <p class="text-gray-600">Mike's dedication to the sport and the community has helped San Diego Goalball grow into the vibrant organization it is today.</p>
+                        <p class="text-gray-600">Lori has been the heart of the organization since its inception, managing operations and community outreach for San Diego athletes.</p>
                     </div>
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 border-t-4 border-indigo-900">
                         <h3 class="text-2xl font-bold text-primary mb-2">Matt Boyle</h3>
-                        <p class="text-orange-400 font-bold uppercase tracking-widest text-sm mb-4">Consultant & Former Coach</p>
-                        <p class="text-gray-600">Matt Boyle is the former head coach of the men's US Paralympic Goalball team. His elite-level experience and tactical knowledge are invaluable to our training programs.</p>
+                        <p class="text-orange-400 font-bold uppercase tracking-widest text-sm mb-4">Head Coach</p>
+                        <p class="text-gray-600">Former head coach of the US Men's Paralympic team, Matt brings world-class expertise to our developmental and competitive programs.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 border-t-4 border-indigo-900">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Joseph Hamilton</h3>
+                        <p class="text-orange-400 font-bold uppercase tracking-widest text-sm mb-4">Coach</p>
+                        <p class="text-gray-600">A veteran of the sport, Coach Hamilton works closely with our athletes to refine their technique and competitive mindset.</p>
                     </div>
                 </div>
             </div>
@@ -337,12 +347,7 @@
                 </div>
             </div>
 
-        <!-- Footer Tournament Countdown -->
-        <div class="mb-12 py-8 border-y border-white/10 text-center">
-            <h3 class="text-white/60 text-xs font-black uppercase tracking-[0.3em] mb-4">Tournament Starts In</h3>
-            <div class="tournament-countdown flex justify-center items-center">
-                <span class="countdown-display">00:00:00</span>
-            </div>
+
         </div>
             <div class="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/40 font-bold uppercase tracking-[0.2em]">
                 <p>&copy; <span id="year"></span> San Diego County Goalball. All rights reserved.</p>
@@ -360,52 +365,7 @@
 
 
 
-    <!-- Download Modal -->
-    <dialog id="download-modal" class="p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full overflow-hidden">
-        <div class="bg-primary p-8 text-white relative">
-            <button id="close-download-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <h2 class="text-3xl font-black uppercase mb-2">Tournament Schedule</h2>
-            <p class="text-white/80">Select your preferred format to download the 16th Annual Cascade Classic schedule.</p>
-        </div>
-        <div class="p-8 bg-white space-y-4">
-            <a href="downloads/tournament-schedule.pdf" download class="flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-primary hover:bg-slate-50 transition-all group">
-                <div class="flex items-center gap-4">
-                    <div class="bg-emerald-100 p-3 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="block font-bold text-primary uppercase">PDF Document</span>
-                        <span class="text-sm text-gray-500">Best for viewing and printing</span>
-                    </div>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-slate-300 group-hover:text-primary">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                </svg>
-            </a>
-            <a href="downloads/tournament-schedule.xlsx" download class="flex items-center justify-between p-4 rounded-2xl border-2 border-slate-100 hover:border-primary hover:bg-slate-50 transition-all group">
-                <div class="flex items-center gap-4">
-                    <div class="bg-green-100 p-3 rounded-xl text-green-900 group-hover:bg-green-900 group-hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="block font-bold text-primary uppercase">Excel Document</span>
-                        <span class="text-sm text-gray-500">Best for data and screen readers</span>
-                    </div>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-slate-300 group-hover:text-primary">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                </svg>
-            </a>
-        </div>
-    </dialog>
+
 
         <!-- Contrast Modal -->
     <dialog id="contrast-modal" class="p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full overflow-hidden">
@@ -458,6 +418,5 @@
             <button id="confirm-confirmation-modal" class="btn-primary px-6 py-2 text-sm uppercase">Continue</button>
         </div>
     </dialog>
-    <div id="countdown-live-region" class="sr-only" aria-live="polite"></div>
 </body>
 </html>
