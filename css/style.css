@@ -217,12 +217,13 @@ button[aria-expanded="true"] + .dropdown-content {
 }
 
 .header-nav-bar {
-  background-color: #ea580c !important; /* Changed to orange as requested */
+  background-color: #7c2d12 !important;
   color: white !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 40;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #mobile-nav {
@@ -283,103 +284,6 @@ main a:not([class]):hover {
   color: black;
 }
 
-/* High Contrast Modes */
-.high-contrast {
-  background-color: #000000 !important;
-  color: #FFFFFF !important;
-}
-
-.high-contrast body, .high-contrast header, .high-contrast footer, .high-contrast section, .high-contrast main, .high-contrast nav, .high-contrast ul, .high-contrast li {
-  background-color: #000000 !important;
-  color: #FFFFFF !important;
-  border-color: #FFFFFF !important;
-}
-
-.high-contrast a, .high-contrast button {
-  color: #FFFFFF !important;
-  text-decoration: underline !important;
-  border: 2px solid #FFFFFF !important;
-  background-color: #000000 !important;
-}
-
-.high-contrast a:hover, .high-contrast button:hover {
-  background-color: #FFFFFF !important;
-  color: #000000 !important;
-}
-
-.high-contrast-yellow {
-  background-color: #000000 !important;
-  color: #FFFF00 !important;
-}
-
-.high-contrast-yellow body, .high-contrast-yellow header, .high-contrast-yellow footer, .high-contrast-yellow section, .high-contrast-yellow main, .high-contrast-yellow nav, .high-contrast-yellow ul, .high-contrast-yellow li {
-  background-color: #000000 !important;
-  color: #FFFF00 !important;
-  border-color: #FFFF00 !important;
-}
-
-.high-contrast-yellow a, .high-contrast-yellow button {
-  color: #FFFF00 !important;
-  text-decoration: underline !important;
-  border: 2px solid #FFFF00 !important;
-  background-color: #000000 !important;
-}
-
-.high-contrast-yellow a:hover, .high-contrast-yellow button:hover {
-  background-color: #FFFF00 !important;
-  color: #000000 !important;
-}
-
-.high-contrast-black-white {
-  background-color: #FFFFFF !important;
-  color: #000000 !important;
-}
-
-.high-contrast-black-white body, .high-contrast-black-white header, .high-contrast-black-white footer, .high-contrast-black-white section, .high-contrast-black-white main, .high-contrast-black-white nav, .high-contrast-black-white ul, .high-contrast-black-white li {
-  background-color: #FFFFFF !important;
-  color: #000000 !important;
-  border-color: #000000 !important;
-}
-
-.high-contrast-black-white a, .high-contrast-black-white button {
-  color: #000000 !important;
-  text-decoration: underline !important;
-  border: 2px solid #000000 !important;
-  background-color: #FFFFFF !important;
-}
-
-.high-contrast-black-white a:hover, .high-contrast-black-white button:hover {
-  background-color: #000000 !important;
-  color: #FFFFFF !important;
-}
-
-.high-contrast-pink {
-  background-color: #000000 !important;
-  color: #FF99CC !important;
-}
-
-.high-contrast-pink body, .high-contrast-pink header, .high-contrast-pink footer, .high-contrast-pink section, .high-contrast-pink main, .high-contrast-pink nav, .high-contrast-pink ul, .high-contrast-pink li {
-  background-color: #000000 !important;
-  color: #FF99CC !important;
-  border-color: #FF99CC !important;
-}
-
-.high-contrast-pink a, .high-contrast-pink button {
-  color: #FF99CC !important;
-  text-decoration: underline !important;
-  border: 2px solid #FF99CC !important;
-  background-color: #000000 !important;
-}
-
-.high-contrast-pink a:hover, .high-contrast-pink button:hover {
-  background-color: #FF99CC !important;
-  color: #000000 !important;
-}
-
-.grayscale-mode {
-  filter: grayscale(100%);
-}
-
 /* Text Size Adjustments */
 html.ts-small { font-size: 14px !important; }
 html.ts-medium { font-size: 16px !important; }
@@ -388,4 +292,149 @@ html.ts-xlarge { font-size: 24px !important; }
 
 dialog {
   border: 4px solid var(--text-dark);
+}
+
+/* Accessibility Modal Enhancements */
+#contrast-modal {
+    max-height: 90vh !important;
+    overflow: hidden !important;
+}
+
+#contrast-modal .overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #ea580c #f1f5f9;
+}
+
+/* Standardized High Contrast Theme Overrides */
+
+/* Mixin for High Contrast */
+[class^="cm-high-contrast"] body,
+[class^="cm-high-contrast"] main,
+[class^="cm-high-contrast"] section,
+[class^="cm-high-contrast"] div:not(.bg-primary):not(.header-toolbar):not(.header-nav-bar),
+[class^="cm-high-contrast"] dialog {
+    border-color: currentColor !important;
+}
+
+/* White on Black */
+.cm-high-contrast, .cm-high-contrast body, .cm-high-contrast dialog {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+}
+.cm-high-contrast * {
+    color: inherit;
+    border-color: currentColor !important;
+}
+.cm-high-contrast .bg-white, .cm-high-contrast .bg-slate-50 {
+    background-color: #000000 !important;
+}
+
+/* Yellow on Black */
+.cm-high-contrast-yellow, .cm-high-contrast-yellow body, .cm-high-contrast-yellow dialog {
+    background-color: #000000 !important;
+    color: #ffff00 !important;
+}
+.cm-high-contrast-yellow * {
+    color: inherit;
+    border-color: currentColor !important;
+}
+.cm-high-contrast-yellow .bg-white, .cm-high-contrast-yellow .bg-slate-50 {
+    background-color: #000000 !important;
+}
+
+/* Black on White */
+.cm-high-contrast-black-white, .cm-high-contrast-black-white body, .cm-high-contrast-black-white dialog {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+.cm-high-contrast-black-white * {
+    color: inherit;
+    border-color: currentColor !important;
+}
+.cm-high-contrast-black-white .bg-white, .cm-high-contrast-black-white .bg-slate-50 {
+    background-color: #ffffff !important;
+}
+
+/* Pink on Black */
+.cm-high-contrast-pink, .cm-high-contrast-pink body, .cm-high-contrast-pink dialog {
+    background-color: #000000 !important;
+    color: #ff99cc !important;
+}
+.cm-high-contrast-pink * {
+    color: inherit;
+    border-color: currentColor !important;
+}
+.cm-high-contrast-pink .bg-white, .cm-high-contrast-pink .bg-slate-50 {
+    background-color: #000000 !important;
+}
+
+/* Grayscale */
+.cm-grayscale {
+    filter: grayscale(100%) !important;
+}
+
+/* Ensure modal buttons and elements have visible borders in high contrast */
+[class^="cm-high-contrast"] .contrast-option,
+[class^="cm-high-contrast"] .text-size-option,
+[class^="cm-high-contrast"] button,
+[class^="cm-high-contrast"] input {
+    border-width: 2px !important;
+    border-style: solid !important;
+}
+
+/* Highlight active options in modal */
+[class^="cm-high-contrast"] .border-secondary {
+    outline: 4px solid currentColor !important;
+    outline-offset: 4px !important;
+}
+
+/* Search Improvements */
+#search-input {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+#search-input:focus {
+    background-color: rgba(255, 255, 255, 1) !important;
+    color: #111827 !important;
+    box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.3) !important;
+}
+
+#search-input:focus::placeholder {
+    color: #6b7280 !important;
+}
+
+#search-results {
+    animation: searchFadeIn 0.2s ease-out;
+    scrollbar-width: thin;
+    scrollbar-color: #ea580c #f1f5f9;
+}
+
+@keyframes searchFadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+[class^="cm-high-contrast"] #search-results {
+    border: 2px solid currentColor !important;
+    background-color: inherit !important;
+}
+
+#search-results a h4 {
+    transition: color 0.2s;
+}
+
+#search-results a:hover h4 {
+    color: #ea580c !important;
+    text-decoration: underline;
+}
+
+/* Footer Credit Visibility */
+.footer-credit-link {
+    color: white !important;
+    text-decoration: underline;
+    text-decoration-color: rgba(255,255,255,0.4);
+}
+
+.footer-credit-link:hover {
+    text-decoration-color: white;
 }

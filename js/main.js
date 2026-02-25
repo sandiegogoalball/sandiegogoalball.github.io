@@ -300,9 +300,9 @@ function initSearch() {
     };
 
     searchBtn.addEventListener('click', (e) => {
-        const isMobileHidden = window.getComputedStyle(searchInput).display === 'none';
+        const isCollapsed = searchInput.offsetWidth <= 0;
 
-        if (isMobileHidden || searchInput.classList.contains('hidden')) {
+        if (isCollapsed) {
             showSearch();
         } else if (searchInput.value.trim() === '') {
             searchInput.focus();
@@ -385,22 +385,23 @@ function showSearchResults(results) {
     if (!resultsDiv) {
         resultsDiv = document.createElement('div');
         resultsDiv.id = 'search-results';
-        resultsDiv.className = 'absolute top-full right-0 w-80 bg-white shadow-xl rounded-b-xl border border-gray-100 z-[100] max-h-96 overflow-y-auto p-4';
+        resultsDiv.className = 'absolute top-full right-0 w-80 sm:w-96 bg-white shadow-2xl rounded-b-2xl border border-slate-200 z-[100] max-h-96 overflow-y-auto p-2';
+        resultsDiv.setAttribute('aria-live', 'polite');
         document.getElementById('search-container').appendChild(resultsDiv);
     }
 
     resultsDiv.innerHTML = '';
 
     if (results.length === 0) {
-        resultsDiv.innerHTML = '<p class="text-sm text-gray-500">No results found.</p>';
+        resultsDiv.innerHTML = '<div class="p-4 text-sm text-slate-500 font-medium text-center">No matches found for your search.</div>';
     } else {
         results.forEach(item => {
             const link = document.createElement('a');
             link.href = item.url;
-            link.className = 'block p-3 hover:bg-slate-50 rounded-lg transition-colors border-b last:border-0';
+            link.className = 'block p-4 hover:bg-slate-50 rounded-xl transition-all border-b border-slate-50 last:border-0 group';
             link.innerHTML = `
-                <h4 class="font-bold text-red-900 text-sm mb-1">${item.title}</h4>
-                <p class="text-xs text-gray-600 line-clamp-2">${item.content}</p>
+                <h4 class="font-bold text-primary group-hover:text-primary-700 text-sm mb-1 uppercase tracking-tight">${item.title}</h4>
+                <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed">${item.content}</p>
             `;
             resultsDiv.appendChild(link);
         });
@@ -675,22 +676,17 @@ function initContrastToggle() {
 
 /**
  * Sets the contrast/accessibility mode
- * @param {string} mode - 'standard', 'high-contrast', 'high-contrast-yellow', 'high-contrast-black-white', 'high-contrast-pink', 'grayscale'
+ * @param {string} mode - 'standard', 'high-contrast-white', 'high-contrast-yellow', 'high-contrast-black', 'high-contrast-pink', 'grayscale'
  */
 function setContrastMode(mode) {
     const html = document.documentElement;
     const toggleBtn = document.getElementById('contrast-toggle');
 
-    // Remove all accessibility classes
-    html.classList.remove('high-contrast', 'high-contrast-yellow', 'high-contrast-black-white', 'high-contrast-pink', 'grayscale-mode');
+    // Remove all accessibility classes prefixed with cm-
+    html.className = html.className.replace(/\bcm-\S+/g, '').trim();
 
-    if (mode !== 'standard') {
-        if (mode === 'high-contrast') html.classList.add('high-contrast');
-        if (mode === 'high-contrast-yellow') html.classList.add('high-contrast-yellow');
-        if (mode === 'high-contrast-black-white') html.classList.add('high-contrast-black-white');
-        if (mode === 'high-contrast-pink') html.classList.add('high-contrast-pink');
-        if (mode === 'grayscale') html.classList.add('grayscale-mode');
-
+    if (mode && mode !== 'standard') {
+        html.classList.add(`cm-${mode}`);
         localStorage.setItem('accessibility-mode', mode);
         if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'true');
     } else {
