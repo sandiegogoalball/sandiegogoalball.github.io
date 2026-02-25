@@ -7,21 +7,21 @@ window.tailwind = {
                 colors: {
                     // Professional Brand Palette
                     primary: {
-                        DEFAULT: '#7c2d12', // Dark Orange for AAA Contrast
-                        50: '#fff7ed',
-                        100: '#ffedd5',
-                        200: '#fed7aa',
-                        300: '#fdba74',
-                        400: '#fb923c',
-                        500: '#f97316',
-                        600: '#ea580c',
-                        700: '#c2410c',
-                        800: '#9a3412',
-                        900: '#7c2d12',
-                        950: '#431407',
+                        DEFAULT: '#0f172a', // Slate 900
+                        50: '#f8fafc',
+                        100: '#f1f5f9',
+                        200: '#e2e8f0',
+                        300: '#cbd5e1',
+                        400: '#94a3b8',
+                        500: '#64748b',
+                        600: '#475569',
+                        700: '#334155',
+                        800: '#1e293b',
+                        900: '#0f172a',
+                        950: '#020617',
                     },
                     secondary: {
-                        DEFAULT: '#1e3a8a', // Deep Blue for Toolbar
+                        DEFAULT: '#ea580c', // Orange 600
                         50: '#eff6ff',
                         100: '#dbeafe',
                         200: '#bfdbfe',
@@ -35,10 +35,10 @@ window.tailwind = {
                         950: '#172554',
                     },
                     accent: {
-                        DEFAULT: '#eab308', // Yellow for highlights/banner
-                        500: '#eab308',
-                        600: '#ca8a04',
-                        700: '#a16207',
+                        DEFAULT: '#ea580c', // Orange 600
+                        500: '#ea580c',
+                        600: '#c2410c',
+                        700: '#9a3412',
                     },
                     black: '#000000',
                     white: '#FFFFFF',
