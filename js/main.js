@@ -57,7 +57,6 @@ const SITE_INDEX = [
     { title: "Home", url: "index.html", content: "San Diego County Goalball provides opportunities for blind and visually impaired athletes to compete in the Paralympic sport of goalball." },
     { title: "Our Story", url: "about.html", content: "Learn about our mission to empower athletes through sport, inclusion, and competitive excellence. Information on Matt Boyle." },
     { title: "History", url: "history.html", content: "Explore the origins of goalball from WWII rehabilitation to a premier Paralympic sport and our local San Diego roots." },
-    { title: "Gallery", url: "gallery.html", content: "View photos and descriptions of San Diego Goalball practices, tournaments, and community events." },
     { title: "What is Goalball?", url: "about-goalball.html", content: "Discover the rules, history, and unique mechanics of goalball, the premier Paralympic team sport." },
     { title: "Rules", url: "rules.html", content: "Detailed rules of goalball including court dimensions, audible ball mechanics, and common penalties." },
     { title: "Equipment", url: "equipment.html", content: "Learn about specialized goalball gear including audible balls, blackout eyeshades, and protective padding." },
@@ -290,13 +289,11 @@ function initSearch() {
     if (!searchBtn || !searchInput) return;
 
     const showSearch = () => {
-        searchInput.classList.remove('hidden');
         if (searchCancel) searchCancel.classList.remove('hidden');
         searchInput.focus();
     };
 
     const hideSearch = () => {
-        searchInput.classList.add('hidden');
         if (searchCancel) searchCancel.classList.add('hidden');
         const results = document.getElementById('search-results');
         if (results) results.remove();

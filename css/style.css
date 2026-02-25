@@ -1,117 +1,184 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --primary-color: #ea580c; /* Bright Orange */
+  --primary-bright: #f97316;
+  --accent-color: #9a3412;  /* Deep Orange */
+  --accent-dark: #7c2d12;
+  --secondary-color: #f97316;
+  --secondary-dark: #7c2d12;
+  --text-dark: #111827;
+  --toolbar-blue: #1e3a8a;
+  --nav-orange: #ea580c;
+  --nav-orange-dark: #7c2d12;
+  --banner-yellow: #facc15;
+  --banner-black: #000000;
+}
 
-@layer base {
-  :root {
-    --primary-color: #ea580c; /* Bright Orange */
-    --primary-bright: #f97316;
-    --accent-color: #9a3412;  /* Deep Orange */
-    --accent-dark: #7c2d12;
-    --secondary-color: #f97316;
-    --secondary-dark: #7c2d12;
-    --text-dark: #111827;
-    --toolbar-blue: #1e3a8a;
-    --nav-orange: #ea580c;
-    --nav-orange-dark: #7c2d12; /* AAA contrast for white text */
-    --banner-yellow: #facc15;
-    --banner-black: #000000;
-  }
+body {
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  body {
-    @apply text-dark antialiased;
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-black tracking-tighter uppercase;
+.container {
+  max-width: 80rem; /* 1280px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
-@layer components {
+@media (min-width: 1024px) {
   .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
+}
 
-  /* Accessible Skip Link (Visible on focus) */
-  .skip-link {
-    @apply sr-only;
-  }
+/* Accessible Skip Link */
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 
-  .skip-link:focus {
-    @apply not-sr-only fixed top-4 left-4 z-[100] bg-white text-orange-900 px-6 py-3 rounded-lg font-bold shadow-2xl outline-none ring-4 ring-orange-500;
-  }
+.skip-link:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  background-color: white;
+  color: #7c2d12;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  outline: none;
+  box-shadow: 0 0 0 4px #ea580c;
+  clip: auto;
+  width: auto;
+  height: auto;
+}
 
-  /* Modern Buttons */
-  .btn-primary {
-    @apply bg-primary text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-primary-800 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-100 focus:outline-none focus:ring-4 focus:ring-primary-300;
-    box-shadow: 0 10px 15px -3px rgba(124, 45, 18, 0.2), 0 4px 6px -2px rgba(124, 45, 18, 0.1);
-  }
+/* Modern Buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s;
+  display: inline-block;
+  box-shadow: 0 10px 15px -3px rgba(124, 45, 18, 0.2);
+  text-align: center;
+}
 
-  .btn-accent {
-    @apply bg-secondary text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-secondary-800 hover:shadow-lg hover:-translate-y-0.5 hover:scale-105 active:translate-y-0 active:scale-100 focus:outline-none focus:ring-4 focus:ring-secondary-300;
-    box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.2), 0 4px 6px -2px rgba(30, 58, 138, 0.1);
-  }
+.btn-primary:hover {
+  background-color: #9a3412;
+  box-shadow: 0 20px 25px -5px rgba(124, 45, 18, 0.3);
+  transform: translateY(-0.125rem) scale(1.05);
+}
 
-  .btn-secondary {
-    @apply bg-primary-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-primary-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-primary-300;
-  }
+.btn-accent {
+  background-color: var(--secondary-color);
+  color: white;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s;
+  display: inline-block;
+  box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.2);
+  text-align: center;
+}
 
-  .btn-outline {
-    @apply border-2 border-primary text-primary font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-primary hover:text-white hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-primary-300;
-  }
+.btn-outline {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  transition: all 0.3s;
+  display: inline-block;
+}
 
-  .btn-white-outline {
-    @apply border-2 border-white text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover:bg-white hover:text-orange-600 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-4 focus:ring-white/30;
-  }
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
 
-  /* Navigation Hover Effect */
-  nav a { @apply relative py-1 transition-all duration-300 hover:text-orange-800; }
+/* Navigation Hover Effect */
+nav a {
+  position: relative;
+  transition: all 0.3s;
+}
 
-  /* Requested Navigation Hover Effect - Yellow Background, Blue Text */
-  nav a:hover,
-  nav a:focus,
-  nav .dropdown button:hover,
-  nav .dropdown button:focus,
-  #mobile-nav a:hover,
-  #mobile-nav a:focus {
-    background-color: #FACC15 !important; /* bg-yellow-400 */
-    color: #1E3A8A !important; /* text-blue-900 */
-    border-radius: 0.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-  }
+nav a:hover,
+nav a:focus,
+nav .dropdown button:hover,
+nav .dropdown button:focus,
+#mobile-nav a:hover,
+#mobile-nav a:focus {
+  background-color: #FACC15 !important;
+  color: #1E3A8A !important;
+  border-radius: 0.5rem;
+}
 
-  /* Legacy Class Support (Mapped to new theme) */
-  .btn-navy { @apply btn-primary; }
-  .btn-gold { @apply btn-accent; }
-  .btn-sky { @apply btn-secondary; }
+/* Legacy Class Support */
+.btn-navy { background-color: #1e3a8a; color: white; }
+.btn-gold { background-color: #facc15; color: #1e3a8a; }
 
-  /* Utility Backgrounds */
-  .bg-primary { background-color: var(--primary-color); }
-  .bg-accent { background-color: var(--accent-color); }
-  .bg-secondary { background-color: var(--secondary-color); }
+/* Utility Backgrounds */
+.bg-primary { background-color: var(--primary-color); }
+.bg-accent { background-color: var(--accent-color); }
+.bg-secondary { background-color: var(--secondary-color); }
 
-  /* Hero Gradients */
-  .hero-gradient {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
-  }
+/* Hero Gradients */
+.hero-gradient {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+}
 
-  /* Section Spacing */
-  .section-padding { @apply py-16; }
+/* FAQ Accordion */
+.faq-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background-color: white;
+  overflow: hidden;
+  transition: all 0.3s;
+}
 
-  /* FAQ Accordion Styles */
-  .faq-item {
-    @apply border border-slate-200 rounded-2xl bg-white overflow-hidden transition-all duration-300;
-  }
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  text-align: left;
+  font-weight: 700;
+  color: #7c2d12;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
 
-  .faq-question {
-    @apply w-full flex items-center justify-between p-6 text-left font-bold text-orange-900 uppercase tracking-tight transition-colors hover:bg-slate-50;
-  }
-
-  .faq-answer {
-    @apply transition-all duration-300 ease-in-out;
-  }
-
+.faq-question:hover {
+  background-color: #f8fafc;
 }
 
 /* Dropdown Styles */
@@ -137,23 +204,20 @@
   border: 1px solid #f1f5f9;
 }
 
-/* Support only aria-expanded for desktop dropdowns (Expandable/Collapsible) */
 button[aria-expanded="true"] + .dropdown-content {
-  opacity: 100;
+  opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
 
-/* Toolbar and Navigation components */
+/* Header and Navigation */
 .header-toolbar {
   background-color: #1e3a8a !important;
   color: white !important;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 .header-nav-bar {
-  background-color: #1e3a8a !important;
+  background-color: #ea580c !important; /* Changed to orange as requested */
   color: white !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -170,7 +234,6 @@ button[aria-expanded="true"] + .dropdown-content {
   align-items: center;
   gap: 0.25rem;
   padding: 0.5rem 1rem !important;
-  background-color: #7c2d12 !important; /* Darker orange for AAA contrast */
   color: white !important;
   border-radius: 0.375rem;
   margin: 0.5rem 0.25rem;
@@ -179,49 +242,22 @@ button[aria-expanded="true"] + .dropdown-content {
   font-weight: 700 !important;
   font-size: 0.75rem !important;
   letter-spacing: 0.1em;
-  border: none;
-  cursor: pointer;
-}
-
-.nav-link:hover, .nav-link:focus {
-  background-color: #ea580c !important; /* Bright orange on hover */
-  color: white !important;
 }
 
 .nav-link.active,
 .nav-link-active {
-  background-color: #FACC15 !important; /* bg-yellow-400 */
-  color: #1E3A8A !important; /* text-blue-900 */
+  background-color: #FACC15 !important;
+  color: #1E3A8A !important;
 }
 
-/* Modal Backdrop */
-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(4px);
-}
-
-/* Accessibility Focus States */
+/* Accessibility */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  @apply outline-none ring-4 ring-orange-600 ring-offset-2;
+  outline: none;
+  box-shadow: 0 0 0 4px #ea580c;
 }
-
-/* Custom Utilities */
-.text-balance {
-  text-wrap: balance;
-}
-
-.sr-only-visible-label {
-    @apply text-xs font-bold uppercase tracking-widest inline-block;
-}
-
-/* General link styling for content */
-main a:not([class]) {
-  @apply text-primary-900 underline decoration-2 underline-offset-4 hover:text-black transition-colors font-bold;
-}
-
 
 .sr-only {
   position: absolute;
@@ -235,158 +271,113 @@ main a:not([class]) {
   border-width: 0;
 }
 
-/* High Contrast Mode (Default/Classic) */
+main a:not([class]) {
+  color: #7c2d12;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+main a:not([class]):hover {
+  color: black;
+}
+
+/* High Contrast Modes */
 .high-contrast {
-  --primary-color: #000000;
-  --primary-bright: #000000;
-  --accent-color: #000000;
-  --text-dark: #FFFFFF;
   background-color: #000000 !important;
   color: #FFFFFF !important;
 }
 
-.high-contrast body {
-  background-color: #000000 !important;
-  color: #FFFFFF !important;
-}
-
-.high-contrast header,
-.high-contrast footer,
-.high-contrast section,
-.high-contrast div:not([class*="bg-white"]),
-.high-contrast main,
-.high-contrast nav,
-.high-contrast ul,
-.high-contrast li {
+.high-contrast body, .high-contrast header, .high-contrast footer, .high-contrast section, .high-contrast main, .high-contrast nav, .high-contrast ul, .high-contrast li {
   background-color: #000000 !important;
   color: #FFFFFF !important;
   border-color: #FFFFFF !important;
 }
 
-.high-contrast a,
-.high-contrast button {
+.high-contrast a, .high-contrast button {
   color: #FFFFFF !important;
   text-decoration: underline !important;
   border: 2px solid #FFFFFF !important;
   background-color: #000000 !important;
 }
 
-.high-contrast a:hover,
-.high-contrast button:hover {
+.high-contrast a:hover, .high-contrast button:hover {
   background-color: #FFFFFF !important;
   color: #000000 !important;
 }
 
-.high-contrast img {
-  filter: grayscale(100%) contrast(150%);
-}
-
-.high-contrast .bg-white,
-.high-contrast .bg-slate-50,
-.high-contrast .bg-slate-100 {
-  background-color: #000000 !important;
-}
-
-/* Yellow on Black Contrast */
 .high-contrast-yellow {
   background-color: #000000 !important;
   color: #FFFF00 !important;
 }
 
-.high-contrast-yellow body,
-.high-contrast-yellow header,
-.high-contrast-yellow footer,
-.high-contrast-yellow section,
-.high-contrast-yellow main,
-.high-contrast-yellow div,
-.high-contrast-yellow nav,
-.high-contrast-yellow ul,
-.high-contrast-yellow li {
+.high-contrast-yellow body, .high-contrast-yellow header, .high-contrast-yellow footer, .high-contrast-yellow section, .high-contrast-yellow main, .high-contrast-yellow nav, .high-contrast-yellow ul, .high-contrast-yellow li {
   background-color: #000000 !important;
   color: #FFFF00 !important;
   border-color: #FFFF00 !important;
 }
 
-.high-contrast-yellow a,
-.high-contrast-yellow button {
+.high-contrast-yellow a, .high-contrast-yellow button {
   color: #FFFF00 !important;
   text-decoration: underline !important;
   border: 2px solid #FFFF00 !important;
   background-color: #000000 !important;
 }
 
-.high-contrast-yellow a:hover,
-.high-contrast-yellow button:hover {
+.high-contrast-yellow a:hover, .high-contrast-yellow button:hover {
   background-color: #FFFF00 !important;
   color: #000000 !important;
 }
 
-/* Black on White Contrast */
 .high-contrast-black-white {
   background-color: #FFFFFF !important;
   color: #000000 !important;
 }
 
-.high-contrast-black-white body,
-.high-contrast-black-white header,
-.high-contrast-black-white footer,
-.high-contrast-black-white section,
-.high-contrast-black-white main,
-.high-contrast-black-white div,
-.high-contrast-black-white nav,
-.high-contrast-black-white ul,
-.high-contrast-black-white li {
+.high-contrast-black-white body, .high-contrast-black-white header, .high-contrast-black-white footer, .high-contrast-black-white section, .high-contrast-black-white main, .high-contrast-black-white nav, .high-contrast-black-white ul, .high-contrast-black-white li {
   background-color: #FFFFFF !important;
   color: #000000 !important;
   border-color: #000000 !important;
 }
 
-.high-contrast-black-white a,
-.high-contrast-black-white button {
+.high-contrast-black-white a, .high-contrast-black-white button {
   color: #000000 !important;
   text-decoration: underline !important;
   border: 2px solid #000000 !important;
   background-color: #FFFFFF !important;
 }
 
-.high-contrast-black-white a:hover,
-.high-contrast-black-white button:hover {
+.high-contrast-black-white a:hover, .high-contrast-black-white button:hover {
   background-color: #000000 !important;
   color: #FFFFFF !important;
 }
 
-/* Pink on Black Contrast */
 .high-contrast-pink {
   background-color: #000000 !important;
   color: #FF99CC !important;
 }
 
-.high-contrast-pink body,
-.high-contrast-pink header,
-.high-contrast-pink footer,
-.high-contrast-pink section,
-.high-contrast-pink main,
-.high-contrast-pink div,
-.high-contrast-pink nav,
-.high-contrast-pink ul,
-.high-contrast-pink li {
+.high-contrast-pink body, .high-contrast-pink header, .high-contrast-pink footer, .high-contrast-pink section, .high-contrast-pink main, .high-contrast-pink nav, .high-contrast-pink ul, .high-contrast-pink li {
   background-color: #000000 !important;
   color: #FF99CC !important;
   border-color: #FF99CC !important;
 }
 
-.high-contrast-pink a,
-.high-contrast-pink button {
+.high-contrast-pink a, .high-contrast-pink button {
   color: #FF99CC !important;
   text-decoration: underline !important;
   border: 2px solid #FF99CC !important;
   background-color: #000000 !important;
 }
 
-.high-contrast-pink a:hover,
-.high-contrast-pink button:hover {
+.high-contrast-pink a:hover, .high-contrast-pink button:hover {
   background-color: #FF99CC !important;
   color: #000000 !important;
+}
+
+.grayscale-mode {
+  filter: grayscale(100%);
 }
 
 /* Text Size Adjustments */
@@ -395,31 +386,6 @@ html.ts-medium { font-size: 16px !important; }
 html.ts-large { font-size: 20px !important; }
 html.ts-xlarge { font-size: 24px !important; }
 
-/* Ensure modal text visibility in all modes */
 dialog {
   border: 4px solid var(--text-dark);
-}
-
-.high-contrast dialog,
-.high-contrast-yellow dialog,
-.high-contrast-black-white dialog {
-  background-color: inherit !important;
-  color: inherit !important;
-  border: 4px solid currentColor !important;
-}
-
-.high-contrast dialog *,
-.high-contrast-yellow dialog *,
-.high-contrast-black-white dialog * {
-  background-color: transparent !important;
-  color: inherit !important;
-}
-
-/* Grayscale Mode */
-.grayscale-mode {
-  filter: grayscale(100%);
-}
-
-.grayscale-mode img {
-  filter: grayscale(100%) contrast(120%);
 }
