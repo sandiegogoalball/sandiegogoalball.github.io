@@ -122,62 +122,56 @@ function injectModals() {
         contrastModal.className = 'p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full max-h-[90vh] overflow-hidden';
         contrastModal.innerHTML = `
             <div class="flex flex-col h-full max-h-[90vh]">
-                <div class="bg-secondary p-6 text-white relative flex-shrink-0">
+                <div class="bg-primary p-8 text-white relative flex-shrink-0">
                     <button id="close-contrast-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
                     </button>
-                    <h2 class="text-2xl font-black uppercase mb-1">Accessibility Options</h2>
+                    <h2 class="text-3xl font-black uppercase mb-1">Display Settings</h2>
                     <p class="text-white/80 text-sm font-medium">Customize your viewing experience below.</p>
                 </div>
-                <div class="p-6 bg-white overflow-y-auto flex-grow space-y-8">
+                <div class="p-10 bg-white overflow-y-auto flex-grow space-y-10 text-black">
                     <section aria-labelledby="visual-options-heading">
-                        <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
-                            <h3 id="visual-options-heading" class="text-sm font-black uppercase tracking-wider text-slate-600">Visual Appearance</h3>
+                        <div class="flex items-center gap-2 mb-6 border-b-2 border-slate-100 pb-3">
+                            <h3 id="visual-options-heading" class="text-lg font-black uppercase tracking-wider text-black">Visual Appearance</h3>
                         </div>
-                        <div class="grid grid-cols-1 gap-2">
-                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="standard">
-                                <span class="font-bold text-slate-900 uppercase text-xs">Standard Mode</span>
-                                <div class="w-6 h-6 rounded-full bg-primary shadow-inner"></div>
+                        <div class="grid grid-cols-1 gap-3">
+                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="standard">
+                                <span class="font-black text-black uppercase text-sm">Standard Mode</span>
+                                <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-300"></div>
                             </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast">
-                                <span class="font-bold text-slate-900 uppercase text-xs">White on Black</span>
-                                <div class="w-6 h-6 rounded-full bg-black border-2 border-white shadow-inner"></div>
+                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="high-contrast">
+                                <span class="font-black text-black uppercase text-sm">White on Black</span>
+                                <div class="w-8 h-8 rounded-full bg-black border-2 border-white shadow-inner"></div>
                             </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-yellow">
-                                <span class="font-bold text-slate-900 uppercase text-xs">Yellow on Black</span>
-                                <div class="w-6 h-6 rounded-full bg-black border-2 border-yellow-400 shadow-inner"></div>
+                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="high-contrast-yellow">
+                                <span class="font-black text-black uppercase text-sm">Yellow on Black</span>
+                                <div class="w-8 h-8 rounded-full bg-black border-2 border-yellow-400 shadow-inner"></div>
                             </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-black-white">
-                                <span class="font-bold text-slate-900 uppercase text-xs">Black on White</span>
-                                <div class="w-6 h-6 rounded-full bg-white border-2 border-black shadow-inner"></div>
+                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="high-contrast-black-white">
+                                <span class="font-black text-black uppercase text-sm">Black on White</span>
+                                <div class="w-8 h-8 rounded-full bg-white border-2 border-black shadow-inner"></div>
                             </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-pink">
-                                <span class="font-bold text-slate-900 uppercase text-xs">Pink on Black</span>
-                                <div class="w-6 h-6 rounded-full bg-black border-2 border-[#FF99CC] shadow-inner"></div>
-                            </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="grayscale">
-                                <span class="font-bold text-slate-900 uppercase text-xs">Grayscale</span>
-                                <div class="w-6 h-6 rounded-full bg-gray-400 shadow-inner"></div>
+                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="high-contrast-pink">
+                                <span class="font-black text-black uppercase text-sm">Pink on Black</span>
+                                <div class="w-8 h-8 rounded-full bg-black border-2 border-[#FF99CC] shadow-inner"></div>
                             </button>
                         </div>
                     </section>
                     <section aria-labelledby="text-size-heading">
-                        <div class="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-primary"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802" /></svg>
-                            <h3 id="text-size-heading" class="text-sm font-black uppercase tracking-wider text-slate-600">Text Size</h3>
+                        <div class="flex items-center gap-2 mb-6 border-b-2 border-slate-100 pb-3">
+                            <h3 id="text-size-heading" class="text-lg font-black uppercase tracking-wider text-black">Text Size</h3>
                         </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <button type="button" class="text-size-option p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-xs" data-size="ts-small">Small</button>
-                            <button type="button" class="text-size-option p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-xs" data-size="ts-medium">Medium</button>
-                            <button type="button" class="text-size-option p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-xs" data-size="ts-large">Large</button>
-                            <button type="button" class="text-size-option p-4 rounded-xl border-2 border-slate-100 hover:border-secondary transition-all font-bold uppercase text-xs" data-size="ts-xlarge">Extra Large</button>
+                        <div class="grid grid-cols-2 gap-4">
+                            <button type="button" class="text-size-option p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all font-black uppercase text-sm" data-size="ts-small">Small</button>
+                            <button type="button" class="text-size-option p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all font-black uppercase text-sm" data-size="ts-medium">Medium</button>
+                            <button type="button" class="text-size-option p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all font-black uppercase text-sm" data-size="ts-large">Large</button>
+                            <button type="button" class="text-size-option p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all font-black uppercase text-sm" data-size="ts-xlarge">Extra Large</button>
                         </div>
                     </section>
                 </div>
-                <div class="p-6 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row gap-3 flex-shrink-0">
-                    <button type="button" id="cancel-accessibility" class="flex-1 px-6 py-4 rounded-full border-2 border-slate-300 text-slate-700 font-bold uppercase text-xs hover:bg-slate-100 transition-all">Cancel</button>
-                    <button type="button" id="save-accessibility" class="flex-1 px-6 py-4 rounded-full bg-primary text-white font-bold uppercase text-xs hover:bg-primary-700 transition-all shadow-lg border-2 border-primary">Save Settings</button>
+                <div class="p-8 bg-slate-50 border-t-2 border-slate-200 flex flex-col sm:flex-row gap-4 flex-shrink-0">
+                    <button type="button" id="cancel-accessibility" class="flex-1 px-8 py-4 rounded-full border-2 border-slate-400 text-black font-black uppercase text-sm hover:bg-slate-200 transition-all">Cancel</button>
+                    <button type="button" id="save-accessibility" class="flex-1 px-8 py-4 rounded-full bg-accent text-white font-black uppercase text-sm hover:bg-accent-700 transition-all shadow-lg border-2 border-accent">Save Changes</button>
                 </div>
             </div>
         `;
@@ -189,16 +183,16 @@ function injectModals() {
         confirmModal.id = 'confirmation-modal';
         confirmModal.className = 'p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full overflow-hidden';
         confirmModal.innerHTML = `
-            <div class="bg-primary p-8 text-white relative">
-                <button id="close-confirmation-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+            <div class="bg-primary p-10 text-white relative">
+                <button id="close-confirmation-modal" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
                 </button>
-                <h2 id="confirmation-modal-title" class="text-3xl font-black uppercase mb-2">Notification</h2>
-                <p id="confirmation-modal-message" class="text-white/80">Message goes here.</p>
+                <h2 id="confirmation-modal-title" class="text-4xl font-black uppercase mb-3">Notice</h2>
+                <p id="confirmation-modal-message" class="text-white/90 text-lg leading-relaxed">Message goes here.</p>
             </div>
-            <div class="p-8 bg-white flex justify-end gap-4">
-                <button id="cancel-confirmation-modal" class="btn-outline px-6 py-2 text-sm uppercase">Cancel</button>
-                <button id="confirm-confirmation-modal" class="btn-primary px-6 py-2 text-sm uppercase">Continue</button>
+            <div class="p-10 bg-white flex justify-end gap-5">
+                <button id="cancel-confirmation-modal" class="btn-outline px-8 py-3 text-sm font-black uppercase">Go Back</button>
+                <button id="confirm-confirmation-modal" class="btn-primary px-8 py-3 text-sm font-black uppercase">Proceed</button>
             </div>
         `;
         document.body.appendChild(confirmModal);
@@ -497,15 +491,15 @@ function showSearchResults(results) {
     resultsDiv.innerHTML = '';
 
     if (results.length === 0) {
-        resultsDiv.innerHTML = '<div class="p-4 text-sm text-slate-500 font-medium text-center">No matches found for your search.</div>';
+        resultsDiv.innerHTML = '<div class="p-4 text-sm text-black font-black text-center">No matches found for your search.</div>';
     } else {
         results.forEach(item => {
             const link = document.createElement('a');
             link.href = item.url;
-            link.className = 'block p-4 hover:bg-slate-50 rounded-xl transition-all border-b border-slate-50 last:border-0 group';
+            link.className = 'block p-4 hover:bg-slate-50 rounded-xl transition-all border-b border-slate-100 last:border-0 group';
             link.innerHTML = `
-                <h4 class="font-bold text-primary group-hover:text-primary-700 text-sm mb-1 uppercase tracking-tight">${item.title}</h4>
-                <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed">${item.content}</p>
+                <h4 class="font-black text-black group-hover:text-accent text-sm mb-1 uppercase tracking-tight">${item.title}</h4>
+                <p class="text-xs text-black line-clamp-2 leading-relaxed">${item.content}</p>
             `;
             resultsDiv.appendChild(link);
         });
@@ -770,22 +764,22 @@ function initContrastToggle() {
         // Update contrast options UI
         contrastOptions.forEach(opt => {
             if (opt.getAttribute('data-mode') === tempMode) {
-                opt.classList.add('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary');
-                opt.classList.remove('border-slate-100');
+                opt.classList.add('border-accent', 'bg-slate-100', 'ring-4', 'ring-accent');
+                opt.classList.remove('border-slate-200');
             } else {
-                opt.classList.remove('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary');
-                opt.classList.add('border-slate-100');
+                opt.classList.remove('border-accent', 'bg-slate-100', 'ring-4', 'ring-accent');
+                opt.classList.add('border-slate-200');
             }
         });
 
         // Update text size options UI
         textSizeOptions.forEach(opt => {
             if (opt.getAttribute('data-size') === tempSize) {
-                opt.classList.add('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary');
-                opt.classList.remove('border-slate-100');
+                opt.classList.add('border-accent', 'bg-slate-100', 'ring-4', 'ring-accent');
+                opt.classList.remove('border-slate-200');
             } else {
-                opt.classList.remove('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary');
-                opt.classList.add('border-slate-100');
+                opt.classList.remove('border-accent', 'bg-slate-100', 'ring-4', 'ring-accent');
+                opt.classList.add('border-slate-200');
             }
         });
     }
