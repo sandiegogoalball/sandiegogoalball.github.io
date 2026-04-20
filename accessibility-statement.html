@@ -23,49 +23,60 @@
     <!-- Header & Navigation -->
     <a href="#main-heading" class="skip-link sr-only">Skip to main content</a>
     <header class="z-50 header-subpage">
-        <!-- Student Project Banner -->
         <div role="region" aria-label="Student Project Banner" class="bg-[var(--banner-bg)] text-[var(--banner-text)] py-3 text-[11px] tracking-[0.2em] font-black uppercase text-center border-b border-white/10">
             STUDENT PROJECT: THIS WEBSITE WAS CREATED AS A PROJECT FOR A COLLEGE COURSE. WEBSITE CREATED BY DARREN DIZON (<a href="https://linktr.ee/DarrenDizon" target="_blank" class="underline">LINKTREE</a>). <a href="assignment-criteria.html" class="underline ml-4">VIEW ASSIGNMENT CRITERIA</a>
         </div>
-
-        <!-- Utility Bar (Search & Controls) -->
         <div class="header-toolbar">
-            <div class="container mx-auto px-4 py-2 flex justify-end items-center gap-4">
-                <!-- Search -->
-                <div id="search-container" class="relative flex items-center">
-                    <input type="text" id="search-input" placeholder="Search site..."
-                        class="w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100 px-0 md:px-4 py-2 rounded-full border-2 border-transparent focus:border-white bg-white/10 text-white placeholder-white/70 outline-none transition-all focus:w-40 sm:focus:w-48 md:focus:w-64 lg:focus:w-80 focus:opacity-100 focus:px-4 pr-10 md:pr-20" aria-label="Search">
-                    <div class="absolute right-0 flex items-center gap-1">
-                        <button id="search-cancel" class="hidden p-1.5 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Clear search">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                        <button id="search-btn" class="p-2 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Perform search">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
-                        </button>
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-4 group">
+                    <img src="images/logo.png" alt="San Diego Goalball home" class="h-10 md:h-12 w-auto transform transition-transform group-hover:scale-110">
+                </a>
+
+                <!-- Desktop Nav Links (Tool Bar at the top) -->
+                <nav class="hidden lg:flex items-center gap-2">
+                    <a href="index.html" class="nav-link-inline">Home</a>
+                    <a href="about.html" class="nav-link-inline">About</a>
+                    <a href="about-goalball.html" class="nav-link-inline">The Sport</a>
+                    <a href="schedule.html" class="nav-link-inline">Schedule</a>
+                    <a href="get-involved.html" class="nav-link-inline">Get Involved</a>
+                    <a href="resources.html" class="nav-link-inline">Resources</a>
+                </nav>
+
+                <div class="flex items-center gap-2 md:gap-4">
+                    <!-- Search -->
+                    <div id="search-container" class="relative flex items-center">
+                        <input type="text" id="search-input" placeholder="Search..."
+                            class="w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100 px-0 md:px-4 py-2 rounded-full border-2 border-transparent focus:border-white bg-white/20 text-white placeholder-white/70 outline-none transition-all focus:w-40 sm:focus:w-48 md:focus:w-64 lg:focus:w-80 focus:opacity-100 focus:px-4 pr-10 md:pr-20">
+                        <div class="absolute right-0 flex items-center gap-1">
+                            <button id="search-cancel" class="hidden p-1.5 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Clear search">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <button id="search-btn" class="p-2 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Search our site">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                    <!-- Contrast Toggle -->
+                    <button type="button" id="contrast-toggle" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full text-white transition-all border border-white/10" aria-label="Display Options" aria-haspopup="dialog">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                        </svg>
+                        <span class="text-xs font-black uppercase tracking-widest hidden lg:inline">Options</span>
+                    </button>
+                    <!-- Collapsible Menu Toggle (Unified) -->
+                    <button type="button" id="menu-toggle-btn" class="flex items-center gap-2 bg-accent hover:bg-accent-600 px-4 py-2 rounded-full text-white transition-all shadow-lg" aria-label="Toggle site navigation menu" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <span class="text-xs font-black uppercase tracking-widest menu-label">Menu</span>
+                    </button>
                 </div>
-                <!-- Contrast Toggle -->
-                <button type="button" id="contrast-toggle" class="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full text-white transition-all border border-white/20" aria-label="Display Options" aria-haspopup="dialog">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-                    </svg>
-                    <span class="text-xs font-black uppercase tracking-widest hidden lg:inline">Options</span>
-                </button>
-                <!-- Mobile Menu Toggle -->
-                <button type="button" id="menu-toggle-btn" class="flex items-center gap-2 bg-accent hover:bg-accent-600 px-4 py-2 rounded-full text-white transition-all shadow-lg" aria-label="Toggle Navigation Menu" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    <span class="text-xs font-black uppercase tracking-widest menu-label">Menu</span>
-                </button>
             </div>
         </div>
-
-        <!-- Main Navigation Bar -->
         <div class="header-nav-bar bg-white">
             <div class="container mx-auto px-4 flex justify-between items-center">
                 <a href="index.html" class="flex items-center gap-4 group py-2" aria-label="San Diego Goalball Home">
@@ -123,8 +134,6 @@
                 </nav>
             </div>
         </div>
-
-        <!-- Navigation Drawer (Collapsible) -->
         <div id="mobile-nav" class="fixed inset-0 bg-primary-950/95 z-[1000] invisible opacity-0 translate-x-full transition-all duration-500 ease-in-out">
             <div class="flex flex-col h-full max-w-sm ml-auto bg-primary shadow-2xl p-8 overflow-y-auto">
                 <div class="flex justify-between items-center mb-12">
@@ -204,14 +213,14 @@
 <section class="bg-slate-50 text-primary border-b border-slate-100 py-24">
     <div class="container mx-auto px-4 max-w-5xl">
         <h1 class="text-5xl font-extrabold uppercase tracking-tight">Accessibility Statement</h1>
-        <p class="text-xl text-primary mt-4 max-w-3xl">
+        <p class="text-xl md:text-2xl text-white/90 font-medium mt-4 max-w-3xl">
             San Diego County Goalball is committed to ensuring digital accessibility for all users, including individuals with disabilities.
             We continuously improve the user experience for everyone and apply relevant accessibility standards whenever possible.
         </p>
     </div>
 </section>
 
-<section class="section-padding bg-white">
+<section class="py-24 bg-white">
 <div class="container mx-auto px-4 max-w-4xl">
 <div class="prose prose-lg text-black">
 
