@@ -5,44 +5,18 @@ window.tailwind = {
         theme: {
             extend: {
                 colors: {
-                    // Professional Brand Palette: Slate and Orange
-                    primary: {
-                        DEFAULT: '#0f172a', // Slate 900
-                        50: '#f8fafc',
-                        100: '#f1f5f9',
-                        200: '#e2e8f0',
-                        300: '#cbd5e1',
-                        400: '#94a3b8',
-                        500: '#64748b',
-                        600: '#475569',
-                        700: '#334155',
-                        800: '#1e293b',
-                        900: '#0f172a',
-                        950: '#020617',
-                    },
-                    secondary: {
-                        DEFAULT: '#ea580c', // Orange 600
-                        50: '#fff7ed',
-                        100: '#ffedd5',
-                        200: '#fed7aa',
-                        300: '#fdba74',
-                        400: '#fb923c',
-                        500: '#f97316',
-                        600: '#ea580c',
-                        700: '#c2410c',
-                        800: '#9a3412',
-                        900: '#7c2d12',
-                        950: '#431407',
-                    },
+                    // APH Inspired Palette: Navy and Teal
+                    primary: '#002D56',
+                    secondary: '#007A87',
                     accent: {
-                        DEFAULT: '#ea580c', // Orange 600
-                        500: '#ea580c',
-                        600: '#c2410c',
-                        700: '#9a3412',
+                        DEFAULT: '#007A87',
+                        500: '#00A3AD',
+                        600: '#007A87',
+                        700: '#005F67',
                     },
                     black: '#000000',
                     white: '#FFFFFF',
-                    dark: '#111827',
+                    dark: '#002D56',
                 },
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
@@ -648,7 +622,7 @@ function initExternalLinks() {
 }
 
 /**
- * FAQ Accordion Logic
+ * FAQ Accordion Logic - Enhanced for Accessibility (ARIA + State Text)
  */
 function initFAQ() {
     const faqItems = document.querySelectorAll('.faq-item');
@@ -657,28 +631,39 @@ function initFAQ() {
         const question = item.querySelector('.faq-question');
         const answer = item.querySelector('.faq-answer');
         const icon = item.querySelector('.faq-icon');
+        const status = item.querySelector('.faq-status');
 
         if (question && answer) {
             question.addEventListener('click', () => {
-                const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+                const isOpen = question.getAttribute('aria-expanded') === 'true';
+                const nowOpen = !isOpen;
 
-                // Close all other items
+                // Close all other items for a clean accordion experience
                 faqItems.forEach(otherItem => {
+                    const otherBtn = otherItem.querySelector('.faq-question');
                     const otherAnswer = otherItem.querySelector('.faq-answer');
                     const otherIcon = otherItem.querySelector('.faq-icon');
-                    if (otherAnswer && otherAnswer !== answer) {
-                        otherAnswer.style.maxHeight = '0px';
-                        otherIcon?.classList.remove('rotate-180');
+                    const otherStatus = otherItem.querySelector('.faq-status');
+
+                    if (otherBtn && otherBtn !== question) {
+                        otherBtn.setAttribute('aria-expanded', 'false');
+                        if (otherAnswer) otherAnswer.style.maxHeight = '0px';
+                        if (otherIcon) otherIcon.classList.remove('rotate-180');
+                        if (otherStatus) otherStatus.textContent = 'Collapsed';
                     }
                 });
 
                 // Toggle current item
-                if (isOpen) {
-                    answer.style.maxHeight = '0px';
-                    icon?.classList.remove('rotate-180');
-                } else {
+                question.setAttribute('aria-expanded', nowOpen);
+
+                if (nowOpen) {
                     answer.style.maxHeight = answer.scrollHeight + 'px';
-                    icon?.classList.add('rotate-180');
+                    if (icon) icon.classList.add('rotate-180');
+                    if (status) status.textContent = 'Expanded';
+                } else {
+                    answer.style.maxHeight = '0px';
+                    if (icon) icon.classList.remove('rotate-180');
+                    if (status) status.textContent = 'Collapsed';
                 }
             });
         }
@@ -846,23 +831,23 @@ function initCookieConsent() {
     // Create the banner
     const banner = document.createElement('div');
     banner.id = 'cookie-consent-banner';
-    banner.className = 'fixed bottom-0 left-0 w-full bg-primary text-white p-6 z-[200] shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.3)] border-t-4 border-accent transform transition-transform duration-500 translate-y-full';
+    banner.className = 'fixed bottom-0 left-0 w-full bg-[#002D56] text-white p-8 z-[9999] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t-4 border-[#007A87] transform transition-transform duration-500 translate-y-full';
     banner.setAttribute('role', 'region');
     banner.setAttribute('aria-label', 'Cookie Consent');
 
     banner.innerHTML = `
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             <div class="flex-grow">
-                <h2 class="text-xl font-black mb-2 uppercase tracking-tight">We value your privacy</h2>
-                <p class="text-white/80 text-sm leading-relaxed max-w-4xl">
-                    We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. For more information, please read our <a href="privacy-policy.html" class="underline hover:text-white">Privacy Policy</a>.
+                <h2 class="text-2xl font-black mb-3 uppercase tracking-tight text-white">We value your privacy</h2>
+                <p class="text-white text-base leading-relaxed max-w-4xl font-medium">
+                    We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. <a href="privacy-policy.html" class="underline hover:text-[#007A87] font-bold">Read our Privacy Policy</a>.
                 </p>
             </div>
-            <div class="flex flex-shrink-0 gap-4">
-                <button id="cookie-accept-btn" class="bg-accent hover:bg-accent-600 text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap shadow-lg hover:-translate-y-0.5">
+            <div class="flex flex-wrap gap-4">
+                <button id="cookie-accept-btn" class="bg-[#007A87] hover:bg-[#005F67] text-white font-extrabold py-4 px-10 rounded-full transition-all text-sm uppercase tracking-widest shadow-xl border-2 border-[#007A87]">
                     Accept All
                 </button>
-                <button id="cookie-decline-btn" class="bg-transparent border-2 border-white/30 hover:border-white text-white font-bold py-3 px-8 rounded-full transition-all text-sm uppercase tracking-widest whitespace-nowrap hover:bg-white/10">
+                <button id="cookie-decline-btn" class="bg-white hover:bg-gray-100 text-[#002D56] font-extrabold py-4 px-10 rounded-full transition-all text-sm uppercase tracking-widest shadow-xl border-2 border-white">
                     Decline
                 </button>
             </div>

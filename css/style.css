@@ -1,12 +1,12 @@
 :root {
-  --primary-color: #0f172a; /* Slate 900 - Professional Dark Blue/Grey */
-  --accent-color: #ea580c;  /* Orange 600 - Brand Accent */
-  --accent-hover: #c2410c;  /* Orange 700 */
+  --primary-color: #002D56; /* Navy - APH Style */
+  --accent-color: #007A87;  /* Teal - APH Style */
+  --accent-hover: #005F67;  /* Deep Teal */
   --text-main: #000000;     /* Strict Black */
-  --text-dark: #000000;     /* Strict Black */
-  --bg-light: #f8fafc;      /* Slate 50 */
+  --text-dark: #002D56;     /* Navy */
+  --bg-light: #f0f4f8;      /* Clean Blue-ish Grey */
   --white: #ffffff;
-  --banner-bg: #1e3a8a;     /* Deep Blue */
+  --banner-bg: #001A33;     /* Darker Navy */
   --banner-text: #ffffff;   /* White Text */
 }
 
@@ -52,8 +52,8 @@ header {
 .header-nav-bar {
   background-color: var(--white) !important;
   color: #000000 !important;
-  border-bottom: 4px solid var(--accent-color) !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   position: sticky;
   top: 0;
   z-index: 40;
@@ -120,23 +120,24 @@ header {
 
 /* Buttons */
 .btn-primary {
-  background-color: var(--accent-color);
+  background-color: var(--primary-color);
   color: var(--white) !important;
-  padding: 0.75rem 1.75rem;
-  border-radius: 0.5rem;
+  padding: 0.875rem 2rem;
+  border-radius: 0.375rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transition: all 0.2s;
-  box-shadow: 0 4px 6px -1px rgba(234, 88, 12, 0.2);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   display: inline-block;
   text-align: center;
+  border: 1px solid transparent;
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--accent-color);
   transform: translateY(-1px);
-  box-shadow: 0 10px 15px -3px rgba(234, 88, 12, 0.3);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .btn-outline {
@@ -155,11 +156,6 @@ header {
 .btn-outline:hover {
   background-color: var(--accent-color);
   color: var(--white) !important;
-}
-
-/* Section Spacing */
-.section-padding {
-  padding: 6rem 0;
 }
 
 /* Hero Section Refinement */

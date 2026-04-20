@@ -19,25 +19,22 @@
     <a href="#main-heading" class="skip-link sr-only">Skip to main content</a>
     <!-- Header & Navigation -->
     <header class="z-50 header-home">
-        <!-- Student Project Banner -->
         <div role="region" aria-label="Student Project Banner" class="bg-[var(--banner-bg)] text-[var(--banner-text)] py-3 text-[11px] tracking-[0.2em] font-black uppercase text-center border-b border-white/10">
             STUDENT PROJECT: THIS WEBSITE WAS CREATED AS A PROJECT FOR A COLLEGE COURSE. WEBSITE CREATED BY DARREN DIZON (<a href="https://linktr.ee/DarrenDizon" target="_blank" class="underline">LINKTREE</a>). <a href="assignment-criteria.html" class="underline ml-4">VIEW ASSIGNMENT CRITERIA</a>
         </div>
-
-        <!-- Utility Bar (Search & Controls) -->
         <div class="header-toolbar">
             <div class="container mx-auto px-4 py-2 flex justify-end items-center gap-4">
                 <!-- Search -->
                 <div id="search-container" class="relative flex items-center">
                     <input type="text" id="search-input" placeholder="Search site..."
-                        class="w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100 px-0 md:px-4 py-2 rounded-full border-2 border-transparent focus:border-white bg-white/10 text-white placeholder-white/70 outline-none transition-all focus:w-40 sm:focus:w-48 md:focus:w-64 lg:focus:w-80 focus:opacity-100 focus:px-4 pr-10 md:pr-20" aria-label="Search">
+                        class="w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100 px-0 md:px-4 py-2 rounded-full border-2 border-transparent focus:border-white bg-white/10 text-white placeholder-white/70 outline-none transition-all focus:w-40 sm:focus:w-48 md:focus:w-64 lg:focus:w-80 focus:opacity-100 focus:px-4 pr-10 md:pr-20" aria-label="Search our site">
                     <div class="absolute right-0 flex items-center gap-1">
                         <button id="search-cancel" class="hidden p-1.5 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Clear search">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <button id="search-btn" class="p-2 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Perform search">
+                        <button id="search-btn" class="p-2 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Submit search query">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
@@ -52,7 +49,7 @@
                     <span class="text-xs font-black uppercase tracking-widest hidden lg:inline">Options</span>
                 </button>
                 <!-- Mobile Menu Toggle -->
-                <button type="button" id="menu-toggle-btn" class="flex items-center gap-2 bg-accent hover:bg-accent-600 px-4 py-2 rounded-full text-white transition-all shadow-lg" aria-label="Toggle Navigation Menu" aria-expanded="false">
+                <button type="button" id="menu-toggle-btn" class="flex items-center gap-2 bg-accent hover:bg-accent-600 px-4 py-2 rounded-full text-white transition-all shadow-lg" aria-label="Toggle site navigation menu" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
@@ -60,8 +57,6 @@
                 </button>
             </div>
         </div>
-
-        <!-- Main Navigation Bar -->
         <div class="header-nav-bar bg-white">
             <div class="container mx-auto px-4 flex justify-between items-center">
                 <a href="index.html" class="flex items-center gap-4 group py-2" aria-label="San Diego Goalball Home">
@@ -119,8 +114,6 @@
                 </nav>
             </div>
         </div>
-
-        <!-- Navigation Drawer (Collapsible) -->
         <div id="mobile-nav" class="fixed inset-0 bg-primary-950/95 z-[1000] invisible opacity-0 translate-x-full transition-all duration-500 ease-in-out">
             <div class="flex flex-col h-full max-w-sm ml-auto bg-primary shadow-2xl p-8 overflow-y-auto">
                 <div class="flex justify-between items-center mb-12">
@@ -199,12 +192,12 @@
         <!-- Hero Section -->
         <section class="relative h-[70vh] flex items-center overflow-hidden">
             <img src="images/2e92691d-373c-4dd1-b111-23596e420300.jpeg" alt="San Diego Goalball team together on the court" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 hero-gradient"></div>
+            <div class="absolute inset-0 bg-primary/60 hero-gradient"></div>
             <div class="container mx-auto px-4 relative z-10 text-white">
                 <h1 id="main-heading" class="text-5xl md:text-7xl font-black mb-6 max-w-4xl leading-tight uppercase tracking-tighter">
-                    Athleticism Without <span class="text-primary-400">Boundaries</span>
+                    Athleticism Without <span class="text-secondary">Boundaries</span>
                 </h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-2xl text-black leading-relaxed font-medium">
+                <p class="text-xl md:text-2xl mb-8 max-w-2xl text-white/90 leading-relaxed font-medium">
                     The premier competitive sport for the blind and visually impaired community in San Diego County.
                 </p>
                 <div class="flex flex-wrap gap-4">
@@ -214,7 +207,7 @@
             </div>
         </section>
         <!-- Welcome Section -->
-        <section class="section-padding bg-white">
+        <section class="py-24 bg-white">
             <div class="container mx-auto px-4">
                 <div class="grid md:grid-cols-2 gap-16 items-center">
                     <div>
@@ -225,7 +218,7 @@
                             <p>Whether you're looking for recreation, fitness, or aiming for the highest levels of competition, our world-class coaches and welcoming community have a place for you on our court.</p>
                         </div>
                         <div class="mt-8">
-                            <a href="about.html" class="btn-primary">Our Story</a>
+                            <a href="about.html" class="btn-primary shadow-sm">Our Story</a>
                         </div>
                     </div>
                     <div class="relative">
@@ -236,7 +229,7 @@
             </div>
         </section>
         <!-- Video Section -->
-        <section class="section-padding bg-slate-50 border-y border-slate-200">
+        <section class="py-24 bg-slate-50 border-y border-slate-200">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tight">Experience Goalball</h2>
@@ -270,7 +263,7 @@
             </div>
         </section>
         <!-- Resources Preview Section -->
-        <section class="section-padding bg-slate-50 border-y border-slate-200">
+        <section class="py-24 bg-slate-50 border-y border-slate-200">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                     <div class="max-w-2xl text-left">
@@ -285,51 +278,51 @@
                             <h3 class="text-lg font-bold text-primary mb-3 uppercase">USABA</h3>
                             <p class="text-sm text-black mb-4">U.S. Association of Blind Athletes goalball programs.</p>
                         </div>
-                        <a href="https://www.usaba.org/clubs-sports/goalball/" target="_blank" class="btn-primary text-xs py-2 px-4 text-center">Visit USABA</a>
+                        <a href="https://www.usaba.org/clubs-sports/goalball/" target="_blank" class="btn-primary shadow-sm text-xs py-2 px-4 text-center">Visit USABA</a>
                     </div>
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h3 class="text-lg font-bold text-primary mb-3 uppercase">IBSA</h3>
                             <p class="text-sm text-black mb-4">International governing body for blind sports worldwide.</p>
                         </div>
-                        <a href="https://ibsasport.org/sports/goalball/" target="_blank" class="btn-primary text-xs py-2 px-4 text-center">Visit IBSA</a>
+                        <a href="https://ibsasport.org/sports/goalball/" target="_blank" class="btn-primary shadow-sm text-xs py-2 px-4 text-center">Visit IBSA</a>
                     </div>
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h3 class="text-lg font-bold text-primary mb-3 uppercase">IPC</h3>
                             <p class="text-sm text-black mb-4">Goalball at the Paralympic Games and global events.</p>
                         </div>
-                        <a href="https://www.paralympic.org/goalball" target="_blank" class="btn-primary text-xs py-2 px-4 text-center">Visit IPC</a>
+                        <a href="https://www.paralympic.org/goalball" target="_blank" class="btn-primary shadow-sm text-xs py-2 px-4 text-center">Visit IPC</a>
                     </div>
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
                         <div>
                             <h3 class="text-lg font-bold text-primary mb-3 uppercase">Local SD</h3>
                             <p class="text-sm text-black mb-4">Resources and support for blind residents in San Diego.</p>
                         </div>
-                        <a href="https://www.sdcb.org/" target="_blank" class="btn-primary text-xs py-2 px-4 text-center">Visit SDCB</a>
+                        <a href="https://www.sdcb.org/" target="_blank" class="btn-primary shadow-sm text-xs py-2 px-4 text-center">Visit SDCB</a>
                     </div>
                 </div>
             </div>
         </section>
         <!-- CTA Section -->
-        <section class="section-padding bg-white">
+        <section class="py-24 bg-white">
             <div class="container mx-auto px-4 text-center">
                 <h2 class="text-3xl md:text-4xl font-black text-primary mb-12 uppercase tracking-tighter">Ready to join the action?</h2>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div class="bg-slate-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-primary">
                         <h3 class="text-xl font-bold mb-4 text-primary uppercase">Athletes</h3>
                         <p class="text-black mb-6">Open to all blind and visually impaired individuals. No experience necessary.</p>
-                        <a href="schedule.html" class="btn-primary text-sm">Get Started</a>
+                        <a href="schedule.html" class="btn-primary shadow-sm text-sm">Get Started</a>
                     </div>
                     <div class="bg-slate-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-accent">
                         <h3 class="text-xl font-bold mb-4 text-primary uppercase">Volunteers</h3>
                         <p class="text-black mb-6">Help with practices, refereeing, and community outreach. No sports background required.</p>
-                        <a href="get-involved.html" class="btn-primary text-sm">Volunteer</a>
+                        <a href="get-involved.html" class="btn-primary shadow-sm text-sm">Volunteer</a>
                     </div>
                     <div class="bg-slate-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow border-t-4 border-black">
                         <h3 class="text-xl font-bold mb-4 text-primary uppercase">Support</h3>
                         <p class="text-black mb-6">Your contributions help us provide equipment and facilities for our athletes.</p>
-                        <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="btn-primary text-sm">Donate Now</a>
+                        <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="btn-primary shadow-sm text-sm">Donate Now</a>
                     </div>
                 </div>
             </div>
