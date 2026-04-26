@@ -314,6 +314,15 @@ function initDesktopNav() {
                 button.setAttribute('aria-expanded', !isExpanded);
             });
 
+            // Handle mouse enter/leave for desktop hover behavior
+            dropdown.addEventListener('mouseenter', () => {
+                button.setAttribute('aria-expanded', 'true');
+            });
+
+            dropdown.addEventListener('mouseleave', () => {
+                button.setAttribute('aria-expanded', 'false');
+            });
+
             // Handle keyboard navigation within dropdown
             dropdown.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
