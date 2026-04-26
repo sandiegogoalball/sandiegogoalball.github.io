@@ -21,204 +21,71 @@
 <body class="bg-white text-black font-sans antialiased min-h-screen flex flex-col">
 
     <a href="#main-heading" class="skip-link sr-only">Skip to main content</a>
-    <header class="z-50 header-subpage">
-        <div role="region" aria-label="Student Project Banner" class="bg-[var(--banner-bg)] text-[var(--banner-text)] py-3 text-[11px] tracking-[0.2em] font-black uppercase text-center border-b border-white/10">
+                <header class="z-50 sticky top-0">
+        <div role="region" aria-label="Student Project Banner" class="bg-[var(--banner-bg)] text-[var(--banner-text)] py-3 text-[11px] tracking-[0.2em] font-black uppercase text-center border-b border-white/20">
             STUDENT PROJECT: THIS WEBSITE WAS CREATED AS A PROJECT FOR A COLLEGE COURSE. WEBSITE CREATED BY DARREN DIZON (<a href="https://linktr.ee/DarrenDizon" target="_blank" class="underline">LINKTREE</a>). <a href="assignment-criteria.html" class="underline ml-4">VIEW ASSIGNMENT CRITERIA</a>
         </div>
-        <div class="header-toolbar">
-            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                <a href="index.html" class="flex items-center gap-4 group">
-                    <img src="images/logo.png" alt="San Diego Goalball home" class="h-10 md:h-12 w-auto transform transition-transform group-hover:scale-110">
+
+        <!-- Top Bar: Logo & Search/Options -->
+        <div class="header-top bg-white">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-4 group shrink-0" aria-label="San Diego Goalball Home">
+                    <img src="images/logo.png" alt="San Diego Goalball logo" class="h-10 md:h-12 w-auto transform transition-transform group-hover:scale-105">
                 </a>
 
-                <!-- Desktop Nav Links (Tool Bar at the top) -->
-                <nav class="hidden lg:flex items-center gap-2">
-                    <a href="index.html" class="nav-link-inline">Home</a>
-                    <a href="about.html" class="nav-link-inline">About</a>
-                    <a href="about-goalball.html" class="nav-link-inline">The Sport</a>
-                    <a href="schedule.html" class="nav-link-inline">Schedule</a>
-                    <a href="get-involved.html" class="nav-link-inline">Get Involved</a>
-                    <a href="resources.html" class="nav-link-inline">Resources</a>
-                </nav>
-
                 <div class="flex items-center gap-2 md:gap-4">
-                    <!-- Search -->
                     <div id="search-container" class="relative flex items-center">
                         <input type="text" id="search-input" placeholder="Search..."
-                            class="w-0 md:w-48 lg:w-64 opacity-0 md:opacity-100 px-0 md:px-4 py-2 rounded-full border-2 border-transparent focus:border-white bg-white/20 text-white placeholder-white/70 outline-none transition-all focus:w-40 sm:focus:w-48 md:focus:w-64 lg:focus:w-80 focus:opacity-100 focus:px-4 pr-10 md:pr-20">
+                            class="w-0 md:w-32 lg:w-48 opacity-0 md:opacity-100 px-0 md:px-4 py-2 rounded-full border-2 border-primary bg-slate-50 text-black outline-none transition-all focus:w-40 sm:focus:w-48 md:focus:w-64 lg:focus:w-80 focus:opacity-100 focus:px-4 pr-10" aria-label="Search our site">
                         <div class="absolute right-0 flex items-center gap-1">
-                            <button id="search-cancel" class="hidden p-1.5 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Clear search">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                            <button id="search-cancel" class="hidden p-1.5 hover:bg-slate-200 rounded-full transition-colors text-slate-500" aria-label="Clear search">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                 </svg>
                             </button>
-                            <button id="search-btn" class="p-2 hover:bg-white/20 rounded-full transition-colors text-white" aria-label="Search our site">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                            <button id="search-btn" class="p-2 hover:bg-slate-100 rounded-full transition-colors text-primary" aria-label="Submit search query">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                                 </svg>
                             </button>
                         </div>
                     </div>
-                    <!-- Contrast Toggle -->
-                    <button type="button" id="contrast-toggle" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full text-white transition-all border border-white/10" aria-label="Display Options" aria-haspopup="dialog">
+                    <button type="button" id="contrast-toggle" class="p-2 hover:bg-slate-100 rounded-full text-primary transition-all border border-slate-200" aria-label="Display Options" aria-haspopup="dialog">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
                         </svg>
-                        <span class="text-xs font-black uppercase tracking-widest hidden lg:inline">Options</span>
                     </button>
-                    <!-- Collapsible Menu Toggle (Unified) -->
-                    <button type="button" id="menu-toggle-btn" class="flex items-center gap-2 bg-accent hover:bg-accent-600 px-4 py-2 rounded-full text-white transition-all shadow-lg" aria-label="Toggle site navigation menu" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                    <button type="button" id="menu-toggle-btn" class="lg:hidden flex items-center gap-2 bg-primary hover:bg-accent px-4 py-2 rounded-full text-white transition-all shadow-lg" aria-label="Toggle site navigation menu" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                         </svg>
-                        <span class="text-xs font-black uppercase tracking-widest menu-label">Menu</span>
-                    <span class="nav-status sr-only"></span>
+                        <span class="text-xs font-black uppercase tracking-widest hidden sm:inline menu-label">Menu</span>
+                        <span class="nav-status sr-only"></span>
                     </button>
                 </div>
             </div>
         </div>
-        <div class="header-nav-bar bg-white">
-            <div class="container mx-auto px-4 flex justify-between items-center">
-                <a href="index.html" class="flex items-center gap-4 group py-2" aria-label="San Diego Goalball Home">
-                    <img src="images/logo.png" alt="San Diego Goalball logo" class="h-12 md:h-14 w-auto transform transition-transform group-hover:scale-105">
-                </a>
 
-                <!-- Desktop Nav Links -->
-                <nav class="hidden lg:flex items-center" role="navigation" aria-label="Main Navigation">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <div class="relative group dropdown">
-                        <button type="button" class="nav-link" aria-haspopup="true" aria-expanded="false">
-                            About Us
-                            <span class="nav-status sr-only"></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                        </button>
-                        <div class="dropdown-content absolute top-full left-0 bg-white shadow-xl rounded-b-xl border-t-2 border-accent min-w-[200px] z-50">
-                            <a href="about.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent border-b border-slate-100">Our Story</a>
-                            <a href="history.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent">History</a>
-                        </div>
-                    </div>
-                    <div class="relative group dropdown">
-                        <button type="button" class="nav-link" aria-haspopup="true" aria-expanded="false">
-                            The Sport
-                            <span class="nav-status sr-only"></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                        </button>
-                        <div class="dropdown-content absolute top-full left-0 bg-white shadow-xl rounded-b-xl border-t-2 border-accent min-w-[200px] z-50">
-                            <a href="about-goalball.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent border-b border-slate-100">What is Goalball?</a>
-                            <a href="rules.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent border-b border-slate-100">Rules</a>
-                            <a href="equipment.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent">Equipment</a>
-                        </div>
-                    </div>
-                    <div class="relative group dropdown">
-                        <button type="button" class="nav-link" aria-haspopup="true" aria-expanded="false">
-                            Schedule
-                            <span class="nav-status sr-only"></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                        </button>
-                        <div class="dropdown-content absolute top-full left-0 bg-white shadow-xl rounded-b-xl border-t-2 border-accent min-w-[200px] z-50">
-                            <a href="schedule.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent border-b border-slate-100">Practice Schedule</a>
-                            <a href="tournaments.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent border-b border-slate-100">Tournaments</a>
-                            <a href="past-events.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent">Past Events</a>
-                        </div>
-                    </div>
-                    <div class="relative group dropdown">
-                        <button type="button" class="nav-link" aria-haspopup="true" aria-expanded="false">
-                            Involved
-                            <span class="nav-status sr-only"></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                        </button>
-                        <div class="dropdown-content absolute top-full left-0 bg-white shadow-xl rounded-b-xl border-t-2 border-accent min-w-[200px] z-50">
-                            <a href="get-involved.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent border-b border-slate-100">Overview</a>
-                            <a href="volunteer.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent border-b border-slate-100">Volunteer</a>
-                            <a href="sponsors.html" class="block px-6 py-4 text-sm font-black hover:bg-slate-50 hover:text-accent">Our Sponsors</a>
-                        </div>
-                    </div>
-                    <a href="resources.html" class="nav-link">Resources</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </nav>
-            </div>
-        </div>
-        <div id="mobile-nav" class="fixed inset-0 bg-primary-950/95 z-[1000] invisible opacity-0 translate-x-full transition-all duration-500 ease-in-out">
-            <div class="flex flex-col h-full max-w-sm ml-auto bg-primary shadow-2xl p-8 overflow-y-auto">
-                <div class="flex justify-between items-center mb-12">
-                    <span class="text-xl font-black text-white uppercase tracking-tighter">Navigation</span>
-                    <button type="button" class="text-white/50 hover:text-white transition-colors" onclick="document.getElementById('menu-toggle-btn').click()" aria-label="Close Menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
-                    </button>
-                </div>
-                <div class="flex flex-col gap-2 font-semibold uppercase text-sm tracking-[0.2em]">
-                    <a href="index.html" class="text-white py-4 border-b border-white/5 hover:text-accent transition-colors">Home</a>
-                    <!-- About Collapsible -->
-                    <div class="border-b border-white/5">
-                        <button type="button" class="flex justify-between items-center w-full py-4 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="drawer-about-links">
-                            <span class="uppercase tracking-widest">About</span>
-                            <span class="flex items-center gap-2">
-                                <span class="nav-status sr-only"></span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                            </span>
-                        </button>
-                        <div id="drawer-about-links" class="hidden flex flex-col pb-4 pl-4 gap-3 text-xs opacity-70">
-                            <a href="about.html" class="hover:text-accent">Our Story</a>
-                            <a href="history.html" class="hover:text-accent">History</a>
-                        </div>
-                    </div>
-                    <!-- The Sport Collapsible -->
-                    <div class="border-b border-white/5">
-                        <button type="button" class="flex justify-between items-center w-full py-4 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="drawer-sport-links">
-                            <span class="uppercase tracking-widest">The Sport</span>
-                            <span class="flex items-center gap-2">
-                                <span class="nav-status sr-only"></span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                            </span>
-                        </button>
-                        <div id="drawer-sport-links" class="hidden flex flex-col pb-4 pl-4 gap-3 text-xs opacity-70">
-                            <a href="about-goalball.html" class="hover:text-accent">What is Goalball?</a>
-                            <a href="rules.html" class="hover:text-accent">Rules</a>
-                            <a href="equipment.html" class="hover:text-accent">Equipment</a>
-                        </div>
-                    </div>
-                    <!-- Schedule Collapsible -->
-                    <div class="border-b border-white/5">
-                        <button type="button" class="flex justify-between items-center w-full py-4 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="drawer-schedule-links">
-                            <span class="uppercase tracking-widest">Schedule</span>
-                            <span class="flex items-center gap-2">
-                                <span class="nav-status sr-only"></span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                            </span>
-                        </button>
-                        <div id="drawer-schedule-links" class="hidden flex flex-col pb-4 pl-4 gap-3 text-xs opacity-70">
-                            <a href="schedule.html" class="hover:text-accent">Practice Schedule</a>
-                            <a href="tournaments.html" class="hover:text-accent">Tournaments</a>
-                            <a href="past-events.html" class="hover:text-accent">Past Events</a>
-                        </div>
-                    </div>
-                    <!-- Get Involved Collapsible -->
-                    <div class="border-b border-white/5">
-                        <button type="button" class="flex justify-between items-center w-full py-4 text-white mobile-dropdown-toggle transition-transform duration-300" aria-expanded="false" aria-controls="drawer-involved-links">
-                            <span class="uppercase tracking-widest">Get Involved</span>
-                            <span class="flex items-center gap-2">
-                                <span class="nav-status sr-only"></span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
-                            </span>
-                        </button>
-                        <div id="drawer-involved-links" class="hidden flex flex-col pb-4 pl-4 gap-3 text-xs opacity-70">
-                            <a href="get-involved.html" class="hover:text-accent">Overview</a>
-                            <a href="volunteer.html" class="hover:text-accent">Volunteer</a>
-                            <a href="sponsors.html" class="hover:text-accent">Our Sponsors</a>
-                        </div>
-                    </div>
-                    <a href="resources.html" class="text-white py-4 border-b border-white/5 hover:text-accent transition-colors">Resources</a>
-                    <a href="contact.html" class="text-white py-4 hover:text-accent transition-colors">Contact</a>
-                </div>
-                <div class="mt-auto pt-12">
-                    <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="btn-primary w-full block text-center py-4">Donate Now</a>
+        <!-- Bottom Bar: Accessible Navigation Bar -->
+        <nav class="nav-bar hidden lg:block" role="navigation" aria-label="Main Navigation">
+            <div class="container mx-auto">
+                <div class="nav-container">
+                    <a href="index.html" class="nav-link" id="nav-index">Home</a>
+                    <a href="about.html" class="nav-link" id="nav-about">About Us</a>
+                    <a href="about-goalball.html" class="nav-link" id="nav-about-goalball">The Sport</a>
+                    <a href="schedule.html" class="nav-link" id="nav-schedule">Practice Schedule</a>
+                    <a href="tournaments.html" class="nav-link" id="nav-tournaments">Tournaments</a>
+                    <a href="get-involved.html" class="nav-link" id="nav-get-involved">Get Involved</a>
+                    <a href="faq.html" class="nav-link" id="nav-faq">FAQ</a>
+                    <a href="resources.html" class="nav-link" id="nav-resources">Resources</a>
+                    <a href="contact.html" class="nav-link" id="nav-contact">Contact</a>
                 </div>
             </div>
-        </div>
+        </nav>
     </header>
-    <main id="main-content" class="flex-grow">
+    <main id="main-content" class="flex-grow bg-white relative z-0">
         <!-- Page Banner -->
-        <section class="bg-primary text-white py-32">
+        <section class="bg-primary text-white py-24">
             <div class="container mx-auto px-4">
                 <h1 id="main-heading" class="text-5xl font-extrabold uppercase tracking-tight">Our Sponsors</h1>
                 <p class="text-xl md:text-2xl text-white/90 font-medium mt-4 max-w-2xl">Empowering athletes through generous community support and partnership.</p>
@@ -292,7 +159,7 @@
             <div class="grid md:grid-cols-4 gap-12 mb-16">
                 <div class="col-span-2">
                     <h3 class="text-3xl font-black mb-8 uppercase tracking-tight">San Diego Goalball</h3>
-                    <p class="text-white/80 max-w-md leading-relaxed mb-8 text-lg">Empowering the blind and visually impaired community through competitive excellence and inclusive athleticism. San Diego County Goalball is a proud 501(c)3 non-profit.</p>
+                    <p class="text-white/90 max-w-md leading-relaxed mb-8 text-lg">Empowering the blind and visually impaired community through competitive excellence and inclusive athleticism. San Diego County Goalball is a proud 501(c)3 non-profit.</p>
                     <div class="mb-8">
                         <h4 class="text-white font-black uppercase mb-6 tracking-wider border-b-2 border-white/20 pb-2 inline-block">SD Goalball Sponsors</h4>
                         <div class="flex flex-wrap gap-8 items-center">
@@ -329,17 +196,17 @@
                     <h4 class="text-white font-black uppercase mb-8 tracking-wider border-b-2 border-white/20 pb-2 inline-block">Contact Info</h4>
                     <ul class="space-y-6 text-sm font-bold uppercase tracking-widest">
                         <li class="flex flex-col gap-2">
-                            <span class="text-white/50 text-[10px]">Email</span>
+                            <span class="text-white/80 text-[10px]">Email</span>
                             <a href="mailto:nlrms@roadrunner.com" class="text-white hover:text-white/70 transition-all underline decoration-white/20">nlrms@roadrunner.com</a>
                         </li>
                         <li class="flex flex-col gap-2">
-                            <span class="text-white/50 text-[10px]">Phone</span>
+                            <span class="text-white/80 text-[10px]">Phone</span>
                             <a href="tel:7605252800" class="text-white hover:text-white/70 transition-all underline decoration-white/20">760-525-2800</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/40 font-bold uppercase tracking-[0.2em]">
+            <div class="pt-10 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/70 font-bold uppercase tracking-[0.2em]">
                 <p>&copy; <span id="year"></span> San Diego County Goalball. All rights reserved.</p>
                 <div class="flex flex-wrap justify-center gap-x-4 gap-y-2">
                     <a href="accessibility-statement.html" class="hover:text-white transition-colors">Accessibility Statement</a>
