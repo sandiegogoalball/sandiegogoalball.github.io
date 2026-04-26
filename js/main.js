@@ -199,9 +199,14 @@ function initMobileMenu() {
             // Add visibility for screen readers and sighted users
             const label = menuBtn.querySelector('.menu-label');
             const iconSvg = menuBtn.querySelector('svg');
+            const status = menuBtn.querySelector('.nav-status');
 
             if (label) {
                 label.textContent = nowExpanded ? 'Close' : 'Menu';
+            }
+
+            if (status) {
+                status.textContent = nowExpanded ? 'Expanded' : 'Collapsed';
             }
 
             if (iconSvg) {
@@ -231,6 +236,8 @@ function initMobileMenu() {
                 document.body.classList.remove('overflow-hidden');
                 const label = menuBtn.querySelector('.menu-label');
                 if (label) label.textContent = 'Menu';
+                const status = menuBtn.querySelector('.nav-status');
+                if (status) status.textContent = 'Collapsed';
                 const iconSvg = menuBtn.querySelector('svg');
                 if (iconSvg) {
                     iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
@@ -258,6 +265,10 @@ function initMobileMenu() {
 
             // Toggle current
             toggle.setAttribute('aria-expanded', nowExpanded);
+            const status = toggle.querySelector('.nav-status');
+            if (status) {
+                status.textContent = nowExpanded ? 'Expanded' : 'Collapsed';
+            }
 
             if (target) {
                 if (nowExpanded) {
@@ -302,31 +313,44 @@ function initDesktopNav() {
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                const nowExpanded = !isExpanded;
 
                 // Close all other dropdowns
                 dropdowns.forEach(other => {
                     if (other !== dropdown) {
                         const otherBtn = other.querySelector('button');
-                        if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                        if (otherBtn) {
+                            otherBtn.setAttribute('aria-expanded', 'false');
+                            const otherStatus = otherBtn.querySelector('.nav-status');
+                            if (otherStatus) otherStatus.textContent = 'Collapsed';
+                        }
                     }
                 });
 
-                button.setAttribute('aria-expanded', !isExpanded);
+                button.setAttribute('aria-expanded', nowExpanded);
+                const status = button.querySelector('.nav-status');
+                if (status) status.textContent = nowExpanded ? 'Expanded' : 'Collapsed';
             });
 
             // Handle mouse enter/leave for desktop hover behavior
             dropdown.addEventListener('mouseenter', () => {
                 button.setAttribute('aria-expanded', 'true');
+                const status = button.querySelector('.nav-status');
+                if (status) status.textContent = 'Expanded';
             });
 
             dropdown.addEventListener('mouseleave', () => {
                 button.setAttribute('aria-expanded', 'false');
+                const status = button.querySelector('.nav-status');
+                if (status) status.textContent = 'Collapsed';
             });
 
             // Handle keyboard navigation within dropdown
             dropdown.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     button.setAttribute('aria-expanded', 'false');
+                    const status = button.querySelector('.nav-status');
+                    if (status) status.textContent = 'Collapsed';
                     button.focus();
                 }
 
@@ -343,6 +367,8 @@ function initDesktopNav() {
                 requestAnimationFrame(() => {
                     if (!dropdown.contains(document.activeElement)) {
                         button.setAttribute('aria-expanded', 'false');
+                        const status = button.querySelector('.nav-status');
+                        if (status) status.textContent = 'Collapsed';
                     }
                 });
             });
@@ -354,7 +380,11 @@ function initDesktopNav() {
         if (!e.target.closest('.dropdown')) {
             dropdowns.forEach(dropdown => {
                 const button = dropdown.querySelector('button');
-                if (button) button.setAttribute('aria-expanded', 'false');
+                if (button) {
+                    button.setAttribute('aria-expanded', 'false');
+                    const status = button.querySelector('.nav-status');
+                    if (status) status.textContent = 'Collapsed';
+                }
             });
         }
     });
