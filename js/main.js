@@ -1,11 +1,9 @@
 // Tailwind CSS Configuration
-// This must run before the Tailwind CDN script processes the page
 window.tailwind = {
     config: {
         theme: {
             extend: {
                 colors: {
-                    // APH Inspired Palette: Navy and Teal
                     primary: '#002D56',
                     secondary: '#007A87',
                     accent: {
@@ -14,20 +12,29 @@ window.tailwind = {
                         600: '#007A87',
                         700: '#005F67',
                     },
-                    black: '#000000',
-                    white: '#FFFFFF',
-                    dark: '#002D56',
-                    charcoal: '#333333',
                 },
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
+                },
+                animation: {
+                    'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    'slide-in': 'slideIn 0.5s ease-out forwards',
+                },
+                keyframes: {
+                    fadeIn: {
+                        '0%': { opacity: '0' },
+                        '100%': { opacity: '1' },
+                    },
+                    slideIn: {
+                        '0%': { transform: 'translateY(20px)', opacity: '0' },
+                        '100%': { transform: 'translateY(0)', opacity: '1' },
+                    }
                 }
             }
         }
     }
 };
 
-// Site Index for Search
 const SITE_INDEX = [
     { title: "Home", url: "index.html", content: "San Diego County Goalball provides opportunities for blind and visually impaired athletes to compete in the Paralympic sport of goalball." },
     { title: "Our Story", url: "about.html", content: "Learn about our mission to empower athletes through sport, inclusion, and competitive excellence. Information on Matt Boyle." },
@@ -48,136 +55,197 @@ const SITE_INDEX = [
     { title: "Privacy Policy", url: "privacy-policy.html", content: "Privacy policy for San Diego County Goalball website." }
 ];
 
-// Site-wide Logic
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject required modals for accessibility and confirmation
     injectModals();
-
-    // Initialize mobile menu
     initMobileMenu();
-
-    // Initialize desktop navigation accessibility
     initDesktopNav();
-
-    // Initialize search
     initSearch();
-
-    // Initialize footer search submit
     initFooterSearchSubmit();
-
-    // Initialize external links accessibility
     initExternalLinks();
-
-    // Initialize FAQ Accordion
     initFAQ();
-
-    // Set current year in footer
     initYear();
-
-    // Initialize navigation highlighting
     highlightCurrentPage();
-
-    // Initialize Global Confirmation Modal
     initConfirmationModal();
-
-    // Initialize Contrast Toggle
     initContrastToggle();
-
-    // Initialize Cookie Consent
     initCookieConsent();
+    initScrollHeader();
+    initScrollReveal();
 });
 
-/**
- * Dynamically injects modals into the DOM to ensure they are present on all pages
- */
+function initScrollReveal() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+function initScrollHeader() {
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('shadow-xl', 'py-0');
+            header.querySelector('.header-top').classList.remove('h-20', 'md:h-24');
+            header.querySelector('.header-top').classList.add('h-16', 'md:h-20');
+        } else {
+            header.classList.remove('shadow-xl');
+            header.querySelector('.header-top').classList.add('h-20', 'md:h-24');
+            header.querySelector('.header-top').classList.remove('h-16', 'md:h-20');
+        }
+    });
+}
+
 function injectModals() {
     if (!document.getElementById('mobile-nav')) {
         const mobileNav = document.createElement('div');
         mobileNav.id = 'mobile-nav';
-        mobileNav.className = 'fixed inset-0 bg-primary/40 backdrop-blur-sm z-[1000] invisible opacity-0 translate-x-full transition-all duration-500 ease-in-out';
+        mobileNav.className = 'fixed inset-0 bg-primary/60 backdrop-blur-md z-[2000] invisible opacity-0 transition-all duration-500 ease-in-out';
         mobileNav.innerHTML = `
-            <div class="flex flex-col h-full max-w-xs ml-auto bg-white shadow-2xl p-8 overflow-y-auto">
-                <div class="flex justify-between items-center mb-8 border-b-2 border-slate-100 pb-4">
-                    <span class="text-xl font-black text-primary uppercase tracking-tighter nav-heading">Navigation</span>
-                    <button type="button" class="text-slate-400 hover:text-primary transition-colors" onclick="document.getElementById('menu-toggle-btn').click()" aria-label="Close Menu">
+            <div class="flex flex-col h-full max-w-sm ml-auto bg-white shadow-2xl overflow-y-auto transform translate-x-full transition-transform duration-500 ease-in-out drawer-inner">
+                <div class="flex justify-between items-center p-8 border-b border-slate-100">
+                    <span class="text-2xl font-black text-primary uppercase tracking-tighter">Menu</span>
+                    <button type="button" class="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-primary" onclick="document.getElementById('menu-toggle-btn').click()" aria-label="Close Menu">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
                     </button>
                 </div>
-                <div class="flex flex-col gap-1 font-bold uppercase text-sm tracking-widest">
-                    <a href="index.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Home</a>
-                    <a href="about.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">About</a>
-                    <a href="about-goalball.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Sport</a>
-                    <a href="schedule.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Schedule</a>
-                    <a href="tournaments.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Tournaments</a>
-                    <a href="get-involved.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Involved</a>
-                    <a href="faq.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">FAQ</a>
-                    <a href="resources.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Resources</a>
-                    <a href="contact.html" class="text-primary py-4 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Contact</a>
+                <div class="p-8 flex flex-col gap-2 overflow-y-auto h-full">
+                    <a href="index.html" class="mobile-nav-link text-xl font-black text-primary py-4 border-b border-slate-50 hover:text-secondary transition-colors">Home</a>
+
+                    <!-- Mobile About -->
+                    <div class="mobile-dropdown py-4 border-b border-slate-50">
+                        <button type="button" class="w-full flex justify-between items-center text-xl font-black text-primary uppercase tracking-tight mobile-drawer-toggle" aria-expanded="false" data-target="mobile-about-content">
+                            About
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div id="mobile-about-content" class="hidden flex-col gap-4 pl-6 pt-4">
+                            <a href="about.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Our Story</a>
+                            <a href="history.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">History</a>
+                            <a href="sponsors.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Our Sponsors</a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Sport -->
+                    <div class="mobile-dropdown py-4 border-b border-slate-50">
+                        <button type="button" class="w-full flex justify-between items-center text-xl font-black text-primary uppercase tracking-tight mobile-drawer-toggle" aria-expanded="false" data-target="mobile-sport-content">
+                            The Sport
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div id="mobile-sport-content" class="hidden flex-col gap-4 pl-6 pt-4">
+                            <a href="about-goalball.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Overview</a>
+                            <a href="rules.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Rules</a>
+                            <a href="equipment.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Equipment</a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Events -->
+                    <div class="mobile-dropdown py-4 border-b border-slate-50">
+                        <button type="button" class="w-full flex justify-between items-center text-xl font-black text-primary uppercase tracking-tight mobile-drawer-toggle" aria-expanded="false" data-target="mobile-events-content">
+                            Events
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div id="mobile-events-content" class="hidden flex-col gap-4 pl-6 pt-4">
+                            <a href="schedule.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Practice Schedule</a>
+                            <a href="tournaments.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Tournaments</a>
+                            <a href="past-events.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Past Events</a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Community -->
+                    <div class="mobile-dropdown py-4 border-b border-slate-50">
+                        <button type="button" class="w-full flex justify-between items-center text-xl font-black text-primary uppercase tracking-tight mobile-drawer-toggle" aria-expanded="false" data-target="mobile-community-content">
+                            Community
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                        </button>
+                        <div id="mobile-community-content" class="hidden flex-col gap-4 pl-6 pt-4">
+                            <a href="get-involved.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Get Involved</a>
+                            <a href="volunteer.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">Volunteer</a>
+                            <a href="faq.html" class="text-lg font-bold text-slate-600 hover:text-secondary uppercase tracking-wider">FAQ</a>
+                        </div>
+                    </div>
+
+                    <a href="resources.html" class="text-xl font-black text-primary py-4 border-b border-slate-50 hover:text-secondary transition-colors uppercase tracking-tight">Resources</a>
+                    <a href="contact.html" class="text-xl font-black text-primary py-4 hover:text-secondary transition-colors uppercase tracking-tight">Contact</a>
                 </div>
-                <div class="mt-auto pt-12">
-                    <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="w-full block text-center py-4 bg-accent text-white font-black rounded-full shadow-lg hover:bg-accent-700 transition-all uppercase tracking-widest text-sm">Donate Now</a>
+                <div class="mt-auto p-8 bg-slate-50">
+                    <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="w-full block text-center py-5 bg-secondary text-white font-black rounded-full shadow-xl hover:bg-secondary-600 transition-all uppercase tracking-widest text-sm">Donate Now</a>
                 </div>
             </div>
         `;
         document.body.appendChild(mobileNav);
+
+        // Mobile Drawer Dropdowns
+        const mobileToggles = mobileNav.querySelectorAll('.mobile-drawer-toggle');
+        mobileToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const targetId = toggle.getAttribute('data-target');
+                const target = document.getElementById(targetId);
+                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+                toggle.setAttribute('aria-expanded', !isExpanded);
+                toggle.querySelector('svg').style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+                target.classList.toggle('hidden');
+                target.classList.toggle('flex');
+            });
+        });
     }
 
     if (!document.getElementById('contrast-modal')) {
         const contrastModal = document.createElement('dialog');
         contrastModal.id = 'contrast-modal';
-        contrastModal.className = 'p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full max-h-[90vh] overflow-hidden';
+        contrastModal.className = 'p-0 rounded-[2rem] shadow-2xl border-none max-w-lg w-[95%] max-h-[90vh] overflow-hidden';
         contrastModal.innerHTML = `
             <div class="flex flex-col h-full max-h-[90vh]">
-                <div class="bg-primary p-8 text-white relative flex-shrink-0">
-                    <button id="close-contrast-modal" class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                <div class="bg-primary p-10 text-white relative flex-shrink-0">
+                    <button id="close-contrast-modal" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
                     </button>
-                    <h2 class="text-3xl font-black uppercase mb-1">Display Settings</h2>
-                    <p class="text-white/80 text-sm font-medium">Customize your viewing experience below.</p>
+                    <h2 class="text-4xl font-black uppercase mb-2 tracking-tight">Display Options</h2>
+                    <p class="text-white/80 text-sm font-bold uppercase tracking-widest">Customize your experience</p>
                 </div>
-                <div class="p-10 bg-white overflow-y-auto flex-grow space-y-10 text-black">
-                    <section aria-labelledby="visual-options-heading">
-                        <div class="flex items-center gap-2 mb-6 border-b-2 border-slate-100 pb-3">
-                            <h3 id="visual-options-heading" class="text-lg font-black uppercase tracking-wider text-black">Visual Appearance</h3>
-                        </div>
-                        <div class="grid grid-cols-1 gap-3">
-                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="standard">
-                                <span class="font-black text-black uppercase text-sm">Standard Mode</span>
-                                <div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-slate-300"></div>
+                <div class="p-10 bg-white overflow-y-auto flex-grow space-y-12 text-black">
+                    <section>
+                        <h3 class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-4 after:content-[''] after:h-px after:bg-slate-100 after:flex-grow">Visual Mode</h3>
+                        <div class="grid grid-cols-1 gap-4">
+                            <button type="button" class="contrast-option flex items-center justify-between p-6 rounded-2xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="standard">
+                                <span class="font-black text-primary uppercase text-sm">Standard (White)</span>
+                                <div class="w-10 h-10 rounded-full bg-slate-50 border-2 border-slate-200"></div>
                             </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="high-contrast">
-                                <span class="font-black text-black uppercase text-sm">White on Black</span>
-                                <div class="w-8 h-8 rounded-full bg-black border-2 border-white shadow-inner"></div>
+                            <button type="button" class="contrast-option flex items-center justify-between p-6 rounded-2xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast">
+                                <span class="font-black text-primary uppercase text-sm">White on Black</span>
+                                <div class="w-10 h-10 rounded-full bg-black border-2 border-white shadow-xl"></div>
                             </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="high-contrast-yellow">
-                                <span class="font-black text-black uppercase text-sm">Yellow on Black</span>
-                                <div class="w-8 h-8 rounded-full bg-black border-2 border-yellow-400 shadow-inner"></div>
+                            <button type="button" class="contrast-option flex items-center justify-between p-6 rounded-2xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-yellow">
+                                <span class="font-black text-primary uppercase text-sm">Yellow on Black</span>
+                                <div class="w-10 h-10 rounded-full bg-black border-2 border-yellow-400 shadow-xl"></div>
                             </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="high-contrast-black-white">
-                                <span class="font-black text-black uppercase text-sm">Black on White</span>
-                                <div class="w-8 h-8 rounded-full bg-white border-2 border-black shadow-inner"></div>
-                            </button>
-                            <button type="button" class="contrast-option flex items-center justify-between p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all" data-mode="high-contrast-pink">
-                                <span class="font-black text-black uppercase text-sm">Pink on Black</span>
-                                <div class="w-8 h-8 rounded-full bg-black border-2 border-[#FF99CC] shadow-inner"></div>
+                            <button type="button" class="contrast-option flex items-center justify-between p-6 rounded-2xl border-2 border-slate-100 hover:border-secondary transition-all" data-mode="high-contrast-pink">
+                                <span class="font-black text-primary uppercase text-sm">Pink on Black</span>
+                                <div class="w-10 h-10 rounded-full bg-black border-2 border-pink-400 shadow-xl"></div>
                             </button>
                         </div>
                     </section>
-                    <section aria-labelledby="text-size-heading">
-                        <div class="flex items-center gap-2 mb-6 border-b-2 border-slate-100 pb-3">
-                            <h3 id="text-size-heading" class="text-lg font-black uppercase tracking-wider text-black">Text Size</h3>
-                        </div>
+                    <section>
+                        <h3 class="text-xs font-black uppercase tracking-[0.2em] text-slate-400 mb-6 flex items-center gap-4 after:content-[''] after:h-px after:bg-slate-100 after:flex-grow">Text Size</h3>
                         <div class="grid grid-cols-2 gap-4">
-                            <button type="button" class="text-size-option p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all font-black uppercase text-sm" data-size="ts-small">Small</button>
-                            <button type="button" class="text-size-option p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all font-black uppercase text-sm" data-size="ts-medium">Medium</button>
-                            <button type="button" class="text-size-option p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all font-black uppercase text-sm" data-size="ts-large">Large</button>
-                            <button type="button" class="text-size-option p-5 rounded-xl border-2 border-slate-200 hover:border-accent transition-all font-black uppercase text-sm" data-size="ts-xlarge">Extra Large</button>
+                            <button type="button" class="text-size-option p-6 rounded-2xl border-2 border-slate-100 hover:border-secondary transition-all font-black uppercase text-xs" data-size="ts-small">Small</button>
+                            <button type="button" class="text-size-option p-6 rounded-2xl border-2 border-slate-100 hover:border-secondary transition-all font-black uppercase text-xs" data-size="ts-medium">Medium</button>
+                            <button type="button" class="text-size-option p-6 rounded-2xl border-2 border-slate-100 hover:border-secondary transition-all font-black uppercase text-xs" data-size="ts-large">Large</button>
+                            <button type="button" class="text-size-option p-6 rounded-2xl border-2 border-slate-100 hover:border-secondary transition-all font-black uppercase text-xs" data-size="ts-xlarge">Extra Large</button>
                         </div>
                     </section>
                 </div>
-                <div class="p-8 bg-slate-50 border-t-2 border-slate-200 flex flex-col sm:flex-row gap-4 flex-shrink-0">
-                    <button type="button" id="cancel-accessibility" class="flex-1 px-8 py-4 rounded-full border-2 border-slate-400 text-black font-black uppercase text-sm hover:bg-slate-200 transition-all">Cancel</button>
-                    <button type="button" id="save-accessibility" class="flex-1 px-8 py-4 rounded-full bg-accent text-white font-black uppercase text-sm hover:bg-accent-700 transition-all shadow-lg border-2 border-accent">Save Changes</button>
+                <div class="p-8 bg-slate-50 border-t border-slate-100 flex gap-4">
+                    <button type="button" id="save-accessibility" class="flex-1 py-5 rounded-full bg-primary text-white font-black uppercase text-sm hover:bg-secondary transition-all shadow-xl hover:scale-[1.02] active:scale-95">Save Changes</button>
                 </div>
             </div>
         `;
@@ -187,356 +255,159 @@ function injectModals() {
     if (!document.getElementById('confirmation-modal')) {
         const confirmModal = document.createElement('dialog');
         confirmModal.id = 'confirmation-modal';
-        confirmModal.className = 'p-0 rounded-3xl shadow-2xl border-none max-w-lg w-full overflow-hidden';
+        confirmModal.className = 'p-0 rounded-[2rem] shadow-2xl border-none max-w-md w-[95%] overflow-hidden';
         confirmModal.innerHTML = `
-            <div class="bg-primary p-10 text-white relative">
-                <button id="close-confirmation-modal" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
-                </button>
-                <h2 id="confirmation-modal-title" class="text-4xl font-black uppercase mb-3">Notice</h2>
-                <p id="confirmation-modal-message" class="text-white/90 text-lg leading-relaxed">Message goes here.</p>
-            </div>
-            <div class="p-10 bg-white flex justify-end gap-5">
-                <button id="cancel-confirmation-modal" class="btn-outline px-8 py-3 text-sm font-black uppercase">Go Back</button>
-                <button id="confirm-confirmation-modal" class="btn-primary px-8 py-3 text-sm font-black uppercase">Proceed</button>
+            <div class="flex flex-col">
+                <div class="bg-primary p-10 text-white relative">
+                    <button id="close-confirmation-modal" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors" aria-label="Close Modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                    </button>
+                    <h2 id="confirmation-modal-title" class="text-3xl font-black uppercase mb-2 tracking-tight">External Link</h2>
+                    <p class="text-white/80 text-sm font-bold uppercase tracking-widest">Leaving our website</p>
+                </div>
+                <div class="p-10 bg-white">
+                    <p id="confirmation-modal-message" class="text-slate-600 font-medium leading-relaxed mb-10 text-black"></p>
+                    <div class="flex gap-4">
+                        <button type="button" id="confirm-confirmation-modal" class="flex-1 py-5 rounded-full bg-secondary text-white font-black uppercase text-sm hover:bg-secondary-600 transition-all shadow-xl hover:scale-[1.02] active:scale-95">Continue</button>
+                        <button type="button" id="cancel-confirmation-modal" class="flex-1 py-5 rounded-full bg-slate-100 text-primary font-black uppercase text-sm hover:bg-slate-200 transition-all">Cancel</button>
+                    </div>
+                </div>
             </div>
         `;
         document.body.appendChild(confirmModal);
     }
 }
 
-/**
- * Unified menu toggle functionality (Mobile & Desktop Drawer)
- */
 function initMobileMenu() {
-    const menuBtn = document.getElementById('menu-toggle-btn');
-    const mobileNav = document.getElementById('mobile-nav');
+    const btn = document.getElementById('menu-toggle-btn');
+    const nav = document.getElementById('mobile-nav');
+    const drawer = nav.querySelector('.drawer-inner');
 
-    if (menuBtn && mobileNav) {
-        menuBtn.addEventListener('click', () => {
-            const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-            const nowExpanded = !isExpanded;
-            menuBtn.setAttribute('aria-expanded', nowExpanded);
+    if (btn && nav) {
+        btn.addEventListener('click', () => {
+            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', !isExpanded);
 
-            if (nowExpanded) {
-                mobileNav.classList.remove('opacity-0', 'invisible', 'translate-x-full');
-                mobileNav.classList.add('opacity-100', 'visible', 'translate-x-0');
-                document.body.classList.add('overflow-hidden'); // Prevent scroll when menu is open
-            } else {
-                mobileNav.classList.add('opacity-0', 'invisible', 'translate-x-full');
-                mobileNav.classList.remove('opacity-100', 'visible', 'translate-x-0');
-                document.body.classList.remove('overflow-hidden');
-            }
-
-            // Add visibility for screen readers and sighted users
-            const label = menuBtn.querySelector('.menu-label');
-            const iconSvg = menuBtn.querySelector('svg');
-            const status = menuBtn.querySelector('.nav-status');
-
-            if (label) {
-                label.textContent = nowExpanded ? 'Close' : 'Menu';
-            }
-
-            if (status) {
-                status.textContent = '';
-            }
-
-            if (iconSvg) {
-                if (nowExpanded) {
-                    // X icon
-                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />';
-                    // Move focus to first link in nav
-                    setTimeout(() => {
-                        const firstLink = mobileNav.querySelector('a');
-                        if (firstLink) firstLink.focus();
-                    }, 300);
+            // Hamburger Animation Logic
+            const svg = btn.querySelector('svg');
+            if (svg) {
+                if (!isExpanded) {
+                    svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />';
                 } else {
-                    // Menu icon
-                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
-                    // Focus back to menu button
-                    menuBtn.focus();
+                    svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
                 }
+            }
+
+            if (!isExpanded) {
+                nav.classList.remove('invisible', 'opacity-0');
+                nav.classList.add('visible', 'opacity-100');
+                drawer.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden';
+            } else {
+                drawer.classList.add('translate-x-full');
+                nav.classList.remove('opacity-100');
+                nav.classList.add('opacity-0');
+                setTimeout(() => {
+                    nav.classList.remove('visible');
+                    nav.classList.add('invisible');
+                }, 500);
+                document.body.style.overflow = '';
             }
         });
 
-        // Close menu on Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
-                mobileNav.classList.add('opacity-0', 'invisible', 'translate-x-full');
-                mobileNav.classList.remove('opacity-100', 'visible', 'translate-x-0');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                document.body.classList.remove('overflow-hidden');
-                const label = menuBtn.querySelector('.menu-label');
-                if (label) label.textContent = 'Menu';
-                const status = menuBtn.querySelector('.nav-status');
-                if (status) status.textContent = '';
-                const iconSvg = menuBtn.querySelector('svg');
-                if (iconSvg) {
-                    iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
-                }
-                menuBtn.focus();
-            }
-        });
-
-        // Close menu when clicking outside (on the backdrop overlay)
-        mobileNav.addEventListener('click', (e) => {
-            if (e.target === mobileNav) {
-                menuBtn.click();
-            }
+        nav.addEventListener('click', (e) => {
+            if (e.target === nav) btn.click();
         });
     }
-
-    // Hide mobile menu toggle on large screens if it's not meant to be there
-    // Actually, we'll control visibility via CSS usually, but we can ensure state is reset
-    window.addEventListener('resize', () => {
-        if (window.innerWidth >= 1024) { // lg breakpoint
-            if (menuBtn && menuBtn.getAttribute('aria-expanded') === 'true') {
-                menuBtn.click();
-            }
-        }
-    });
-
-    // Dropdown Accordions (Works for both mobile and desktop drawer)
-    const mobileToggles = document.querySelectorAll('.mobile-dropdown-toggle');
-    mobileToggles.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const targetId = toggle.getAttribute('aria-controls');
-            const target = document.getElementById(targetId);
-            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-            const nowExpanded = !isExpanded;
-
-            // Toggle current
-            toggle.setAttribute('aria-expanded', nowExpanded);
-            const status = toggle.querySelector('.nav-status');
-            if (status) {
-                status.textContent = '';
-            }
-
-            if (target) {
-                if (nowExpanded) {
-                    target.classList.remove('hidden');
-                    // Trigger reflow for transition
-                    void target.offsetHeight;
-                    target.classList.remove('max-h-0', 'opacity-0', 'invisible');
-                    target.classList.add('max-h-[500px]', 'opacity-100', 'visible');
-                } else {
-                    target.classList.add('max-h-0', 'opacity-0', 'invisible');
-                    target.classList.remove('max-h-[500px]', 'opacity-100', 'visible');
-                    // Add hidden after transition completes
-                    setTimeout(() => {
-                        if (toggle.getAttribute('aria-expanded') === 'false') {
-                            target.classList.add('hidden');
-                        }
-                    }, 300);
-                }
-            }
-
-            // Rotate icon for animation effect
-            const icon = toggle.querySelector('svg');
-            if (icon) {
-                icon.style.transform = nowExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
-            }
-        });
-    });
 }
 
-/**
- * Desktop navigation accessibility - handle focus states and clicks
- */
 function initDesktopNav() {
     const dropdowns = document.querySelectorAll('.dropdown');
-
     dropdowns.forEach(dropdown => {
         const button = dropdown.querySelector('button');
         const content = dropdown.querySelector('.dropdown-content');
 
         if (button && content) {
-            // Toggle on click
             button.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
-                const nowExpanded = !isExpanded;
 
-                // Close all other dropdowns
-                dropdowns.forEach(other => {
-                    if (other !== dropdown) {
-                        const otherBtn = other.querySelector('button');
-                        if (otherBtn) {
-                            otherBtn.setAttribute('aria-expanded', 'false');
-                            const otherStatus = otherBtn.querySelector('.nav-status');
-                            if (otherStatus) otherStatus.textContent = '';
-                        }
-                    }
+                // Close all others
+                dropdowns.forEach(d => {
+                    d.querySelector('button').setAttribute('aria-expanded', 'false');
+                    d.querySelector('.dropdown-content').classList.add('hidden');
                 });
 
-                button.setAttribute('aria-expanded', nowExpanded);
-                const status = button.querySelector('.nav-status');
-                if (status) status.textContent = '';
+                if (!isExpanded) {
+                    button.setAttribute('aria-expanded', 'true');
+                    content.classList.remove('hidden');
+                }
             });
 
-            // Handle mouse enter/leave for desktop hover behavior
-            dropdown.addEventListener('mouseenter', () => {
-                button.setAttribute('aria-expanded', 'true');
-                const status = button.querySelector('.nav-status');
-                if (status) status.textContent = '';
-            });
-
-            dropdown.addEventListener('mouseleave', () => {
-                button.setAttribute('aria-expanded', 'false');
-                const status = button.querySelector('.nav-status');
-                if (status) status.textContent = '';
-            });
-
-            // Handle keyboard navigation within dropdown
+            // Close on escape
             dropdown.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     button.setAttribute('aria-expanded', 'false');
-                    const status = button.querySelector('.nav-status');
-                    if (status) status.textContent = '';
+                    content.classList.add('hidden');
                     button.focus();
                 }
-
-                // Allow Space to toggle as well
-                if (e.key === ' ' || e.key === 'Spacebar') {
-                    e.preventDefault();
-                    button.click();
-                }
-            });
-
-            // Close when focus leaves the dropdown (Tab out)
-            dropdown.addEventListener('focusout', (e) => {
-                // Use requestAnimationFrame to check focus after it shifts
-                requestAnimationFrame(() => {
-                    if (!dropdown.contains(document.activeElement)) {
-                        button.setAttribute('aria-expanded', 'false');
-                        const status = button.querySelector('.nav-status');
-                        if (status) status.textContent = '';
-                    }
-                });
             });
         }
     });
 
-    // Close all dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.dropdown')) {
-            dropdowns.forEach(dropdown => {
-                const button = dropdown.querySelector('button');
-                if (button) {
-                    button.setAttribute('aria-expanded', 'false');
-                    const status = button.querySelector('.nav-status');
-                    if (status) status.textContent = '';
-                }
-            });
-        }
+    document.addEventListener('click', () => {
+        dropdowns.forEach(d => {
+            d.querySelector('button').setAttribute('aria-expanded', 'false');
+            d.querySelector('.dropdown-content').classList.add('hidden');
+        });
     });
 }
 
-/**
- * Modern Search Functionality
- */
 function initSearch() {
-    const searchBtn = document.getElementById('search-btn');
-    const searchInput = document.getElementById('search-input');
-    const searchCancel = document.getElementById('search-cancel');
-    const searchContainer = document.getElementById('search-container');
+    const btn = document.getElementById('search-btn');
+    const input = document.getElementById('search-input');
+    const cancel = document.getElementById('search-cancel');
+    const container = document.getElementById('search-container');
 
-    if (!searchBtn || !searchInput) return;
+    if (btn && input) {
+        btn.addEventListener('click', () => {
+            if (input.offsetWidth < 10) {
+                input.focus();
+            } else if (input.value.trim().length >= 2) {
+                performSearch(input.value);
+            }
+        });
 
-    const showSearch = () => {
-        if (searchCancel) searchCancel.classList.remove('hidden');
-        searchInput.focus();
-    };
+        input.addEventListener('input', () => {
+            cancel.classList.toggle('hidden', input.value.length === 0);
+            if (input.value.length >= 2) performSearch(input.value);
+            else {
+                const results = document.getElementById('search-results');
+                if (results) results.remove();
+            }
+        });
 
-    const hideSearch = () => {
-        if (searchCancel) searchCancel.classList.add('hidden');
-        const results = document.getElementById('search-results');
-        if (results) results.remove();
-    };
+        cancel.addEventListener('click', () => {
+            input.value = '';
+            cancel.classList.add('hidden');
+            const results = document.getElementById('search-results');
+            if (results) results.remove();
+            input.focus();
+        });
 
-    searchBtn.addEventListener('click', (e) => {
-        const isCollapsed = searchInput.offsetWidth <= 0;
-
-        if (isCollapsed) {
-            showSearch();
-        } else if (searchInput.value.trim() === '') {
-            searchInput.focus();
-        } else {
-            performSearch(searchInput.value);
-        }
-    });
-
-    if (searchCancel) {
-        searchCancel.addEventListener('click', () => {
-            searchInput.value = '';
-            hideSearch();
-            searchBtn.focus();
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch(input.value);
         });
     }
-
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            performSearch(searchInput.value);
-        }
-    });
-
-    // Close search on escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !searchInput.classList.contains('hidden')) {
-            hideSearch();
-        }
-    });
 }
 
 function performSearch(query) {
     if (!query || query.trim().length < 2) return;
-
-    const results = SITE_INDEX.filter(item =>
+    const matches = SITE_INDEX.filter(item =>
         item.title.toLowerCase().includes(query.toLowerCase()) ||
         item.content.toLowerCase().includes(query.toLowerCase())
     );
-
-    showSearchResults(results);
-
-    // Auto-scroll to results for better UX, especially on mobile
-    const resultsDiv = document.getElementById('search-results');
-    if (resultsDiv && window.innerWidth < 768) {
-        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-}
-
-/**
- * Footer search input submission
- */
-function initFooterSearchSubmit() {
-    const footerSearchInput = document.getElementById('footer-search-input');
-    const footerSearchSubmit = document.getElementById('footer-search-submit');
-
-    if (footerSearchInput && footerSearchSubmit) {
-        const handleFooterSearch = () => {
-            const query = footerSearchInput.value.trim();
-            if (query.length >= 2) {
-                // We use the existing performSearch logic
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                const mainSearchInput = document.getElementById('search-input');
-                const mainSearchCancel = document.getElementById('search-cancel');
-                if (mainSearchInput) {
-                    mainSearchInput.classList.remove('hidden');
-                    if (mainSearchCancel) mainSearchCancel.classList.remove('hidden');
-                    mainSearchInput.value = query;
-                    performSearch(query);
-                    mainSearchInput.focus();
-                }
-            }
-        };
-
-        footerSearchSubmit.addEventListener('click', handleFooterSearch);
-        footerSearchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleFooterSearch();
-            }
-        });
-    }
+    showSearchResults(matches);
 }
 
 function showSearchResults(results) {
@@ -544,458 +415,202 @@ function showSearchResults(results) {
     if (!resultsDiv) {
         resultsDiv = document.createElement('div');
         resultsDiv.id = 'search-results';
-        resultsDiv.className = 'absolute top-full right-0 w-80 sm:w-96 bg-white shadow-2xl rounded-b-2xl border border-slate-200 z-[100] max-h-96 overflow-y-auto p-2';
-        resultsDiv.setAttribute('aria-live', 'polite');
+        resultsDiv.className = 'absolute top-full right-0 w-80 md:w-[400px] bg-white shadow-2xl rounded-2xl border border-slate-100 z-[200] mt-4 p-4 max-h-[70vh] overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-300';
         document.getElementById('search-container').appendChild(resultsDiv);
     }
 
-    resultsDiv.innerHTML = '';
-
     if (results.length === 0) {
-        resultsDiv.innerHTML = '<div class="p-4 text-sm text-black font-black text-center">No matches found for your search.</div>';
+        resultsDiv.innerHTML = '<div class="p-4 text-center font-bold text-slate-400">No results found</div>';
     } else {
-        results.forEach(item => {
-            const link = document.createElement('a');
-            link.href = item.url;
-            link.className = 'block p-4 hover:bg-slate-50 rounded-xl transition-all border-b border-slate-100 last:border-0 group';
-            link.innerHTML = `
-                <h4 class="font-black text-black group-hover:text-accent text-sm mb-1 uppercase tracking-tight">${item.title}</h4>
-                <p class="text-xs text-black line-clamp-2 leading-relaxed">${item.content}</p>
-            `;
-            resultsDiv.appendChild(link);
-        });
+        resultsDiv.innerHTML = results.map(item => `
+            <a href="${item.url}" class="block p-4 hover:bg-slate-50 rounded-xl transition-all border-b border-slate-50 last:border-none group">
+                <h4 class="font-black text-primary text-sm uppercase tracking-tight group-hover:text-secondary mb-1">${item.title}</h4>
+                <p class="text-xs text-slate-500 line-clamp-2">${item.content}</p>
+            </a>
+        `).join('');
     }
-
-    // Close results when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!document.getElementById('search-container').contains(e.target)) {
-            const resultsDiv = document.getElementById('search-results');
-            if (resultsDiv) resultsDiv.remove();
-        }
-    }, { once: true });
 }
 
-/**
- * Global Confirmation Modal Logic
- */
-let confirmCallback = null;
-
-function initConfirmationModal() {
-    const modal = document.getElementById('confirmation-modal');
-    const closeBtn = document.getElementById('close-confirmation-modal');
-    const cancelBtn = document.getElementById('cancel-confirmation-modal');
-    const confirmBtn = document.getElementById('confirm-confirmation-modal');
-
-    if (!modal) return;
-
-    const closeModal = () => {
-        modal.close();
-        confirmCallback = null;
-    };
-
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
-
-    if (confirmBtn) {
-        confirmBtn.addEventListener('click', () => {
-            if (confirmCallback) {
-                confirmCallback();
+function initFooterSearchSubmit() {
+    const input = document.getElementById('footer-search-input');
+    const btn = document.getElementById('footer-search-submit');
+    if (input && btn) {
+        btn.addEventListener('click', () => {
+            if (input.value.length >= 2) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const mainInput = document.getElementById('search-input');
+                mainInput.value = input.value;
+                performSearch(input.value);
+                mainInput.focus();
             }
-            closeModal();
         });
     }
-
-    // Close on click outside
-    modal.addEventListener('click', (e) => {
-        const dialogDimensions = modal.getBoundingClientRect();
-        if (
-            e.clientX < dialogDimensions.left ||
-            e.clientX > dialogDimensions.right ||
-            e.clientY < dialogDimensions.top ||
-            e.clientY > dialogDimensions.bottom
-        ) {
-            closeModal();
-        }
-    });
 }
 
-function showConfirmation(title, message, onConfirm, showCancel = true) {
-    const modal = document.getElementById('confirmation-modal');
-    const titleElem = document.getElementById('confirmation-modal-title');
-    const messageElem = document.getElementById('confirmation-modal-message');
-    const cancelBtn = document.getElementById('cancel-confirmation-modal');
-    const confirmBtn = document.getElementById('confirm-confirmation-modal');
-
-    if (!modal || !titleElem || !messageElem) {
-        // Fallback if modal not present in HTML
-        if (confirm(message)) {
-            onConfirm();
-        }
-        return;
-    }
-
-    titleElem.textContent = title;
-    messageElem.textContent = message;
-    confirmCallback = onConfirm;
-
-    if (cancelBtn) {
-        if (showCancel) {
-            cancelBtn.classList.remove('hidden');
-        } else {
-            cancelBtn.classList.add('hidden');
-        }
-    }
-
-    if (confirmBtn) {
-        confirmBtn.textContent = showCancel ? 'Continue' : 'OK';
-    }
-
-    modal.showModal();
-}
-
-/**
- * Shows a simple alert with a single OK button
- */
-function showAlert(title, message) {
-    showConfirmation(title, message, () => {
-        // Nothing special on alert dismissal
-    }, false);
-}
-
-/**
- * Simple Popup function as requested by user - Updated to use Alert Modal
- */
-function showPopup() {
-    showAlert("Notification", "Hello! This is a popup.");
-}
-
-/**
- * Automatically handle external links for accessibility and security
- * Updated to use accessible modal
- */
 function initExternalLinks() {
-    const links = document.querySelectorAll('a[target="_blank"]');
-
-    links.forEach(link => {
-        // Ensure rel="noopener noreferrer" for security
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
         link.setAttribute('rel', 'noopener noreferrer');
-
-        // Add "(opens in new tab)" for screen readers
-        const hasSRLabel = link.querySelector('.sr-only');
-        if (!hasSRLabel) {
-            const srText = document.createElement('span');
-            srText.className = 'sr-only';
-            srText.textContent = ' (opens in new tab)';
-            link.appendChild(srText);
-        }
-
-        // Accessible modal pop-up logic - only for actually external links
         link.addEventListener('click', (e) => {
-            const href = link.href;
             const isExternal = link.hostname && link.hostname !== window.location.hostname;
-
             if (isExternal) {
                 e.preventDefault();
                 showConfirmation(
                     "Leaving Website",
-                    "You are now leaving the San Diego Goalball website to visit an external link. Do you wish to continue?",
-                    () => {
-                        window.open(href, '_blank', 'noopener,noreferrer');
-                    }
+                    "You are now leaving our site to visit an external link. Continue?",
+                    () => window.open(link.href, '_blank')
                 );
             }
         });
     });
 }
 
-/**
- * FAQ Accordion Logic - Enhanced for Accessibility (ARIA + State Text)
- */
 function initFAQ() {
-    const faqItems = document.querySelectorAll('.faq-item');
-
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        const icon = item.querySelector('.faq-icon');
-
-        if (question && answer) {
-            question.addEventListener('click', () => {
-                const isOpen = question.getAttribute('aria-expanded') === 'true';
-                const nowOpen = !isOpen;
-
-                // Close all other items for a clean accordion experience
-                faqItems.forEach(otherItem => {
-                    const otherBtn = otherItem.querySelector('.faq-question');
-                    const otherAnswer = otherItem.querySelector('.faq-answer');
-                    const otherIcon = otherItem.querySelector('.faq-icon');
-
-                    if (otherBtn && otherBtn !== question) {
-                        otherBtn.setAttribute('aria-expanded', 'false');
-                        if (otherAnswer) {
-                            otherAnswer.classList.remove('active');
-                            otherAnswer.setAttribute('aria-hidden', 'true');
-                            otherAnswer.style.display = 'none';
-                        }
-                        if (otherIcon) otherIcon.classList.remove('rotate-180');
-                    }
+    document.querySelectorAll('.faq-item').forEach(item => {
+        const q = item.querySelector('.faq-question');
+        const a = item.querySelector('.faq-answer');
+        if (q && a) {
+            q.addEventListener('click', () => {
+                const isOpen = q.getAttribute('aria-expanded') === 'true';
+                document.querySelectorAll('.faq-question').forEach(otherQ => {
+                    otherQ.setAttribute('aria-expanded', 'false');
+                    otherQ.nextElementSibling.classList.remove('active');
                 });
-
-                // Toggle current item
-                question.setAttribute('aria-expanded', nowOpen);
-
-                if (nowOpen) {
-                    answer.style.display = 'block';
-                    // Force a reflow to ensure display: block is applied before adding active class
-                    void answer.offsetWidth;
-                    answer.classList.add('active');
-                    answer.setAttribute('aria-hidden', 'false');
-                    if (icon) icon.classList.add('rotate-180');
-                } else {
-                    answer.classList.remove('active');
-                    answer.setAttribute('aria-hidden', 'true');
-                    // Hide completely after transition or immediately
-                    answer.style.display = 'none';
-                    if (icon) icon.classList.remove('rotate-180');
+                if (!isOpen) {
+                    q.setAttribute('aria-expanded', 'true');
+                    a.classList.add('active');
                 }
             });
         }
     });
 }
 
-/**
- * Set the current year in any element with id="year"
- */
 function initYear() {
-    const yearElement = document.getElementById('year');
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-    }
+    const el = document.getElementById('year');
+    if (el) el.textContent = new Date().getFullYear();
 }
 
-/**
- * Accessibility Options Functionality - Enhanced for Multiple Modes and Text Size
- */
-function initContrastToggle() {
-    const toggleBtn = document.getElementById('contrast-toggle');
-    const modal = document.getElementById('contrast-modal');
-    const closeBtn = document.getElementById('close-contrast-modal');
-    const contrastOptions = document.querySelectorAll('.contrast-option');
-    const textSizeOptions = document.querySelectorAll('.text-size-option');
-    const saveBtn = document.getElementById('save-accessibility');
-    const cancelBtn = document.getElementById('cancel-accessibility');
-
-    if (!toggleBtn || !modal) return;
-
-    // Current active state (from storage or defaults)
-    let activeMode = localStorage.getItem('accessibility-mode') || 'standard';
-    let activeSize = localStorage.getItem('accessibility-size') || 'ts-medium';
-
-    // Temporary state while modal is open
-    let tempMode = activeMode;
-    let tempSize = activeSize;
-
-    // Initial application
-    setContrastMode(activeMode);
-    setTextSize(activeSize);
-
-    toggleBtn.addEventListener('click', () => {
-        // Reset temp state to current active state when opening
-        tempMode = activeMode;
-        tempSize = activeSize;
-        updateModalUI();
-        modal.showModal();
-    });
-
-    const closeModal = () => {
-        modal.close();
-    };
-
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
-
-    contrastOptions.forEach(option => {
-        option.addEventListener('click', () => {
-            tempMode = option.getAttribute('data-mode');
-            updateModalUI();
-        });
-    });
-
-    textSizeOptions.forEach(option => {
-        option.addEventListener('click', () => {
-            tempSize = option.getAttribute('data-size');
-            updateModalUI();
-        });
-    });
-
-    if (saveBtn) {
-        saveBtn.addEventListener('click', () => {
-            activeMode = tempMode;
-            activeSize = tempSize;
-            setContrastMode(activeMode);
-            setTextSize(activeSize);
-            closeModal();
-        });
-    }
-
-    function updateModalUI() {
-        // Update contrast options UI
-        contrastOptions.forEach(opt => {
-            if (opt.getAttribute('data-mode') === tempMode) {
-                opt.classList.add('border-accent', 'bg-slate-100', 'ring-4', 'ring-accent');
-                opt.classList.remove('border-slate-200');
-            } else {
-                opt.classList.remove('border-accent', 'bg-slate-100', 'ring-4', 'ring-accent');
-                opt.classList.add('border-slate-200');
+function highlightCurrentPage() {
+    const path = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-link, .dropdown-item, .mobile-nav-link').forEach(link => {
+        if (link.getAttribute('href') === path) {
+            link.classList.add('active', 'text-secondary');
+            if (link.classList.contains('dropdown-item')) {
+                const parentBtn = link.closest('.dropdown').querySelector('button');
+                parentBtn.classList.add('active', 'text-secondary');
             }
-        });
-
-        // Update text size options UI
-        textSizeOptions.forEach(opt => {
-            if (opt.getAttribute('data-size') === tempSize) {
-                opt.classList.add('border-accent', 'bg-slate-100', 'ring-4', 'ring-accent');
-                opt.classList.remove('border-slate-200');
-            } else {
-                opt.classList.remove('border-accent', 'bg-slate-100', 'ring-4', 'ring-accent');
-                opt.classList.add('border-slate-200');
-            }
-        });
-    }
-
-    // Close on click outside
-    modal.addEventListener('click', (e) => {
-        const dialogDimensions = modal.getBoundingClientRect();
-        if (
-            e.clientX < dialogDimensions.left ||
-            e.clientX > dialogDimensions.right ||
-            e.clientY < dialogDimensions.top ||
-            e.clientY > dialogDimensions.bottom
-        ) {
-            closeModal();
         }
     });
 }
 
-/**
- * Sets the contrast/accessibility mode
- * @param {string} mode - 'standard', 'high-contrast-white', 'high-contrast-yellow', 'high-contrast-black', 'high-contrast-pink', 'grayscale'
- */
-function setContrastMode(mode) {
-    const html = document.documentElement;
-    const toggleBtn = document.getElementById('contrast-toggle');
-
-    // Remove all accessibility classes prefixed with cm-
-    html.className = html.className.replace(/\bcm-\S+/g, '').trim();
-
-    if (mode && mode !== 'standard') {
-        html.classList.add(`cm-${mode}`);
-        localStorage.setItem('accessibility-mode', mode);
-        if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'true');
-    } else {
-        localStorage.removeItem('accessibility-mode');
-        if (toggleBtn) toggleBtn.setAttribute('aria-pressed', 'false');
-    }
+function initConfirmationModal() {
+    const modal = document.getElementById('confirmation-modal');
+    if (!modal) return;
+    const closeBtns = [
+        document.getElementById('close-confirmation-modal'),
+        document.getElementById('cancel-confirmation-modal')
+    ];
+    closeBtns.forEach(btn => btn?.addEventListener('click', () => modal.close()));
 }
 
-/**
- * Sets the text size mode
- * @param {string} size - 'ts-small', 'ts-medium', 'ts-large', 'ts-xlarge'
- */
-function setTextSize(size) {
+function showConfirmation(title, message, onConfirm) {
+    const modal = document.getElementById('confirmation-modal');
+    if (!modal) {
+        if (confirm(message)) onConfirm();
+        return;
+    }
+    const titleEl = document.getElementById('confirmation-modal-title');
+    const msgEl = document.getElementById('confirmation-modal-message');
+    const confirmBtn = document.getElementById('confirm-confirmation-modal');
+
+    if (titleEl) titleEl.textContent = title;
+    if (msgEl) msgEl.textContent = message;
+
+    if (confirmBtn) {
+        const newConfirmBtn = confirmBtn.cloneNode(true);
+        confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+        newConfirmBtn.addEventListener('click', () => {
+            onConfirm();
+            modal.close();
+        });
+    }
+
+    modal.showModal();
+}
+
+function initContrastToggle() {
+    const btn = document.getElementById('contrast-toggle');
+    const modal = document.getElementById('contrast-modal');
+    if (!btn || !modal) return;
+
+    btn.addEventListener('click', () => modal.showModal());
+    document.getElementById('close-contrast-modal').addEventListener('click', () => modal.close());
+
+    const options = document.querySelectorAll('.contrast-option');
+    options.forEach(opt => {
+        opt.addEventListener('click', () => {
+            options.forEach(o => o.classList.remove('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary/20'));
+            opt.classList.add('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary/20');
+            localStorage.setItem('temp-mode', opt.getAttribute('data-mode'));
+        });
+    });
+
+    const sizes = document.querySelectorAll('.text-size-option');
+    sizes.forEach(opt => {
+        opt.addEventListener('click', () => {
+            sizes.forEach(o => o.classList.remove('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary/20'));
+            opt.classList.add('border-secondary', 'bg-slate-50', 'ring-4', 'ring-secondary/20');
+            localStorage.setItem('temp-size', opt.getAttribute('data-size'));
+        });
+    });
+
+    document.getElementById('save-accessibility').addEventListener('click', () => {
+        const mode = localStorage.getItem('temp-mode');
+        const size = localStorage.getItem('temp-size');
+        if (mode) applyMode(mode);
+        if (size) applySize(size);
+        modal.close();
+    });
+
+    // Initial Apply
+    applyMode(localStorage.getItem('accessibility-mode') || 'standard');
+    applySize(localStorage.getItem('accessibility-size') || 'ts-medium');
+}
+
+function applyMode(mode) {
+    const html = document.documentElement;
+    html.className = html.className.replace(/\bcm-\S+/g, '').trim();
+    if (mode !== 'standard') html.classList.add(`cm-${mode}`);
+    localStorage.setItem('accessibility-mode', mode);
+}
+
+function applySize(size) {
     const html = document.documentElement;
     html.classList.remove('ts-small', 'ts-medium', 'ts-large', 'ts-xlarge');
-
-    if (size !== 'ts-medium') {
-        html.classList.add(size);
-        localStorage.setItem('accessibility-size', size);
-    } else {
-        localStorage.removeItem('accessibility-size');
-    }
+    html.classList.add(size);
+    localStorage.setItem('accessibility-size', size);
 }
 
-/**
- * Cookie Consent Banner logic
- */
 function initCookieConsent() {
-    // Check if consent has already been given
-    const consent = localStorage.getItem('cookie-consent');
-    if (consent) return;
-
-    // Create the banner
+    if (localStorage.getItem('cookie-consent')) return;
     const banner = document.createElement('div');
-    banner.id = 'cookie-consent-banner';
-    banner.className = 'fixed bottom-0 left-0 w-full bg-[#002D56] text-white p-8 z-[9999] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t-4 border-[#007A87] transform transition-transform duration-500 translate-y-full';
-    banner.setAttribute('role', 'region');
-    banner.setAttribute('aria-label', 'Cookie Consent');
-
+    banner.className = 'fixed bottom-8 left-8 right-8 md:left-auto md:w-[450px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.2)] p-8 z-[5000] rounded-[2rem] border border-slate-100 animate-in slide-in-from-bottom-10 duration-700';
     banner.innerHTML = `
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-            <div class="flex-grow">
-                <h2 class="text-2xl font-black mb-3 uppercase tracking-tight text-white">We value your privacy</h2>
-                <p class="text-white text-base leading-relaxed max-w-4xl font-medium">
-                    We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. <a href="privacy-policy.html" class="underline hover:text-[#007A87] font-bold">Read our Privacy Policy</a>.
-                </p>
-            </div>
-            <div class="flex flex-wrap gap-4">
-                <button id="cookie-accept-btn" class="bg-[#007A87] hover:bg-[#005F67] text-white font-extrabold py-4 px-10 rounded-full transition-all text-sm uppercase tracking-widest shadow-xl border-2 border-[#007A87]">
-                    Accept All
-                </button>
-                <button id="cookie-decline-btn" class="bg-white hover:bg-gray-100 text-[#002D56] font-extrabold py-4 px-10 rounded-full transition-all text-sm uppercase tracking-widest shadow-xl border-2 border-white">
-                    Decline
-                </button>
+        <div class="relative">
+            <h2 class="text-2xl font-black text-primary mb-4 uppercase tracking-tight">Privacy Policy</h2>
+            <p class="text-slate-500 text-sm leading-relaxed mb-8 font-medium">We use cookies to improve your experience. By continuing, you agree to our use of cookies.</p>
+            <div class="flex gap-4">
+                <button id="cookie-accept" class="flex-1 py-4 bg-primary text-white font-black rounded-full hover:bg-secondary transition-all text-xs uppercase tracking-widest">Accept</button>
+                <button id="cookie-decline" class="flex-1 py-4 bg-slate-100 text-primary font-black rounded-full hover:bg-slate-200 transition-all text-xs uppercase tracking-widest">Decline</button>
             </div>
         </div>
     `;
-
     document.body.appendChild(banner);
-
-    // Trigger animation
-    setTimeout(() => {
-        banner.classList.remove('translate-y-full');
-    }, 500);
-
-    const acceptBtn = document.getElementById('cookie-accept-btn');
-    const declineBtn = document.getElementById('cookie-decline-btn');
-
-    const closeBanner = () => {
-        banner.classList.add('translate-y-full');
-        setTimeout(() => banner.remove(), 500);
-    };
-
-    acceptBtn.addEventListener('click', () => {
+    document.getElementById('cookie-accept').onclick = () => {
         localStorage.setItem('cookie-consent', 'accepted');
-        // Actually set a cookie as requested
-        document.cookie = "cookie-consent=accepted; max-age=" + (365 * 24 * 60 * 60) + "; path=/; SameSite=Lax";
-        closeBanner();
-    });
-
-    declineBtn.addEventListener('click', () => {
+        banner.remove();
+    };
+    document.getElementById('cookie-decline').onclick = () => {
         localStorage.setItem('cookie-consent', 'declined');
-        closeBanner();
-    });
-}
-
-/**
- * Highlights the current page in the navigation (both desktop and mobile)
- */
-function highlightCurrentPage() {
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.nav-link, .nav-link-inline, #mobile-nav a');
-
-    navLinks.forEach(link => {
-        const linkPath = link.getAttribute('href');
-        if (linkPath === currentPath) {
-            link.classList.add('nav-link-active');
-            link.setAttribute('aria-current', 'page');
-
-            // If it's a sub-menu item, also highlight the parent dropdown button
-            const dropdown = link.closest('.dropdown') || link.closest('li.dropdown');
-            if (dropdown) {
-                const button = dropdown.querySelector('button');
-                if (button) {
-                    button.classList.add('nav-link-active');
-                }
-            }
-        }
-    });
+        banner.remove();
+    };
 }
