@@ -206,7 +206,7 @@ function initMobileMenu() {
             }
 
             if (status) {
-                status.textContent = nowExpanded ? 'Expanded' : 'Collapsed';
+                status.textContent = '';
             }
 
             if (iconSvg) {
@@ -237,7 +237,7 @@ function initMobileMenu() {
                 const label = menuBtn.querySelector('.menu-label');
                 if (label) label.textContent = 'Menu';
                 const status = menuBtn.querySelector('.nav-status');
-                if (status) status.textContent = 'Collapsed';
+                if (status) status.textContent = '';
                 const iconSvg = menuBtn.querySelector('svg');
                 if (iconSvg) {
                     iconSvg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
@@ -267,7 +267,7 @@ function initMobileMenu() {
             toggle.setAttribute('aria-expanded', nowExpanded);
             const status = toggle.querySelector('.nav-status');
             if (status) {
-                status.textContent = nowExpanded ? 'Expanded' : 'Collapsed';
+                status.textContent = '';
             }
 
             if (target) {
@@ -322,27 +322,27 @@ function initDesktopNav() {
                         if (otherBtn) {
                             otherBtn.setAttribute('aria-expanded', 'false');
                             const otherStatus = otherBtn.querySelector('.nav-status');
-                            if (otherStatus) otherStatus.textContent = 'Collapsed';
+                            if (otherStatus) otherStatus.textContent = '';
                         }
                     }
                 });
 
                 button.setAttribute('aria-expanded', nowExpanded);
                 const status = button.querySelector('.nav-status');
-                if (status) status.textContent = nowExpanded ? 'Expanded' : 'Collapsed';
+                if (status) status.textContent = '';
             });
 
             // Handle mouse enter/leave for desktop hover behavior
             dropdown.addEventListener('mouseenter', () => {
                 button.setAttribute('aria-expanded', 'true');
                 const status = button.querySelector('.nav-status');
-                if (status) status.textContent = 'Expanded';
+                if (status) status.textContent = '';
             });
 
             dropdown.addEventListener('mouseleave', () => {
                 button.setAttribute('aria-expanded', 'false');
                 const status = button.querySelector('.nav-status');
-                if (status) status.textContent = 'Collapsed';
+                if (status) status.textContent = '';
             });
 
             // Handle keyboard navigation within dropdown
@@ -350,7 +350,7 @@ function initDesktopNav() {
                 if (e.key === 'Escape') {
                     button.setAttribute('aria-expanded', 'false');
                     const status = button.querySelector('.nav-status');
-                    if (status) status.textContent = 'Collapsed';
+                    if (status) status.textContent = '';
                     button.focus();
                 }
 
@@ -368,7 +368,7 @@ function initDesktopNav() {
                     if (!dropdown.contains(document.activeElement)) {
                         button.setAttribute('aria-expanded', 'false');
                         const status = button.querySelector('.nav-status');
-                        if (status) status.textContent = 'Collapsed';
+                        if (status) status.textContent = '';
                     }
                 });
             });
@@ -383,7 +383,7 @@ function initDesktopNav() {
                 if (button) {
                     button.setAttribute('aria-expanded', 'false');
                     const status = button.querySelector('.nav-status');
-                    if (status) status.textContent = 'Collapsed';
+                    if (status) status.textContent = '';
                 }
             });
         }
@@ -688,7 +688,7 @@ function initFAQ() {
                         otherBtn.setAttribute('aria-expanded', 'false');
                         if (otherAnswer) otherAnswer.style.maxHeight = '0px';
                         if (otherIcon) otherIcon.classList.remove('rotate-180');
-                        if (otherStatus) otherStatus.textContent = 'Collapsed';
+                        if (otherStatus) otherStatus.textContent = '';
                     }
                 });
 
@@ -698,11 +698,11 @@ function initFAQ() {
                 if (nowOpen) {
                     answer.style.maxHeight = answer.scrollHeight + 'px';
                     if (icon) icon.classList.add('rotate-180');
-                    if (status) status.textContent = 'Expanded';
+                    if (status) status.textContent = '';
                 } else {
                     answer.style.maxHeight = '0px';
                     if (icon) icon.classList.remove('rotate-180');
-                    if (status) status.textContent = 'Collapsed';
+                    if (status) status.textContent = '';
                 }
             });
         }

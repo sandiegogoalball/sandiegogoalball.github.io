@@ -25,6 +25,18 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
+/* Ensure headings inherit white color on dark backgrounds */
+.bg-primary h1, .bg-primary h2, .bg-primary h3, .bg-primary h4, .bg-primary h5, .bg-primary h6,
+.bg-orange-800 h1, .bg-orange-800 h2, .bg-orange-800 h3, .bg-orange-800 h4, .bg-orange-800 h5, .bg-orange-800 h6,
+footer h1, footer h2, footer h3, footer h4, footer h5, footer h6 {
+  color: var(--white) !important;
+}
+
+/* Allow utility classes to override global heading color */
+.text-white { color: #ffffff !important; }
+.text-black { color: #000000 !important; }
+.text-primary { color: #002D56 !important; }
+
 *:focus-visible {
   outline: 3px solid var(--accent-color) !important;
   outline-offset: 2px;
