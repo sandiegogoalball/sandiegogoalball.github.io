@@ -17,6 +17,7 @@ window.tailwind = {
                     black: '#000000',
                     white: '#FFFFFF',
                     dark: '#002D56',
+                    charcoal: '#333333',
                 },
                 fontFamily: {
                     sans: ['Inter', 'sans-serif'],
@@ -90,6 +91,37 @@ document.addEventListener('DOMContentLoaded', () => {
  * Dynamically injects modals into the DOM to ensure they are present on all pages
  */
 function injectModals() {
+    if (!document.getElementById('mobile-nav')) {
+        const mobileNav = document.createElement('div');
+        mobileNav.id = 'mobile-nav';
+        mobileNav.className = 'fixed inset-0 bg-primary/40 backdrop-blur-sm z-[1000] invisible opacity-0 translate-x-full transition-all duration-500 ease-in-out';
+        mobileNav.innerHTML = `
+            <div class="flex flex-col h-full max-w-xs ml-auto bg-white shadow-2xl p-8 overflow-y-auto">
+                <div class="flex justify-between items-center mb-8 border-b-2 border-slate-100 pb-4">
+                    <span class="text-xl font-black text-primary uppercase tracking-tighter nav-heading">Navigation</span>
+                    <button type="button" class="text-slate-400 hover:text-primary transition-colors" onclick="document.getElementById('menu-toggle-btn').click()" aria-label="Close Menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+                <div class="flex flex-col gap-1 font-bold uppercase text-sm tracking-widest">
+                    <a href="index.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Home</a>
+                    <a href="about.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">About</a>
+                    <a href="about-goalball.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Sport</a>
+                    <a href="schedule.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Schedule</a>
+                    <a href="tournaments.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Tournaments</a>
+                    <a href="get-involved.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Involved</a>
+                    <a href="faq.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">FAQ</a>
+                    <a href="resources.html" class="text-primary py-4 border-b border-slate-50 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Resources</a>
+                    <a href="contact.html" class="text-primary py-4 hover:text-accent hover:bg-slate-50 px-2 rounded-lg transition-all">Contact</a>
+                </div>
+                <div class="mt-auto pt-12">
+                    <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank" class="w-full block text-center py-4 bg-accent text-white font-black rounded-full shadow-lg hover:bg-accent-700 transition-all uppercase tracking-widest text-sm">Donate Now</a>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(mobileNav);
+    }
+
     if (!document.getElementById('contrast-modal')) {
         const contrastModal = document.createElement('dialog');
         contrastModal.id = 'contrast-modal';
@@ -253,6 +285,16 @@ function initMobileMenu() {
             }
         });
     }
+
+    // Hide mobile menu toggle on large screens if it's not meant to be there
+    // Actually, we'll control visibility via CSS usually, but we can ensure state is reset
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) { // lg breakpoint
+            if (menuBtn && menuBtn.getAttribute('aria-expanded') === 'true') {
+                menuBtn.click();
+            }
+        }
+    });
 
     // Dropdown Accordions (Works for both mobile and desktop drawer)
     const mobileToggles = document.querySelectorAll('.mobile-dropdown-toggle');
@@ -455,6 +497,12 @@ function performSearch(query) {
     );
 
     showSearchResults(results);
+
+    // Auto-scroll to results for better UX, especially on mobile
+    const resultsDiv = document.getElementById('search-results');
+    if (resultsDiv && window.innerWidth < 768) {
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 }
 
 /**
@@ -670,7 +718,6 @@ function initFAQ() {
         const question = item.querySelector('.faq-question');
         const answer = item.querySelector('.faq-answer');
         const icon = item.querySelector('.faq-icon');
-        const status = item.querySelector('.faq-status');
 
         if (question && answer) {
             question.addEventListener('click', () => {
@@ -682,13 +729,15 @@ function initFAQ() {
                     const otherBtn = otherItem.querySelector('.faq-question');
                     const otherAnswer = otherItem.querySelector('.faq-answer');
                     const otherIcon = otherItem.querySelector('.faq-icon');
-                    const otherStatus = otherItem.querySelector('.faq-status');
 
                     if (otherBtn && otherBtn !== question) {
                         otherBtn.setAttribute('aria-expanded', 'false');
-                        if (otherAnswer) otherAnswer.style.maxHeight = '0px';
+                        if (otherAnswer) {
+                            otherAnswer.classList.remove('active');
+                            otherAnswer.setAttribute('aria-hidden', 'true');
+                            otherAnswer.style.display = 'none';
+                        }
                         if (otherIcon) otherIcon.classList.remove('rotate-180');
-                        if (otherStatus) otherStatus.textContent = '';
                     }
                 });
 
@@ -696,13 +745,18 @@ function initFAQ() {
                 question.setAttribute('aria-expanded', nowOpen);
 
                 if (nowOpen) {
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    answer.style.display = 'block';
+                    // Force a reflow to ensure display: block is applied before adding active class
+                    void answer.offsetWidth;
+                    answer.classList.add('active');
+                    answer.setAttribute('aria-hidden', 'false');
                     if (icon) icon.classList.add('rotate-180');
-                    if (status) status.textContent = '';
                 } else {
-                    answer.style.maxHeight = '0px';
+                    answer.classList.remove('active');
+                    answer.setAttribute('aria-hidden', 'true');
+                    // Hide completely after transition or immediately
+                    answer.style.display = 'none';
                     if (icon) icon.classList.remove('rotate-180');
-                    if (status) status.textContent = '';
                 }
             });
         }
