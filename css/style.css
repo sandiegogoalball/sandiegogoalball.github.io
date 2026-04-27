@@ -37,12 +37,17 @@ a {
     color: var(--accent-color);
     text-decoration: underline;
     text-underline-offset: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, outline 0.3s ease, border-color 0.3s ease;
 }
 
 a:hover {
     text-decoration: none;
     background-color: var(--accent-color);
     color: #000;
+}
+
+button {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, outline 0.3s ease, border-color 0.3s ease;
 }
 
 /* Utils */
@@ -409,6 +414,7 @@ a:hover {
     border-radius: 4px;
     text-decoration: none;
     font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, outline 0.3s ease, border-color 0.3s ease;
 }
 
 .donate-btn:hover {
@@ -503,6 +509,59 @@ main section {
     font-size: 2rem;
     font-weight: bold;
     display: block;
+}
+
+/* Icons and Smoothness */
+.menu-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 1rem;
+}
+
+.social-links svg {
+    width: 18px;
+    height: 18px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0;
+    background: transparent;
+}
+
+.social-links a:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    transform: scale(1.15);
+}
+
+.footer-sponsors {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.footer-sponsor-logo {
+    height: 35px;
+    width: auto;
+    filter: grayscale(1) brightness(1.5);
+    transition: filter 0.3s ease, transform 0.3s ease;
+    display: block;
+}
+
+.footer-sponsor-logo:hover {
+    filter: grayscale(0) brightness(1);
+    transform: scale(1.05);
 }
 
 /* Images */
