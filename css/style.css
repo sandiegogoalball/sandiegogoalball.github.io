@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  --bg-color: #001f3f; /* Deep Navy */
+  --text-color: #ffffff;
+  --accent-color: #ffa500; /* High Contrast Orange */
+  --focus-ring: #00ff00; /* Bright Green for focus */
+  --card-bg: #002b56;
+  --header-bg: #000000;
+  --footer-bg: #000000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  font-size: 18px; /* Minimum body text size */
+}
+
+h1, h2, h3, h4 {
+  color: var(--accent-color);
+  line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; border-left: 5px solid var(--accent-color); padding-left: 15px; }
+h3 { font-size: 1.5rem; }
+
+a {
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  text-decoration: none;
+  background-color: var(--accent-color);
+  color: #000;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--accent-color);
+  color: #000;
+  padding: 15px;
+  z-index: 1000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 4px solid var(--focus-ring);
+}
+
+/* Header & Navigation */
+header {
+  background-color: var(--header-bg);
+  border-bottom: 4px solid var(--accent-color);
+}
+
+[role="region"][aria-label="Student Project Banner"] {
+  background-color: #ffdc00; /* Yellow banner as requested in memory */
+  color: #000;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+[role="region"][aria-label="Student Project Banner"] a {
+  color: #000;
+}
+
+header > div:nth-of-type(2) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+header img {
+  max-height: 120px;
+  background-color: white;
+  padding: 5px;
+  border: 2px solid var(--accent-color);
+}
+
+/* Navigation Menu */
+nav[role="navigation"] {
+  background-color: #000;
+}
+
+nav[role="navigation"] > div > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 1rem;
+}
+
+nav[role="navigation"] a,
+nav[role="navigation"] button {
+  color: var(--text-color);
+  text-decoration: none;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+nav[role="navigation"] svg {
+  width: 20px;
+  height: 20px;
+}
+
+nav[role="navigation"] a:hover,
+nav[role="navigation"] button:hover {
+  background-color: #333;
+  color: var(--accent-color);
+}
+
+/* Dropdowns */
+nav div > div > div {
+  position: relative;
+}
+
+nav div > div > div > div {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #111;
+  min-width: 250px;
+  z-index: 100;
+  border: 4px solid var(--accent-color);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+nav div > div > div > div a {
+  display: block;
+  width: 100%;
+  border-bottom: 2px solid #333;
+  color: white !important;
+}
+
+nav div > div > div[data-open="true"] > div {
+  display: block;
+}
+
+/* Focus States - Critical for Accessibility */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 4px solid var(--focus-ring) !important;
+  outline-offset: 2px;
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+section {
+  margin-bottom: 4rem;
+}
+
+/* Hero Section */
+main > section:first-of-type {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #000;
+  overflow: hidden;
+}
+
+main > section:first-of-type img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+main > section:first-of-type > div:last-of-type {
+  position: relative;
+  z-index: 1;
+}
+
+/* Stats Bar */
+section div div div {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+section div div div span {
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  padding: 4rem 2rem 2rem;
+  border-top: 8px solid var(--accent-color);
+}
+
+footer h4 {
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 10px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+footer a {
+  color: var(--text-color);
+}
+
+footer a:hover {
+  color: var(--accent-color);
+}
+
+/* Buttons */
+.cta-button, [role="button"], a[href$=".html"]:not(nav a):not(footer a) {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: #000;
+  padding: 15px 30px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  border: 2px solid #000;
+  min-width: 44px; /* Minimum hit target */
+  min-height: 44px;
+}
+
+/* Fluid Layout / Magnification */
+@media (max-width: 768px) {
+  nav[role="navigation"] > div > div {
+    flex-direction: column;
+  }
+
+  nav div > div > div > div {
+    position: static;
+    width: 100%;
+  }
+}
+
+/* High Contrast Mode Toggle (if implemented via JS) */
+body.high-contrast {
+  --bg-color: #000000;
+  --accent-color: #ffff00;
+  --text-color: #ffffff;
+  --card-bg: #000000;
+}
