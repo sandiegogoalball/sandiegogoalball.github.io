@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Dropdown functionality
-    const dropdownButtons = document.querySelectorAll('nav button[aria-haspopup="true"]');
+    // Dropdown functionality for Mobile & Screen Readers
+    const dropdownButtons = document.querySelectorAll('.nav-item-dropdown > button');
 
     dropdownButtons.forEach(button => {
         button.addEventListener('click', (e) => {
@@ -8,10 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
             // Close all other dropdowns
-            document.querySelectorAll('nav div > div > div').forEach(div => {
-                if (div !== parent) {
-                    div.removeAttribute('data-open');
-                    div.querySelector('button').setAttribute('aria-expanded', 'false');
+            document.querySelectorAll('.nav-item-dropdown').forEach(item => {
+                if (item !== parent) {
+                    item.removeAttribute('data-open');
+                    const otherBtn = item.querySelector('button');
+                    if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
                 }
             });
 
@@ -28,22 +29,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', () => {
-        dropdownButtons.forEach(button => {
-            button.setAttribute('aria-expanded', 'false');
-            button.parentElement.removeAttribute('data-open');
+    // Close dropdowns when clicking outside or pressing Escape
+    const closeAllDropdowns = () => {
+        document.querySelectorAll('.nav-item-dropdown').forEach(item => {
+            item.removeAttribute('data-open');
+            const btn = item.querySelector('button');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+    };
+
+    document.addEventListener('click', closeAllDropdowns);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeAllDropdowns();
+        }
+    });
+
+    // Handle focus loss from dropdowns (Tab out)
+    document.querySelectorAll('.nav-item-dropdown').forEach(item => {
+        item.addEventListener('focusout', (e) => {
+            // Check if the new focused element is outside the dropdown
+            if (!item.contains(e.relatedTarget)) {
+                item.removeAttribute('data-open');
+                const btn = item.querySelector('button');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            }
         });
     });
 
-    // Mobile menu toggle (if added)
+    // Mobile menu toggle
     const menuToggle = document.getElementById('menu-toggle-btn');
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
-            const nav = document.querySelector('nav[role="navigation"]');
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', !isExpanded);
-            // In CSS we'd handle the visibility of nav based on this if needed
+            const newState = !isExpanded;
+            menuToggle.setAttribute('aria-expanded', newState);
+            document.body.classList.toggle('nav-open', newState);
         });
     }
 
@@ -62,4 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
             contrastToggle.setAttribute('aria-pressed', isHighContrast);
         });
     }
+
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(button => {
+        button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', !isExpanded);
+        });
+    });
 });
