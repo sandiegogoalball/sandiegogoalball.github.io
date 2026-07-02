@@ -13,6 +13,7 @@
   <!-- Styles -->
   <!-- Scripts -->
   <link href="css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/accessibility-widget.css">
  </head>
  <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -24,7 +25,7 @@
      <div class="header-actions">
 
       <button aria-controls="main-nav-list" aria-expanded="false" aria-label="Toggle Navigation Menu" id="menu-toggle-btn" type="button">
-       <svg class="menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <svg class="icon-small menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round">
        </svg>
        <span>
@@ -108,34 +109,24 @@
   </header>
   <main id="main-content">
    <!-- Page Banner -->
-   <!-- Page Banner -->
-   <section>
-    <div class="banner-bg">
-     <div>
-     </div>
-     <div>
-     </div>
-    </div>
+   <section class="page-banner" aria-labelledby="main-heading">
     <div class="banner-content">
-     <div>
-      <nav aria-label="Breadcrumb">
+     <div class="container">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
        <a href="index.html">Home</a>
-
-       <span>
-        Tournaments
-       </span>
+       <span aria-current="page">Tournaments</span>
       </nav>
       <h1 id="main-heading">
        Tournaments
       </h1>
-      <p>
+      <p class="banner-tagline">
        The pinnacle of competitive goalball.
       </p>
      </div>
     </div>
    </section>
    <!-- Tournament Overview -->
-   <section>
+   <section class="content-section">
     <div class="container">
      <div>
       <h2>
@@ -151,58 +142,54 @@
     </div>
    </section>
    <!-- Major Tournaments -->
-   <section>
+   <section class="tournaments-list" aria-labelledby="events-heading">
     <div class="container">
-     <h2>
+     <h2 id="events-heading">
       Key Annual Events
      </h2>
-     <div>
+     <div class="tournaments-grid">
       <!-- Cascade Classic -->
-      <div>
-       <div>
+      <article class="tournament-card">
+       <header>
         <h3>
          Cascade Classic
         </h3>
-        <p>
+        <p class="tournament-meta">
          Vancouver, WA | Annual Event
         </p>
+       </header>
+       <div class="tournament-content">
+        <p>
+         One of the longest-running and most prestigious tournaments on the West Coast. Hosted by Adaptive Sports NW at the Washington State School for the Blind, it features elite and developmental divisions.
+        </p>
+        <p>
+         San Diego Goalball is a regular participant in this premier regional competition.
+        </p>
+        <a class="btn btn-secondary" href="past-events.html">Tournament History</a>
        </div>
-       <div>
-        <div>
-         <p>
-          One of the longest-running and most prestigious tournaments on the West Coast. Hosted by Adaptive Sports NW at the Washington State School for the Blind, it features elite and developmental divisions.
-         </p>
-         <p>
-          San Diego Goalball is a regular participant in this premier regional competition.
-         </p>
-        </div>
-        <div>
-         <a href="past-events.html">Tournament History</a>
-        </div>
-       </div>
-      </div>
+      </article>
       <!-- USABA Nationals -->
-      <div>
-       <div>
+      <article class="tournament-card">
+       <header>
         <h3>
          USABA Nationals
         </h3>
-        <p>
+        <p class="tournament-meta">
          Varies | June/July
         </p>
-       </div>
-       <div>
+       </header>
+       <div class="tournament-content">
         <p>
          The ultimate domestic competition. The USABA National Championships bring together the best clubs from across the United States to crown a national champion.
         </p>
-        <a href="https://www.usaba.org" target="_blank">Visit USABA Website</a>
+        <a aria-label="Visit USABA Website (opens in new tab)" class="btn btn-secondary" href="https://www.usaba.org" target="_blank">Visit USABA Website</a>
        </div>
-      </div>
+      </article>
      </div>
     </div>
    </section>
    <!-- Preparation -->
-   <section>
+   <section class="content-section">
     <div class="container">
      <h2>
       How We Prepare
@@ -228,7 +215,7 @@
     </div>
    </section>
    <!-- CTA -->
-   <section>
+   <section class="content-section">
     <div class="container">
      <h2>
       Support Our Journey
@@ -260,7 +247,7 @@
      </div>
      <div class="social-links">
       <a aria-label="Follow us on Instagram" href="https://www.instagram.com/sdgoalball?igsh=NTc4MTIwNjQ2YQ==" target="_blank">
-       <svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+       <svg class="icon-small" fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441c.795 0 1.439-.645 1.439-1.441s-.644-1.44-1.439-1.44z">
        </svg>
       </a>
@@ -352,5 +339,6 @@
   </footer>
   <script src="js/script.js">
   </script>
+  <script src="js/accessibility-widget.js"></script>
  </body>
 </html>

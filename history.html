@@ -13,6 +13,7 @@
   <!-- Styles -->
   <!-- Scripts -->
   <link href="css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/accessibility-widget.css">
  </head>
  <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -24,7 +25,7 @@
      <div class="header-actions">
 
       <button aria-controls="main-nav-list" aria-expanded="false" aria-label="Toggle Navigation Menu" id="menu-toggle-btn" type="button">
-       <svg class="menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <svg class="icon-small menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round">
        </svg>
        <span>
@@ -108,37 +109,27 @@
   </header>
   <main id="main-content">
    <!-- Page Banner -->
-   <!-- Page Banner -->
-   <section>
-    <div class="banner-bg">
-     <div>
-     </div>
-     <div>
-     </div>
-    </div>
+   <section class="page-banner" aria-labelledby="main-heading">
     <div class="banner-content">
-     <div>
-      <nav aria-label="Breadcrumb">
+     <div class="container">
+      <nav aria-label="Breadcrumb" class="breadcrumb">
        <a href="index.html">Home</a>
-
-       <span>
-        History of Goalball
-       </span>
+       <span aria-current="page">History of Goalball</span>
       </nav>
       <h1 id="main-heading">
        History of Goalball
       </h1>
-      <p>
+      <p class="banner-tagline">
        From rehabilitation to the world stage.
       </p>
      </div>
     </div>
    </section>
    <!-- History Content -->
-   <section>
+   <section class="history-content" aria-labelledby="origins-heading">
     <div class="container">
-     <div>
-      <h2>
+     <article class="content-block">
+      <h2 id="origins-heading">
        The Origins (1946)
       </h2>
       <p>
@@ -147,7 +138,9 @@
       <p>
        Unlike many other sports for the visually impaired, goalball was not adapted from an existing sport played by sighted individuals. It was created from the ground up specifically for athletes with visual impairments.
       </p>
-      <h2>
+     </article>
+     <article class="content-block">
+      <h2 id="global-heading">
        Global Recognition
       </h2>
       <p>
@@ -156,101 +149,65 @@
       <p>
        The women's event was added to the Paralympic program at the 1984 Games in New York. Today, goalball is played in over 100 countries and is governed by the International Blind Sports Federation (IBSA).
       </p>
-      <h2>
+     </article>
+     <article class="content-block">
+      <h2 id="sd-roots-heading">
        San Diego Goalball Roots
       </h2>
       <p>
        The San Diego County Goalball program was born out of a family's passion and necessity. Neal and Lori Meyers founded the organization over a decade ago when their son, Michael, was just 11 years old. Seeking a competitive outlet for Michael, who is visually impaired, they realized that if a local program didn't exist, they would have to build it themselves.
       </p>
       <p>
-       What started as a small family initiative has grown into a thriving community staple. Under the leadership of the Meyers family and dedicated coaches like Matt Boyle and Joseph Hamilton, San Diego Goalball has become a hub for athletes across the county. We have established permanent homes for the sport at the
-       <strong>
-        Stagecoach Community Center
-       </strong>
-       in Carlsbad and the
-       <strong>
-        Mission Valley YMCA
-       </strong>
-       in San Diego.
+       What started as a small family initiative has grown into a thriving community staple. Under the leadership of the Meyers family and dedicated coaches like Matt Boyle and Joseph Hamilton, San Diego Goalball has become a hub for athletes across the county. We have established permanent homes for the sport at the <strong>Stagecoach Community Center</strong> in Carlsbad and the <strong>Mission Valley YMCA</strong> in San Diego.
       </p>
       <p>
        Over the years, our program has not only produced national-level talent but has also served as a vital social and athletic anchor for the visually impaired community in Southern California, proving that blindness is no barrier to high-intensity competitive sport.
       </p>
-     </div>
+     </article>
     </div>
    </section>
    <!-- Timeline Section -->
-   <section>
+   <section class="timeline-section" aria-labelledby="timeline-heading">
     <div class="container">
-     <h2>
+     <h2 id="timeline-heading">
       Goalball Timeline
      </h2>
-     <div>
-      <div>
-       <div>
-        1946
+     <div class="timeline">
+      <article class="timeline-item">
+       <div class="timeline-year">1946</div>
+       <div class="timeline-content">
+        <h3>Invented</h3>
+        <p>Created for WWII veteran rehabilitation in Germany and Austria.</p>
        </div>
-       <div>
-        <h3>
-         Invented
-        </h3>
-        <p>
-         Created for WWII veteran rehabilitation in Germany and Austria.
-        </p>
+      </article>
+      <article class="timeline-item">
+       <div class="timeline-year">1972</div>
+       <div class="timeline-content">
+        <h3>Paralympic Debut</h3>
+        <p>Introduced as a demonstration sport in Heidelberg.</p>
        </div>
-      </div>
-      <div>
-       <div>
-        1972
+      </article>
+      <article class="timeline-item">
+       <div class="timeline-year">1976</div>
+       <div class="timeline-content">
+        <h3>Official Medal Sport</h3>
+        <p>First men's Paralympic tournament in Toronto.</p>
        </div>
-       <div>
-        <h3>
-         Paralympic Debut
-        </h3>
-        <p>
-         Introduced as a demonstration sport in Heidelberg.
-        </p>
+      </article>
+      <article class="timeline-item">
+       <div class="timeline-year">1984</div>
+       <div class="timeline-content">
+        <h3>Women's Debut</h3>
+        <p>Women's goalball added to the Paralympics in New York.</p>
        </div>
-      </div>
-      <div>
-       <div>
-        1976
+      </article>
+      <article class="timeline-item">
+       <div class="timeline-year">2028</div>
+       <div class="timeline-content">
+        <h3>Los Angeles Games</h3>
+        <p>Goalball returns to Southern California for the LA 2028 Paralympics.</p>
        </div>
-       <div>
-        <h3>
-         Official Medal Sport
-        </h3>
-        <p>
-         First men's Paralympic tournament in Toronto.
-        </p>
-       </div>
-      </div>
-      <div>
-       <div>
-        1984
-       </div>
-       <div>
-        <h3>
-         Women's Debut
-        </h3>
-        <p>
-         Women's goalball added to the Paralympics in New York.
-        </p>
-       </div>
-      </div>
-      <div>
-       <div>
-        2028
-       </div>
-       <div>
-        <h3>
-         Los Angeles Games
-        </h3>
-        <p>
-         Goalball returns to Southern California for the LA 2028 Paralympics.
-        </p>
-       </div>
-      </div>
+      </article>
      </div>
     </div>
    </section>
@@ -275,7 +232,7 @@
      </div>
      <div class="social-links">
       <a aria-label="Follow us on Instagram" href="https://www.instagram.com/sdgoalball?igsh=NTc4MTIwNjQ2YQ==" target="_blank">
-       <svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+       <svg class="icon-small" fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441c.795 0 1.439-.645 1.439-1.441s-.644-1.44-1.439-1.44z">
        </svg>
       </a>
@@ -367,5 +324,6 @@
   </footer>
   <script src="js/script.js">
   </script>
+  <script src="js/accessibility-widget.js"></script>
  </body>
 </html>
