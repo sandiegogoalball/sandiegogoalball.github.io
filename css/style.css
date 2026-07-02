@@ -569,3 +569,121 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+.icon-small {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+/* Enhanced Section Spacing */
+section.content-section,
+section.hero,
+section.welcome-section,
+section.video-section,
+section.resources-preview,
+section.cta-section,
+section.page-banner,
+section.mission-section,
+section.team-section,
+section.contacts-section,
+section.tournaments-list,
+section.schedule-section {
+    padding: 5rem 0;
+}
+
+/* Card Styling */
+.resource-card, .cta-card, .team-member, .contact-card, .tournament-card, .schedule-card, .testimonial-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 165, 0, 0.2);
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resource-card:hover, .cta-card:hover, .team-member:hover, .contact-card:hover, .tournament-card:hover, .schedule-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+/* Grid Layouts */
+.resources-grid, .cta-grid, .team-grid, .contacts-grid, .tournaments-grid, .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Button Variants */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-secondary {
+    background-color: #333;
+    color: #fff;
+    border-color: var(--accent-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-color);
+    color: #000;
+}
+
+/* Typography refinements */
+.banner-tagline {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 1rem 0 0;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+}
+
+.section-header h2 {
+    border-left: none;
+    padding-left: 0;
+}
+
+.section-header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--accent-color);
+    margin: 1rem auto;
+}

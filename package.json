@@ -1,5 +1,12 @@
 {
-  "dependencies": {
-    "@playwright/test": "^1.59.1"
+  "name": "san-diego-goalball",
+  "version": "1.0.0",
+  "description": "Official website for San Diego County Goalball",
+  "main": "index.html",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
   }
 }

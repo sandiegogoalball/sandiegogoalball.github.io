@@ -13,6 +13,7 @@
   <!-- Styles -->
   <!-- Scripts -->
   <link href="css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/accessibility-widget.css">
  </head>
  <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -24,7 +25,7 @@
      <div class="header-actions">
 
       <button aria-controls="main-nav-list" aria-expanded="false" aria-label="Toggle Navigation Menu" id="menu-toggle-btn" type="button">
-       <svg class="menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <svg class="icon-small menu-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round">
        </svg>
        <span>
@@ -108,42 +109,32 @@
   </header>
   <main id="main-content">
    <!-- Hero Section -->
-   <section>
-    <div>
-     <img alt="" src="images/2e92691d-373c-4dd1-b111-23596e420300.jpeg"/>
-     <div>
-     </div>
-     <div>
-     </div>
+   <section class="hero" aria-labelledby="main-heading">
+    <div class="hero-image-container">
+     <img alt="Goalball player in action" src="images/2e92691d-373c-4dd1-b111-23596e420300.jpeg"/>
     </div>
-    <div>
-     <div>
-      <div>
-       <span>
-       </span>
-       <span>
-        San Diego's Premier Adaptive Sport
-       </span>
+    <div class="hero-content">
+     <div class="container">
+      <div class="hero-tagline">
+       <span>San Diego's Premier Adaptive Sport</span>
       </div>
       <h1 id="main-heading">
        Limitless
        <br/>
-       <span>
-        Athleticism
-       </span>
+       <span>Athleticism</span>
       </h1>
       <p>
        Experience the intensity of Goalball—the premier Paralympic sport for the blind and visually impaired community in San Diego County.
       </p>
-      <div>
-       <a href="schedule.html">Find a Practice</a>
-       <a href="about-goalball.html">What is Goalball?</a>
+      <div class="hero-actions">
+       <a class="btn btn-primary" href="schedule.html">Find a Practice</a>
+       <a class="btn btn-secondary" href="about-goalball.html">What is Goalball?</a>
       </div>
      </div>
     </div>
    </section>
    <!-- Stats Bar -->
-   <section>
+   <section class="content-section">
     <div class="stats-bar">
      <div class="stats-item">
       <span>
@@ -172,32 +163,24 @@
     </div>
    </section>
    <!-- Welcome Section -->
-   <section>
-    <div>
-     <div>
-      <div>
-       <div>
-       </div>
-       <div>
+   <section class="welcome-section" aria-labelledby="mission-heading">
+    <div class="container">
+     <div class="welcome-grid">
+      <div class="welcome-image">
+       <div class="testimonial-card">
         <img alt="Athlete ready to block the ball" src="images/27d1258c-3b56-4193-9f7c-887045690341.jpeg"/>
-        <div>
-        </div>
-        <div>
+        <blockquote class="testimonial-quote">
          <p>
           "Goalball gave me a sense of belonging and competition I never thought possible."
          </p>
-         <div>
-          <div>
-          </div>
-          <span>
-           Michael Meyers
-          </span>
-         </div>
-        </div>
+         <cite>
+          Michael Meyers
+         </cite>
+        </blockquote>
        </div>
       </div>
-      <div>
-       <h2>
+      <div class="welcome-text">
+       <h2 id="mission-heading">
         Our Mission
        </h2>
        <h3>
@@ -206,7 +189,7 @@
          Sound &amp; Spirit
         </span>
        </h3>
-       <div>
+       <div class="mission-description">
         <p>
          San Diego County Goalball provides a supportive yet competitive environment for athletes of all skill levels. Founded by Neal and Lori Meyers to support their son Michael, we are dedicated to the Paralympic sport of goalball.
         </p>
@@ -214,159 +197,121 @@
          Whether you're looking for recreation, fitness, or aiming for the highest levels of competition, our world-class coaches and welcoming community have a place for you on our court.
         </p>
        </div>
-       <a href="about.html">Our Full Story</a>
+       <a class="link-more" href="about.html">Our Full Story</a>
       </div>
      </div>
     </div>
    </section>
    <!-- Video Section -->
-   <section>
-    <div>
-     <div>
-      <h2>
+   <section class="video-section" aria-labelledby="video-heading">
+    <div class="container">
+     <div class="section-header">
+      <h2 id="video-heading">
        Experience Goalball
       </h2>
       <p>
        Watch this official Paralympic guide to understand the game.
       </p>
      </div>
-     <div>
-      <div>
+     <div class="video-grid">
+      <div class="video-container">
        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/0bZ51jzmbAQ" title="Paralympic Sport A-Z: Goalball - Official Guide">
        </iframe>
       </div>
-      <div>
+      <article class="video-description">
        <h3>
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-         <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" stroke-linecap="round" stroke-linejoin="round">
-         <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="icon-small" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <path d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" stroke-linecap="round" stroke-linejoin="round"></path>
+         <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
         Video Description for Visually Impaired Users
        </h3>
-       <div>
+       <div class="description-content">
         <p>
          This video provides an overview of Goalball, the premier Paralympic sport for athletes with visual impairments. It explains that the game is played on a court with two teams of three players each.
         </p>
         <p>
-         <strong>
-          Key Highlights:
-         </strong>
-         <ul>
-          <li>
-           The ball contains bells, allowing players to track it by sound.
-          </li>
-          <li>
-           All players wear blackout eyeshades to ensure fair competition regardless of their level of visual impairment.
-          </li>
-          <li>
-           Players stay low to the ground, using their bodies to block the ball from entering their long, wide goal.
-          </li>
-          <li>
-           The video demonstrates the intense athleticism required to throw and block the ball at high speeds.
-          </li>
-         </ul>
+         <strong>Key Highlights:</strong>
         </p>
+        <ul>
+         <li>
+          The ball contains bells, allowing players to track it by sound.
+         </li>
+         <li>
+          All players wear blackout eyeshades to ensure fair competition regardless of their level of visual impairment.
+         </li>
+         <li>
+          Players stay low to the ground, using their bodies to block the ball from entering their long, wide goal.
+         </li>
+         <li>
+          The video demonstrates the intense athleticism required to throw and block the ball at high speeds.
+         </li>
+        </ul>
        </div>
-      </div>
+      </article>
      </div>
     </div>
    </section>
    <!-- Resources Preview Section -->
-   <section>
-    <div>
-     <div>
+   <section class="resources-preview" aria-labelledby="resources-heading">
+    <div class="container">
+     <div class="section-header-flex">
       <div>
-       <h2>
+       <h2 id="resources-heading">
         Goalball Resources
        </h2>
        <p>
         Everything you need to know about the sport, from governing bodies to equipment and rules.
        </p>
       </div>
-      <a href="resources.html">View All Resources</a>
+      <a class="btn btn-outline" href="resources.html">View All Resources</a>
      </div>
-     <div>
-      <div>
-       <div>
-        <h3>
-         USABA
-        </h3>
-        <p>
-         U.S. Association of Blind Athletes goalball programs.
-        </p>
-       </div>
-       <a href="https://www.usaba.org/clubs-sports/goalball/" target="_blank">Visit USABA</a>
-      </div>
-      <div>
-       <div>
-        <h3>
-         IBSA
-        </h3>
-        <p>
-         International governing body for blind sports worldwide.
-        </p>
-       </div>
-       <a href="https://ibsasport.org/sports/goalball/" target="_blank">Visit IBSA</a>
-      </div>
-      <div>
-       <div>
-        <h3>
-         IPC
-        </h3>
-        <p>
-         Goalball at the Paralympic Games and global events.
-        </p>
-       </div>
-       <a href="https://www.paralympic.org/goalball" target="_blank">Visit IPC</a>
-      </div>
-      <div>
-       <div>
-        <h3>
-         Local SD
-        </h3>
-        <p>
-         Resources and support for blind residents in San Diego.
-        </p>
-       </div>
-       <a href="https://www.sdcb.org/" target="_blank">Visit SDCB</a>
-      </div>
+     <div class="resources-grid">
+      <article class="resource-card">
+       <h3>USABA</h3>
+       <p>U.S. Association of Blind Athletes goalball programs.</p>
+       <a aria-label="Visit USABA website" href="https://www.usaba.org/clubs-sports/goalball/" target="_blank">Visit USABA</a>
+      </article>
+      <article class="resource-card">
+       <h3>IBSA</h3>
+       <p>International governing body for blind sports worldwide.</p>
+       <a aria-label="Visit IBSA website" href="https://ibsasport.org/sports/goalball/" target="_blank">Visit IBSA</a>
+      </article>
+      <article class="resource-card">
+       <h3>IPC</h3>
+       <p>Goalball at the Paralympic Games and global events.</p>
+       <a aria-label="Visit IPC website" href="https://www.paralympic.org/goalball" target="_blank">Visit IPC</a>
+      </article>
+      <article class="resource-card">
+       <h3>Local SD</h3>
+       <p>Resources and support for blind residents in San Diego.</p>
+       <a aria-label="Visit SDCB website" href="https://www.sdcb.org/" target="_blank">Visit SDCB</a>
+      </article>
      </div>
     </div>
    </section>
    <!-- CTA Section -->
-   <section>
-    <div>
-     <h2>
+   <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="container">
+     <h2 id="cta-heading">
       Ready to join the action?
      </h2>
-     <div>
-      <div>
-       <h3>
-        Athletes
-       </h3>
-       <p>
-        Open to all blind and visually impaired individuals. No experience necessary.
-       </p>
-       <a href="schedule.html">Get Started</a>
-      </div>
-      <div>
-       <h3>
-        Volunteers
-       </h3>
-       <p>
-        Help with practices, refereeing, and community outreach. No sports background required.
-       </p>
-       <a href="get-involved.html">Volunteer</a>
-      </div>
-      <div>
-       <h3>
-        Support
-       </h3>
-       <p>
-        Your contributions help us provide equipment and facilities for our athletes.
-       </p>
-       <a href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank">Donate Now</a>
-      </div>
+     <div class="cta-grid">
+      <article class="cta-card">
+       <h3>Athletes</h3>
+       <p>Open to all blind and visually impaired individuals. No experience necessary.</p>
+       <a class="btn btn-primary" href="schedule.html">Get Started</a>
+      </article>
+      <article class="cta-card">
+       <h3>Volunteers</h3>
+       <p>Help with practices, refereeing, and community outreach. No sports background required.</p>
+       <a class="btn btn-primary" href="get-involved.html">Volunteer</a>
+      </article>
+      <article class="cta-card">
+       <h3>Support</h3>
+       <p>Your contributions help us provide equipment and facilities for our athletes.</p>
+       <a class="btn btn-primary" href="https://www.gofundme.com/f/support-san-diego-county-goalball-team" target="_blank">Donate Now</a>
+      </article>
      </div>
     </div>
    </section>
@@ -391,7 +336,7 @@
      </div>
      <div class="social-links">
       <a aria-label="Follow us on Instagram" href="https://www.instagram.com/sdgoalball?igsh=NTc4MTIwNjQ2YQ==" target="_blank">
-       <svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+       <svg class="icon-small" fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441c.795 0 1.439-.645 1.439-1.441s-.644-1.44-1.439-1.44z">
        </svg>
       </a>
@@ -483,5 +428,6 @@
   </footer>
   <script src="js/script.js">
   </script>
+  <script src="js/accessibility-widget.js"></script>
  </body>
 </html>
